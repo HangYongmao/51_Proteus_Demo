@@ -1,0 +1,138 @@
+BODY {
+	FONT-SIZE: 75%; BACKGROUND: url(c51bbs.jpg) no-repeat; FONT-FAMILY: ËÎÌå
+}
+A {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 16pt; FONT-FAMILY: "ËÎÌå", "Arial", "·ÂËÎ_GB2312"; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 9pt; COLOR: #3300cc; LINE-HEIGHT: 16pt; FONT-FAMILY: "ËÎÌå", "Arial", "·ÂËÎ_GB2312"; TEXT-DECORATION: underline
+}
+A:link {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #0000cc
+}
+A:active {
+	COLOR: #996699
+}
+A:visited {
+	COLOR: #996699
+}
+H1 {
+	FONT-SIZE: 145%; MARGIN-BOTTOM: 0.5em
+}
+H2 {
+	MARGIN-TOP: 1.5em; FONT-SIZE: 125%; MARGIN-BOTTOM: 0.5em
+}
+H3 {
+	MARGIN-TOP: 1.2em; FONT-SIZE: 110%; MARGIN-BOTTOM: 0.5em
+}
+H4 {
+	FONT-SIZE: 105%
+}
+H5 {
+	FONT-SIZE: 100%
+}
+P.proclabel {
+	FONT-WEIGHT: bold; FONT-SIZE: 100%
+}
+P {
+	MARGIN-TOP: 0.6em; MARGIN-BOTTOM: 0.6em
+}
+LI P {
+	MARGIN-TOP: 0px; MARGIN-BOTTOM: 0.6em
+}
+OL {
+	MARGIN-TOP: 0.5em; MARGIN-BOTTOM: 0em; MARGIN-LEFT: 4em
+}
+UL {
+	MARGIN-TOP: 0.6em; MARGIN-BOTTOM: 0em
+}
+OL UL {
+	MARGIN-TOP: 2em; LIST-STYLE-TYPE: disc
+}
+LI {
+	PADDING-BOTTOM: 0.7em; MARGIN-LEFT: -2em
+}
+DL UL {
+	MARGIN-TOP: 2em; MARGIN-BOTTOM: 0em
+}
+DL {
+	MARGIN-TOP: -1em
+}
+OL DL {
+	MARGIN-TOP: -1.5em; MARGIN-LEFT: 0em
+}
+OL DL DL {
+	MARGIN-TOP: 0em; MARGIN-LEFT: 0.2em
+}
+DD {
+	MARGIN-BOTTOM: 0em; MARGIN-LEFT: 1.5em
+}
+DT {
+	FONT-WEIGHT: bold; MARGIN-LEFT: 1.5em; PADDING-TOP: 2em
+}
+PRE {
+	MARGIN-TOP: 0em; FONT-SIZE: 125%; MARGIN-BOTTOM: 1.5em; FONT-FAMILY: ËÎÌå
+}
+TABLE {
+	MARGIN-TOP: 1em; FONT-SIZE: 100%; MARGIN-BOTTOM: 1em
+}
+TH.center {
+	TEXT-ALIGN: center
+}
+TH {
+	BACKGROUND: #dddddd; MARGIN: 3pt; VERTICAL-ALIGN: bottom; TEXT-ALIGN: left
+}
+TR {
+	VERTICAL-ALIGN: top
+}
+TD {
+	MARGIN: 3pt; VERTICAL-ALIGN: top
+}
+HR.sms {
+	COLOR: red; TEXT-ALIGN: left
+}
+HR.iis {
+	COLOR: red
+}
+P.dis {
+	FONT-SIZE: 6pt
+}
+UL.onestep {
+	LIST-STYLE-TYPE: square
+}
+H5 {
+	
+}
+H5.active {
+	BACKGROUND: #000000; COLOR: #ffcc99
+}
+H5.subh {
+	MARGIN-TOP: 1.5em; MARGIN-BOTTOM: -1em; COLOR: #660000
+}
+H5.proch {
+	MARGIN-BOTTOM: 4pt; COLOR: #003399
+}
+H5.topich {
+	MARGIN-BOTTOM: -1em; COLOR: #ff0033
+}
+H5.note {
+	MARGIN-TOP: 2em; MARGIN-BOTTOM: -1em; COLOR: #99cc99
+}
+H5.relh {
+	MARGIN-TOP: 2.25em; MARGIN-BOTTOM: -1em; COLOR: #9933cc
+}
+.dectree {
+	MARGIN-TOP: 1.5em; MARGIN-LEFT: 1.33em
+}
+DIV.dectree P {
+	MARGIN-TOP: 1em; COLOR: orange
+}
+DIV.dectree P:first-letter {
+	FONT-SIZE: 3em; COLOR: orange
+}
+A:link .dectree P {
+	COLOR: yellow
+}
+.reltopics {
+	MARGIN-TOP: 2em; LINE-HEIGHT: 0.5em; div: 1em
+}

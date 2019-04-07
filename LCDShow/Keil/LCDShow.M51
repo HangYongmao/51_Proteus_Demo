@@ -1,0 +1,944 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/08/2007  11:03:52  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj, SMC1602.obj, KeyScan.obj, KeyProcess.obj, InputNumber.obj, InputChar.obj, Introduce.o
+>> bj, CapProcess.obj, SmallProcess.obj TO LCDShow
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  SMC1602.obj (SMC1602)
+  KeyScan.obj (KEYSCAN)
+  KeyProcess.obj (KEYPROCESS)
+  InputNumber.obj (INPUTNUMBER)
+  InputChar.obj (INPUTCHAR)
+  Introduce.obj (INTRODUCE)
+  CapProcess.obj (CAPPROCESS)
+  SmallProcess.obj (SMALLPROCESS)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?COPY)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SLCMP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CCASE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  LCDShow (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0014H     UNIT         ?DT?KEYPROCESS
+            DATA    001CH     0004H     UNIT         ?DT?KEYSCAN
+            BIT     0020H.0   0000H.3   UNIT         ?BI?MAIN
+            BIT     0020H.3   0000H.2   UNIT         ?BI?KEYPROCESS
+            BIT     0020H.5   0000H.1   UNIT         ?BI?INPUTCHAR
+            BIT     0020H.6   0000H.1   UNIT         ?BI?INTRODUCE
+                    0020H.7   0000H.1                *** GAP ***
+            DATA    0021H     0055H     UNIT         _DATA_GROUP_
+            DATA    0076H     0002H     UNIT         ?DT?MAIN
+            IDATA   0078H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     0010H     UNIT         ?PR?_VWRITECMD?SMC1602
+                    0016H     0005H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     02A5H     UNIT         ?PR?_VSHOWONECHAR?SMC1602
+            CODE    02C3H     015FH     UNIT         ?C?LIB_CODE
+            CODE    0422H     00BBH     UNIT         ?PR?VINTRODUCE?INTRODUCE
+            CODE    04DDH     009DH     UNIT         ?PR?_VKEYPROCESS?KEYPROCESS
+            CODE    057AH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0606H     0068H     UNIT         ?CO?INTRODUCE
+            CODE    066EH     004FH     UNIT         ?PR?_VCHARADD?KEYPROCESS
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 2
+
+
+            CODE    06BDH     0047H     UNIT         ?PR?UCKEYSCAN?KEYSCAN
+            CODE    0704H     0047H     UNIT         ?PR?_UCGETNUM?INPUTNUMBER
+            CODE    074BH     0044H     UNIT         ?PR?_UCCAPTWO?CAPPROCESS
+            CODE    078FH     0044H     UNIT         ?PR?_UCSMALLTWO?SMALLPROCESS
+            CODE    07D3H     0042H     UNIT         ?PR?VTIMER1?MAIN
+            CODE    0815H     0041H     UNIT         ?PR?_UCCAPONE?CAPPROCESS
+            CODE    0856H     0041H     UNIT         ?PR?_UCSMALLONE?SMALLPROCESS
+            CODE    0897H     0038H     UNIT         ?PR?_VCHARPROCESS?KEYPROCESS
+            CODE    08CFH     0038H     UNIT         ?PR?_UCCAPTHREE?CAPPROCESS
+            CODE    0907H     0038H     UNIT         ?PR?_UCSMALLTHREE?SMALLPROCESS
+            CODE    093FH     0037H     UNIT         ?C_INITSEG
+            CODE    0976H     0030H     UNIT         ?PR?_VSHOWCHAR?SMC1602
+            CODE    09A6H     002DH     UNIT         ?PR?MAIN?MAIN
+            CODE    09D3H     002CH     UNIT         ?CO?KEYPROCESS
+            CODE    09FFH     0027H     UNIT         ?PR?VCLEANALL?KEYPROCESS
+            CODE    0A26H     0026H     UNIT         ?PR?VCLEANONE?KEYPROCESS
+            CODE    0A4CH     0026H     UNIT         ?PR?_UCCAPPROC?INPUTCHAR
+            CODE    0A72H     0026H     UNIT         ?PR?_UCSMALLPROC?INPUTCHAR
+            CODE    0A98H     0016H     UNIT         ?PR?VINT0?MAIN
+            CODE    0AAEH     0010H     UNIT         ?PR?_VWRITEDATA?SMC1602
+            CODE    0ABEH     000FH     UNIT         ?PR?VDELAY?SMC1602
+            CODE    0ACDH     000EH     UNIT         ?PR?_UCGETCHAR?KEYPROCESS
+            CODE    0ADBH     000EH     UNIT         ?PR?_UCGETLETTER?INPUTCHAR
+
+
+
+OVERLAY MAP OF MODULE:   LCDShow (MAIN)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                          -----    -----
+  +--> ?PR?_VWRITECMD?SMC1602
+  +--> ?PR?VINTRODUCE?INTRODUCE
+  +--> ?PR?UCKEYSCAN?KEYSCAN
+  +--> ?PR?_VKEYPROCESS?KEYPROCESS
+
+?PR?_VWRITECMD?SMC1602                 -----    -----
+  +--> ?PR?VDELAY?SMC1602
+
+?PR?VINTRODUCE?INTRODUCE               0022H    0051H
+  +--> ?CO?INTRODUCE
+  +--> ?PR?_VWRITECMD?SMC1602
+  +--> ?PR?_VSHOWCHAR?SMC1602
+
+?PR?_VSHOWCHAR?SMC1602                 0073H    0003H
+  +--> ?PR?_VSHOWONECHAR?SMC1602
+
+?PR?_VSHOWONECHAR?SMC1602              -----    -----
+  +--> ?PR?_VWRITEDATA?SMC1602
+
+?PR?_VWRITEDATA?SMC1602                -----    -----
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 3
+
+
+  +--> ?PR?VDELAY?SMC1602
+
+?PR?_VKEYPROCESS?KEYPROCESS            0021H    0001H
+  +--> ?PR?VINTRODUCE?INTRODUCE
+  +--> ?PR?_VCHARADD?KEYPROCESS
+  +--> ?PR?_VWRITECMD?SMC1602
+  +--> ?PR?_VSHOWONECHAR?SMC1602
+  +--> ?PR?VCLEANALL?KEYPROCESS
+  +--> ?PR?VCLEANONE?KEYPROCESS
+  +--> ?CO?KEYPROCESS
+  +--> ?PR?_VSHOWCHAR?SMC1602
+  +--> ?PR?_VCHARPROCESS?KEYPROCESS
+
+?PR?_VCHARADD?KEYPROCESS               0024H    0001H
+  +--> ?PR?_VWRITECMD?SMC1602
+  +--> ?PR?_VSHOWONECHAR?SMC1602
+  +--> ?CO?KEYPROCESS
+  +--> ?PR?_VSHOWCHAR?SMC1602
+
+?PR?VCLEANALL?KEYPROCESS               -----    -----
+  +--> ?PR?_VWRITECMD?SMC1602
+  +--> ?CO?KEYPROCESS
+  +--> ?PR?_VSHOWCHAR?SMC1602
+
+?PR?VCLEANONE?KEYPROCESS               -----    -----
+  +--> ?PR?_VWRITECMD?SMC1602
+  +--> ?PR?_VSHOWONECHAR?SMC1602
+
+?PR?_VCHARPROCESS?KEYPROCESS           0022H    0002H
+  +--> ?PR?_UCGETCHAR?KEYPROCESS
+  +--> ?PR?_VCHARADD?KEYPROCESS
+  +--> ?PR?_VSHOWONECHAR?SMC1602
+
+?PR?_UCGETCHAR?KEYPROCESS              0024H    0001H
+  +--> ?PR?_UCGETNUM?INPUTNUMBER
+  +--> ?PR?_UCGETLETTER?INPUTCHAR
+
+?PR?_UCGETLETTER?INPUTCHAR             0025H    0001H
+  +--> ?PR?_UCCAPPROC?INPUTCHAR
+  +--> ?PR?_UCSMALLPROC?INPUTCHAR
+
+?PR?_UCCAPPROC?INPUTCHAR               0026H    0001H
+  +--> ?PR?_UCCAPONE?CAPPROCESS
+  +--> ?PR?_UCCAPTWO?CAPPROCESS
+  +--> ?PR?_UCCAPTHREE?CAPPROCESS
+
+?PR?_UCSMALLPROC?INPUTCHAR             0026H    0001H
+  +--> ?PR?_UCSMALLONE?SMALLPROCESS
+  +--> ?PR?_UCSMALLTWO?SMALLPROCESS
+  +--> ?PR?_UCSMALLTHREE?SMALLPROCESS
+
+
+
+SYMBOL TABLE OF MODULE:  LCDShow (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 4
+
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  B:00A8H.7       PUBLIC        EA
+  C:0A98H         PUBLIC        vINT0
+  C:09A6H         PUBLIC        main
+  C:07D3H         PUBLIC        vTimer1
+  D:0076H         PUBLIC        uc_CleanCount
+  B:00A8H.3       PUBLIC        ET1
+  B:0020H.0       PUBLIC        b_KillShock
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  D:0077H         PUBLIC        uc_KillCount
+  B:0088H.6       PUBLIC        TR1
+  B:0020H.1       PUBLIC        b_KeyShock
+  B:0020H.2       PUBLIC        b_KeyScan
+  -------         PROC          MAIN
+  C:09A6H         LINE#         66
+  C:09A6H         LINE#         67
+  C:09A6H         LINE#         68
+  C:09A9H         LINE#         71
+  C:09ABH         LINE#         72
+  C:09ADH         LINE#         76
+  C:09B0H         LINE#         77
+  C:09B3H         LINE#         78
+  C:09B5H         LINE#         79
+  C:09B7H         LINE#         81
+  C:09B9H         LINE#         83
+  C:09C3H         LINE#         86
+  C:09C6H         LINE#         88
+  C:09C6H         LINE#         89
+  C:09C6H         LINE#         90
+  C:09C9H         LINE#         91
+  C:09C9H         LINE#         92
+  C:09CBH         LINE#         93
+  C:09D1H         LINE#         94
+  C:09D1H         LINE#         95
+  -------         ENDPROC       MAIN
+  -------         PROC          VINT0
+  C:0A98H         LINE#         103
+  C:0A98H         LINE#         105
+  C:0A9BH         LINE#         106
+  C:0A9BH         LINE#         107
+  C:0A9EH         LINE#         108
+  C:0A9EH         LINE#         109
+  C:0AA0H         LINE#         110
+  C:0AA2H         LINE#         111
+  C:0AA2H         LINE#         112
+  C:0AA4H         LINE#         113
+  C:0AA6H         LINE#         116
+  C:0AA9H         LINE#         117
+  C:0AABH         LINE#         120
+  C:0AADH         LINE#         121
+  -------         ENDPROC       VINT0
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 5
+
+
+  -------         PROC          VTIMER1
+  C:07D3H         LINE#         130
+  C:07D9H         LINE#         135
+  C:07DCH         LINE#         136
+  C:07DCH         LINE#         137
+  C:07E6H         LINE#         138
+  C:07E6H         LINE#         139
+  C:07E8H         LINE#         140
+  C:07EAH         LINE#         141
+  C:07EDH         LINE#         142
+  C:07EFH         LINE#         143
+  C:07F1H         LINE#         144
+  C:07F1H         LINE#         149
+  C:07F4H         LINE#         150
+  C:07F4H         LINE#         151
+  C:07F9H         LINE#         152
+  C:07F9H         LINE#         153
+  C:07FBH         LINE#         155
+  C:07FEH         LINE#         157
+  C:0801H         LINE#         159
+  C:0804H         LINE#         160
+  C:0806H         LINE#         162
+  C:0808H         LINE#         163
+  C:0808H         LINE#         168
+  C:080BH         LINE#         169
+  C:080EH         LINE#         170
+  -------         ENDPROC       VTIMER1
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        SMC1602
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0AAEH         PUBLIC        _vWriteData
+  D:00A0H         PUBLIC        P2
+  B:00B0H.5       PUBLIC        P3_5
+  B:00B0H.6       PUBLIC        P3_6
+  B:00B0H.7       PUBLIC        P3_7
+  C:0976H         PUBLIC        _vShowChar
+  C:001EH         PUBLIC        _vShowOneChar
+  C:0006H         PUBLIC        _vWriteCMD
+  C:0ABEH         PUBLIC        vDelay
+  -------         PROC          VDELAY
+  -------         DO            
+  D:0006H         SYMBOL        uiCount
+  -------         ENDDO         
+  C:0ABEH         LINE#         36
+  C:0ABEH         LINE#         37
+  C:0ABEH         LINE#         39
+  C:0ACCH         LINE#         40
+  -------         ENDPROC       VDELAY
+  -------         PROC          _VWRITECMD
+  D:0005H         SYMBOL        ucCommand
+  C:0006H         LINE#         47
+  C:0008H         LINE#         48
+  C:0008H         LINE#         49
+  C:000BH         LINE#         51
+  C:000DH         LINE#         52
+  C:000FH         LINE#         53
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 6
+
+
+  C:0011H         LINE#         55
+  C:0013H         LINE#         57
+  C:0015H         LINE#         58
+  -------         ENDPROC       _VWRITECMD
+  -------         PROC          _VWRITEDATA
+  D:0005H         SYMBOL        ucData
+  C:0AAEH         LINE#         66
+  C:0AB0H         LINE#         67
+  C:0AB0H         LINE#         68
+  C:0AB3H         LINE#         70
+  C:0AB5H         LINE#         71
+  C:0AB7H         LINE#         72
+  C:0AB9H         LINE#         74
+  C:0ABBH         LINE#         76
+  C:0ABDH         LINE#         77
+  -------         ENDPROC       _VWRITEDATA
+  -------         PROC          _VSHOWONECHAR
+  D:0007H         SYMBOL        ucChar
+  C:001EH         LINE#         86
+  C:001EH         LINE#         87
+  C:001EH         LINE#         88
+  C:0148H         LINE#         89
+  C:0148H         LINE#         90
+  C:014DH         LINE#         91
+  C:0152H         LINE#         92
+  C:0157H         LINE#         93
+  C:015CH         LINE#         94
+  C:0161H         LINE#         95
+  C:0166H         LINE#         96
+  C:016BH         LINE#         97
+  C:0170H         LINE#         98
+  C:0175H         LINE#         99
+  C:017AH         LINE#         100
+  C:017FH         LINE#         101
+  C:0184H         LINE#         102
+  C:0189H         LINE#         103
+  C:018EH         LINE#         104
+  C:0193H         LINE#         105
+  C:0198H         LINE#         106
+  C:019DH         LINE#         107
+  C:01A2H         LINE#         108
+  C:01A7H         LINE#         109
+  C:01ACH         LINE#         111
+  C:01B1H         LINE#         112
+  C:01B6H         LINE#         113
+  C:01BBH         LINE#         114
+  C:01C0H         LINE#         115
+  C:01C5H         LINE#         116
+  C:01CAH         LINE#         117
+  C:01CFH         LINE#         118
+  C:01D4H         LINE#         119
+  C:01D9H         LINE#         120
+  C:01DEH         LINE#         122
+  C:01E3H         LINE#         123
+  C:01E8H         LINE#         124
+  C:01EDH         LINE#         125
+  C:01F2H         LINE#         126
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 7
+
+
+  C:01F7H         LINE#         127
+  C:01FCH         LINE#         128
+  C:0201H         LINE#         129
+  C:0206H         LINE#         130
+  C:020BH         LINE#         131
+  C:0210H         LINE#         132
+  C:0215H         LINE#         133
+  C:021AH         LINE#         134
+  C:021FH         LINE#         135
+  C:0224H         LINE#         136
+  C:0229H         LINE#         137
+  C:022EH         LINE#         138
+  C:0233H         LINE#         139
+  C:0238H         LINE#         140
+  C:023DH         LINE#         141
+  C:0241H         LINE#         142
+  C:0245H         LINE#         143
+  C:0249H         LINE#         144
+  C:024DH         LINE#         145
+  C:0251H         LINE#         146
+  C:0255H         LINE#         147
+  C:0259H         LINE#         149
+  C:025DH         LINE#         150
+  C:0261H         LINE#         151
+  C:0265H         LINE#         152
+  C:0269H         LINE#         153
+  C:026DH         LINE#         154
+  C:0271H         LINE#         155
+  C:0275H         LINE#         156
+  C:0279H         LINE#         157
+  C:027DH         LINE#         158
+  C:0281H         LINE#         159
+  C:0285H         LINE#         160
+  C:0289H         LINE#         161
+  C:028DH         LINE#         162
+  C:0291H         LINE#         163
+  C:0295H         LINE#         164
+  C:0299H         LINE#         165
+  C:029DH         LINE#         166
+  C:02A1H         LINE#         167
+  C:02A5H         LINE#         168
+  C:02A9H         LINE#         169
+  C:02ADH         LINE#         170
+  C:02B1H         LINE#         171
+  C:02B5H         LINE#         172
+  C:02B9H         LINE#         173
+  C:02BDH         LINE#         174
+  C:02C2H         LINE#         176
+  C:02C2H         LINE#         177
+  C:02C2H         LINE#         178
+  -------         ENDPROC       _VSHOWONECHAR
+  -------         PROC          _VSHOWCHAR
+  D:0073H         SYMBOL        ucaChar
+  -------         DO            
+  D:0004H         SYMBOL        ucCount
+  -------         ENDDO         
+  C:0976H         LINE#         185
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 8
+
+
+  C:097CH         LINE#         186
+  C:097CH         LINE#         188
+  C:097EH         LINE#         189
+  C:097EH         LINE#         190
+  C:0990H         LINE#         191
+  C:09A2H         LINE#         192
+  C:09A2H         LINE#         193
+  C:09A5H         LINE#         194
+  -------         ENDPROC       _VSHOWCHAR
+  -------         ENDMOD        SMC1602
+
+  -------         MODULE        KEYSCAN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:06BDH         PUBLIC        ucKeyScan
+  D:001CH         PUBLIC        uca_LineScan
+  B:00A8H.0       PUBLIC        EX0
+  -------         PROC          UCKEYSCAN
+  -------         DO            
+  D:0001H         SYMBOL        ucTemp
+  D:0007H         SYMBOL        ucRow
+  D:0006H         SYMBOL        ucLine
+  -------         ENDDO         
+  C:06BDH         LINE#         34
+  C:06BDH         LINE#         35
+  C:06BDH         LINE#         36
+  C:06BEH         LINE#         37
+  C:06C0H         LINE#         39
+  C:06C2H         LINE#         41
+  C:06C2H         LINE#         42
+  C:06C2H         LINE#         43
+  C:06C9H         LINE#         44
+  C:06CEH         LINE#         45
+  C:06D2H         LINE#         46
+  C:06D2H         LINE#         47
+  C:06E2H         LINE#         48
+  C:06E2H         LINE#         49
+  C:06E6H         LINE#         50
+  C:06EAH         LINE#         51
+  C:06EEH         LINE#         52
+  C:06F2H         LINE#         53
+  C:06F6H         LINE#         54
+  C:06F6H         LINE#         55
+  C:06F6H         LINE#         56
+  C:06F6H         LINE#         57
+  C:06FAH         LINE#         59
+  C:06FDH         LINE#         60
+  C:06FFH         LINE#         61
+  C:0703H         LINE#         62
+  -------         ENDPROC       UCKEYSCAN
+  -------         ENDMOD        KEYSCAN
+
+  -------         MODULE        KEYPROCESS
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0A26H         PUBLIC        vCleanOne
+  C:066EH         PUBLIC        _vCharAdd
+  C:04DDH         PUBLIC        _vKeyProcess
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 9
+
+
+  B:0020H.3       PUBLIC        b_CleanClick
+  D:0008H         PUBLIC        uc_CharPointer
+  D:0009H         PUBLIC        uc_ClickCount
+  D:000AH         PUBLIC        uca_CharBox
+  C:0897H         PUBLIC        _vCharProcess
+  B:0020H.4       PUBLIC        b_InputMode
+  C:09FFH         PUBLIC        vCleanAll
+  C:0ACDH         PUBLIC        _ucGetChar
+  D:001BH         PUBLIC        uc_KeyTemp
+  -------         PROC          VCLEANALL
+  -------         DO            
+  D:0007H         SYMBOL        ucCount
+  -------         ENDDO         
+  C:09FFH         LINE#         59
+  C:09FFH         LINE#         60
+  C:09FFH         LINE#         63
+  C:0A07H         LINE#         64
+  C:0A10H         LINE#         66
+  C:0A13H         LINE#         67
+  C:0A18H         LINE#         68
+  C:0A21H         LINE#         69
+  -------         ENDPROC       VCLEANALL
+  -------         PROC          VCLEANONE
+  C:0A26H         LINE#         77
+  C:0A26H         LINE#         78
+  C:0A26H         LINE#         79
+  C:0A2DH         LINE#         80
+  C:0A2DH         LINE#         81
+  C:0A2FH         LINE#         82
+  C:0A36H         LINE#         83
+  C:0A3EH         LINE#         84
+  C:0A43H         LINE#         85
+  C:0A4BH         LINE#         86
+  C:0A4BH         LINE#         87
+  -------         ENDPROC       VCLEANONE
+  -------         PROC          _VCHARADD
+  D:0024H         SYMBOL        ucChar
+  -------         DO            
+  D:0007H         SYMBOL        ucCount
+  -------         ENDDO         
+  C:066EH         LINE#         93
+  C:0670H         LINE#         94
+  C:0670H         LINE#         96
+  C:0677H         LINE#         97
+  C:0677H         LINE#         99
+  C:067FH         LINE#         100
+  C:0684H         LINE#         102
+  C:068BH         LINE#         103
+  C:068DH         LINE#         104
+  C:068FH         LINE#         106
+  C:068FH         LINE#         107
+  C:0694H         LINE#         108
+  C:069DH         LINE#         109
+  C:06A2H         LINE#         110
+  C:06A7H         LINE#         112
+  C:06A7H         LINE#         113
+  C:06B1H         LINE#         114
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 10
+
+
+  C:06B4H         LINE#         115
+  C:06B7H         LINE#         116
+  C:06B7H         LINE#         118
+  C:06B9H         LINE#         119
+  C:06BCH         LINE#         120
+  -------         ENDPROC       _VCHARADD
+  -------         PROC          _UCGETCHAR
+  D:0024H         SYMBOL        ucChar
+  C:0ACDH         LINE#         124
+  C:0ACFH         LINE#         125
+  C:0ACFH         LINE#         126
+  C:0AD2H         LINE#         127
+  C:0AD5H         LINE#         129
+  C:0ADAH         LINE#         130
+  -------         ENDPROC       _UCGETCHAR
+  -------         PROC          _VCHARPROCESS
+  D:0022H         SYMBOL        ucKeyCode
+  C:0897H         LINE#         136
+  C:089BH         LINE#         137
+  C:089BH         LINE#         138
+  C:089EH         LINE#         139
+  C:08A0H         LINE#         141
+  C:08A0H         LINE#         142
+  C:08A8H         LINE#         143
+  C:08A8H         LINE#         144
+  C:08ACH         LINE#         145
+  C:08ACH         LINE#         146
+  C:08ACH         LINE#         147
+  C:08AEH         LINE#         149
+  C:08AEH         LINE#         150
+  C:08B0H         LINE#         151
+  C:08B8H         LINE#         152
+  C:08B8H         LINE#         153
+  C:08BAH         LINE#         155
+  C:08BAH         LINE#         156
+  C:08BFH         LINE#         157
+  C:08C9H         LINE#         158
+  C:08C9H         LINE#         159
+  C:08C9H         LINE#         160
+  C:08CBH         LINE#         161
+  C:08CEH         LINE#         162
+  -------         ENDPROC       _VCHARPROCESS
+  -------         PROC          _VKEYPROCESS
+  D:0021H         SYMBOL        ucKeyCode
+  C:04DDH         LINE#         168
+  C:04DFH         LINE#         169
+  C:04DFH         LINE#         170
+  C:04E4H         LINE#         171
+  C:04E4H         LINE#         172
+  C:04EBH         LINE#         173
+  C:04EDH         LINE#         174
+  C:04EFH         LINE#         176
+  C:04EFH         LINE#         177
+  C:04F2H         LINE#         178
+  C:04F5H         LINE#         179
+  C:04F5H         LINE#         184
+  C:050EH         LINE#         185
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 11
+
+
+  C:050EH         LINE#         186
+  C:050EH         LINE#         187
+  C:0510H         LINE#         188
+  C:0513H         LINE#         189
+  C:0513H         LINE#         191
+  C:0513H         LINE#         192
+  C:0518H         LINE#         193
+  C:0518H         LINE#         195
+  C:0518H         LINE#         196
+  C:051BH         LINE#         197
+  C:051BH         LINE#         198
+  C:051DH         LINE#         199
+  C:0522H         LINE#         200
+  C:0522H         LINE#         201
+  C:0525H         LINE#         202
+  C:0527H         LINE#         203
+  C:0527H         LINE#         204
+  C:0529H         LINE#         206
+  C:0529H         LINE#         207
+  C:052CH         LINE#         208
+  C:0531H         LINE#         209
+  C:0531H         LINE#         210
+  C:0531H         LINE#         211
+  C:0531H         LINE#         212
+  C:0533H         LINE#         214
+  C:0533H         LINE#         215
+  C:0536H         LINE#         216
+  C:0536H         LINE#         218
+  C:0536H         LINE#         219
+  C:0539H         LINE#         220
+  C:0539H         LINE#         222
+  C:0539H         LINE#         223
+  C:053BH         LINE#         224
+  C:053EH         LINE#         225
+  C:053EH         LINE#         226
+  C:0543H         LINE#         227
+  C:0543H         LINE#         228
+  C:0546H         LINE#         229
+  C:054CH         LINE#         230
+  C:054CH         LINE#         231
+  C:054EH         LINE#         233
+  C:054EH         LINE#         234
+  C:0551H         LINE#         235
+  C:055AH         LINE#         236
+  C:055AH         LINE#         237
+  C:055AH         LINE#         238
+  C:055CH         LINE#         240
+  C:055CH         LINE#         241
+  C:0561H         LINE#         242
+  C:056AH         LINE#         243
+  C:0572H         LINE#         244
+  C:0572H         LINE#         245
+  C:0572H         LINE#         247
+  C:0572H         LINE#         248
+  C:0579H         LINE#         249
+  C:0579H         LINE#         250
+  -------         ENDPROC       _VKEYPROCESS
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 12
+
+
+  -------         ENDMOD        KEYPROCESS
+
+  -------         MODULE        INPUTNUMBER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0704H         PUBLIC        _ucGetNum
+  -------         PROC          _UCGETNUM
+  D:0007H         SYMBOL        ucKeyCode
+  C:0704H         LINE#         12
+  C:0704H         LINE#         13
+  C:0704H         LINE#         14
+  C:072AH         LINE#         15
+  C:072AH         LINE#         16
+  C:072DH         LINE#         17
+  C:0730H         LINE#         18
+  C:0733H         LINE#         19
+  C:0736H         LINE#         20
+  C:0739H         LINE#         21
+  C:073CH         LINE#         22
+  C:073FH         LINE#         23
+  C:0742H         LINE#         24
+  C:0745H         LINE#         25
+  C:0748H         LINE#         27
+  C:0748H         LINE#         28
+  C:0748H         LINE#         29
+  C:074AH         LINE#         30
+  -------         ENDPROC       _UCGETNUM
+  -------         ENDMOD        INPUTNUMBER
+
+  -------         MODULE        INPUTCHAR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0A4CH         PUBLIC        _ucCapProc
+  B:0020H.5       PUBLIC        b_CapStatus
+  C:0A72H         PUBLIC        _ucSmallProc
+  C:0ADBH         PUBLIC        _ucGetLetter
+  -------         PROC          _UCCAPPROC
+  D:0026H         SYMBOL        ucKeyCode
+  C:0A4CH         LINE#         34
+  C:0A4EH         LINE#         35
+  C:0A4EH         LINE#         36
+  C:0A60H         LINE#         37
+  C:0A60H         LINE#         38
+  C:0A65H         LINE#         39
+  C:0A6AH         LINE#         40
+  C:0A6FH         LINE#         41
+  C:0A6FH         LINE#         42
+  C:0A6FH         LINE#         43
+  C:0A71H         LINE#         44
+  -------         ENDPROC       _UCCAPPROC
+  -------         PROC          _UCSMALLPROC
+  D:0026H         SYMBOL        ucKeyCode
+  C:0A72H         LINE#         49
+  C:0A74H         LINE#         50
+  C:0A74H         LINE#         51
+  C:0A86H         LINE#         52
+  C:0A86H         LINE#         53
+  C:0A8BH         LINE#         54
+  C:0A90H         LINE#         55
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 13
+
+
+  C:0A95H         LINE#         56
+  C:0A95H         LINE#         57
+  C:0A95H         LINE#         58
+  C:0A97H         LINE#         59
+  -------         ENDPROC       _UCSMALLPROC
+  -------         PROC          _UCGETLETTER
+  D:0025H         SYMBOL        ucKeyCode
+  C:0ADBH         LINE#         64
+  C:0ADDH         LINE#         65
+  C:0ADDH         LINE#         66
+  C:0AE0H         LINE#         67
+  C:0AE3H         LINE#         69
+  C:0AE8H         LINE#         70
+  -------         ENDPROC       _UCGETLETTER
+  -------         ENDMOD        INPUTCHAR
+
+  -------         MODULE        INTRODUCE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0422H         PUBLIC        vIntroduce
+  C:061EH         SYMBOL        _?ix1000
+  B:0020H.6       PUBLIC        b_Introduce
+  -------         PROC          VINTRODUCE
+  -------         DO            
+  D:0082H         SYMBOL        uiCount
+  D:0022H         SYMBOL        ucCount
+  D:0023H         SYMBOL        ucaIntroduce
+  -------         ENDDO         
+  C:0422H         LINE#         17
+  C:0422H         LINE#         18
+  C:0422H         LINE#         21
+  C:0435H         LINE#         27
+  C:043AH         LINE#         29
+  C:0440H         LINE#         30
+  C:0440H         LINE#         31
+  C:0445H         LINE#         32
+  C:0454H         LINE#         34
+  C:0459H         LINE#         35
+  C:045EH         LINE#         36
+  C:0461H         LINE#         37
+  C:0470H         LINE#         39
+  C:0489H         LINE#         40
+  C:048DH         LINE#         44
+  C:0492H         LINE#         45
+  C:049BH         LINE#         47
+  C:049EH         LINE#         48
+  C:049EH         LINE#         49
+  C:04A3H         LINE#         50
+  C:04A9H         LINE#         51
+  C:04ABH         LINE#         53
+  C:04ABH         LINE#         54
+  C:04B0H         LINE#         55
+  C:04B5H         LINE#         56
+  C:04BBH         LINE#         58
+  C:04C2H         LINE#         59
+  C:04C2H         LINE#         61
+  C:04C7H         LINE#         62
+  C:04D0H         LINE#         64
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 14
+
+
+  C:04D8H         LINE#         66
+  -------         ENDPROC       VINTRODUCE
+  -------         ENDMOD        INTRODUCE
+
+  -------         MODULE        CAPPROCESS
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0815H         PUBLIC        _ucCapOne
+  C:074BH         PUBLIC        _ucCapTwo
+  C:08CFH         PUBLIC        _ucCapThree
+  -------         PROC          _UCCAPONE
+  D:0007H         SYMBOL        ucKeyCode
+  C:0815H         LINE#         12
+  C:0815H         LINE#         13
+  C:0815H         LINE#         14
+  C:0838H         LINE#         15
+  C:0838H         LINE#         16
+  C:083BH         LINE#         17
+  C:083EH         LINE#         18
+  C:0841H         LINE#         19
+  C:0844H         LINE#         20
+  C:0847H         LINE#         21
+  C:084AH         LINE#         22
+  C:084DH         LINE#         23
+  C:0850H         LINE#         24
+  C:0853H         LINE#         25
+  C:0853H         LINE#         26
+  C:0853H         LINE#         27
+  C:0855H         LINE#         28
+  -------         ENDPROC       _UCCAPONE
+  -------         PROC          _UCCAPTWO
+  D:0007H         SYMBOL        ucKeyCode
+  C:074BH         LINE#         34
+  C:074BH         LINE#         35
+  C:074BH         LINE#         36
+  C:076EH         LINE#         37
+  C:076EH         LINE#         38
+  C:0771H         LINE#         39
+  C:0774H         LINE#         40
+  C:0777H         LINE#         41
+  C:077AH         LINE#         42
+  C:077DH         LINE#         43
+  C:0780H         LINE#         44
+  C:0783H         LINE#         45
+  C:0786H         LINE#         46
+  C:078CH         LINE#         47
+  C:078CH         LINE#         48
+  C:078CH         LINE#         49
+  C:078EH         LINE#         50
+  -------         ENDPROC       _UCCAPTWO
+  -------         PROC          _UCCAPTHREE
+  D:0007H         SYMBOL        ucKeyCode
+  C:08CFH         LINE#         56
+  C:08CFH         LINE#         57
+  C:08CFH         LINE#         58
+  C:08ECH         LINE#         59
+  C:08ECH         LINE#         60
+  C:08EFH         LINE#         61
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 15
+
+
+  C:08F2H         LINE#         62
+  C:08F5H         LINE#         63
+  C:08F8H         LINE#         64
+  C:08FBH         LINE#         65
+  C:08FEH         LINE#         66
+  C:0901H         LINE#         67
+  C:0904H         LINE#         68
+  C:0904H         LINE#         69
+  C:0904H         LINE#         70
+  C:0906H         LINE#         71
+  -------         ENDPROC       _UCCAPTHREE
+  -------         ENDMOD        CAPPROCESS
+
+  -------         MODULE        SMALLPROCESS
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:078FH         PUBLIC        _ucSmallTwo
+  C:0907H         PUBLIC        _ucSmallThree
+  C:0856H         PUBLIC        _ucSmallOne
+  -------         PROC          _UCSMALLONE
+  D:0007H         SYMBOL        ucKeyCode
+  C:0856H         LINE#         11
+  C:0856H         LINE#         12
+  C:0856H         LINE#         13
+  C:0879H         LINE#         14
+  C:0879H         LINE#         15
+  C:087CH         LINE#         16
+  C:087FH         LINE#         17
+  C:0882H         LINE#         18
+  C:0885H         LINE#         19
+  C:0888H         LINE#         20
+  C:088BH         LINE#         21
+  C:088EH         LINE#         22
+  C:0891H         LINE#         23
+  C:0894H         LINE#         24
+  C:0894H         LINE#         25
+  C:0894H         LINE#         26
+  C:0896H         LINE#         27
+  -------         ENDPROC       _UCSMALLONE
+  -------         PROC          _UCSMALLTWO
+  D:0007H         SYMBOL        ucKeyCode
+  C:078FH         LINE#         32
+  C:078FH         LINE#         33
+  C:078FH         LINE#         34
+  C:07B2H         LINE#         35
+  C:07B2H         LINE#         36
+  C:07B5H         LINE#         37
+  C:07B8H         LINE#         38
+  C:07BBH         LINE#         39
+  C:07BEH         LINE#         40
+  C:07C1H         LINE#         41
+  C:07C4H         LINE#         42
+  C:07C7H         LINE#         43
+  C:07CAH         LINE#         44
+  C:07D0H         LINE#         45
+  C:07D0H         LINE#         46
+  C:07D0H         LINE#         47
+  C:07D2H         LINE#         48
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/08/2007  11:03:52  PAGE 16
+
+
+  -------         ENDPROC       _UCSMALLTWO
+  -------         PROC          _UCSMALLTHREE
+  D:0007H         SYMBOL        ucKeyCode
+  C:0907H         LINE#         53
+  C:0907H         LINE#         54
+  C:0907H         LINE#         55
+  C:0924H         LINE#         56
+  C:0924H         LINE#         57
+  C:0927H         LINE#         58
+  C:092AH         LINE#         59
+  C:092DH         LINE#         60
+  C:0930H         LINE#         61
+  C:0933H         LINE#         62
+  C:0936H         LINE#         63
+  C:0939H         LINE#         64
+  C:093CH         LINE#         65
+  C:093CH         LINE#         66
+  C:093CH         LINE#         67
+  C:093EH         LINE#         68
+  -------         ENDPROC       _UCSMALLTHREE
+  -------         ENDMOD        SMALLPROCESS
+
+  -------         MODULE        ?C?COPY
+  C:0393H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDOPTR
+  C:03B9H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?SLCMP
+  C:03E6H         PUBLIC        ?C?SLCMP
+  -------         ENDMOD        ?C?SLCMP
+
+  -------         MODULE        ?C?CCASE
+  C:03FCH         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+Program Size: data=120.7 xdata=0 code=2788
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

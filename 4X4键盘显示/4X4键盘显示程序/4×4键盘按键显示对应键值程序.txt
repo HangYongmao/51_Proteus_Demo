@@ -1,0 +1,194 @@
+伪定义        
+        KEYBUF    EQU    30H     ;键值暂存单元,查表时用
+;*************************************
+;*                                   *
+;*      主程序和中断程序入口         *
+;*                                   *
+;*************************************
+  ORG     0000H       ;程序执行开始地址
+  AJMP    MAIN                ;跳至MAIN执行
+;*************************************
+;*                                   *
+;*        主  程  序             *
+;*                                   *
+;*************************************
+                ORG     0040H
+MAIN:           MOV     P1,#0FFH
+                CLR     P2.0
+                LCALL   KEYSCAN         ;主体程序。调用查键子程序
+  LJMP MAIN    ;转MAIN循环
+  NOP     ;软件陷阱
+  NOP
+  NOP
+  LJMP MAIN    
+;*************************************
+;*                                   *
+;* 键盘工作子程序(4 * 4 阵列)      *
+;* 出口为各键工作程序入口 P1口      *
+;*************************************
+KEYSCAN:        
+     MOV P1,#0FFH;清P1口，初始化键低电平有效
+     CLR P1.4;清P1.4口
+     MOV A,P1;读P1口状态
+     ANL A,#0FH;清高4位，保留低四位低电平有效
+     XRL A,#0FH;异或相同则为0不同结果为1，为0则表示无键被按下(这一行)
+     JZ NOKEY1;为0则转下一行键值处理
+     LCALL DL10MS;有键按下则延时10ms再测一次抗干扰
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY1;是干扰则转下一行键值处理程序
+     MOV A,P1
+     ANL A,#0FH;保留低四?
+KB1:
+     CJNE A,#0EH,KB2;如果值为#0E则为P1.4与P1.0组合的键
+     MOV KEYBUF,#0;赋键值
+     LJMP KEYWORK;转键处理
+KB2: CJNE A,#0DH,KB3;如果值为#0D则为P1.4与P1.1组合的键
+     MOV KEYBUF,#1
+     LJMP KEYWORK
+KB3: CJNE A,#0BH,KB4;如果值为#0B则为P1.4与P1.2组合的
+     MOV KEYBUF,#2
+     LJMP KEYWORK
+KB4: CJNE A,#07H,KB5;如果值为#07则为P1.4与P1.3组合的
+     MOV KEYBUF,#3
+     LJMP KEYWORK
+KB5: NOP
+
+
+NOKEY1:
+     MOV P1,#0FFH
+     CLR P1.5
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY2
+     LCALL DL10MS
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY2
+     MOV A,P1
+     ANL A,#0FH
+     CJNE A,#0EH,KB6
+     MOV KEYBUF,#4
+     LJMP KEYWORK
+KB6: CJNE A,#0DH,KB7
+     MOV KEYBUF,#5
+     LJMP KEYWORK
+KB7: CJNE A,#0BH,KB8
+     MOV KEYBUF,#6
+     LJMP KEYWORK
+KB8: CJNE A,#07H,KB9
+     MOV KEYBUF,#7
+     LJMP KEYWORK
+KB9: NOP
+
+
+NOKEY2:
+     MOV P1,#0FFH
+     CLR P1.6
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY3
+     LCALL DL10MS
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY3
+     MOV A,P1
+     ANL A,#0FH
+     CJNE A,#0EH,KB10
+     MOV KEYBUF,#8
+     LJMP KEYWORK
+KB10: CJNE A,#0DH,KB11
+     MOV KEYBUF,#9
+     LJMP KEYWORK
+KB11: CJNE A,#0BH,KB12
+     MOV KEYBUF,#10
+     LJMP KEYWORK
+KB12: CJNE A,#07H,KB13
+     MOV KEYBUF,#11
+     LJMP KEYWORK
+
+KB13: NOP
+
+
+NOKEY3:
+     MOV P1,#0FFH
+     CLR P1.7
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY4
+     LCALL DL10MS
+     MOV A,P1
+     ANL A,#0FH
+     XRL A,#0FH
+     JZ NOKEY4
+     MOV A,P1
+     ANL A,#0FH
+     CJNE A,#0EH,KB14
+     MOV KEYBUF,#12
+     LJMP KEYWORK
+KB14: CJNE A,#0DH,KB15
+     MOV KEYBUF,#13
+     LJMP KEYWORK
+KB15: CJNE A,#0BH,KB16
+     MOV KEYBUF,#14
+     LJMP KEYWORK
+KB16: CJNE A,#07H,KB17
+     MOV KEYBUF,#15
+     LJMP KEYWORK
+KB17: NOP
+
+NOKEY4:
+     LJMP MAIN
+
+KEYWORK:
+      MOV A,KEYBUF;得到键值
+      MOV  DPTR,#TABLE
+      MOVC A,@A+DPTR;查行键值送ACC
+      MOV P0,A;
+
+     
+WAITFREE:
+     MOV A,P1;以下程序等待键释放
+     MOV KEYBUF,#00H
+     ANL A,#0FH
+     XRL A,#0FH
+     JNZ WAITFREE
+     RET
+;
+;*************************************
+;*                                   *
+;*          延时513 us              *
+;*                                   *
+;*************************************
+;
+;513微秒延时程序
+DELAY:          MOV     R2,#0FEH
+DELAY1:         DJNZ    R2,DELAY1
+  RET
+;
+;
+;
+;*************************************
+;*                                   *
+;*             延时10ms             *
+;*                                   *
+;*************************************
+;
+;10毫秒延时程序
+DL10MS:         MOV     R3,#14H
+DL10MS1:        LCALL   DELAY
+                DJNZ    R3,DL10MS1
+          RET
+;
+TABLE:                                  ;七段显示器数据定义
+     DB  0C0H, 0F9H, 0A4H, 0B0H, 99H ; 01234
+     DB  92H,  82H,  0F8H, 80H,  90H    ; 56789
+     DB  88H,  83H,  0C6H,  0A1H, 86H ; ABCDE
+     DB  8EH           ; F
+     END              ;程序结束

@@ -1,0 +1,121 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/11/2007  10:08:30  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE °ËÔÂ¹ð»¨Ïã.obj TO Project
+
+
+INPUT MODULES INCLUDED:
+  °ËÔÂ¹ð»¨Ïã.obj (_Ë_Â¹ð»_Ïã)
+
+
+LINK MAP OF MODULE:  Project (_Ë_Â¹ð»_Ïã)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0159H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Project (_Ë_Â¹ð»_Ïã)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        _Ë_Â¹ð»_Ïã
+  D:00F0H         SYMBOL        B
+  C:009AH         SYMBOL        DAT
+  C:0090H         SYMBOL        DEL
+  C:0091H         SYMBOL        DEL3
+  C:0093H         SYMBOL        DEL4
+  C:0083H         SYMBOL        END0
+  D:00A8H         SYMBOL        IE
+  C:003FH         SYMBOL        MUSIC0
+  C:0049H         SYMBOL        MUSIC1
+  C:005DH         SYMBOL        MUSIC2
+  C:0072H         SYMBOL        MUSIC3
+  C:0077H         SYMBOL        MUSIC4
+  C:0054H         SYMBOL        MUSIC5
+  C:0086H         SYMBOL        MUSIC6
+  D:0090H         SYMBOL        P1
+  D:0081H         SYMBOL        SP
+  B:0090H.0       SYMBOL        SPEAKER
+  C:0030H         SYMBOL        START
+  D:008CH         SYMBOL        TH0
+  D:008AH         SYMBOL        TL0
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  C:0000H         LINE#         7
+  C:000BH         LINE#         9
+  C:000DH         LINE#         10
+  C:0010H         LINE#         11
+  C:0013H         LINE#         12
+  C:0030H         LINE#         17
+  C:0033H         LINE#         18
+  C:0036H         LINE#         19
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/11/2007  10:08:30  PAGE 2
+
+
+  C:0039H         LINE#         20
+  C:003CH         LINE#         21
+  C:003FH         LINE#         23
+  C:0040H         LINE#         24
+  C:0043H         LINE#         25
+  C:0046H         LINE#         26
+  C:0049H         LINE#         28
+  C:004AH         LINE#         29
+  C:004BH         LINE#         30
+  C:004CH         LINE#         31
+  C:004EH         LINE#         32
+  C:0051H         LINE#         33
+  C:0054H         LINE#         35
+  C:0055H         LINE#         36
+  C:0056H         LINE#         37
+  C:0057H         LINE#         38
+  C:0059H         LINE#         39
+  C:005AH         LINE#         40
+  C:005BH         LINE#         41
+  C:005DH         LINE#         43
+  C:005EH         LINE#         44
+  C:0060H         LINE#         45
+  C:0061H         LINE#         46
+  C:0062H         LINE#         47
+  C:0063H         LINE#         49
+  C:0064H         LINE#         50
+  C:0067H         LINE#         51
+  C:0068H         LINE#         52
+  C:006BH         LINE#         54
+  C:006EH         LINE#         55
+  C:006FH         LINE#         56
+  C:0072H         LINE#         58
+  C:0073H         LINE#         59
+  C:0075H         LINE#         60
+  C:0077H         LINE#         62
+  C:0078H         LINE#         63
+  C:007AH         LINE#         64
+  C:007DH         LINE#         65
+  C:007FH         LINE#         66
+  C:0080H         LINE#         67
+  C:0083H         LINE#         69
+  C:0084H         LINE#         70
+  C:0086H         LINE#         72
+  C:0088H         LINE#         73
+  C:008BH         LINE#         74
+  C:008DH         LINE#         75
+  C:0090H         LINE#         77
+  C:0091H         LINE#         79
+  C:0093H         LINE#         81
+  C:0094H         LINE#         82
+  C:0096H         LINE#         83
+  C:0097H         LINE#         84
+  C:0099H         LINE#         85
+  -------         ENDMOD        _Ë_Â¹ð»_Ïã
+
+Program Size: data=8.0 xdata=0 code=345
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

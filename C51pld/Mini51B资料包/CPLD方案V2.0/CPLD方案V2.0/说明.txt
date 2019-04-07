@@ -1,0 +1,6 @@
+CPLD开发环境，Maxplus210.1
+
+【topsch.acf】IC引脚配置文件
+【topsch.gdf】顶层原理图文件
+【_7segscan.sym】数码管扫描驱动模块符号文件，需要【_7segscan.v】源文件支持。
+

@@ -1,0 +1,136 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/24/2008  13:18:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE main.obj TO counter9999 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  counter9999 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0008H                  *** GAP ***
+            REG     0010H     0008H     ABSOLUTE     "REG BANK 2"
+            DATA    0018H     0017H     UNIT         ?DT?MAIN
+            IDATA   002FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     001AH     UNIT         ?C_INITSEG
+            CODE    001DH     000CH     UNIT         ?PR?TIMER2_INIT?MAIN
+                    0029H     0002H                  *** GAP ***
+            CODE    002BH     0003H     ABSOLUTE     
+            CODE    002EH     0097H     UNIT         ?PR?TIMER2?MAIN
+            CODE    00C5H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0151H     0055H     UNIT         ?C?LIB_CODE
+            CODE    01A6H     0007H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   counter9999 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER2_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  counter9999 (MAIN)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/24/2008  13:18:42  PAGE 2
+
+
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00E8H         PUBLIC        P4
+  D:0019H         PUBLIC        counter
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:00CBH         PUBLIC        RCAP2H
+  D:00CAH         PUBLIC        RCAP2L
+  C:01A6H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:002EH         PUBLIC        Timer2
+  B:00A8H.5       PUBLIC        ET2
+  B:00C8H.7       PUBLIC        TF2
+  B:00C8H.2       PUBLIC        TR2
+  D:00C9H         PUBLIC        T2MOD
+  D:00C8H         PUBLIC        T2CON
+  C:001DH         PUBLIC        timer2_init
+  D:001BH         PUBLIC        ledmap
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TIMER2_INIT
+  C:001DH         LINE#         20
+  C:001DH         LINE#         21
+  C:001DH         LINE#         22
+  C:0020H         LINE#         24
+  C:0022H         LINE#         25
+  C:0024H         LINE#         26
+  C:0026H         LINE#         27
+  C:0028H         LINE#         28
+  -------         ENDPROC       TIMER2_INIT
+  -------         PROC          TIMER2
+  -------         DO            
+  D:0018H         SYMBOL        time
+  -------         ENDDO         
+  C:002EH         LINE#         31
+  C:003BH         LINE#         34
+  C:003DH         LINE#         36
+  C:0040H         LINE#         37
+  C:0043H         LINE#         39
+  C:004DH         LINE#         40
+  C:004DH         LINE#         41
+  C:0055H         LINE#         42
+  C:0070H         LINE#         43
+  C:008AH         LINE#         44
+  C:00A4H         LINE#         45
+  C:00B7H         LINE#         46
+  C:00BAH         LINE#         47
+  C:00BAH         LINE#         48
+  -------         ENDPROC       TIMER2
+  -------         PROC          MAIN
+  C:01A6H         LINE#         50
+  C:01A6H         LINE#         51
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/24/2008  13:18:42  PAGE 3
+
+
+  C:01A6H         LINE#         52
+  C:01A9H         LINE#         53
+  C:01ABH         LINE#         54
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?UIDIV
+  C:0151H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=40.0 xdata=0 code=427
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

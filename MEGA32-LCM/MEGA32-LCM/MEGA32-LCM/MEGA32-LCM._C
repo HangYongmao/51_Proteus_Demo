@@ -1,0 +1,6 @@
+//ICC-AVR application builder : 2006-5-9 12:31:05
+// Target : M32
+// Crystal: 16.000Mhz
+
+#include <iom32v.h>
+#include <macros.h>

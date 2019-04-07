@@ -1,0 +1,24 @@
+ORG 0000H
+AJMP MAIN
+ORG 0030H
+MAIN: MOV DPTR,#7FFFH   ;置DAC0832入口地址
+      MOV R0,#00H       ;置初时值
+SAO:  JNB P1.0,JIA
+      JNB P1.1,JIAN
+      AJMP SAO
+JIA:  INC R0
+      MOV A,R0
+      CJNE A,#00H,SONG
+      MOV R0,#0FFH
+      MOV A,R0
+      AJMP SONG
+JIAN: DEC R0
+      MOV A,R0
+      CJNE A,#0FFH,SONG
+      MOV R0,#00H
+      MOV A,R0
+SONG: MOVX @DPTR,A
+LOP:  MOV A,P1
+      CJNE A,#0FFH,LOP
+      AJMP SAO
+      END

@@ -1,0 +1,201 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/11/2007  15:17:05  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj, LED6Show.obj TO DynamicLED
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  LED6Show.obj (LED6SHOW)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LMUL)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULCMP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  DynamicLED (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?MAIN
+            DATA    000EH     0006H     UNIT         ?DT?LED6SHOW
+            DATA    0014H     0004H     UNIT         _DATA_GROUP_
+            IDATA   0018H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     000DH     UNIT         ?C_INITSEG
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     02B5H     UNIT         ?PR?_PUCLEDNUM?LED6SHOW
+            CODE    02D3H     0147H     UNIT         ?C?LIB_CODE
+            CODE    041AH     008CH     UNIT         ?C_C51STARTUP
+            CODE    04A6H     0069H     UNIT         ?PR?VTIMER0?MAIN
+            CODE    050FH     0030H     UNIT         ?PR?VTIMER1?MAIN
+            CODE    053FH     001BH     UNIT         ?PR?MAIN?MAIN
+            CODE    055AH     0012H     UNIT         ?PR?_VSHOWONENUM?LED6SHOW
+            CODE    056CH     0010H     UNIT         ?CO?LED6SHOW
+
+
+
+OVERLAY MAP OF MODULE:   DynamicLED (MAIN)
+
+
+SEGMENT                             DATA_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?PR?VTIMER0?MAIN                  -----    -----
+  +--> ?PR?_PUCLEDNUM?LED6SHOW
+  +--> ?PR?_VSHOWONENUM?LED6SHOW
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:17:05  PAGE 2
+
+
+?PR?_PUCLEDNUM?LED6SHOW           0014H    0004H
+
+?PR?_VSHOWONENUM?LED6SHOW         -----    -----
+  +--> ?CO?LED6SHOW
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                     -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  DynamicLED (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  C:053FH         PUBLIC        main
+  C:04A6H         PUBLIC        vTimer0
+  C:050FH         PUBLIC        vTimer1
+  D:0008H         PUBLIC        ul_Number
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  B:00A8H.3       PUBLIC        ET1
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  D:000CH         PUBLIC        uc_TimeCount
+  B:0088H.6       PUBLIC        TR1
+  D:000DH         PUBLIC        uc_DisCount
+  -------         PROC          MAIN
+  C:053FH         LINE#         44
+  C:053FH         LINE#         45
+  C:053FH         LINE#         46
+  C:0542H         LINE#         50
+  C:0545H         LINE#         51
+  C:0548H         LINE#         52
+  C:054AH         LINE#         53
+  C:054CH         LINE#         57
+  C:054FH         LINE#         58
+  C:0552H         LINE#         59
+  C:0554H         LINE#         60
+  C:0556H         LINE#         63
+  C:0558H         LINE#         65
+  -------         ENDPROC       MAIN
+  -------         PROC          VTIMER1
+  C:050FH         LINE#         74
+  C:0513H         LINE#         77
+  C:0518H         LINE#         78
+  C:0518H         LINE#         79
+  C:051BH         LINE#         80
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:17:05  PAGE 3
+
+
+  C:0530H         LINE#         81
+  C:0532H         LINE#         82
+  C:0534H         LINE#         84
+  C:0537H         LINE#         85
+  C:053AH         LINE#         86
+  -------         ENDPROC       VTIMER1
+  -------         PROC          VTIMER0
+  C:04A6H         LINE#         94
+  C:04C3H         LINE#         96
+  C:04E0H         LINE#         98
+  C:04E7H         LINE#         99
+  C:04EBH         LINE#         100
+  C:04EEH         LINE#         102
+  C:04F1H         LINE#         103
+  C:04F4H         LINE#         104
+  -------         ENDPROC       VTIMER0
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        LED6SHOW
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:001EH         PUBLIC        _pucLedNum
+  C:0576H         PUBLIC        uca_LEDSelect
+  D:000EH         PUBLIC        uca_LedNum
+  C:056CH         PUBLIC        uca_LEDCode
+  C:055AH         PUBLIC        _vShowOneNum
+  -------         PROC          _PUCLEDNUM
+  D:0014H         SYMBOL        ulNumber
+  C:001EH         LINE#         44
+  C:0026H         LINE#         45
+  C:0026H         LINE#         46
+  C:003CH         LINE#         47
+  C:0048H         LINE#         48
+  C:005BH         LINE#         49
+  C:0064H         LINE#         50
+  C:0079H         LINE#         52
+  C:00A4H         LINE#         54
+  C:0105H         LINE#         57
+  C:0199H         LINE#         60
+  C:0260H         LINE#         63
+  C:02CCH         LINE#         65
+  C:02D2H         LINE#         66
+  -------         ENDPROC       _PUCLEDNUM
+  -------         PROC          _VSHOWONENUM
+  D:0007H         SYMBOL        ucOneNum
+  D:0005H         SYMBOL        ucOrder
+  C:055AH         LINE#         70
+  C:055AH         LINE#         71
+  C:055AH         LINE#         72
+  C:055DH         LINE#         73
+  C:0564H         LINE#         74
+  C:056BH         LINE#         75
+  -------         ENDPROC       _VSHOWONENUM
+  -------         ENDMOD        LED6SHOW
+
+  -------         MODULE        ?C?CLDPTR
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:17:05  PAGE 4
+
+
+  C:02D3H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?LMUL
+  C:02ECH         PUBLIC        ?C?LMUL
+  -------         ENDMOD        ?C?LMUL
+
+  -------         MODULE        ?C?ULDIV
+  C:0377H         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+  -------         MODULE        ?C?ULCMP
+  C:0409H         PUBLIC        ?C?ULCMP
+  -------         ENDMOD        ?C?ULCMP
+
+Program Size: data=25.0 xdata=0 code=1396
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

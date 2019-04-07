@@ -1,0 +1,188 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/30/2007  09:19:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 两只老虎音乐.obj TO Project
+
+
+INPUT MODULES INCLUDED:
+  两只老虎音乐.obj (两只老籣襙乐)
+
+
+LINK MAP OF MODULE:  Project (两只老籣襙乐)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0182H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Project (两只老籣襙乐)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        两只老籣襙乐
+  C:0161H         SYMBOL        D0
+  C:016EH         SYMBOL        D00
+  C:0163H         SYMBOL        D1
+  C:0170H         SYMBOL        D11
+  C:0165H         SYMBOL        D2
+  C:0172H         SYMBOL        D22
+  C:016CH         SYMBOL        DELY
+  C:015FH         SYMBOL        DELYY
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.1       SYMBOL        ET0
+  C:003FH         SYMBOL        LOOP
+  C:0030H         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  D:008CH         SYMBOL        TH0
+  C:0179H         SYMBOL        TIM0
+  D:008AH         SYMBOL        TL0
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  C:0000H         LINE#         4
+  C:000BH         LINE#         7
+  C:0030H         LINE#         10
+  C:0033H         LINE#         11
+  C:0036H         LINE#         12
+  C:0038H         LINE#         13
+  C:003BH         LINE#         14
+  C:003DH         LINE#         15
+  C:003FH         LINE#         18
+  C:0042H         LINE#         19
+  C:0045H         LINE#         20
+  C:0048H         LINE#         22
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/30/2007  09:19:58  PAGE 2
+
+
+  C:004BH         LINE#         23
+  C:004EH         LINE#         24
+  C:0051H         LINE#         26
+  C:0054H         LINE#         27
+  C:0057H         LINE#         28
+  C:005AH         LINE#         30
+  C:005DH         LINE#         31
+  C:0060H         LINE#         32
+  C:0063H         LINE#         34
+  C:0065H         LINE#         35
+  C:0068H         LINE#         36
+  C:006AH         LINE#         38
+  C:006DH         LINE#         39
+  C:0070H         LINE#         40
+  C:0073H         LINE#         42
+  C:0076H         LINE#         43
+  C:0079H         LINE#         44
+  C:007CH         LINE#         46
+  C:007FH         LINE#         47
+  C:0082H         LINE#         48
+  C:0085H         LINE#         50
+  C:0088H         LINE#         51
+  C:008BH         LINE#         52
+  C:008EH         LINE#         53
+  C:0091H         LINE#         55
+  C:0093H         LINE#         56
+  C:0096H         LINE#         57
+  C:0098H         LINE#         60
+  C:009BH         LINE#         61
+  C:009EH         LINE#         62
+  C:00A1H         LINE#         64
+  C:00A4H         LINE#         65
+  C:00A7H         LINE#         66
+  C:00AAH         LINE#         68
+  C:00ADH         LINE#         69
+  C:00B0H         LINE#         70
+  C:00B3H         LINE#         71
+  C:00B6H         LINE#         73
+  C:00B8H         LINE#         74
+  C:00BBH         LINE#         75
+  C:00BDH         LINE#         78
+  C:00C0H         LINE#         79
+  C:00C3H         LINE#         80
+  C:00C6H         LINE#         82
+  C:00C9H         LINE#         83
+  C:00CCH         LINE#         84
+  C:00CFH         LINE#         86
+  C:00D2H         LINE#         87
+  C:00D5H         LINE#         88
+  C:00D8H         LINE#         90
+  C:00DBH         LINE#         91
+  C:00DEH         LINE#         92
+  C:00E1H         LINE#         94
+  C:00E4H         LINE#         95
+  C:00E7H         LINE#         96
+  C:00EAH         LINE#         98
+  C:00EDH         LINE#         99
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/30/2007  09:19:58  PAGE 3
+
+
+  C:00F0H         LINE#         100
+  C:00F3H         LINE#         103
+  C:00F5H         LINE#         104
+  C:00F8H         LINE#         105
+  C:00FAH         LINE#         107
+  C:00FDH         LINE#         108
+  C:0100H         LINE#         109
+  C:0103H         LINE#         111
+  C:0106H         LINE#         112
+  C:0109H         LINE#         113
+  C:010CH         LINE#         115
+  C:010FH         LINE#         116
+  C:0112H         LINE#         117
+  C:0115H         LINE#         119
+  C:0118H         LINE#         120
+  C:011BH         LINE#         121
+  C:011EH         LINE#         123
+  C:0121H         LINE#         124
+  C:0124H         LINE#         125
+  C:0127H         LINE#         127
+  C:012AH         LINE#         128
+  C:012DH         LINE#         129
+  C:0130H         LINE#         131
+  C:0132H         LINE#         132
+  C:0135H         LINE#         133
+  C:0137H         LINE#         136
+  C:013AH         LINE#         137
+  C:013DH         LINE#         138
+  C:0140H         LINE#         140
+  C:0143H         LINE#         141
+  C:0146H         LINE#         142
+  C:0149H         LINE#         144
+  C:014CH         LINE#         145
+  C:014FH         LINE#         146
+  C:0152H         LINE#         147
+  C:0155H         LINE#         149
+  C:0157H         LINE#         150
+  C:015AH         LINE#         151
+  C:015CH         LINE#         152
+  C:015FH         LINE#         155
+  C:0161H         LINE#         156
+  C:0163H         LINE#         157
+  C:0165H         LINE#         158
+  C:0167H         LINE#         159
+  C:0169H         LINE#         160
+  C:016BH         LINE#         161
+  C:016CH         LINE#         164
+  C:016EH         LINE#         165
+  C:0170H         LINE#         166
+  C:0172H         LINE#         167
+  C:0174H         LINE#         168
+  C:0176H         LINE#         169
+  C:0178H         LINE#         170
+  C:0179H         LINE#         172
+  C:017CH         LINE#         173
+  C:017FH         LINE#         174
+  C:0181H         LINE#         175
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/30/2007  09:19:58  PAGE 4
+
+
+  -------         ENDMOD        两只老籣襙乐
+
+Program Size: data=8.0 xdata=0 code=386
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

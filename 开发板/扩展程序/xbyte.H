@@ -1,0 +1,13 @@
+#define PA8255         XBYTE[0x8000]
+#define PB8255         XBYTE[0x8001]
+#define PC8255         XBYTE[0x8002]
+#define COM8255        XBYTE[0x8003]
+
+#define AD0809_IN0 	   XBYTE[0x8100]
+#define AD0809_IN1	   XBYTE[0x8101]
+#define AD0809_IN2	   XBYTE[0x8102]
+#define AD0809_IN3	   XBYTE[0x8103]
+#define AD0809_IN4	   XBYTE[0x8104]
+#define AD0809_IN5	   XBYTE[0x8105]
+#define AD0809_IN6	   XBYTE[0x8106]
+#define AD0809_IN7	   XBYTE[0x8107]

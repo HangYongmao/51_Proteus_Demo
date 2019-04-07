@@ -1,0 +1,277 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/24/2008  13:22:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE ex.obj, Ds18b20.obj TO ex RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  ex.obj (EX)
+  Ds18b20.obj (DS18B20)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  ex (EX)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00E3H     UNIT         ?PR?_TEMPER_COV?DS18B20
+            CODE    00E6H     0095H     UNIT         ?PR?GET_TEMPER?DS18B20
+            CODE    017BH     0011H     UNIT         ?PR?MAIN?EX
+            CODE    018CH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   ex (EX)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?EX
+
+?PR?MAIN?EX                     0008H    0003H
+  +--> ?PR?GET_TEMPER?DS18B20
+  +--> ?PR?_TEMPER_COV?DS18B20
+
+?PR?GET_TEMPER?DS18B20          -----    -----
+  +--> ?PR?_TEMPER_COV?DS18B20
+
+
+
+SYMBOL TABLE OF MODULE:  ex (EX)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EX
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/24/2008  13:22:27  PAGE 2
+
+
+  D:0090H         PUBLIC        P1
+  C:017BH         PUBLIC        main
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        kk
+  D:000AH         SYMBOL        k
+  -------         ENDDO         
+  C:017BH         LINE#         5
+  C:017BH         LINE#         6
+  C:017BH         LINE#         9
+  C:017EH         LINE#         10
+  C:017EH         LINE#         11
+  C:017EH         LINE#         12
+  C:0185H         LINE#         13
+  C:018AH         LINE#         14
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        EX
+
+  -------         MODULE        DS18B20
+  C:00E6H         SEGMENT       ?PR?GET_TEMPER?DS18B20
+  C:0003H         SEGMENT       ?PR?_TEMPER_COV?DS18B20
+  C:00E6H         PUBLIC        GET_TEMPER
+  C:0003H         PUBLIC        _TEMPER_COV
+  C:010EH         SYMBOL        ABC
+  D:00E0H         SYMBOL        ACC
+  C:00E8H         SYMBOL        BCD
+  C:0020H         SYMBOL        BIN_BCD
+  C:0105H         SYMBOL        CBA
+  C:00D1H         SYMBOL        DELAY
+  C:00E1H         SYMBOL        DELAY1
+  B:00B0H.3       SYMBOL        DQ
+  B:0020H.0       SYMBOL        FLAG1
+  C:008DH         SYMBOL        INIT_1820
+  C:00D3H         SYMBOL        MIN
+  D:00B0H         SYMBOL        P3
+  C:015BH         SYMBOL        RE00
+  C:015DH         SYMBOL        RE01
+  C:0125H         SYMBOL        RE1
+  C:0123H         SYMBOL        READ_1820
+  C:0157H         SYMBOL        READ_18200
+  C:00B3H         SYMBOL        RE_CONFIG
+  C:00B7H         SYMBOL        RE_CONFIG1
+  C:00F1H         SYMBOL        S22
+  C:0011H         SYMBOL        TEMPER_COV1
+  N:0035H         SYMBOL        TEMPER_H
+  N:0036H         SYMBOL        TEMPER_L
+  N:0060H         SYMBOL        TEMPER_NUM
+  C:0029H         SYMBOL        TEMP_TAB
+  C:0094H         SYMBOL        TSR1
+  C:009AH         SYMBOL        TSR2
+  C:00A2H         SYMBOL        TSR3
+  C:00A7H         SYMBOL        TSR4
+  C:00ACH         SYMBOL        TSR5
+  C:00AEH         SYMBOL        TSR6
+  C:00B0H         SYMBOL        TSR7
+  C:0142H         SYMBOL        WR1
+  C:013FH         SYMBOL        WRITE_1820
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/24/2008  13:22:27  PAGE 3
+
+
+  C:00D6H         SYMBOL        YS500
+  C:00DCH         SYMBOL        YS500US
+  C:00E6H         LINE#         25
+  C:00E8H         LINE#         26
+  C:00EBH         LINE#         27
+  C:00EEH         LINE#         28
+  C:00F1H         LINE#         29
+  C:00F4H         LINE#         30
+  C:00F6H         LINE#         31
+  C:00F9H         LINE#         32
+  C:00FBH         LINE#         33
+  C:00FEH         LINE#         34
+  C:00FFH         LINE#         35
+  C:0102H         LINE#         36
+  C:0105H         LINE#         37
+  C:0108H         LINE#         38
+  C:010BH         LINE#         39
+  C:010EH         LINE#         40
+  C:0111H         LINE#         41
+  C:0113H         LINE#         42
+  C:0116H         LINE#         43
+  C:0118H         LINE#         44
+  C:011BH         LINE#         45
+  C:011EH         LINE#         46
+  C:0120H         LINE#         47
+  C:0122H         LINE#         48
+  C:0123H         LINE#         52
+  C:0125H         LINE#         53
+  C:0126H         LINE#         54
+  C:0128H         LINE#         55
+  C:0129H         LINE#         56
+  C:012AH         LINE#         57
+  C:012CH         LINE#         58
+  C:012DH         LINE#         59
+  C:012EH         LINE#         60
+  C:012FH         LINE#         61
+  C:0131H         LINE#         62
+  C:0133H         LINE#         63
+  C:0135H         LINE#         64
+  C:0137H         LINE#         65
+  C:0139H         LINE#         66
+  C:013BH         LINE#         67
+  C:013CH         LINE#         68
+  C:013EH         LINE#         69
+  C:013FH         LINE#         73
+  C:0141H         LINE#         74
+  C:0142H         LINE#         75
+  C:0144H         LINE#         76
+  C:0146H         LINE#         77
+  C:0148H         LINE#         78
+  C:0149H         LINE#         79
+  C:014BH         LINE#         80
+  C:014DH         LINE#         81
+  C:014FH         LINE#         82
+  C:0151H         LINE#         83
+  C:0152H         LINE#         84
+  C:0154H         LINE#         85
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/24/2008  13:22:27  PAGE 4
+
+
+  C:0156H         LINE#         86
+  C:0157H         LINE#         90
+  C:0159H         LINE#         91
+  C:015BH         LINE#         92
+  C:015DH         LINE#         93
+  C:015EH         LINE#         94
+  C:0160H         LINE#         95
+  C:0161H         LINE#         96
+  C:0162H         LINE#         97
+  C:0164H         LINE#         98
+  C:0165H         LINE#         99
+  C:0166H         LINE#         100
+  C:0167H         LINE#         101
+  C:0169H         LINE#         102
+  C:016BH         LINE#         103
+  C:016DH         LINE#         104
+  C:016FH         LINE#         105
+  C:0171H         LINE#         106
+  C:0173H         LINE#         107
+  C:0174H         LINE#         108
+  C:0176H         LINE#         109
+  C:0177H         LINE#         110
+  C:0178H         LINE#         111
+  C:017AH         LINE#         112
+  C:0003H         LINE#         129
+  C:0005H         LINE#         130
+  C:0007H         LINE#         131
+  C:0008H         LINE#         132
+  C:000AH         LINE#         133
+  C:000CH         LINE#         134
+  C:000FH         LINE#         135
+  C:0011H         LINE#         138
+  C:0013H         LINE#         139
+  C:0015H         LINE#         140
+  C:0016H         LINE#         141
+  C:0018H         LINE#         142
+  C:001AH         LINE#         143
+  C:001DH         LINE#         144
+  C:001FH         LINE#         145
+  C:0020H         LINE#         149
+  C:0023H         LINE#         150
+  C:0025H         LINE#         151
+  C:0026H         LINE#         152
+  C:0028H         LINE#         153
+  C:008DH         LINE#         172
+  C:008FH         LINE#         173
+  C:0090H         LINE#         174
+  C:0092H         LINE#         175
+  C:0094H         LINE#         176
+  C:0096H         LINE#         177
+  C:0098H         LINE#         178
+  C:009AH         LINE#         179
+  C:009CH         LINE#         180
+  C:009FH         LINE#         181
+  C:00A2H         LINE#         182
+  C:00A4H         LINE#         183
+  C:00A7H         LINE#         184
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/24/2008  13:22:27  PAGE 5
+
+
+  C:00A9H         LINE#         185
+  C:00ACH         LINE#         186
+  C:00AEH         LINE#         187
+  C:00B0H         LINE#         188
+  C:00B2H         LINE#         189
+  C:00B3H         LINE#         193
+  C:00B6H         LINE#         194
+  C:00B7H         LINE#         196
+  C:00B9H         LINE#         197
+  C:00BCH         LINE#         198
+  C:00BEH         LINE#         199
+  C:00C1H         LINE#         201
+  C:00C3H         LINE#         202
+  C:00C6H         LINE#         203
+  C:00C8H         LINE#         204
+  C:00CBH         LINE#         205
+  C:00CDH         LINE#         206
+  C:00D0H         LINE#         207
+  C:00D1H         LINE#         211
+  C:00D3H         LINE#         212
+  C:00D5H         LINE#         213
+  C:00D6H         LINE#         214
+  C:00D9H         LINE#         215
+  C:00DCH         LINE#         216
+  C:00DEH         LINE#         217
+  C:00E0H         LINE#         218
+  C:00E1H         LINE#         219
+  C:00E3H         LINE#         220
+  C:00E5H         LINE#         221
+  -------         ENDMOD        DS18B20
+
+Program Size: data=12.0 xdata=0 code=408
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

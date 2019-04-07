@@ -1,0 +1,125 @@
+,,, ;HC11 PWM Motor Control Example
+,,, ;Demonstrates ADC and Timer Output Capture functions
+,,,
+,,, PORTA             equ      $1000
+,,, PORTC             equ      $1003
+,,, PORTB             equ      $1004
+,,, DDRC              equ      $1007
+,,, TOC1              equ      $1016
+,,, TOC2              equ      $1018
+,,, TCTL1             equ      $1020
+,,, TCTL2             equ      $1021
+,,, TMSK1             equ      $1022
+,,, TFLG1             equ      $1023
+,,, TMSK2             equ      $1024
+,,, PACTL             equ      $1026
+,,, ADCTL             equ      $1030
+,,, ADR1              equ      $1031
+,,, ADR2              equ      $1032
+,,,
+,,,                 org $F000
+,,,
+F000,8E 00 FF,start:, start:          lds  #$FF
+,,,
+F003,86 FF,,                 ldaa #$FF                       ;Port C is output
+F005,B7 10 07,,                 staa DDRC
+,,,
+F008,86 80,,                 ldaa #$80                       ;Enable OC1 interrupts.
+F00A,B7 10 22,,                 staa TMSK1                      ;
+,,,
+F00D,86 02,,                 ldaa #$2                        ;Set the prescaler (divide by 16)
+F00F,B7 10 24,,                 staa TMSK2
+,,,
+F012,86 80,,                 ldaa #$80                       ;Enable PA7 as output
+F014,B7 10 26,,                 staa PACTL
+,,,
+,,,
+F017,86 10,,                 ldaa #$10                       ;Start first ADC conversion - multi mode enable
+F019,B7 10 30,,                 staa ADCTL
+,,,
+F01C,CC 01 00,,                 ldd #$0100                      ;Load the capture register
+F01F,FD 10 16,,                 std TOC1
+,,,
+F022,0E,,                 cli                             ;Enable interupts
+,,,
+F023,3E,loop, loop            wai
+F024,20 FD,,                 bra loop
+,,,
+,,,
+,,,
+,,, ;OC1 interrupt service
+F026,86 10,oc1f, oc1f            ldaa #$10                       ;Start another ADC conversion
+F028,B7 10 30,,                 staa ADCTL
+,,,
+F02B,B6 10 31,,                 ldaa ADR1                       ;Read the pot position from ADC channel 1
+F02E,B7 10 04,,                 staa PORTB                      ;Display it
+,,,
+F031,80 7F,,                 suba #127                       ;0x7F is zero reference.
+,,,
+F033,26 09,,                 bne oc1f_ne                     ;Jump if values not same
+,,,
+,,, ;Set Both outputs low. Motor is stationary
+F035,5F,,                 clrb
+F036,F7 10 00,,                 stab PORTA                      ;Both OC1 and OC2 outputs low
+F039,F7 10 20,,                 stab TCTL1                      ;TOC2 mode is disabled
+F03C,20 21,,                 bra done
+,,,
+,,, ;Non-zero drive - decide if +ve or -ve:
+,,,
+F03E,25 10,oc1f_ne, oc1f_ne         bcs oc1f_cs
+,,,
+,,, ;Positive result - motor spins clockwise:
+,,,
+F040,C6 40,,                 ldab #$40                       ;Port A drives this value:
+F042,F7 10 00,,                 stab PORTA
+F045,5F,,                 clrb                            ;Release TOC2 latch - Port A acquires value, above.
+F046,F7 10 20,,                 stab TCTL1
+F049,C6 40,,                 ldab #$40                       ;TOC 2 output toggles on OC2 event; motor drive stops.
+F04B,F7 10 20,,                 stab TCTL1
+F04E,20 0F,,                 bra done
+,,,
+,,, ;Negative result - motor spins anti-clockwise:
+,,,
+F050,C6 80,oc1f_cs, oc1f_cs         ldab #$80                       ;Port A drives this value:
+F052,F7 10 00,,                 stab PORTA
+F055,5F,,                 clrb                            ;Release TOC2 latch - Port A acquires value, above.
+F056,F7 10 20,,                 stab TCTL1
+F059,C6 40,,                 ldab #$40                       ;TOC 2 output toggles on OC2 event; motor drive stops.
+F05B,F7 10 20,,                 stab TCTL1
+F05E,40,,                 nega                            ;Invert result -> 0xFF -> 0x01 etc.
+,,,
+,,, ;Now set up TOC2 to trigger at a time forward of TOC1. This means that the motor will
+,,, ;be powered for the number of ticks in ACCA * 256.
+,,,
+F05F,16,done:, done:           tab                             ;TOC 2 is set to trigger after this no of cycles.
+F060,4F,,                 clra
+F061,59,,                 rolb
+F062,49,,                 rola
+F063,59,,                 rolb
+F064,49,,                 rola
+F065,59,,                 rolb
+F066,49,,                 rola
+F067,59,,                 rolb
+F068,49,,                 rola
+F069,59,,                 rolb
+F06A,49,,                 rola
+F06B,F3 10 16,,                 addd TOC1
+F06E,FD 10 18,,                 std TOC2
+,,,
+F071,CC 10 00,,                 ldd #$1000
+F074,F3 10 16,,                 addd TOC1
+F077,FD 10 16,,                 std TOC1
+,,,
+F07A,86 80,,                 ldaa #$80                       ;Clear the TOC 1 interrupt
+F07C,B7 10 23,,                 staa TFLG1
+F07F,3B,,                 rti
+,,,
+,,,
+,,, ;Interrupt Vectors
+,,,
+,,,                 org $FFE8
+FFE8,F0 26,,                 dw oc1f
+,,,
+,,,                 org $FFFE
+FFFE,F0 00,,                 dw start
+,,,

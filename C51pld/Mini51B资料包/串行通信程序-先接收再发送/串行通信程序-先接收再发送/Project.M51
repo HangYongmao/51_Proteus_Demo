@@ -1,0 +1,67 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/11/2007  20:14:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 串行通信程序-先接收再发送.obj TO Project
+
+
+INPUT MODULES INCLUDED:
+  串行通信程序-先接收再发送.obj (確__蚠_懦__騙蟔接收_俜_送)
+
+
+LINK MAP OF MODULE:  Project (確__蚠_懦__騙蟔接收_俜_送)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0028H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Project (確__蚠_懦__騙蟔接收_俜_送)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        確__蚠_懦__騙蟔接收_俜_送
+  D:0090H         SYMBOL        P1
+  D:0087H         SYMBOL        PCON
+  C:0015H         SYMBOL        RECEIVE
+  B:0098H.0       SYMBOL        RI
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  C:001CH         SYMBOL        SEND
+  D:008DH         SYMBOL        TH1
+  B:0098H.1       SYMBOL        TI
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         2
+  C:0003H         LINE#         3
+  C:0006H         LINE#         4
+  C:0009H         LINE#         6
+  C:000CH         LINE#         7
+  C:000FH         LINE#         8
+  C:0011H         LINE#         9
+  C:0013H         LINE#         10
+  C:0015H         LINE#         13
+  C:0018H         LINE#         14
+  C:001AH         LINE#         15
+  C:001CH         LINE#         16
+  C:001EH         LINE#         17
+  C:001FH         LINE#         18
+  C:0021H         LINE#         19
+  C:0024H         LINE#         20
+  C:0026H         LINE#         21
+  -------         ENDMOD        確__蚠_懦__騙蟔接收_俜_送
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/11/2007  20:14:15  PAGE 2
+
+
+
+Program Size: data=8.0 xdata=0 code=40
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

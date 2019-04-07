@@ -1,0 +1,183 @@
+#define	_PPDATAR_H
+
+#include <reg51.h>
+#include <string.h>
+
+#define uchar unsigned char
+#define uint unsigned int
+
+/* 握手信号宏定义 */
+#define CALL 0x24		// 主机呼叫
+#define OK 0x00			// 从机准备好
+#define MAXLEN 64    	// 缓冲区最大长度
+uchar buf[MAXLEN];
+sbit  p00 = P0^0; sbit  p01 = P0^1; sbit  p02 = P0^2; sbit  p03 = P0^3;
+sbit p10=P1^0; sbit p11=P1^1; sbit p12=P1^2; sbit p13=P1^3;
+sbit p14=P1^4; sbit p15=P1^5; sbit p16=P1^6; sbit p17=P1^7;
+bit err;
+void delay();
+
+//********************八段码*************************//
+code unsigned char LEDMAP[] = { 
+0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07,
+0x7f, 0x6f, 0x00,0x71//共阳显示码，分别显示0、1、2、3、4、5、6、7、8、9、灭、F。
+};
+//***********************显示码选择**********************//
+int DisplayLED(unsigned char j)
+{
+	unsigned int i=0;
+	unsigned int x1;
+	x1= LEDMAP[(i+j) & 0x0f];
+	return  x1;
+}
+
+//***********************显示**********************//
+void  display()
+{
+	P0=0xf7;
+	P1=DisplayLED(buf[0]);
+	delay();
+	P0=0xfb;
+	P1=DisplayLED(buf[1]);
+	delay();
+	P0=0xfd;
+	P1=DisplayLED(buf[2]);
+	delay();
+	P0=0xfe;
+	P1=DisplayLED(buf[3]);
+	delay();
+}
+//////////////////////显示FFFF//////////////////////////////
+void  display_f()
+{
+	P0=0xfe;
+	P1=DisplayLED(11);
+	delay();
+	P0=0xfd;
+	P1=DisplayLED(11);
+	delay();
+	P0=0xfb;
+	P1=DisplayLED(11);
+	delay();
+	P0=0xf7;
+	P1=DisplayLED(11);
+	delay();
+}
+//************************CRC计算****************************************//
+uint getcrc(uchar *s,uchar len)
+{
+  uint acc=0,i,j=0;
+while(len--)
+ {
+    acc=acc^(*s++<<8);
+    for(i=0;i++<8;)
+      if(acc&0x8000)
+        acc=(acc<<1)^0x1021;
+      else
+        acc=acc<<1;
+ }
+ return(acc);
+}
+//*************************delay*********************//
+void delay()
+{
+	unsigned int i,n;
+	n=100;
+	for (i=0; i<n; i++) {}
+}
+//************************进行数据校验****************************************//
+int chkcrc(uchar *buf,uchar len)
+	{
+	  uint strcrc;
+	   strcrc=getcrc(buf,len);   //生成接收数据的CRC码
+	   if(((0xff&buf[len])==(0xff&(strcrc/256)))&&((0xff&buf[len+1])==(0xff&(strcrc%256))))
+	                           //接收的CRC码和生成的CRC码进行比较
+	     return(0);
+	   else
+             return(-1);
+        }
+
+/* 接收数据函数 */
+bit recvdata(uchar *buf)
+{
+	uchar i;
+	uchar len;					// 保存数据长度
+	int ecc;					// 保存校验字节
+	
+	/* 接收数据长度字节 */
+	RI = 0;
+	while(!RI);
+	len = SBUF;
+	RI = 0;
+
+	/* 接收数据及校验字节 */
+	for (i=0;i<len+2;i++)
+	{
+		while(!RI);
+		*buf = SBUF;	
+		RI = 0;	
+		buf++;		
+	}
+	*buf = 0;					// 表示接收结束	
+       
+         /* 进行数据校验 */
+        ecc = chkcrc(buf,len);
+	if (ecc!=0)					// 如果校验错误
+	
+       	       return 1;			// 返回1表示校验错误
+        else
+	       return 0;					// 校验成功，返回0
+       
+}
+
+void init_serial()
+{
+	TMOD = 0x20;				// 定时器T1使用工作方式2
+	TH1 = 250;
+	TL1 = 250;
+	TR1 = 1;					// 开始计时
+	PCON = 0x80;				// SMOD = 1
+	SCON = 0x50;				// 工作方式1，波特率9600kbit/s，允许接收 
+}
+
+/*串口通信程序 */
+void tongxin()
+{ 
+	uchar tmp=0;
+	init_serial();
+        EA = 0;					// 关闭所有中断
+
+       /* 如果接收到的数据不是CALL，则继续等待 */
+		while (tmp!=CALL)
+		{
+			RI = 0;
+			while(!RI)
+			tmp = SBUF;
+			RI = 0;
+		}
+	
+		/* 发送OK信号，表示从机可以接收数据 */
+		TI = 0;				
+		SBUF = OK;
+		while(!TI);
+		TI = 0;
+
+		/* 数据接收 */
+	err = recvdata(buf);	// 校验失败返回1，接收成功返回0
+                        if(err==1)
+			    display_f();
+                        if(err==0)
+		             display();
+                 
+
+}
+//*************************主函数***********************//
+void  main()
+{
+     
+      while(1)
+      {
+         tongxin();
+	    
+      }  
+}

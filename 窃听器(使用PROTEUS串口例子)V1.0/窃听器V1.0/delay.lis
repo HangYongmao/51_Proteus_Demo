@@ -1,0 +1,290 @@
+                        .module delay.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile D:\MyProject\SMS-MC55\Code\ÇÔÌýÆ÷delay\delay.c
+ 0000                   .dbfunc e DelayMs _DelayMs fV
+ 0000           ;              i -> R20,R21
+ 0000           ;             ms -> R16,R17
+                        .even
+ 0000           _DelayMs::
+ 0000 00D0              rcall push_gset1
+ 0002                   .dbline -1
+ 0002                   .dbline 17
+ 0002           ; ////////////////////////////////////////////////////////////////////////////////
+ 0002           ; // ICC-AVR application builder : 2006-6-25 ÏÂÎç 06:02:39
+ 0002           ; // Target : M8
+ 0002           ; // Crystal: 3.6864Mhz
+ 0002           ; // Author:  Anwarye
+ 0002           ; // Title:   Detcetaphone
+ 0002           ; ////////////////////////////////////////////////////////////////////////////////
+ 0002           ; 
+ 0002           ; #include <iom8v.h>
+ 0002           ; #include <macros.h>
+ 0002           ; //#include "define.h"
+ 0002           ; 
+ 0002           ; extern volatile unsigned char          PhoneNum[12]; 
+ 0002           ; 
+ 0002           ; 
+ 0002           ; void DelayMs(unsigned int ms)
+ 0002           ; {
+ 0002 0AC0              rjmp L3
+ 0004           L2:
+ 0004                   .dbline 20
+ 0004           ;     unsigned int i;
+ 0004           ;     while(ms--)
+ 0004           ;       {
+ 0004                   .dbline 21
+ 0004           ;           for(i=0;i<450;i++)   // 3.6864MHz  =  450  ,7.3728MHz = 900
+ 0004 4427              clr R20
+ 0006 5527              clr R21
+ 0008 03C0              rjmp L8
+ 000A           L5:
+ 000A                   .dbline 22
+ 000A                   .dbline 23
+ 000A 0000              NOP
+ 000C                   .dbline 24
+ 000C           L6:
+ 000C                   .dbline 21
+ 000C 4F5F              subi R20,255  ; offset = 1
+ 000E 5F4F              sbci R21,255
+ 0010           L8:
+ 0010                   .dbline 21
+ 0010 423C              cpi R20,194
+ 0012 E1E0              ldi R30,1
+ 0014 5E07              cpc R21,R30
+ 0016 C8F3              brlo L5
+ 0018                   .dbline 25
+ 0018           L3:
+ 0018                   .dbline 19
+ 0018 1801              movw R2,R16
+ 001A 0150              subi R16,1
+ 001C 1040              sbci R17,0
+ 001E 2220              tst R2
+ 0020 89F7              brne L2
+ 0022 3320              tst R3
+ 0024 79F7              brne L2
+ 0026           X0:
+ 0026                   .dbline -2
+ 0026           L1:
+ 0026 00D0              rcall pop_gset1
+ 0028                   .dbline 0 ; func end
+ 0028 0895              ret
+ 002A                   .dbsym r i 20 i
+ 002A                   .dbsym r ms 16 i
+ 002A                   .dbend
+ 002A                   .dbfunc e Write_EEPROM _Write_EEPROM fV
+ 002A           ;        Address -> R22,R23
+ 002A           ;           Data -> R20
+                        .even
+ 002A           _Write_EEPROM::
+ 002A 00D0              rcall push_gset2
+ 002C B901              movw R22,R18
+ 002E 402F              mov R20,R16
+ 0030                   .dbline -1
+ 0030                   .dbline 29
+ 0030           ;           {
+ 0030           ;               asm("NOP");
+ 0030           ;               }
+ 0030           ;       }
+ 0030           ; }
+ 0030           ; 
+ 0030           ; void Write_EEPROM(unsigned char Data,unsigned int Address)
+ 0030           ; {
+ 0030                   .dbline 30
+ 0030           ;     if(EECR&0x20) DelayMs(8);
+ 0030 E59B              sbis 0x1c,5
+ 0032 03C0              rjmp L10
+ 0034                   .dbline 30
+ 0034 08E0              ldi R16,8
+ 0036 10E0              ldi R17,0
+ 0038 E3DF              rcall _DelayMs
+ 003A           L10:
+ 003A                   .dbline 31
+ 003A           ;     EEARH=Address>>8;
+ 003A 1B01              movw R2,R22
+ 003C 232C              mov R2,R3
+ 003E 3324              clr R3
+ 0040 2FBA              out 0x1f,R2
+ 0042                   .dbline 32
+ 0042           ;     EEARL=Address&0x00ff;
+ 0042 CB01              movw R24,R22
+ 0044 9070              andi R25,0
+ 0046 8EBB              out 0x1e,R24
+ 0048                   .dbline 33
+ 0048           ;     EEDR=Data;
+ 0048 4DBB              out 0x1d,R20
+ 004A                   .dbline 34
+ 004A           ;     EECR=EECR|0x04;
+ 004A E29A              sbi 0x1c,2
+ 004C                   .dbline 35
+ 004C           ;     EECR=EECR|0x02;
+ 004C E19A              sbi 0x1c,1
+ 004E                   .dbline 36
+ 004E           ;     DelayMs(8);
+ 004E 08E0              ldi R16,8
+ 0050 10E0              ldi R17,0
+ 0052 D6DF              rcall _DelayMs
+ 0054                   .dbline -2
+ 0054           L9:
+ 0054 00D0              rcall pop_gset2
+ 0056                   .dbline 0 ; func end
+ 0056 0895              ret
+ 0058                   .dbsym r Address 22 i
+ 0058                   .dbsym r Data 20 c
+ 0058                   .dbend
+ 0058                   .dbfunc e Read_EEPROM _Read_EEPROM fc
+ 0058           ;              i -> R20
+ 0058           ;        Address -> R20,R21
+                        .even
+ 0058           _Read_EEPROM::
+ 0058 00D0              rcall push_gset1
+ 005A A801              movw R20,R16
+ 005C                   .dbline -1
+ 005C                   .dbline 40
+ 005C           ; }
+ 005C           ; 
+ 005C           ; unsigned char Read_EEPROM(unsigned int Address)
+ 005C           ; {
+ 005C                   .dbline 43
+ 005C           ;     unsigned char i;
+ 005C           ;       
+ 005C           ;     if(EECR&0x01) DelayMs(8);
+ 005C E09B              sbis 0x1c,0
+ 005E 03C0              rjmp L13
+ 0060                   .dbline 43
+ 0060 08E0              ldi R16,8
+ 0062 10E0              ldi R17,0
+ 0064 CDDF              rcall _DelayMs
+ 0066           L13:
+ 0066                   .dbline 44
+ 0066           ;     EEARH=Address>>8;
+ 0066 1A01              movw R2,R20
+ 0068 232C              mov R2,R3
+ 006A 3324              clr R3
+ 006C 2FBA              out 0x1f,R2
+ 006E                   .dbline 45
+ 006E           ;     EEARL=Address&0x00ff;
+ 006E CA01              movw R24,R20
+ 0070 9070              andi R25,0
+ 0072 8EBB              out 0x1e,R24
+ 0074                   .dbline 46
+ 0074           ;     EECR=EECR|0x01;
+ 0074 E09A              sbi 0x1c,0
+ 0076                   .dbline 47
+ 0076           ;     DelayMs(10);
+ 0076 0AE0              ldi R16,10
+ 0078 10E0              ldi R17,0
+ 007A C2DF              rcall _DelayMs
+ 007C                   .dbline 48
+ 007C           ;     i=EEDR;
+ 007C 4DB3              in R20,0x1d
+ 007E                   .dbline 49
+ 007E           ;     return(i);
+ 007E 042F              mov R16,R20
+ 0080                   .dbline -2
+ 0080           L12:
+ 0080 00D0              rcall pop_gset1
+ 0082                   .dbline 0 ; func end
+ 0082 0895              ret
+ 0084                   .dbsym r i 20 c
+ 0084                   .dbsym r Address 20 i
+ 0084                   .dbend
+ 0084                   .dbfunc e PhoneNum_to_EEPROM _PhoneNum_to_EEPROM fV
+ 0084           ;             ch -> R20
+ 0084           ;              n -> R22
+                        .even
+ 0084           _PhoneNum_to_EEPROM::
+ 0084 00D0              rcall push_gset2
+ 0086                   .dbline -1
+ 0086                   .dbline 53
+ 0086           ; }
+ 0086           ; 
+ 0086           ; void PhoneNum_to_EEPROM(void)
+ 0086           ; {
+ 0086                   .dbline 55
+ 0086           ;     unsigned char n,ch;
+ 0086           ;       for(n=0;n<12;n++)
+ 0086 6627              clr R22
+ 0088 0CC0              rjmp L19
+ 008A           L16:
+ 008A                   .dbline 56
+ 008A                   .dbline 57
+ 008A 80E0              ldi R24,<_PhoneNum
+ 008C 90E0              ldi R25,>_PhoneNum
+ 008E E62F              mov R30,R22
+ 0090 FF27              clr R31
+ 0092 E80F              add R30,R24
+ 0094 F91F              adc R31,R25
+ 0096 4081              ldd R20,z+0
+ 0098                   .dbline 58
+ 0098 262F              mov R18,R22
+ 009A 3327              clr R19
+ 009C 042F              mov R16,R20
+ 009E C5DF              rcall _Write_EEPROM
+ 00A0                   .dbline 59
+ 00A0           L17:
+ 00A0                   .dbline 55
+ 00A0 6395              inc R22
+ 00A2           L19:
+ 00A2                   .dbline 55
+ 00A2 6C30              cpi R22,12
+ 00A4 90F3              brlo L16
+ 00A6                   .dbline -2
+ 00A6           L15:
+ 00A6 00D0              rcall pop_gset2
+ 00A8                   .dbline 0 ; func end
+ 00A8 0895              ret
+ 00AA                   .dbsym r ch 20 c
+ 00AA                   .dbsym r n 22 c
+ 00AA                   .dbend
+ 00AA                   .dbfunc e EEPROM_to_PhoneNum _EEPROM_to_PhoneNum fV
+ 00AA           ;             ch -> R20
+ 00AA           ;              n -> R22
+                        .even
+ 00AA           _EEPROM_to_PhoneNum::
+ 00AA 00D0              rcall push_gset2
+ 00AC                   .dbline -1
+ 00AC                   .dbline 63
+ 00AC           ;       {
+ 00AC           ;           ch = PhoneNum[n];
+ 00AC           ;           Write_EEPROM(ch,n);
+ 00AC           ;       }
+ 00AC           ; }
+ 00AC           ; 
+ 00AC           ; void EEPROM_to_PhoneNum(void)
+ 00AC           ; {
+ 00AC                   .dbline 65
+ 00AC           ;     unsigned char n,ch;
+ 00AC           ;       for(n=0;n<12;n++)
+ 00AC 6627              clr R22
+ 00AE 0CC0              rjmp L24
+ 00B0           L21:
+ 00B0                   .dbline 66
+ 00B0                   .dbline 67
+ 00B0 062F              mov R16,R22
+ 00B2 1127              clr R17
+ 00B4 D1DF              rcall _Read_EEPROM
+ 00B6 402F              mov R20,R16
+ 00B8                   .dbline 68
+ 00B8 80E0              ldi R24,<_PhoneNum
+ 00BA 90E0              ldi R25,>_PhoneNum
+ 00BC E62F              mov R30,R22
+ 00BE FF27              clr R31
+ 00C0 E80F              add R30,R24
+ 00C2 F91F              adc R31,R25
+ 00C4 4083              std z+0,R20
+ 00C6                   .dbline 69
+ 00C6           L22:
+ 00C6                   .dbline 65
+ 00C6 6395              inc R22
+ 00C8           L24:
+ 00C8                   .dbline 65
+ 00C8 6C30              cpi R22,12
+ 00CA 90F3              brlo L21
+ 00CC                   .dbline -2
+ 00CC           L20:
+ 00CC 00D0              rcall pop_gset2
+ 00CE                   .dbline 0 ; func end
+ 00CE 0895              ret
+ 00D0                   .dbsym r ch 20 c
+ 00D0                   .dbsym r n 22 c
+ 00D0                   .dbend

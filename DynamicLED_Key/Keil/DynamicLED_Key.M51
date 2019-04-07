@@ -1,0 +1,326 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/11/2007  15:13:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj, KeyScan.obj, LED6Show.obj, KeyPorcess.obj TO DynamicLED_Key
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  KeyScan.obj (KEYSCAN)
+  LED6Show.obj (LED6SHOW)
+  KeyPorcess.obj (KEYPORCESS)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LMUL)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULCMP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CCASE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  DynamicLED_Key (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?MAIN
+            DATA    000EH     0006H     UNIT         ?DT?LED6SHOW
+            DATA    0014H     0004H     UNIT         ?DT?KEYSCAN
+            DATA    0018H     0004H     UNIT         _DATA_GROUP_
+                    001CH     0004H                  *** GAP ***
+            BIT     0020H.0   0000H.2   UNIT         ?BI?MAIN
+                    0020H.2   0000H.6                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     0005H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     000DH                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     02B5H     UNIT         ?PR?_PUCLEDNUM?LED6SHOW
+            CODE    02D3H     016DH     UNIT         ?C?LIB_CODE
+            CODE    0440H     009CH     UNIT         ?PR?_VKEYPROCESS?KEYPORCESS
+            CODE    04DCH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0568H     0069H     UNIT         ?PR?VTIMER0?MAIN
+            CODE    05D1H     004EH     UNIT         ?PR?VINT0?MAIN
+            CODE    061FH     0043H     UNIT         ?PR?UCKEYSCAN?KEYSCAN
+            CODE    0662H     0024H     UNIT         ?PR?MAIN?MAIN
+            CODE    0686H     0022H     UNIT         ?PR?VTIMER1?MAIN
+            CODE    06A8H     0017H     UNIT         ?C_INITSEG
+            CODE    06BFH     0012H     UNIT         ?PR?_VSHOWONENUM?LED6SHOW
+            CODE    06D1H     0010H     UNIT         ?CO?LED6SHOW
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:13:59  PAGE 2
+
+
+
+
+OVERLAY MAP OF MODULE:   DynamicLED_Key (MAIN)
+
+
+SEGMENT                               DATA_GROUP 
+  +--> CALLED SEGMENT               START    LENGTH
+---------------------------------------------------
+?PR?VINT0?MAIN                      -----    -----
+  +--> ?PR?UCKEYSCAN?KEYSCAN
+  +--> ?PR?_VKEYPROCESS?KEYPORCESS
+
+*** NEW ROOT ***************************************************
+
+?PR?VTIMER0?MAIN                    -----    -----
+  +--> ?PR?_PUCLEDNUM?LED6SHOW
+  +--> ?PR?_VSHOWONENUM?LED6SHOW
+
+?PR?_PUCLEDNUM?LED6SHOW             0018H    0004H
+
+?PR?_VSHOWONENUM?LED6SHOW           -----    -----
+  +--> ?CO?LED6SHOW
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                       -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  DynamicLED_Key (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  C:05D1H         PUBLIC        vINT0
+  C:0662H         PUBLIC        main
+  C:0568H         PUBLIC        vTimer0
+  C:0686H         PUBLIC        vTimer1
+  D:0008H         PUBLIC        ul_Number
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  B:00A8H.3       PUBLIC        ET1
+  B:0020H.0       PUBLIC        b_KillShock
+  D:008CH         PUBLIC        TH0
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  D:000CH         PUBLIC        uc_KillCount
+  B:00B8H.1       PUBLIC        PT0
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:13:59  PAGE 3
+
+
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  D:000DH         PUBLIC        uc_DisCount
+  B:0020H.1       PUBLIC        b_KeyShock
+  -------         PROC          MAIN
+  C:0662H         LINE#         58
+  C:0662H         LINE#         59
+  C:0662H         LINE#         60
+  C:0665H         LINE#         62
+  C:0668H         LINE#         66
+  C:066BH         LINE#         67
+  C:066EH         LINE#         68
+  C:0670H         LINE#         69
+  C:0672H         LINE#         73
+  C:0675H         LINE#         74
+  C:0678H         LINE#         75
+  C:067AH         LINE#         76
+  C:067CH         LINE#         80
+  C:067EH         LINE#         81
+  C:0680H         LINE#         83
+  C:0682H         LINE#         85
+  C:0684H         LINE#         87
+  -------         ENDPROC       MAIN
+  -------         PROC          VINT0
+  C:05D1H         LINE#         96
+  C:05EEH         LINE#         98
+  C:05F0H         LINE#         100
+  C:05F3H         LINE#         101
+  C:05F3H         LINE#         102
+  C:05F9H         LINE#         103
+  C:05FBH         LINE#         104
+  C:05FDH         LINE#         107
+  C:0600H         LINE#         108
+  C:0602H         LINE#         112
+  C:0604H         LINE#         113
+  -------         ENDPROC       VINT0
+  -------         PROC          VTIMER1
+  C:0686H         LINE#         121
+  C:068AH         LINE#         124
+  C:068DH         LINE#         125
+  C:068DH         LINE#         126
+  C:0692H         LINE#         127
+  C:0692H         LINE#         128
+  C:0694H         LINE#         129
+  C:0696H         LINE#         130
+  C:0699H         LINE#         131
+  C:069BH         LINE#         132
+  C:069DH         LINE#         133
+  C:069DH         LINE#         135
+  C:06A0H         LINE#         136
+  C:06A3H         LINE#         137
+  -------         ENDPROC       VTIMER1
+  -------         PROC          VTIMER0
+  C:0568H         LINE#         143
+  C:0585H         LINE#         145
+  C:05A2H         LINE#         147
+  C:05A9H         LINE#         148
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:13:59  PAGE 4
+
+
+  C:05ADH         LINE#         149
+  C:05B0H         LINE#         151
+  C:05B3H         LINE#         152
+  C:05B6H         LINE#         153
+  -------         ENDPROC       VTIMER0
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        KEYSCAN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:061FH         PUBLIC        ucKeyScan
+  D:0014H         PUBLIC        uca_LineScan
+  -------         PROC          UCKEYSCAN
+  -------         DO            
+  D:0001H         SYMBOL        ucTemp
+  D:0007H         SYMBOL        ucRow
+  D:0006H         SYMBOL        ucLine
+  -------         ENDDO         
+  C:061FH         LINE#         33
+  C:061FH         LINE#         34
+  C:061FH         LINE#         35
+  C:0620H         LINE#         36
+  C:0622H         LINE#         38
+  C:0622H         LINE#         39
+  C:0622H         LINE#         40
+  C:0629H         LINE#         41
+  C:062EH         LINE#         42
+  C:0632H         LINE#         43
+  C:0632H         LINE#         44
+  C:0642H         LINE#         45
+  C:0642H         LINE#         46
+  C:0646H         LINE#         47
+  C:064AH         LINE#         48
+  C:064EH         LINE#         49
+  C:0652H         LINE#         50
+  C:0656H         LINE#         51
+  C:0656H         LINE#         52
+  C:0656H         LINE#         53
+  C:0656H         LINE#         54
+  C:065AH         LINE#         55
+  C:065DH         LINE#         57
+  C:0661H         LINE#         58
+  -------         ENDPROC       UCKEYSCAN
+  -------         ENDMOD        KEYSCAN
+
+  -------         MODULE        LED6SHOW
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:001EH         PUBLIC        _pucLedNum
+  C:06DBH         PUBLIC        uca_LEDSelect
+  D:000EH         PUBLIC        uca_LedNum
+  C:06D1H         PUBLIC        uca_LEDCode
+  C:06BFH         PUBLIC        _vShowOneNum
+  -------         PROC          _PUCLEDNUM
+  D:0018H         SYMBOL        ulNumber
+  C:001EH         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:13:59  PAGE 5
+
+
+  C:0026H         LINE#         45
+  C:0026H         LINE#         46
+  C:003CH         LINE#         47
+  C:0048H         LINE#         48
+  C:005BH         LINE#         49
+  C:0064H         LINE#         50
+  C:0079H         LINE#         52
+  C:00A4H         LINE#         54
+  C:0105H         LINE#         57
+  C:0199H         LINE#         60
+  C:0260H         LINE#         63
+  C:02CCH         LINE#         65
+  C:02D2H         LINE#         66
+  -------         ENDPROC       _PUCLEDNUM
+  -------         PROC          _VSHOWONENUM
+  D:0007H         SYMBOL        ucOneNum
+  D:0005H         SYMBOL        ucOrder
+  C:06BFH         LINE#         74
+  C:06BFH         LINE#         75
+  C:06BFH         LINE#         76
+  C:06C2H         LINE#         77
+  C:06C9H         LINE#         78
+  C:06D0H         LINE#         79
+  -------         ENDPROC       _VSHOWONENUM
+  -------         ENDMOD        LED6SHOW
+
+  -------         MODULE        KEYPORCESS
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0440H         PUBLIC        _vKeyProcess
+  -------         PROC          _VKEYPROCESS
+  D:0007H         SYMBOL        ucKeyCode
+  C:0440H         LINE#         15
+  C:0440H         LINE#         16
+  C:0440H         LINE#         17
+  C:0478H         LINE#         18
+  C:0478H         LINE#         19
+  C:047EH         LINE#         21
+  C:0484H         LINE#         23
+  C:048AH         LINE#         25
+  C:0490H         LINE#         27
+  C:0496H         LINE#         29
+  C:049CH         LINE#         31
+  C:04A2H         LINE#         33
+  C:04A8H         LINE#         35
+  C:04AEH         LINE#         37
+  C:04B4H         LINE#         39
+  C:04BAH         LINE#         41
+  C:04C0H         LINE#         43
+  C:04C6H         LINE#         45
+  C:04CBH         LINE#         47
+  C:04D1H         LINE#         49
+  C:04DBH         LINE#         51
+  C:04DBH         LINE#         52
+  C:04DBH         LINE#         53
+  -------         ENDPROC       _VKEYPROCESS
+  -------         ENDMOD        KEYPORCESS
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:13:59  PAGE 6
+
+
+  -------         MODULE        ?C?CLDPTR
+  C:02D3H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?LMUL
+  C:02ECH         PUBLIC        ?C?LMUL
+  -------         ENDMOD        ?C?LMUL
+
+  -------         MODULE        ?C?ULDIV
+  C:0377H         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+  -------         MODULE        ?C?ULCMP
+  C:0409H         PUBLIC        ?C?ULCMP
+  -------         ENDMOD        ?C?ULCMP
+
+  -------         MODULE        ?C?CCASE
+  C:041AH         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+Program Size: data=29.2 xdata=0 code=1743
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

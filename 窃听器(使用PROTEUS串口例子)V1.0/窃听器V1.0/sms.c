@@ -1,0 +1,295 @@
+////////////////////////////////////////////////////////////////////////////////
+// ICC-AVR application builder : 2006-6-25 下午 06:02:39
+// Target : M8
+// Crystal: 3.6864Mhz
+// Author:  Anwarye
+// Title:   Detcetaphone
+////////////////////////////////////////////////////////////////////////////////
+
+#include <iom8v.h>
+#include <macros.h>
+
+#define SetIGT()	 (PORTD |= (1<<PD7))	  // MC55模块点火控制脚，高有效
+#define ClrIGT()     (PORTD &= ~(1<<PD7))
+
+#define SetLED()     (PORTB |= (1<<PB0))     // LED
+#define ClrLED()     (PORTB &= ~(1<<PB0))
+
+#define SetRTS()     (PORTD |= (1<<PD6))     // LED
+#define ClrRTS()     (PORTD &= ~(1<<PD6))
+
+#define DetRING0()   (PORTD & (1<<PD2))
+
+#define FALSE      0
+#define TRUE       1
+
+#define DONE       1
+#define UNDONE     0
+
+#define OK         1
+#define ERROR      0
+
+#define ALL        0xFF
+
+#define RX_BUF_SIZE  256
+#define TX_BUF_SIZE  32
+
+volatile unsigned char          TmpBuf[16];                // 临时缓冲
+volatile unsigned char          Pdu[256];
+unsigned char                   RetCMGR[14];
+volatile unsigned char          PhoneNum[12]; 
+
+volatile unsigned char          RxBuf[RX_BUF_SIZE];		   // 串口接收缓冲
+volatile unsigned char   RxIndex = 0;                   // 串口接收缓冲指针
+volatile unsigned char   RxIndexTail = 0;               // 串口接收缓冲尾
+
+
+volatile unsigned char          TxBuf[TX_BUF_SIZE];		   // 发送缓冲
+volatile unsigned char   TxIndex = 0;                   // 发送缓冲指针
+
+
+volatile unsigned char RxStatus = 0;
+volatile unsigned char TxStatus = 1;
+
+volatile unsigned char OkFlag = 0;
+volatile unsigned char CallInFlag = 0;
+volatile unsigned char NoCarrierFlag = 0;
+volatile unsigned char BusyFlag = 0;
+
+/*-----------------------------------------------------------------------*/
+///////////////////////////  串口发送使能  ////////////////////////////////
+/*-----------------------------------------------------------------------*/
+void TxEnable(void)
+{
+    
+    UDR = TxBuf[0];                            // 发送缓冲头送入串口发送寄存器，激活开始发送
+	UCSRB |= ((1<<TXCIE));//|(1<<TXEN));
+}
+
+/*-----------------------------------------------------------------------*/
+/////////////////////////////  发送AT命令 /////////////////////////////////
+/*-----------------------------------------------------------------------*/
+void Put_AT_command(const unsigned char *atc, unsigned char atlen)
+{
+    unsigned char count;
+	
+	
+	
+	for(count = 0;count < atlen;count++)      // AT命令窜移入发送缓冲
+	{
+	    TxBuf[count] = *atc+count;
+	}
+	
+	TxBuf[atlen] = 0x0D;                      // 发送缓冲窜结尾加“回车”
+	TxBuf[atlen + 1] = 0x00;                  // 发送缓冲窜结束符号
+
+	OkFlag = 0;
+    TxStatus = 0;
+	TxIndex = 1;                              // 发送指针偏移1
+	TxEnable();                               // 激活发送
+    while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+	while(!OkFlag);                           // 收到模块返回OK,命令结束
+	
+}
+
+/*-----------------------------------------------------------------------*/
+/////////////////////////  从内存发送AT命令串  ////////////////////////////
+/*-----------------------------------------------------------------------*/
+void Put_AT_String(unsigned char *atc, unsigned char atlen)
+{
+    unsigned char count;
+	for(count = 0;count < atlen;count++)
+//	while(*atc)     // AT命令窜移入发送缓冲
+	{
+	    TxBuf[count] = *(atc+count);
+	}
+	
+	TxBuf[atlen] = 0x0D;                      // 发送缓冲窜结尾加“回车”
+	TxBuf[atlen + 1] = 0x00;                  // 发送缓冲窜结束符号
+
+    OkFlag = 0;
+    TxStatus = 0;
+	TxIndex = 1;                              // 发送指针偏移1
+	TxEnable();                               // 激活发送
+    while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+	while(!OkFlag);                           // 收到模块返回OK,命令结束
+}
+/*-----------------------------------------------------------------------*/
+/////////////////////////  向串口发送一串数据  ////////////////////////////
+/*-----------------------------------------------------------------------*/
+void PutString(unsigned char *str, unsigned char length,unsigned char retflag)
+{
+    unsigned char count;
+	for(count = 0;count < length;count++)
+	{
+	    TxBuf[count] = *(str+count);
+	}
+	
+	TxBuf[length] = 0x0D;                      // 发送缓冲窜结尾加“回车”
+	TxBuf[length+ 1] = 0x00;                  // 发送缓冲窜结束符号
+	
+    TxStatus = 0;
+	TxIndex = 1;                              // 发送指针偏移1
+	OkFlag = 0;
+	TxEnable();
+	                               // 激活发送
+    while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+    if(retflag)
+    {	
+        while(!OkFlag);                           // 收到模块返回OK,命令结束
+	}
+}
+/*-----------------------------------------------------------------------*/
+/////////////////////////////  比较两个串 /////////////////////////////////
+/*-----------------------------------------------------------------------*/
+unsigned char StringCompare(volatile unsigned char *str1,const unsigned char *str2,unsigned char strlen)
+{
+    while(strlen--)
+	{
+	    if(*str1++ != *str2++) return(FALSE);    // 两个串不相等返回假
+	}
+	return(TRUE);
+}
+ 
+/*-----------------------------------------------------------------------*/
+/////////////////////////////    删除短信    //////////////////////////////
+/*-----------------------------------------------------------------------*/
+void Delete_SMS(unsigned char num)     // 删除SMS，=0删除所有SMS
+{
+    unsigned char count;
+
+	for(count = 0;count < AtcmgdLen;count++)      // AT命令窜移入发送缓冲
+	{
+	    TmpBuf[count] = Atcmgd[count];
+	}
+		
+	if(num == ALL)
+	{
+	   for(count = 1; count < 10; count++)
+	   {
+	       TmpBuf[AtcmgdLen] = count + 0x30;
+	       Put_AT_String((unsigned char*)TmpBuf,(AtcmgdLen+1));
+
+		}
+	   TmpBuf[AtcmgdLen] = 0x31;
+       for(count = 0; count < 10; count++)
+	   {
+	       TmpBuf[AtcmgdLen+1] = count + 0x30;
+	       Put_AT_String((unsigned char*)TmpBuf,(AtcmgdLen+2));
+
+	    }
+
+	}
+	else
+	{
+	    TmpBuf[AtcmgdLen] = num + 0x30;
+	    Put_AT_String((unsigned char*)TmpBuf,(AtcmgdLen+1));
+
+	}
+}
+
+/*-----------------------------------------------------------------------*/
+//////////////////////////    接收处理短信息    ///////////////////////////
+/*-----------------------------------------------------------------------*/
+void RecSMS(void)
+{
+    unsigned char ch,count;
+	
+    Put_AT_String("AT+CMGR=1",9);
+	
+    count = 0;
+	while(1)
+	{
+	    Pdu[count] = RxBuf[count];
+		if((RxBuf[count-2] == 0x30) && (RxBuf[count-1] == 0x0D)) 
+		{
+		    break;
+	    }
+		count++;
+	}
+}
+
+/*-----------------------------------------------------------------------*/
+///////////////    检查SMS是否有用并将设置号码存入内存    /////////////////
+/*-----------------------------------------------------------------------*/
+void CheckSMS(void)
+{
+    unsigned char i;
+	i = 1;
+}	
+
+////////////////////////////////////////////////////////////////////////////////
+
+/*-----------------------------------------------------------------------*/
+//////////////////////////         拨号         ///////////////////////////
+/*-----------------------------------------------------------------------*/
+void DialNum(void)
+{
+    unsigned char count=0,length=0;
+	while (PhoneNum[count++])                  // 计算电话号码长度
+	{
+	    length++;
+	}
+	
+	TxBuf[0] = 'A';
+	TxBuf[1] = 'T';
+	TxBuf[2] = 'D';
+	
+    for(count=0;count<length;count++)
+	{
+	    TxBuf[count+3] = PhoneNum[count];
+	}
+    
+	TxBuf[length] = ';';
+	TxBuf[length++] = 0x0D;
+	
+    OkFlag = 0;
+    TxStatus = 0;
+	TxIndex = 1;                              // 发送指针偏移1
+	TxEnable();                               // 激活发送
+    while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+	while(!OkFlag);                           // 收到模块返回OK,命令结束	
+} 
+
+
+/*-----------------------------------------------------------------------*/
+/////////////////////////////  初始化MC55    //////////////////////////////
+/*-----------------------------------------------------------------------*/
+void InitMC55(void)
+{
+ 	unsigned char tmp;
+    SetIGT();                                   
+    DelayMs(200);  	   			   			  // 置低MC55 IGT口 200mS ，启动MC55模块
+	ClrIGT();
+
+	DelayMs(50);                             // 等待模块启动
+
+	ClrRTS();
+    DelayMs(50);                              // 激活MC55串口
+	SetRTS();
+	DelayMs(50);
+	ClrRTS();
+    DelayMs(50);                              // 激活MC55串口
+	SetRTS();
+
+	DelayMs(500);                              // 激活MC55串口
+	
+	
+    TxIndex = 0;
+    RxIndex = 0;
+	
+    Put_AT_command(At,AtLen);                 // 发送AT命令校准串口，如果失败尝试10次后结束
+
+	
+    Put_AT_command(Atf,AtfLen);               // 发送AT&F命令恢复MC55模块出厂设置
+	
+	
+	Put_AT_command(Atv1,Atv1Len);            // 设置模块返回码格式 V0 = 简单返回数字 V1=复杂返回文本
+
+	
+	Put_AT_command(Ate0,Ate0Len);            // 关闭MC55串口回显
+
+	
+	Delete_SMS(1);
+
+}	

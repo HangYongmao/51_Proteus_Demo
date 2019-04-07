@@ -1,0 +1,42 @@
+### uVision2 Project, (C) Keil Software
+### Do not modify !
+
+ cExt (*.c)
+ aExt (*.s*; *.src; *.a*)
+ oExt (*.obj)
+ lExt (*.lib)
+ tExt (*.txt; *.h; *.inc)
+ pExt (*.plm)
+ CppX (*.cpp)
+ DaveTm { 0,0,0,0,0,0,0,0 }
+
+Target (Target 1), 0x0000 // Tools: 'MCS-51'
+GRPOPT 1,(Source Group 1),1,0,0
+
+OPTFFF 1,1,2,419430402,0,187,187,0,<.\Ds18b20.asm><Ds18b20.asm> { 44,0,0,0,2,0,0,0,3,0,0,0,255,255,255,255,255,255,255,255,252,255,255,255,226,255,255,255,0,0,0,0,0,0,0,0,79,2,0,0,65,1,0,0 }
+
+
+TARGOPT 1, (Target 1)
+ CLK51=33000000
+  OPTTT 1,1,1,0
+  OPTHX 0,65535,0,0,0
+  OPTLX 120,65,8,<.\>
+  OPTOX 16
+  OPTLT 1,1,1,0,1,1,0,1,0,0,0,0
+  OPTXL 1,1,1,1,1,1,1,0,0
+  OPTFL 1,0,1
+  OPTBL 0,(Add on databooks)<DATASHTS\ADDBOOKS.PDF>
+  OPTBL 1,(80C51 Family Programmer's Guide)<DATASHTS\PHILIPS\P51_PG.PDF>
+  OPTBL 2,(Data Sheet)<DATASHTS\PHILIPS\P80C3xX2_8xC5xX2_DS.PDF>
+  OPTDL (S8051.DLL)()(DP51.DLL)(-p52X2)(S8051.DLL)()(TP51.DLL)(-p52X2)
+  OPTDBG 49150,-1,()()()()()()()()()() (BIN\TKStudy_DEB.dll)()()()
+  OPTKEY 0,(TKStudy_DEB)(-S1 -B115200 -O1796 -E1 -F11059200 -f11059200 -I0 -M0V2T0S0E65535 -M1V0T0S0E0 -M2V0T0S0E0 -M3V2T0S0E65535 -M0V2T1S0E8191 -M1V0T0S0E0 -M2V0T0S0E0 -M3V0T0S0E0)
+  OPTKEY 0,(DLGTP51)((98=-1,-1,-1,-1,0)(82=-1,-1,-1,-1,0)(83=-1,-1,-1,-1,0)(84=-1,-1,-1,-1,0)(85=-1,-1,-1,-1,0)(99=-1,-1,-1,-1,0)(91=-1,-1,-1,-1,0)(92=-1,-1,-1,-1,0)(94=-1,-1,-1,-1,0)(5033=-1,-1,-1,-1,0))
+  OPTKEY 0,(TKS_DEB)(-S1 -B115200 -D0 -I0 -X0 -C0 -E8 -M0)
+  OPTKEY 0,(MON51)(-S1 -B9600 -O15)
+  OPTMM 1,0,(D:0X35)
+  OPTDF 0x86
+  OPTLE <>
+  OPTLC <>
+EndOpt
+

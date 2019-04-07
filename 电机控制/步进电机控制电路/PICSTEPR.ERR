@@ -1,0 +1,3 @@
+Warning[223] C:\PRODEV\VSM\MOTORS\PICSTEPR.ASM 14 : Redefining processor.
+Message[310] C:\PROTEUS\TOOLS\MPASM\P16F84.INC 252 : Superceding current maximum RAM and RAM map.
+Message[302] C:\PRODEV\VSM\MOTORS\PICSTEPR.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.

@@ -1,0 +1,258 @@
+BL51 BANKED LINKER/LOCATER V6.05                                                        07/27/2007  10:57:17  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE 从机1.obj TO 从机1 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  从机1.obj (从籣1)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  从机1 (从籣1)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?从籣1
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0017H     UNIT         ?PR?_DELAY1MS?从籣1
+            CODE    001AH     0006H     UNIT         ?C_INITSEG
+                    0020H     0003H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00B2H     005FH     UNIT         ?PR?_LED_DISP?从籣1
+            CODE    0111H     0056H     UNIT         ?PR?MAIN?从籣1
+            CODE    0167H     0046H     UNIT         ?C?LIB_CODE
+            CODE    01ADH     0033H     UNIT         ?PR?LED_INT?从籣1
+            CODE    01E0H     0027H     UNIT         ?PR?_DELAY10MS?从籣1
+            CODE    0207H     0013H     UNIT         ?CO?从籣1
+
+
+
+OVERLAY MAP OF MODULE:   从机1 (从籣1)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?从籣1
+  +--> ?C_INITSEG
+
+?PR?MAIN?从籣1
+  +--> ?PR?_DELAY10MS?从籣1
+  +--> ?PR?_LED_DISP?从籣1
+
+?PR?_LED_DISP?从籣1
+  +--> ?PR?_DELAY1MS?从籣1
+BL51 BANKED LINKER/LOCATER V6.05                                                      07/27/2007  10:57:17  PAGE 2
+
+
+  +--> ?CO?从籣1
+
+?PR?_DELAY1MS?从籣1
+  +--> ?CO?从籣1
+
+
+
+SYMBOL TABLE OF MODULE:  从机1 (从籣1)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        从籣1
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  D:0008H         PUBLIC        name
+  C:0013H         PUBLIC        _delay1ms
+  C:0111H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  C:0207H         PUBLIC        led_code
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0009H         PUBLIC        led_buff
+  D:000CH         PUBLIC        len
+  C:00B2H         PUBLIC        _led_disp
+  B:0088H.5       PUBLIC        TF0
+  B:0098H.2       PUBLIC        RB8
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0098H.5       PUBLIC        SM2
+  C:01E0H         PUBLIC        _delay10ms
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  B:0090H.5       PUBLIC        key_1
+  B:0090H.6       PUBLIC        key_2
+  B:0090H.7       PUBLIC        key_3
+  C:01ADH         PUBLIC        led_int
+  D:000DH         PUBLIC        i
+  -------         PROC          LED_INT
+  C:01ADH         LINE#         23
+  C:01B4H         LINE#         25
+  C:01BAH         LINE#         26
+  C:01BAH         LINE#         27
+  C:01BDH         LINE#         28
+  C:01BFH         LINE#         29
+  C:01C1H         LINE#         31
+  C:01C1H         LINE#         32
+  C:01C6H         LINE#         33
+  C:01C6H         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.05                                                      07/27/2007  10:57:17  PAGE 3
+
+
+  C:01CDH         LINE#         35
+  C:01CFH         LINE#         36
+  C:01D4H         LINE#         37
+  C:01D4H         LINE#         38
+  C:01D7H         LINE#         39
+  C:01D7H         LINE#         40
+  C:01D7H         LINE#         41
+  C:01D7H         LINE#         42
+  C:01D9H         LINE#         43
+  C:01DBH         LINE#         44
+  -------         ENDPROC       LED_INT
+  C:0006H         SYMBOL        L?0034
+  C:0009H         SYMBOL        L?0035
+  C:000EH         SYMBOL        L?0036
+  -------         PROC          L?0033
+  -------         ENDPROC       L?0033
+  C:0006H         SYMBOL        L?0034
+  C:0009H         SYMBOL        L?0035
+  C:000EH         SYMBOL        L?0036
+  -------         PROC          _DELAY1MS
+  D:0007H         SYMBOL        t
+  C:0013H         LINE#         45
+  C:0013H         LINE#         46
+  C:0013H         LINE#         47
+  C:0019H         LINE#         48
+  -------         ENDPROC       _DELAY1MS
+  -------         PROC          MAIN
+  C:0111H         LINE#         49
+  C:0111H         LINE#         50
+  C:0111H         LINE#         51
+  C:0114H         LINE#         52
+  C:0117H         LINE#         53
+  C:011AH         LINE#         54
+  C:011CH         LINE#         55
+  C:011FH         LINE#         56
+  C:0121H         LINE#         57
+  C:0123H         LINE#         58
+  C:0125H         LINE#         59
+  C:0127H         LINE#         60
+  C:0129H         LINE#         61
+  C:012CH         LINE#         62
+  C:012CH         LINE#         63
+  C:012CH         LINE#         64
+  C:012FH         LINE#         65
+  C:012FH         LINE#         66
+  C:0134H         LINE#         67
+  C:0134H         LINE#         69
+  C:0134H         LINE#         70
+  C:0137H         LINE#         71
+  C:0137H         LINE#         72
+  C:013CH         LINE#         73
+  C:013CH         LINE#         75
+  C:013CH         LINE#         76
+  C:0141H         LINE#         77
+  C:0141H         LINE#         78
+  C:0143H         LINE#         79
+  C:0146H         LINE#         80
+BL51 BANKED LINKER/LOCATER V6.05                                                      07/27/2007  10:57:17  PAGE 4
+
+
+  C:0146H         LINE#         81
+  C:014EH         LINE#         82
+  C:0151H         LINE#         83
+  C:0153H         LINE#         84
+  C:015AH         LINE#         85
+  C:015CH         LINE#         86
+  C:015CH         LINE#         87
+  C:0165H         LINE#         88
+  -------         ENDPROC       MAIN
+  -------         PROC          _LED_DISP
+  D:0001H         SYMBOL        num
+  C:00B2H         LINE#         90
+  C:00B2H         LINE#         91
+  C:00B2H         LINE#         92
+  C:00B5H         LINE#         93
+  C:00BBH         LINE#         94
+  C:00BEH         LINE#         95
+  C:00C1H         LINE#         96
+  C:00C4H         LINE#         97
+  C:00C7H         LINE#         98
+  C:00CAH         LINE#         99
+  C:00D0H         LINE#         100
+  C:00D3H         LINE#         101
+  C:00D6H         LINE#         102
+  C:00D9H         LINE#         103
+  C:00DCH         LINE#         104
+  C:00DFH         LINE#         105
+  C:00E2H         LINE#         106
+  C:00E5H         LINE#         107
+  C:00E8H         LINE#         108
+  C:00EBH         LINE#         109
+  C:00EEH         LINE#         110
+  C:00F1H         LINE#         111
+  C:00F5H         LINE#         112
+  C:00F8H         LINE#         113
+  C:00FBH         LINE#         114
+  C:0100H         LINE#         115
+  C:0105H         LINE#         117
+  C:010CH         LINE#         118
+  -------         ENDPROC       _LED_DISP
+  -------         PROC          _DELAY10MS
+  D:0007H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:01E0H         LINE#         122
+  C:01E0H         LINE#         123
+  C:01E0H         LINE#         124
+  C:01EDH         LINE#         125
+  C:01EDH         LINE#         126
+  C:01F0H         LINE#         127
+  C:01F3H         LINE#         128
+  C:01F6H         LINE#         129
+  C:01F8H         LINE#         130
+  C:01FBH         LINE#         131
+  C:01FDH         LINE#         132
+  C:01FFH         LINE#         133
+BL51 BANKED LINKER/LOCATER V6.05                                                      07/27/2007  10:57:17  PAGE 5
+
+
+  C:0206H         LINE#         135
+  -------         ENDPROC       _DELAY10MS
+  -------         ENDMOD        从籣1
+
+  -------         MODULE        ?C?CLDPTR
+  C:0167H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0180H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+Program Size: data=15.0 xdata=0 code=535
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

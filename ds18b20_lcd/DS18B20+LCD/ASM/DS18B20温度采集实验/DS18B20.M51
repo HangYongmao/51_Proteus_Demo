@@ -1,0 +1,227 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        09/17/2004  11:10:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE Ds18b20.obj TO DS18B20
+
+
+INPUT MODULES INCLUDED:
+  Ds18b20.obj (DS18B20)
+
+
+LINK MAP OF MODULE:  DS18B20 (DS18B20)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     027DH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  DS18B20 (DS18B20)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DS18B20
+  C:0133H         SYMBOL        ABC
+  D:00E0H         SYMBOL        ACC
+  C:010DH         SYMBOL        BCD
+  C:01B7H         SYMBOL        BIN_BCD
+  C:012AH         SYMBOL        CBA
+  C:0268H         SYMBOL        DELAY
+  C:0278H         SYMBOL        DELAY1
+  B:00B0H.3       SYMBOL        DQ
+  B:0020H.0       SYMBOL        FLAG1
+  C:010BH         SYMBOL        GET_TEMPER
+  C:0224H         SYMBOL        INIT_1820
+  C:0100H         SYMBOL        MAIN
+  C:026AH         SYMBOL        MIN
+  D:00B0H         SYMBOL        P3
+  C:017CH         SYMBOL        RE00
+  C:017EH         SYMBOL        RE01
+  C:0146H         SYMBOL        RE1
+  C:0144H         SYMBOL        READ_1820
+  C:0178H         SYMBOL        READ_18200
+  C:024AH         SYMBOL        RE_CONFIG
+  C:024EH         SYMBOL        RE_CONFIG1
+  C:0116H         SYMBOL        S22
+  D:0081H         SYMBOL        SP
+  C:019CH         SYMBOL        TEMPER_COV
+  C:01AAH         SYMBOL        TEMPER_COV1
+  N:0035H         SYMBOL        TEMPER_H
+  N:0036H         SYMBOL        TEMPER_L
+  N:0060H         SYMBOL        TEMPER_NUM
+  C:01C0H         SYMBOL        TEMP_TAB
+  C:022BH         SYMBOL        TSR1
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2004  11:10:58  PAGE 2
+
+
+  C:0231H         SYMBOL        TSR2
+  C:0239H         SYMBOL        TSR3
+  C:023EH         SYMBOL        TSR4
+  C:0243H         SYMBOL        TSR5
+  C:0245H         SYMBOL        TSR6
+  C:0247H         SYMBOL        TSR7
+  C:0163H         SYMBOL        WR1
+  C:0160H         SYMBOL        WRITE_1820
+  C:026DH         SYMBOL        YS500
+  C:0273H         SYMBOL        YS500US
+  C:0000H         LINE#         8
+  C:0100H         LINE#         11
+  C:0103H         LINE#         12
+  C:0106H         LINE#         13
+  C:0109H         LINE#         14
+  C:010BH         LINE#         19
+  C:010DH         LINE#         20
+  C:0110H         LINE#         21
+  C:0113H         LINE#         22
+  C:0116H         LINE#         23
+  C:0119H         LINE#         24
+  C:011BH         LINE#         25
+  C:011EH         LINE#         26
+  C:0120H         LINE#         27
+  C:0123H         LINE#         28
+  C:0124H         LINE#         29
+  C:0127H         LINE#         30
+  C:012AH         LINE#         31
+  C:012DH         LINE#         32
+  C:0130H         LINE#         33
+  C:0133H         LINE#         34
+  C:0136H         LINE#         35
+  C:0138H         LINE#         36
+  C:013BH         LINE#         37
+  C:013DH         LINE#         38
+  C:0140H         LINE#         39
+  C:0143H         LINE#         40
+  C:0144H         LINE#         44
+  C:0146H         LINE#         45
+  C:0147H         LINE#         46
+  C:0149H         LINE#         47
+  C:014AH         LINE#         48
+  C:014BH         LINE#         49
+  C:014DH         LINE#         50
+  C:014EH         LINE#         51
+  C:014FH         LINE#         52
+  C:0150H         LINE#         53
+  C:0152H         LINE#         54
+  C:0154H         LINE#         55
+  C:0156H         LINE#         56
+  C:0158H         LINE#         57
+  C:015AH         LINE#         58
+  C:015CH         LINE#         59
+  C:015DH         LINE#         60
+  C:015FH         LINE#         61
+  C:0160H         LINE#         65
+  C:0162H         LINE#         66
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2004  11:10:58  PAGE 3
+
+
+  C:0163H         LINE#         67
+  C:0165H         LINE#         68
+  C:0167H         LINE#         69
+  C:0169H         LINE#         70
+  C:016AH         LINE#         71
+  C:016CH         LINE#         72
+  C:016EH         LINE#         73
+  C:0170H         LINE#         74
+  C:0172H         LINE#         75
+  C:0173H         LINE#         76
+  C:0175H         LINE#         77
+  C:0177H         LINE#         78
+  C:0178H         LINE#         82
+  C:017AH         LINE#         83
+  C:017CH         LINE#         84
+  C:017EH         LINE#         85
+  C:017FH         LINE#         86
+  C:0181H         LINE#         87
+  C:0182H         LINE#         88
+  C:0183H         LINE#         89
+  C:0185H         LINE#         90
+  C:0186H         LINE#         91
+  C:0187H         LINE#         92
+  C:0188H         LINE#         93
+  C:018AH         LINE#         94
+  C:018CH         LINE#         95
+  C:018EH         LINE#         96
+  C:0190H         LINE#         97
+  C:0192H         LINE#         98
+  C:0194H         LINE#         99
+  C:0195H         LINE#         100
+  C:0197H         LINE#         101
+  C:0198H         LINE#         102
+  C:0199H         LINE#         103
+  C:019BH         LINE#         104
+  C:019CH         LINE#         108
+  C:019EH         LINE#         109
+  C:01A0H         LINE#         110
+  C:01A1H         LINE#         111
+  C:01A3H         LINE#         112
+  C:01A5H         LINE#         113
+  C:01A8H         LINE#         114
+  C:01AAH         LINE#         117
+  C:01ACH         LINE#         118
+  C:01AEH         LINE#         119
+  C:01AFH         LINE#         120
+  C:01B1H         LINE#         121
+  C:01B3H         LINE#         122
+  C:01B6H         LINE#         123
+  C:01B7H         LINE#         127
+  C:01BAH         LINE#         128
+  C:01BCH         LINE#         129
+  C:01BDH         LINE#         130
+  C:01BFH         LINE#         131
+  C:0224H         LINE#         149
+  C:0226H         LINE#         150
+  C:0227H         LINE#         151
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2004  11:10:58  PAGE 4
+
+
+  C:0229H         LINE#         152
+  C:022BH         LINE#         153
+  C:022DH         LINE#         154
+  C:022FH         LINE#         155
+  C:0231H         LINE#         156
+  C:0233H         LINE#         157
+  C:0236H         LINE#         158
+  C:0239H         LINE#         159
+  C:023BH         LINE#         160
+  C:023EH         LINE#         161
+  C:0240H         LINE#         162
+  C:0243H         LINE#         163
+  C:0245H         LINE#         164
+  C:0247H         LINE#         165
+  C:0249H         LINE#         166
+  C:024AH         LINE#         170
+  C:024DH         LINE#         171
+  C:024EH         LINE#         173
+  C:0250H         LINE#         174
+  C:0253H         LINE#         175
+  C:0255H         LINE#         176
+  C:0258H         LINE#         178
+  C:025AH         LINE#         179
+  C:025DH         LINE#         180
+  C:025FH         LINE#         181
+  C:0262H         LINE#         182
+  C:0264H         LINE#         183
+  C:0267H         LINE#         184
+  C:0268H         LINE#         188
+  C:026AH         LINE#         189
+  C:026CH         LINE#         190
+  C:026DH         LINE#         191
+  C:0270H         LINE#         192
+  C:0273H         LINE#         193
+  C:0275H         LINE#         194
+  C:0277H         LINE#         195
+  C:0278H         LINE#         196
+  C:027AH         LINE#         197
+  C:027CH         LINE#         198
+  -------         ENDMOD        DS18B20
+
+Program Size: data=8.0 xdata=0 code=637
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

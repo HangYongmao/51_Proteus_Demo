@@ -1,0 +1,99 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        09/16/2005  22:03:35  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\PROGRAM FILES\KEIL\C51\BIN\BL51.EXE FlashLED.obj TO FlashLED RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  FlashLED.obj (FLASHLED)
+  C:\PROGRAM FILES\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  FlashLED (FLASHLED)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0018H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0035H     UNIT         ?PR?MAIN?FLASHLED
+            CODE    0038H     0020H     UNIT         ?PR?_DELAY1MS?FLASHLED
+            CODE    0058H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   FlashLED (FLASHLED)
+
+
+SEGMENT                           BIT_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?FLASHLED
+
+?PR?MAIN?FLASHLED              0020H.0  0000H.1
+  +--> ?PR?_DELAY1MS?FLASHLED
+
+
+
+SYMBOL TABLE OF MODULE:  FlashLED (FLASHLED)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        FLASHLED
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:0003H         PUBLIC        main
+  C:0038H         PUBLIC        _Delay1ms
+  -------         PROC          _DELAY1MS
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/16/2005  22:03:35  PAGE 2
+
+
+  D:0006H         SYMBOL        count
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0038H         LINE#         3
+  C:0038H         LINE#         4
+  C:0038H         LINE#         6
+  C:0042H         LINE#         7
+  C:0057H         LINE#         8
+  -------         ENDPROC       _DELAY1MS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0001H         SYMBOL        LEDIndex
+  B:0020H.0       SYMBOL        LEDDirection
+  -------         ENDDO         
+  C:0003H         LINE#         10
+  C:0003H         LINE#         11
+  C:0003H         LINE#         12
+  C:0005H         LINE#         13
+  C:0007H         LINE#         15
+  C:0007H         LINE#         16
+  C:0007H         LINE#         17
+  C:000AH         LINE#         18
+  C:0017H         LINE#         20
+  C:0025H         LINE#         21
+  C:0028H         LINE#         22
+  C:002AH         LINE#         23
+  C:002FH         LINE#         24
+  C:0036H         LINE#         25
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        FLASHLED
+
+Program Size: data=9.1 xdata=0 code=100
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

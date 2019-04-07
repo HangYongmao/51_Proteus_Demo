@@ -1,0 +1,235 @@
+#define	_PPDATAT_H
+
+#include <reg51.h>
+#include <string.h>
+
+#define uchar unsigned char
+#define uint unsigned int
+
+/* 握手信号宏定义 */
+#define CALL 0x24		// 主机呼叫
+#define OK 0x00			// 从机准备好
+
+#define MAXLEN 64        	// 缓冲区最大长度
+
+uchar buf[MAXLEN];
+
+sbit  p00 = P0^0; sbit  p01 = P0^1; sbit  p02 = P0^2; sbit  p03 = P0^3;
+sbit p10=P1^0; sbit p11=P1^1; sbit p12=P1^2; sbit p13=P1^3;
+sbit p14=P1^4; sbit p15=P1^5; sbit p16=P1^6; sbit p17=P1^7;
+sbit p23 = P2^3;sbit p25 = P2^5;sbit p27 = P2^7;
+
+unsigned char a;
+unsigned char b;
+unsigned char c;
+unsigned char d;
+unsigned char in1,in2,in3,count;
+unsigned char j1,j2;
+unsigned char z1,z2,z3;
+unsigned int x=1234;
+bit qidong;
+
+void delay();
+
+//********************八段码*************************//
+code unsigned char LEDMAP[] = { 
+0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07,
+0x7f, 0x6f, 0x00,0x71//共阳显示码，分别显示0、1、2、3、4、5、6、7、8、9、灭、F。
+};
+//***********************显示码选择**********************//
+int DisplayLED(unsigned char j)
+{
+	unsigned int i=0;
+	unsigned int x1;
+	x1= LEDMAP[(i+j) & 0x0f];
+	return  x1;
+}
+//***********************转换*************************//
+void si()
+{
+    unsigned int M;
+	a=x%10;
+	M=x/10;
+	b=M%10;
+	M=M/10; 
+	c=M%10;
+	d=M/10;//a取出第四位,b取出第三位,c取出第二位,d取出第一位
+}
+//***********************显示**********************//
+void  display()
+{
+    si();
+	P0=0xf7;
+	P1=DisplayLED(a);
+	delay();
+	P0=0xfb;
+	P1=DisplayLED(b);
+	delay();
+	P0=0xfd;
+	P1=DisplayLED(c);
+	delay();
+        P0=0xfe;
+	P1=DisplayLED(d);
+	delay();	
+}
+//************************扫描按键**********************//
+void timer0() interrupt 1 using 1
+{
+	in1=p23;
+	in2=p25;
+	in3=p27;
+	TH0=0xc3;
+	TL0=0x50;
+	count++;
+
+	if(in1==0)
+		z1++;
+	if(in2==0)
+		z2++;
+	if(in3==0)
+		z3++;
+	if(count==40)
+	{
+//*************************x+***********************//
+        if((0<z1)&(z1<40))
+			x++;
+		if (z1==40)
+			j1++;
+		count=0;
+		z1=0;
+		if((0<j1)&(j1<6))
+			x++;
+		if((5<j1)&(j1<11))
+			x=x+10;
+		if(10<j1)
+			x=x+100;
+		if(in1==1)
+			j1=0;
+ //************************x-*******************//
+		if((0<z2)&(z2<40))
+			x--;
+		if (z2==40)
+			j2++;
+		z2=0;
+		if((0<j2)&(j2<6))
+			x--;
+		if((5<j2)&(j2<11))
+			x=x-10;
+		if(10<j2)
+			x=x-100;
+		if(in1==1)
+			j2=0;
+ //************************启动*******************//
+		if(z3>5)
+                  qidong=1;
+         }  
+}
+void init()
+{
+     TMOD=0x21;                          //定时器0工作于方式1，定时器1工作于方式2
+        TH1 = 250;                          // 设置初值
+	    TL1 = 250;
+
+	    PCON = 0x80;                        // SMOD = 1
+	    SCON = 0x50;                        //工作方式1，波特率9600bps，允许接收 
+
+            ET0=1;                              //允许定时器0中断
+            TR0=1;                              //定时器0开始工作
+	    TR1 = 1;                            //定时器1开始工作
+            EA=1;                               //打开所有中断
+
+}
+//*************************delay*********************//
+void delay()
+{
+	unsigned int i,n;
+	n=100;
+	for (i=0; i<n; i++) {}
+}
+//************************CRC计算****************************************//
+uint getcrc(uchar *s,uchar len)
+{
+  uint acc=0,i,j=0;
+while(len--)
+ {
+    acc=acc^(*s++<<8);
+    for(i=0;i++<8;)
+      if(acc&0x8000)
+        acc=(acc<<1)^0x1021;
+      else
+        acc=acc<<1;
+ }
+ return(acc);
+}
+
+
+//************************串口通信程序****************************************//
+
+/* 发送数据函数 */
+void senddata(uchar *buf)
+{
+	uchar i;
+	uchar len;					// 保存数据长度
+	uint ecc;					// 保存校验字节
+
+	len = strlen(buf);			// 计算要发送数据的长度
+
+	/* 发送数据长度 */
+	TI = 0;
+	SBUF = len;					// 发送长度
+	while(!TI);
+	TI = 0;
+    /* 发送数据和校验字节 */
+    ecc=getcrc(buf,len);
+    buf[len]=ecc/256;
+    buf[len+1]=ecc%256;
+	for (i=0;i<len+2;i++)
+	{
+		SBUF = *buf;
+		buf++;
+		while(!TI);
+		TI = 0;
+	}
+}	
+void tongxin()
+{ 
+	uchar i = 0;
+	uchar tmp; 
+	/* 发送呼叫信号CALL并接收应答信息，如果没有接收到从机准备好的信号，则重新发送呼叫帧 */
+	while(tmp!=OK)			
+	{
+		/* 发送呼叫信号CALL */
+		TI = 0;
+		SBUF = CALL;
+		while(!TI);
+		TI = 0;
+
+		/* 接收从机应答 */
+		RI = 0;
+		while(!RI);
+		tmp = SBUF;
+		RI = 0;		
+	}
+
+	
+}
+
+
+//*************************主函数***********************//
+void  main()
+{
+           init();
+           while(1)
+           {
+             display();
+             if(qidong==1)
+              {
+               si();
+               buf[0]=a;buf[1]=b;            
+               buf[2]=c;buf[3]=d;
+               senddata(buf);
+               tongxin();
+               qidong=0;     
+              }
+           }  
+}  

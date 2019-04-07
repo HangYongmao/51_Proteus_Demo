@@ -1,0 +1,90 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/11/2007  15:59:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO SerialTest
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  SerialTest (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0035H     UNIT         ?PR?MAIN?MAIN
+            CODE    0038H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0044H     000AH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   SerialTest (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?CO?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  SerialTest (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0098H.1       PUBLIC        TI
+  C:0003H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  B:0098H.7       PUBLIC        SM0
+  B:0098H.6       PUBLIC        SM1
+  C:0044H         PUBLIC        uca_LCDCode
+  -------         PROC          MAIN
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/11/2007  15:59:53  PAGE 2
+
+
+  -------         DO            
+  D:0005H         SYMBOL        ucSelect
+  D:0006H         SYMBOL        uiCount
+  -------         ENDDO         
+  C:0003H         LINE#         16
+  C:0003H         LINE#         17
+  C:0003H         LINE#         18
+  C:0005H         LINE#         21
+  C:0007H         LINE#         22
+  C:0009H         LINE#         24
+  C:000CH         LINE#         25
+  C:000FH         LINE#         26
+  C:0011H         LINE#         28
+  C:0011H         LINE#         29
+  C:0011H         LINE#         30
+  C:0014H         LINE#         31
+  C:0018H         LINE#         32
+  C:0019H         LINE#         34
+  C:0020H         LINE#         35
+  C:0023H         LINE#         36
+  C:0025H         LINE#         38
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=78
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

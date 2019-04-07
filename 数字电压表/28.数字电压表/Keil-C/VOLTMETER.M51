@@ -1,0 +1,217 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        08/30/2007  15:01:08  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, VOLTMETER.obj TO VOLTMETER
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  VOLTMETER.obj (VOLTMETER)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SLDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULDIV)
+
+
+LINK MAP OF MODULE:  VOLTMETER (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0012H     UNIT         ?DT?VOLTMETER
+            IDATA   001AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     000DH                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+                    001EH     07E2H                  *** GAP ***
+            CODE    0800H     00CEH     UNIT         ?C?LIB_CODE
+            CODE    08CEH     00AEH     UNIT         ?PR?MAIN?VOLTMETER
+            CODE    097CH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0A08H     0044H     UNIT         ?C?LDIV
+            CODE    0A4CH     0043H     UNIT         ?PR?T1?VOLTMETER
+            CODE    0A8FH     0013H     UNIT         ?CO?VOLTMETER
+            CODE    0AA2H     000BH     UNIT         ?C_INITSEG
+            CODE    0AADH     0003H     UNIT         ?PR?T0?VOLTMETER
+
+
+
+OVERLAY MAP OF MODULE:   VOLTMETER (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?VOLTMETER
+  +--> ?C_INITSEG
+
+*** NEW ROOT ***************************************************
+
+?PR?T1?VOLTMETER
+  +--> ?CO?VOLTMETER
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/30/2007  15:01:08  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  VOLTMETER (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:097CH         SEGMENT       ?C_C51STARTUP
+  I:001AH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:097FH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:097CH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:097CH         LINE#         133
+  C:097EH         LINE#         134
+  C:097FH         LINE#         135
+  C:0980H         LINE#         136
+  C:0982H         LINE#         185
+  C:0985H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        VOLTMETER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:0008H         PUBLIC        R1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:0A8FH         PUBLIC        dispbitcode
+  B:00B0H.1       PUBLIC        OE
+  C:0AADH         PUBLIC        t0
+  C:0A4CH         PUBLIC        t1
+  C:08CEH         PUBLIC        main
+  B:00B0H.0       PUBLIC        ST
+  D:0089H         PUBLIC        TMOD
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/30/2007  15:01:08  PAGE 3
+
+
+  D:000AH         PUBLIC        temp
+  B:00A8H.1       PUBLIC        ET0
+  B:00A8H.3       PUBLIC        ET1
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  C:0A97H         PUBLIC        dispcode
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  B:00B0H.2       PUBLIC        EOC
+  B:0088H.6       PUBLIC        TR1
+  B:00B0H.3       PUBLIC        CLK
+  D:000CH         PUBLIC        getdata
+  D:000DH         PUBLIC        dispcount
+  D:000EH         PUBLIC        i
+  D:0012H         PUBLIC        dispbuf
+  -------         PROC          MAIN
+  C:08CEH         LINE#         16
+  C:08CEH         LINE#         17
+  C:08CEH         LINE#         18
+  C:08D0H         LINE#         19
+  C:08D2H         LINE#         20
+  C:08D4H         LINE#         21
+  C:08D6H         LINE#         22
+  C:08D8H         LINE#         23
+  C:08DBH         LINE#         24
+  C:08DEH         LINE#         25
+  C:08E1H         LINE#         26
+  C:08E4H         LINE#         27
+  C:08E7H         LINE#         28
+  C:08E9H         LINE#         29
+  C:08EBH         LINE#         30
+  C:08EDH         LINE#         31
+  C:08EFH         LINE#         32
+  C:08EFH         LINE#         33
+  C:08EFH         LINE#         34
+  C:08F2H         LINE#         35
+  C:08F2H         LINE#         36
+  C:08F4H         LINE#         37
+  C:08F7H         LINE#         38
+  C:08F9H         LINE#         39
+  C:090BH         LINE#         40
+  C:091AH         LINE#         41
+  C:093CH         LINE#         42
+  C:0948H         LINE#         43
+  C:096AH         LINE#         44
+  C:0975H         LINE#         45
+  C:0977H         LINE#         46
+  C:0979H         LINE#         47
+  C:0979H         LINE#         48
+  -------         ENDPROC       MAIN
+  -------         PROC          T0
+  C:0AADH         LINE#         51
+  C:0AADH         LINE#         53
+  C:0AAFH         LINE#         54
+  -------         ENDPROC       T0
+  -------         PROC          T1
+BL51 BANKED LINKER/LOCATER V6.00                                                      08/30/2007  15:01:08  PAGE 4
+
+
+  C:0A4CH         LINE#         56
+  C:0A57H         LINE#         58
+  C:0A5AH         LINE#         59
+  C:0A5DH         LINE#         60
+  C:0A60H         LINE#         61
+  C:0A6CH         LINE#         62
+  C:0A74H         LINE#         63
+  C:0A79H         LINE#         64
+  C:0A79H         LINE#         65
+  C:0A7CH         LINE#         66
+  C:0A7CH         LINE#         67
+  C:0A7EH         LINE#         68
+  C:0A83H         LINE#         69
+  C:0A83H         LINE#         70
+  C:0A86H         LINE#         71
+  C:0A86H         LINE#         72
+  -------         ENDPROC       T1
+  -------         ENDMOD        VOLTMETER
+
+  -------         MODULE        ?C?SLDIV
+  C:0A08H         PUBLIC        ?C?SLDIV
+  -------         ENDMOD        ?C?SLDIV
+
+  -------         MODULE        ?C?ULDIV
+  C:083CH         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0126H BYTE (14%) *
+******************************************************************************
+
+Program Size: data=27.0 xdata=0 code=697
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

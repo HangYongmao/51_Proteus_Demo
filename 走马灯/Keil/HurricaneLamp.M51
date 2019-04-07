@@ -1,0 +1,541 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        09/17/2005  01:24:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\PROGRAM FILES\KEIL\C51\BIN\BL51.EXE HurricaneLamp.obj TO HurricaneLamp RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  HurricaneLamp.obj (HURRICANELAMP)
+  C:\PROGRAM FILES\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\PROGRAM FILES\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\PROGRAM FILES\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  HurricaneLamp (HURRICANELAMP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000AH     UNIT         ?DT?HURRICANELAMP
+            DATA    0012H     0003H     UNIT         _DATA_GROUP_
+                    0015H     0003H                  *** GAP ***
+            REG     0018H     0008H     ABSOLUTE     "REG BANK 3"
+            BIT     0020H.0   0000H.2   UNIT         ?BI?HURRICANELAMP
+            BIT     0020H.2   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.3   0000H.5                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0027H     UNIT         ?PR?_LEDFLASH?HURRICANELAMP
+                    002AH     0001H                  *** GAP ***
+            CODE    002BH     0003H     ABSOLUTE     
+            CODE    002EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    00BAH     0077H     UNIT         ?PR?MODE_4?HURRICANELAMP
+            CODE    0131H     0065H     UNIT         ?PR?_KEYDISPOSE?HURRICANELAMP
+            CODE    0196H     0055H     UNIT         ?C?LIB_CODE
+            CODE    01EBH     004DH     UNIT         ?CO?HURRICANELAMP
+            CODE    0238H     0048H     UNIT         ?PR?TIMEREVENTRUN?HURRICANELAMP
+            CODE    0280H     0047H     UNIT         ?PR?MODE_7?HURRICANELAMP
+            CODE    02C7H     0044H     UNIT         ?PR?MODE_3?HURRICANELAMP
+            CODE    030BH     0044H     UNIT         ?PR?MODE_6?HURRICANELAMP
+            CODE    034FH     0040H     UNIT         ?PR?MODE_2?HURRICANELAMP
+            CODE    038FH     0040H     UNIT         ?PR?MODE_5?HURRICANELAMP
+            CODE    03CFH     003AH     UNIT         ?PR?GETKEY?HURRICANELAMP
+            CODE    0409H     0032H     UNIT         ?PR?INITIALCPU?HURRICANELAMP
+            CODE    043BH     002CH     UNIT         ?PR?TIMER2?HURRICANELAMP
+            CODE    0467H     0022H     UNIT         ?PR?MODE_0?HURRICANELAMP
+            CODE    0489H     0021H     UNIT         ?PR?MODE_1?HURRICANELAMP
+            CODE    04AAH     0020H     UNIT         ?PR?_DELAY1MS?HURRICANELAMP
+            CODE    04CAH     0016H     UNIT         ?PR?_SETSPEED?HURRICANELAMP
+            CODE    04E0H     0014H     UNIT         ?PR?MAIN?HURRICANELAMP
+            CODE    04F4H     0010H     UNIT         ?PR?INITIALTIMER2?HURRICANELAMP
+            CODE    0504H     000EH     UNIT         ?PR?MODE_8?HURRICANELAMP
+            CODE    0512H     000CH     UNIT         ?C_INITSEG
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 2
+
+
+            CODE    051EH     0009H     UNIT         ?PR?_LEDSHOW?HURRICANELAMP
+            CODE    0527H     0008H     UNIT         ?PR?_DISPLAY?HURRICANELAMP
+
+
+
+OVERLAY MAP OF MODULE:   HurricaneLamp (HURRICANELAMP)
+
+
+SEGMENT                                    BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH     START    LENGTH
+---------------------------------------------------------------------------
+?PR?TIMER2?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?TIMEREVENTRUN?HURRICANELAMP
+
+?PR?TIMEREVENTRUN?HURRICANELAMP         -----    -----      -----    -----
+  +--> ?PR?MODE_0?HURRICANELAMP
+  +--> ?PR?MODE_1?HURRICANELAMP
+  +--> ?PR?MODE_2?HURRICANELAMP
+  +--> ?PR?MODE_3?HURRICANELAMP
+  +--> ?PR?MODE_4?HURRICANELAMP
+  +--> ?PR?MODE_5?HURRICANELAMP
+  +--> ?PR?MODE_6?HURRICANELAMP
+  +--> ?PR?MODE_7?HURRICANELAMP
+  +--> ?PR?MODE_8?HURRICANELAMP
+
+?PR?MODE_0?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_1?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_2?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_3?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_4?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_5?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_6?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_7?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+?PR?MODE_8?HURRICANELAMP                -----    -----      -----    -----
+  +--> ?PR?_LEDSHOW?HURRICANELAMP
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                           -----    -----      -----    -----
+  +--> ?PR?MAIN?HURRICANELAMP
+  +--> ?C_INITSEG
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 3
+
+
+
+?PR?MAIN?HURRICANELAMP                  -----    -----      0012H    0001H
+  +--> ?PR?INITIALCPU?HURRICANELAMP
+  +--> ?PR?INITIALTIMER2?HURRICANELAMP
+  +--> ?PR?GETKEY?HURRICANELAMP
+  +--> ?PR?_KEYDISPOSE?HURRICANELAMP
+
+?PR?INITIALCPU?HURRICANELAMP            -----    -----      -----    -----
+  +--> ?PR?_DELAY1MS?HURRICANELAMP
+  +--> ?PR?_SETSPEED?HURRICANELAMP
+  +--> ?PR?_DISPLAY?HURRICANELAMP
+
+?PR?_SETSPEED?HURRICANELAMP             -----    -----      -----    -----
+  +--> ?CO?HURRICANELAMP
+
+?PR?_DISPLAY?HURRICANELAMP              -----    -----      -----    -----
+  +--> ?CO?HURRICANELAMP
+
+?PR?GETKEY?HURRICANELAMP                -----    -----      0013H    0001H
+  +--> ?PR?_DELAY1MS?HURRICANELAMP
+
+?PR?_KEYDISPOSE?HURRICANELAMP           -----    -----      0013H    0001H
+  +--> ?PR?_DISPLAY?HURRICANELAMP
+  +--> ?PR?_SETSPEED?HURRICANELAMP
+  +--> ?PR?_LEDFLASH?HURRICANELAMP
+
+?PR?_LEDFLASH?HURRICANELAMP             0020H.2  0000H.1    0014H    0001H
+  +--> ?PR?_DISPLAY?HURRICANELAMP
+  +--> ?PR?_DELAY1MS?HURRICANELAMP
+
+
+
+SYMBOL TABLE OF MODULE:  HurricaneLamp (HURRICANELAMP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HURRICANELAMP
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0008H         PUBLIC        MusicIndex
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:04CAH         PUBLIC        _SetSpeed
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:04F4H         PUBLIC        InitialTimer2
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:0009H         PUBLIC        TimerCount
+  C:0467H         PUBLIC        Mode_0
+  C:0489H         PUBLIC        Mode_1
+  C:034FH         PUBLIC        Mode_2
+  D:00B8H         PUBLIC        IP
+  C:02C7H         PUBLIC        Mode_3
+  C:00BAH         PUBLIC        Mode_4
+  C:038FH         PUBLIC        Mode_5
+  C:030BH         PUBLIC        Mode_6
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 4
+
+
+  C:0280H         PUBLIC        Mode_7
+  C:0504H         PUBLIC        Mode_8
+  D:00CBH         PUBLIC        RCAP2H
+  C:04E0H         PUBLIC        main
+  C:0003H         PUBLIC        _LEDFlash
+  C:01EBH         PUBLIC        LEDDisplayCode
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:043BH         PUBLIC        Timer2
+  C:0409H         PUBLIC        InitialCPU
+  C:0527H         PUBLIC        _Display
+  D:000BH         PUBLIC        RunMode
+  C:0238H         PUBLIC        TimerEventRun
+  B:00A8H.5       PUBLIC        ET2
+  C:03CFH         PUBLIC        GetKey
+  B:00C8H.7       PUBLIC        TF2
+  D:00CDH         PUBLIC        TH2
+  D:000CH         PUBLIC        LEDIndex
+  B:0020H.0       PUBLIC        LEDFlag
+  B:00C8H.2       PUBLIC        TR2
+  C:051EH         PUBLIC        _LEDShow
+  C:04AAH         PUBLIC        _Delay1ms
+  C:0131H         PUBLIC        _KeyDispose
+  D:00C8H         PUBLIC        T2CON
+  C:01FCH         PUBLIC        SpeedCode
+  D:000EH         PUBLIC        SystemSpeedIndex
+  D:00D0H         PUBLIC        PSW
+  B:0020H.1       PUBLIC        LEDDirection
+  D:0010H         PUBLIC        SystemSpeed
+  -------         PROC          _DELAY1MS
+  D:0006H         SYMBOL        count
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:04AAH         LINE#         5
+  C:04AAH         LINE#         6
+  C:04AAH         LINE#         8
+  C:04B4H         LINE#         9
+  C:04C9H         LINE#         10
+  -------         ENDPROC       _DELAY1MS
+  -------         PROC          _DISPLAY
+  D:0007H         SYMBOL        Value
+  C:0527H         LINE#         15
+  C:0527H         LINE#         16
+  C:0527H         LINE#         17
+  C:052EH         LINE#         18
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          _LEDFLASH
+  D:0014H         SYMBOL        Count
+  -------         DO            
+  D:0001H         SYMBOL        i
+  B:0020H.2       SYMBOL        Flag
+  -------         ENDDO         
+  C:0003H         LINE#         20
+  C:0005H         LINE#         21
+  C:0005H         LINE#         24
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 5
+
+
+  C:000DH         LINE#         25
+  C:000DH         LINE#         26
+  C:000FH         LINE#         27
+  C:0012H         LINE#         28
+  C:0016H         LINE#         30
+  C:001BH         LINE#         31
+  C:0022H         LINE#         32
+  C:0025H         LINE#         33
+  -------         ENDPROC       _LEDFLASH
+  -------         PROC          GETKEY
+  -------         DO            
+  D:0007H         SYMBOL        KeyTemp
+  D:0013H         SYMBOL        CheckValue
+  D:0001H         SYMBOL        Key
+  -------         ENDDO         
+  C:03CFH         LINE#         36
+  C:03CFH         LINE#         37
+  C:03CFH         LINE#         38
+  C:03D1H         LINE#         39
+  C:03D7H         LINE#         40
+  C:03DAH         LINE#         41
+  C:03DDH         LINE#         43
+  C:03E4H         LINE#         44
+  C:03E8H         LINE#         45
+  C:03EBH         LINE#         46
+  C:03EEH         LINE#         48
+  C:03F3H         LINE#         49
+  C:03F6H         LINE#         50
+  C:03FBH         LINE#         51
+  C:03FEH         LINE#         52
+  C:0403H         LINE#         53
+  C:0406H         LINE#         54
+  C:0408H         LINE#         55
+  -------         ENDPROC       GETKEY
+  -------         PROC          INITIALTIMER2
+  C:04F4H         LINE#         58
+  C:04F4H         LINE#         59
+  C:04F4H         LINE#         60
+  C:04F7H         LINE#         61
+  C:04FDH         LINE#         62
+  C:04FFH         LINE#         63
+  C:0501H         LINE#         64
+  C:0503H         LINE#         65
+  -------         ENDPROC       INITIALTIMER2
+  -------         PROC          _SETSPEED
+  D:0007H         SYMBOL        Speed
+  C:04CAH         LINE#         70
+  C:04CAH         LINE#         71
+  C:04CAH         LINE#         72
+  C:04DFH         LINE#         73
+  -------         ENDPROC       _SETSPEED
+  -------         PROC          _LEDSHOW
+  D:0006H         SYMBOL        LEDStatus
+  C:051EH         LINE#         75
+  C:051EH         LINE#         76
+  C:051EH         LINE#         77
+  C:0522H         LINE#         78
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 6
+
+
+  C:0526H         LINE#         79
+  -------         ENDPROC       _LEDSHOW
+  -------         PROC          INITIALCPU
+  C:0409H         LINE#         81
+  C:0409H         LINE#         82
+  C:0409H         LINE#         83
+  C:040CH         LINE#         84
+  C:0410H         LINE#         85
+  C:0415H         LINE#         87
+  C:0417H         LINE#         88
+  C:0419H         LINE#         89
+  C:041CH         LINE#         90
+  C:041EH         LINE#         91
+  C:0425H         LINE#         92
+  C:0428H         LINE#         93
+  C:042BH         LINE#         94
+  C:042EH         LINE#         95
+  C:0431H         LINE#         96
+  C:0436H         LINE#         97
+  -------         ENDPROC       INITIALCPU
+  -------         PROC          MODE_0
+  C:0467H         LINE#         103
+  C:0467H         LINE#         104
+  C:0467H         LINE#         105
+  C:047BH         LINE#         106
+  C:0488H         LINE#         107
+  -------         ENDPROC       MODE_0
+  -------         PROC          MODE_1
+  C:0489H         LINE#         109
+  C:0489H         LINE#         110
+  C:0489H         LINE#         111
+  C:049CH         LINE#         112
+  C:04A9H         LINE#         113
+  -------         ENDPROC       MODE_1
+  -------         PROC          MODE_2
+  C:034FH         LINE#         115
+  C:034FH         LINE#         116
+  C:034FH         LINE#         117
+  C:0352H         LINE#         118
+  C:0364H         LINE#         120
+  C:0377H         LINE#         121
+  C:037FH         LINE#         122
+  C:0381H         LINE#         123
+  C:038EH         LINE#         124
+  -------         ENDPROC       MODE_2
+  -------         PROC          MODE_3
+  C:02C7H         LINE#         126
+  C:02C7H         LINE#         127
+  C:02C7H         LINE#         128
+  C:02CAH         LINE#         129
+  C:02DCH         LINE#         131
+  C:02F3H         LINE#         132
+  C:02FBH         LINE#         133
+  C:02FDH         LINE#         134
+  C:030AH         LINE#         135
+  -------         ENDPROC       MODE_3
+  -------         PROC          MODE_4
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 7
+
+
+  C:00BAH         LINE#         138
+  C:00BAH         LINE#         139
+  C:00BAH         LINE#         140
+  C:00BDH         LINE#         141
+  C:00BDH         LINE#         142
+  C:00C0H         LINE#         143
+  C:00D2H         LINE#         145
+  C:00E3H         LINE#         146
+  C:00E5H         LINE#         148
+  C:00E5H         LINE#         149
+  C:00E8H         LINE#         150
+  C:00FCH         LINE#         152
+  C:0114H         LINE#         153
+  C:0114H         LINE#         154
+  C:011CH         LINE#         155
+  C:011CH         LINE#         156
+  C:011EH         LINE#         157
+  C:0123H         LINE#         158
+  C:0123H         LINE#         159
+  C:0130H         LINE#         160
+  -------         ENDPROC       MODE_4
+  -------         PROC          MODE_5
+  C:038FH         LINE#         163
+  C:038FH         LINE#         164
+  C:038FH         LINE#         165
+  C:0392H         LINE#         166
+  C:03A4H         LINE#         168
+  C:03B7H         LINE#         169
+  C:03BFH         LINE#         170
+  C:03C1H         LINE#         171
+  C:03CEH         LINE#         172
+  -------         ENDPROC       MODE_5
+  -------         PROC          MODE_6
+  C:030BH         LINE#         175
+  C:030BH         LINE#         176
+  C:030BH         LINE#         177
+  C:030EH         LINE#         178
+  C:0320H         LINE#         180
+  C:0337H         LINE#         181
+  C:033FH         LINE#         182
+  C:0341H         LINE#         183
+  C:034EH         LINE#         184
+  -------         ENDPROC       MODE_6
+  -------         PROC          MODE_7
+  C:0280H         LINE#         187
+  C:0280H         LINE#         188
+  C:0280H         LINE#         189
+  C:0283H         LINE#         190
+  C:0295H         LINE#         192
+  C:02A8H         LINE#         193
+  C:02B0H         LINE#         194
+  C:02B2H         LINE#         195
+  C:02C6H         LINE#         196
+  -------         ENDPROC       MODE_7
+  -------         PROC          MODE_8
+  C:0504H         LINE#         199
+  C:0504H         LINE#         200
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 8
+
+
+  C:0504H         LINE#         201
+  -------         ENDPROC       MODE_8
+  -------         PROC          TIMEREVENTRUN
+  C:0238H         LINE#         204
+  C:0238H         LINE#         205
+  C:0238H         LINE#         206
+  C:023CH         LINE#         207
+  C:023CH         LINE#         208
+  C:023FH         LINE#         209
+  C:023FH         LINE#         210
+  C:0244H         LINE#         211
+  C:0244H         LINE#         212
+  C:0247H         LINE#         213
+  C:0247H         LINE#         214
+  C:024CH         LINE#         215
+  C:024CH         LINE#         216
+  C:024FH         LINE#         217
+  C:024FH         LINE#         218
+  C:0254H         LINE#         219
+  C:0254H         LINE#         220
+  C:0257H         LINE#         221
+  C:0257H         LINE#         222
+  C:025CH         LINE#         223
+  C:025CH         LINE#         224
+  C:025FH         LINE#         225
+  C:025FH         LINE#         226
+  C:0264H         LINE#         227
+  C:0264H         LINE#         228
+  C:0267H         LINE#         229
+  C:0267H         LINE#         230
+  C:026CH         LINE#         231
+  C:026CH         LINE#         232
+  C:026FH         LINE#         233
+  C:026FH         LINE#         234
+  C:0274H         LINE#         235
+  C:0274H         LINE#         236
+  C:0277H         LINE#         237
+  C:0277H         LINE#         238
+  C:027CH         LINE#         239
+  C:027CH         LINE#         240
+  C:027FH         LINE#         241
+  C:027FH         LINE#         242
+  -------         ENDPROC       TIMEREVENTRUN
+  -------         PROC          TIMER2
+  C:043BH         LINE#         244
+  C:0444H         LINE#         246
+  C:0446H         LINE#         247
+  C:0457H         LINE#         248
+  C:0457H         LINE#         249
+  C:045DH         LINE#         250
+  C:0460H         LINE#         251
+  C:0460H         LINE#         252
+  -------         ENDPROC       TIMER2
+  -------         PROC          _KEYDISPOSE
+  D:0013H         SYMBOL        Key
+  C:0131H         LINE#         254
+  C:0133H         LINE#         255
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/17/2005  01:24:53  PAGE 9
+
+
+  C:0133H         LINE#         256
+  C:0138H         LINE#         257
+  C:0138H         LINE#         258
+  C:013AH         LINE#         259
+  C:013FH         LINE#         260
+  C:0141H         LINE#         261
+  C:014BH         LINE#         262
+  C:0150H         LINE#         263
+  C:0150H         LINE#         264
+  C:0155H         LINE#         265
+  C:0155H         LINE#         266
+  C:0160H         LINE#         267
+  C:0160H         LINE#         268
+  C:0168H         LINE#         269
+  C:016DH         LINE#         270
+  C:016FH         LINE#         272
+  C:016FH         LINE#         273
+  C:0174H         LINE#         274
+  C:0174H         LINE#         275
+  C:0174H         LINE#         276
+  C:0179H         LINE#         277
+  C:0179H         LINE#         278
+  C:0184H         LINE#         279
+  C:0184H         LINE#         280
+  C:018CH         LINE#         281
+  C:0190H         LINE#         282
+  C:0190H         LINE#         284
+  C:0190H         LINE#         285
+  C:0195H         LINE#         286
+  C:0195H         LINE#         287
+  C:0195H         LINE#         288
+  -------         ENDPROC       _KEYDISPOSE
+  -------         PROC          MAIN
+  -------         DO            
+  D:0012H         SYMBOL        Key
+  -------         ENDDO         
+  C:04E0H         LINE#         291
+  C:04E0H         LINE#         292
+  C:04E0H         LINE#         294
+  C:04E3H         LINE#         295
+  C:04E6H         LINE#         297
+  C:04E6H         LINE#         298
+  C:04E6H         LINE#         299
+  C:04EBH         LINE#         300
+  C:04EFH         LINE#         301
+  C:04EFH         LINE#         302
+  C:04F2H         LINE#         303
+  C:04F2H         LINE#         304
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        HURRICANELAMP
+
+  -------         MODULE        ?C?UIDIV
+  C:0196H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=30.3 xdata=0 code=1326
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

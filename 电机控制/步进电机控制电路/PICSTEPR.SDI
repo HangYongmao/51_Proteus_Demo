@@ -1,0 +1,82 @@
+,,,                   LIST    p=16F84 ; PIC16F844 is the target processor
+,,,
+,,,              #include "P16F84.INC" ; Include header file
+,,,
+,,,              CBLOCK 0x10   ; Temporary storage
+,,,                 pos
+,,,                 dc1
+,,,                 dc2
+,,,              ENDC
+,,,              LIST    p=16F84 ; PIC16F844 is the target processor
+,,,
+,,,              #include "P16F84.INC" ; Include header file
+,,,
+,,,              CBLOCK 0x10   ; Temporary storage
+,,,              ENDC
+,,,
+,,,              ORG   0
+0000,2805,entrypoint,entrypoint    goto  start
+,,,
+,,,              ORG   4
+0004,2804,intvector,intvector     goto  intvector
+,,,
+0005,0103,start,start         clrw                    ; Zero.
+,,,
+0006,0086,,              movwf   PORTB           ; Ensure PORTB is zero before we enable it.
+0007,1683,,              bsf     STATUS,RP0      ; Select Bank 1
+0008,30F0,,              movlw   0xF0            ; Set port B bits 0-3 as outputs
+0009,0086,,              movwf   TRISB           ; Set TRISB register.
+,,,
+000A,1283,,              bcf     STATUS,RP0      ; Select Bank 0
+,,,
+000B,3003,,              movlw   3               ; Initialize the motor position
+000C,0090,,              movwf   pos
+000D,0086,,              movwf   PORTB
+000E,2029,,              call    delay
+000F,0186,,              clrf    PORTB           ; Motor drive off
+,,,
+,,,;Main loop
+0010,1C05,loop,loop          btfss   PORTA,0         ; Test clockwise button
+0011,2015,,              call    stepcw
+0012,1C85,,              btfss   PORTA,1         ; Test anti-clockwise button
+0013,201F,,              call    stepccw
+0014,2810,,              goto loop
+,,,
+,,,;Rotate one step clockwise
+0015,1003,stepcw,stepcw        bcf    STATUS,C         ; Clear the carry flag
+0016,1990,,              btfsc  pos,3            ; Set carry if this bit set
+0017,1403,,              bsf    STATUS,C
+0018,0D10,,              rlf    pos,W            ; Pick up and rotate the motor's current position
+0019,390F,,              andlw  0x0F             ; Mask to lower nibble
+001A,0090,,              movwf  pos
+001B,0086,,              movwf  PORTB            ; Drive the outputs
+001C,2029,,              call   delay            ; Wait
+001D,0186,,              clrf   PORTB            ; Clear the output
+001E,0008,,              return
+,,,
+,,,;Rotate one step counter clockwise
+001F,1003,stepccw,stepccw       bcf    STATUS,C         ; Clear the carry flag
+0020,1810,,              btfsc  pos,0
+0021,1610,,              bsf    pos,4
+0022,0C10,,              rrf    pos,W            ; Pick up and rotate the motor's current position
+0023,390F,,              andlw  0x0F             ; Mask to lower nibble
+0024,0090,,              movwf  pos
+0025,0086,,              movwf  PORTB            ; Drive the outputs
+0026,2029,,              call   delay            ; Wait
+0027,0186,,              clrf   PORTB            ; Clear the output
+0028,0008,,              return
+,,,
+,,,; This routine implements the delay between steps,
+,,,; and thus controls the motor speed.
+0029,3018,delay,delay         movlw   18             ; Outer loop iteration count
+002A,0091,,              movwf   dc1
+002B,0192,dl1,dl1           clrf    dc2            ; Initialize inner loop
+002C,0000,dl2,dl2           nop
+002D,0000,,              nop
+002E,0B92,,              decfsz  dc2,F
+002F,282C,,              goto    dl2
+0030,0B91,,              decfsz  dc1,F
+0031,282B,,              goto    dl1
+0032,0008,,              return
+,,,
+,,,              END

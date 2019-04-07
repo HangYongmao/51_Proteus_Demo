@@ -1,0 +1,171 @@
+BL51 BANKED LINKER/LOCATER V6.02                                                        07/26/2007  10:43:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.02, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO RunLed
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  RunLed (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0012H     UNIT         ?DT?MAIN
+            IDATA   001AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     0005H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     0005H                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+                    0016H     07EAH                  *** GAP ***
+            CODE    0800H     0096H     UNIT         ?PR?VTIMER0?MAIN
+            CODE    0896H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0922H     001FH     UNIT         ?C_INITSEG
+            CODE    0941H     001BH     UNIT         ?PR?VDELAYCHANGE?MAIN
+            CODE    095CH     0019H     UNIT         ?PR?MAIN?MAIN
+            CODE    0975H     0017H     UNIT         ?PR?VMODECHANGE?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   RunLed (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  RunLed (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.02                                                      07/26/2007  10:43:27  PAGE 2
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  B:00A8H.7       PUBLIC        EA
+  C:095CH         PUBLIC        main
+  C:0800H         PUBLIC        vTimer0
+  D:0008H         PUBLIC        uc_Delay
+  C:0941H         PUBLIC        vDelayChange
+  D:0089H         PUBLIC        TMOD
+  D:0009H         PUBLIC        uc_Mode
+  D:000AH         PUBLIC        uc_Count
+  C:0975H         PUBLIC        vModeChange
+  D:000BH         PUBLIC        _i
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:000CH         PUBLIC        aucLED_SELECT_01
+  D:0015H         PUBLIC        aucLED_SELECT_23
+  -------         PROC          MAIN
+  C:095CH         LINE#         51
+  C:095CH         LINE#         52
+  C:095CH         LINE#         53
+  C:095FH         LINE#         54
+  C:0962H         LINE#         55
+  C:0965H         LINE#         56
+  C:0967H         LINE#         58
+  C:0969H         LINE#         59
+  C:096BH         LINE#         61
+  C:096DH         LINE#         62
+  C:096FH         LINE#         63
+  C:0971H         LINE#         64
+  C:0973H         LINE#         66
+  -------         ENDPROC       MAIN
+  -------         PROC          VTIMER0
+  C:0800H         LINE#         81
+  C:080BH         LINE#         84
+  C:0815H         LINE#         85
+  C:0815H         LINE#         86
+  C:0818H         LINE#         87
+  C:082AH         LINE#         88
+  C:082AH         LINE#         90
+  C:082AH         LINE#         91
+  C:0831H         LINE#         92
+  C:0836H         LINE#         93
+  C:0838H         LINE#         94
+  C:0838H         LINE#         95
+  C:083AH         LINE#         97
+  C:083AH         LINE#         98
+  C:0841H         LINE#         99
+  C:0846H         LINE#         100
+  C:0848H         LINE#         102
+  C:084AH         LINE#         103
+BL51 BANKED LINKER/LOCATER V6.02                                                      07/26/2007  10:43:27  PAGE 3
+
+
+  C:084CH         LINE#         105
+  C:084CH         LINE#         106
+  C:0853H         LINE#         107
+  C:0858H         LINE#         108
+  C:085AH         LINE#         110
+  C:085CH         LINE#         111
+  C:085EH         LINE#         113
+  C:085EH         LINE#         114
+  C:0865H         LINE#         115
+  C:086AH         LINE#         116
+  C:086CH         LINE#         118
+  C:0874H         LINE#         119
+  C:0876H         LINE#         121
+  C:0876H         LINE#         122
+  C:087BH         LINE#         123
+  C:0880H         LINE#         124
+  C:0883H         LINE#         126
+  C:0883H         LINE#         127
+  C:0885H         LINE#         128
+  C:0885H         LINE#         129
+  C:0885H         LINE#         130
+  C:0887H         LINE#         132
+  C:088AH         LINE#         133
+  C:088DH         LINE#         134
+  -------         ENDPROC       VTIMER0
+  -------         PROC          VMODECHANGE
+  C:0975H         LINE#         148
+  C:0979H         LINE#         150
+  C:0980H         LINE#         151
+  C:0985H         LINE#         152
+  C:0987H         LINE#         153
+  -------         ENDPROC       VMODECHANGE
+  -------         PROC          VDELAYCHANGE
+  C:0941H         LINE#         167
+  C:0945H         LINE#         169
+  C:094CH         LINE#         170
+  C:0951H         LINE#         171
+  C:0957H         LINE#         172
+  -------         ENDPROC       VDELAYCHANGE
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0108H BYTE (12%) *
+******************************************************************************
+
+Program Size: data=27.0 xdata=0 code=408
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

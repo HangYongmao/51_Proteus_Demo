@@ -1,0 +1,2488 @@
+                        .module main.c
+                        .area data(ram, con, rel)
+ 0000           _PhoneNum::
+ 0000                   .blkb 12
+                        .area idata
+ 0000 313337313335323634373200  .byte 49,51,55,49,51,53,50,54,52,55,50,0
+                        .area data(ram, con, rel)
+ 000C                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 000C                   .dbsym e PhoneNum _PhoneNum A[12:12]c
+ 000C           _RxIndexTail::
+ 000C                   .blkb 1
+                        .area idata
+ 000C 00                .byte 0
+                        .area data(ram, con, rel)
+ 000D                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 000D                   .dbsym e RxIndexTail _RxIndexTail c
+ 000D           _RxStatus:
+ 000D                   .blkb 1
+                        .area idata
+ 000D 00                .byte 0
+                        .area data(ram, con, rel)
+ 000E                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 000E                   .dbsym s RxStatus _RxStatus c
+ 000E           _TxStatus:
+ 000E                   .blkb 1
+                        .area idata
+ 000E 01                .byte 1
+                        .area data(ram, con, rel)
+ 000F                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 000F                   .dbsym s TxStatus _TxStatus c
+ 000F           _OkFlag:
+ 000F                   .blkb 1
+                        .area idata
+ 000F 00                .byte 0
+                        .area data(ram, con, rel)
+ 0010                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0010                   .dbsym s OkFlag _OkFlag c
+ 0010           _CallInFlag:
+ 0010                   .blkb 1
+                        .area idata
+ 0010 00                .byte 0
+                        .area data(ram, con, rel)
+ 0011                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0011                   .dbsym s CallInFlag _CallInFlag c
+ 0011           _NoCarrierFlag:
+ 0011                   .blkb 1
+                        .area idata
+ 0011 00                .byte 0
+                        .area data(ram, con, rel)
+ 0012                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0012                   .dbsym s NoCarrierFlag _NoCarrierFlag c
+ 0012           _BusyFlag:
+ 0012                   .blkb 1
+                        .area idata
+ 0012 00                .byte 0
+                        .area data(ram, con, rel)
+ 0013                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0013                   .dbsym s BusyFlag _BusyFlag c
+ 0013           _DettqFlag:
+ 0013                   .blkb 1
+                        .area idata
+ 0013 00                .byte 0
+                        .area data(ram, con, rel)
+ 0014                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0014                   .dbsym s DettqFlag _DettqFlag c
+ 0014           _release:
+ 0014                   .blkb 1
+                        .area idata
+ 0014 00                .byte 0
+                        .area data(ram, con, rel)
+ 0015                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0015                   .dbsym s release _release c
+ 0015           _CallOut:
+ 0015                   .blkb 1
+                        .area idata
+ 0015 00                .byte 0
+                        .area data(ram, con, rel)
+ 0016                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0016                   .dbsym s CallOut _CallOut c
+ 0016           _error:
+ 0016                   .blkb 1
+                        .area idata
+ 0016 00                .byte 0
+                        .area data(ram, con, rel)
+ 0017                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0017                   .dbsym s error _error c
+ 0017           _PhoneNumData:
+ 0017                   .blkb 1
+                        .area idata
+ 0017 00                .byte 0
+                        .area data(ram, con, rel)
+ 0018                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0018                   .dbsym s PhoneNumData _PhoneNumData c
+                        .area lit(rom, con, rel)
+ 0000           _At::
+ 0000 415400            .byte 'A,'T,0
+ 0003                   .dbsym e At _At A[3:3]kc
+ 0003           _Ata::
+ 0003 41544100          .byte 'A,'T,'A,0
+ 0007                   .dbsym e Ata _Ata A[4:4]kc
+ 0007           _Ath::
+ 0007 41544800          .byte 'A,'T,'H,0
+ 000B                   .dbsym e Ath _Ath A[4:4]kc
+ 000B           _Ate0::
+ 000B 4154453000        .byte 'A,'T,'E,48,0
+ 0010                   .dbsym e Ate0 _Ate0 A[5:5]kc
+ 0010           _Atv0::
+ 0010 4154563000        .byte 'A,'T,'V,48,0
+ 0015                   .dbsym e Atv0 _Atv0 A[5:5]kc
+ 0015           _Atx0::
+ 0015 4154583000        .byte 'A,'T,'X,48,0
+ 001A                   .dbsym e Atx0 _Atx0 A[5:5]kc
+ 001A           _Atf::
+ 001A 4154264600        .byte 'A,'T,38,'F,0
+ 001F                   .dbsym e Atf _Atf A[5:5]kc
+ 001F           _Atclip::
+ 001F 41542B434C49503D3100      .byte 'A,'T,43,'C,'L,'I,'P,61,49,0
+ 0029                   .dbsym e Atclip _Atclip A[10:10]kc
+ 0029           _Atcsq::
+ 0029 41542B43535100    .byte 'A,'T,43,'C,'S,'Q,0
+ 0030                   .dbsym e Atcsq _Atcsq A[7:7]kc
+ 0030           _Atssyn::
+ 0030 41545E5353594E433D3100    .byte 'A,'T,94,'S,'S,'Y,'N,'C,61,49,0
+ 003B                   .dbsym e Atssyn _Atssyn A[11:11]kc
+ 003B           _Atsmso::
+ 003B 41545E534D534F00  .byte 'A,'T,94,'S,'M,'S,'O,0
+ 0043                   .dbsym e Atsmso _Atsmso A[8:8]kc
+ 0043           _Atsnfs::
+ 0043 41545E534E46533D3400      .byte 'A,'T,94,'S,'N,'F,'S,61,52,0
+ 004D                   .dbsym e Atsnfs _Atsnfs A[10:10]kc
+ 004D           _Atsnfi::
+ 004D 41545E534E46493D342C333237363700  .byte 'A,'T,94,'S,'N,'F,'I,61,52,44,51,50,55,54,55,0
+ 005D                   .dbsym e Atsnfi _Atsnfi A[16:16]kc
+ 005D           _Atcnmi::
+ 005D 41542B434E4D493D312C312C302C302C  .byte 'A,'T,43,'C,'N,'M,'I,61,49,44,49,44,48,44,48,44
+ 006D 3100              .byte 49,0
+ 006F                   .dbsym e Atcnmi _Atcnmi A[18:18]kc
+ 006F           _Atsnfo::
+ 006F 41545E534E464F3D332C31363338342C  .byte 'A,'T,94,'S,'N,'F,'O,61,51,44,49,54,51,56,52,44
+ 007F 31363338342C31363338342C31363338  .byte 49,54,51,56,52,44,49,54,51,56,52,44,49,54,51,56
+ 008F 342C31363338342C342C3000  .byte 52,44,49,54,51,56,52,44,52,44,48,0
+ 009B                   .dbsym e Atsnfo _Atsnfo A[44:44]kc
+ 009B           _Atcmgf::
+ 009B 41542B434D47463D3000      .byte 'A,'T,43,'C,'M,'G,'F,61,48,0
+ 00A5                   .dbsym e Atcmgf _Atcmgf A[10:10]kc
+ 00A5           _Atcmgs::
+ 00A5 41542B434D47533D00        .byte 'A,'T,43,'C,'M,'G,'S,61,0
+ 00AE                   .dbsym e Atcmgs _Atcmgs A[9:9]kc
+ 00AE           _Atcmgr::
+ 00AE 41542B434D47523D3100      .byte 'A,'T,43,'C,'M,'G,'R,61,49,0
+ 00B8                   .dbsym e Atcmgr _Atcmgr A[10:10]kc
+ 00B8           _Atcmgl::
+ 00B8 41542B434D474C3D3000      .byte 'A,'T,43,'C,'M,'G,'L,61,48,0
+ 00C2                   .dbsym e Atcmgl _Atcmgl A[10:10]kc
+ 00C2           _Atcmgd::
+ 00C2 41542B434D47443D00        .byte 'A,'T,43,'C,'M,'G,'D,61,0
+ 00CB                   .dbsym e Atcmgd _Atcmgd A[9:9]kc
+ 00CB           _Atsnfpt::
+ 00CB 41545E534E4650543D3000    .byte 'A,'T,94,'S,'N,'F,'P,'T,61,48,0
+ 00D6                   .dbsym e Atsnfpt _Atsnfpt A[11:11]kc
+ 00D6           _Atclck1::
+ 00D6 41542B434C434B3D225343222C312C00  .byte 'A,'T,43,'C,'L,'C,'K,61,34,'S,'C,34,44,49,44,0
+ 00E6                   .dbsym e Atclck1 _Atclck1 A[16:16]kc
+ 00E6           _Atcpin::
+ 00E6 41542B4350494E3F00        .byte 'A,'T,43,'C,'P,'I,'N,63,0
+ 00EF                   .dbsym e Atcpin _Atcpin A[9:9]kc
+ 00EF           _Atclck2::
+ 00EF 41542B434C434B3D225343222C3200    .byte 'A,'T,43,'C,'L,'C,'K,61,34,'S,'C,34,44,50,0
+ 00FE                   .dbsym e Atclck2 _Atclck2 A[15:15]kc
+ 00FE           _Atcpwd::
+ 00FE 41542B435057443D225343222C00      .byte 'A,'T,43,'C,'P,'W,'D,61,34,'S,'C,34,44,0
+ 010C                   .dbsym e Atcpwd _Atcpwd A[14:14]kc
+ 010C           _Atclck0::
+ 010C 41542B434C434B3D225343222C302C00  .byte 'A,'T,43,'C,'L,'C,'K,61,34,'S,'C,34,44,48,44,0
+ 011C                   .dbsym e Atclck0 _Atclck0 A[16:16]kc
+ 011C           _Atcpinc::
+ 011C 41542B4350494E3D00        .byte 'A,'T,43,'C,'P,'I,'N,61,0
+ 0125                   .dbsym e Atcpinc _Atcpinc A[9:9]kc
+ 0125           _Atsblk::
+ 0125 41545E53424C4B00  .byte 'A,'T,94,'S,'B,'L,'K,0
+ 012D                   .dbsym e Atsblk _Atsblk A[8:8]kc
+ 012D           _Atccfc::
+ 012D 41545E434346433D00        .byte 'A,'T,94,'C,'C,'F,'C,61,0
+ 0136                   .dbsym e Atccfc _Atccfc A[9:9]kc
+ 0136           _SMSin::
+ 0136 2B434D54493A2022534D222C203100    .byte 43,'C,'M,'T,'I,58,32,34,'S,'M,34,44,32,49,0
+ 0145                   .dbsym e SMSin _SMSin A[15:15]kc
+ 0145           _Atd::
+ 0145 41544400          .byte 'A,'T,'D,0
+ 0149                   .dbsym e Atd _Atd A[4:4]kc
+                        .area vector(rom, abs)
+                        .org 22
+ 0016 00C0              rjmp _uart0_rx_isr
+                        .area lit(rom, con, rel)
+                        .area text(rom, con, rel)
+ 0000                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0000                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay\main.c
+ 0000                   .dbfunc e uart0_rx_isr _uart0_rx_isr fV
+ 0000           ;              j -> R16
+ 0000           ;              i -> R16
+                        .even
+ 0000           _uart0_rx_isr::
+ 0000 2A92              st -y,R2
+ 0002 3A92              st -y,R3
+ 0004 0A93              st -y,R16
+ 0006 8A93              st -y,R24
+ 0008 9A93              st -y,R25
+ 000A EA93              st -y,R30
+ 000C FA93              st -y,R31
+ 000E 2FB6              in R2,0x3f
+ 0010 2A92              st -y,R2
+ 0012                   .dbline -1
+ 0012                   .dbline 18
+ 0012           ; ////////////////////////////////////////////////////////////////////////////////
+ 0012           ; // ICC-AVR application builder : 2006-6-25 下午 06:02:39
+ 0012           ; // Target : M8
+ 0012           ; // Crystal: 3.6864Mhz
+ 0012           ; // Author:  Anwarye
+ 0012           ; // Title:   Detcetaphone
+ 0012           ; ////////////////////////////////////////////////////////////////////////////////
+ 0012           ; 
+ 0012           ; #include <iom8v.h>
+ 0012           ; #include <macros.h>
+ 0012           ; #include "var.h"
+ 0012           ; 
+ 0012           ; #define XTAL == 3.6864M
+ 0012           ; 
+ 0012           ; ////////////////////////////////////////////////////////////////////////////////
+ 0012           ; #pragma interrupt_handler uart0_rx_isr:12
+ 0012           ; void uart0_rx_isr(void)
+ 0012           ; {
+ 0012                   .dbline 20
+ 0012           ;     unsigned char i,j;
+ 0012           ;     if(UDR == 0x0A)
+ 0012 8CB1              in R24,0xc
+ 0014 8A30              cpi R24,10
+ 0016 09F4              brne L2
+ 0018                   .dbline 21
+ 0018           ;     { 
+ 0018                   .dbline 22
+ 0018           ;        return;                 // 收到0x0A直接丢弃
+ 0018 7AC0              rjmp L1
+ 001A           L2:
+ 001A                   .dbline 25
+ 001A           ;     }
+ 001A           ;       
+ 001A           ;       i = RxIndex;
+ 001A 00912100          lds R16,_RxIndex
+ 001E                   .dbline 26
+ 001E           ;       j = RxIndex-1;
+ 001E 00912100          lds R16,_RxIndex
+ 0022 0150              subi R16,1
+ 0024                   .dbline 27
+ 0024           ;     if((RxBuf[0] == 0x30) && (RxBuf[1] == 0x0D))
+ 0024 80912200          lds R24,_RxBuf
+ 0028 8033              cpi R24,48
+ 002A 99F4              brne L4
+ 002C 80912300          lds R24,_RxBuf+1
+ 0030 8D30              cpi R24,13
+ 0032 79F4              brne L4
+ 0034                   .dbline 28
+ 0034           ;     {
+ 0034                   .dbline 29
+ 0034           ;         RxIndexTail = RxIndex;              // 保存接收缓冲指针尾
+ 0034 20902100          lds R2,_RxIndex
+ 0038 20920C00          sts _RxIndexTail,R2
+ 003C                   .dbline 30
+ 003C           ;         RxIndex = 0;                                          // 接收缓冲指针归零
+ 003C 2224              clr R2
+ 003E 20922100          sts _RxIndex,R2
+ 0042                   .dbline 31
+ 0042           ;           RxStatus = 1;                                               // 接收完成标志置位
+ 0042 81E0              ldi R24,1
+ 0044 80930D00          sts _RxStatus,R24
+ 0048                   .dbline 32
+ 0048           ;               OkFlag = 1;
+ 0048 80930F00          sts _OkFlag,R24
+ 004C                   .dbline 33
+ 004C           ;               error = 0;
+ 004C 20921600          sts _error,R2
+ 0050                   .dbline 34
+ 0050           ;               return; 
+ 0050 5EC0              rjmp L1
+ 0052           L4:
+ 0052                   .dbline 36
+ 0052           ;       }
+ 0052           ;     if((RxBuf[0] == 0x32) && (RxBuf[1] == 0x0D))  // 收到来电信号，来电标志置位
+ 0052 80912200          lds R24,_RxBuf
+ 0056 8233              cpi R24,50
+ 0058 79F4              brne L7
+ 005A 80912300          lds R24,_RxBuf+1
+ 005E 8D30              cpi R24,13
+ 0060 59F4              brne L7
+ 0062                   .dbline 37
+ 0062           ;     {
+ 0062                   .dbline 38
+ 0062           ;         CallInFlag = 1;                           // 置电话呼入标志
+ 0062 81E0              ldi R24,1
+ 0064 80931000          sts _CallInFlag,R24
+ 0068                   .dbline 39
+ 0068           ;           RxIndex = 0;
+ 0068 2224              clr R2
+ 006A 20922100          sts _RxIndex,R2
+ 006E                   .dbline 40
+ 006E           ;               RxStatus = 1;
+ 006E 80930D00          sts _RxStatus,R24
+ 0072                   .dbline 41
+ 0072           ;               OkFlag = 1;
+ 0072 80930F00          sts _OkFlag,R24
+ 0076                   .dbline 42
+ 0076           ;               return;  
+ 0076 4BC0              rjmp L1
+ 0078           L7:
+ 0078                   .dbline 44
+ 0078           ;     }
+ 0078           ;     else if((RxBuf[0] == 0x33) && (RxBuf[1] == 0x0D))  // 被叫号码忙 或者挂机 主叫挂机
+ 0078 80912200          lds R24,_RxBuf
+ 007C 8333              cpi R24,51
+ 007E 79F4              brne L10
+ 0080 80912300          lds R24,_RxBuf+1
+ 0084 8D30              cpi R24,13
+ 0086 59F4              brne L10
+ 0088                   .dbline 45
+ 0088           ;     {
+ 0088                   .dbline 46
+ 0088           ;         BusyFlag = 1;                                // 置电话呼入标志
+ 0088 81E0              ldi R24,1
+ 008A 80931200          sts _BusyFlag,R24
+ 008E                   .dbline 47
+ 008E           ;           RxIndex = 0;
+ 008E 2224              clr R2
+ 0090 20922100          sts _RxIndex,R2
+ 0094                   .dbline 48
+ 0094           ;               RxStatus = 1;
+ 0094 80930D00          sts _RxStatus,R24
+ 0098                   .dbline 49
+ 0098           ;               OkFlag = 1;
+ 0098 80930F00          sts _OkFlag,R24
+ 009C                   .dbline 50
+ 009C           ;               return;  
+ 009C 38C0              rjmp L1
+ 009E           L10:
+ 009E                   .dbline 52
+ 009E           ;     }      
+ 009E           ;     else if((RxBuf[0] == 0x37) && (RxBuf[1] == 0x0D))  // 收到来电信号，来电标志置位
+ 009E 80912200          lds R24,_RxBuf
+ 00A2 8733              cpi R24,55
+ 00A4 79F4              brne L13
+ 00A6 80912300          lds R24,_RxBuf+1
+ 00AA 8D30              cpi R24,13
+ 00AC 59F4              brne L13
+ 00AE                   .dbline 53
+ 00AE           ;     {
+ 00AE                   .dbline 54
+ 00AE           ;         NoCarrierFlag = 1;                               // 置电话呼入标志  NO CARRIER
+ 00AE 81E0              ldi R24,1
+ 00B0 80931100          sts _NoCarrierFlag,R24
+ 00B4                   .dbline 55
+ 00B4           ;           RxIndex = 0;
+ 00B4 2224              clr R2
+ 00B6 20922100          sts _RxIndex,R2
+ 00BA                   .dbline 56
+ 00BA           ;               RxStatus = 1;
+ 00BA 80930D00          sts _RxStatus,R24
+ 00BE                   .dbline 57
+ 00BE           ;               OkFlag = 1;
+ 00BE 80930F00          sts _OkFlag,R24
+ 00C2                   .dbline 58
+ 00C2           ;               return;
+ 00C2 25C0              rjmp L1
+ 00C4           L13:
+ 00C4                   .dbline 60
+ 00C4           ;     }
+ 00C4           ;     else if((RxBuf[0] == 0x34) && (RxBuf[1] == 0x0D))  // 收到来电信号，来电标志置位
+ 00C4 80912200          lds R24,_RxBuf
+ 00C8 8433              cpi R24,52
+ 00CA 79F4              brne L16
+ 00CC 80912300          lds R24,_RxBuf+1
+ 00D0 8D30              cpi R24,13
+ 00D2 59F4              brne L16
+ 00D4                   .dbline 61
+ 00D4           ;     {
+ 00D4                   .dbline 62
+ 00D4           ;           RxIndex = 0;
+ 00D4 2224              clr R2
+ 00D6 20922100          sts _RxIndex,R2
+ 00DA                   .dbline 63
+ 00DA           ;               RxStatus = 1;
+ 00DA 81E0              ldi R24,1
+ 00DC 80930D00          sts _RxStatus,R24
+ 00E0                   .dbline 64
+ 00E0           ;               OkFlag = 1;
+ 00E0 80930F00          sts _OkFlag,R24
+ 00E4                   .dbline 65
+ 00E4           ;               error = 1;
+ 00E4 80931600          sts _error,R24
+ 00E8                   .dbline 66
+ 00E8           ;               return; 
+ 00E8 12C0              rjmp L1
+ 00EA           L16:
+ 00EA                   .dbline 69
+ 00EA           ;       }
+ 00EA           ;       else 
+ 00EA           ;     {
+ 00EA                   .dbline 71
+ 00EA           ;     
+ 00EA           ;     RxBuf[RxIndex++] = UDR;                 // 继续接收数据放入接收缓冲
+ 00EA 20902100          lds R2,_RxIndex
+ 00EE 3324              clr R3
+ 00F0 822D              mov R24,R2
+ 00F2 8F5F              subi R24,255    ; addi 1
+ 00F4 80932100          sts _RxIndex,R24
+ 00F8 80E0              ldi R24,<_RxBuf
+ 00FA 90E0              ldi R25,>_RxBuf
+ 00FC E22D              mov R30,R2
+ 00FE FF27              clr R31
+ 0100 E80F              add R30,R24
+ 0102 F91F              adc R31,R25
+ 0104 2CB0              in R2,0xc
+ 0106 2082              std z+0,R2
+ 0108                   .dbline 72
+ 0108           ;       RxStatus = 0;                         // 串口接收中
+ 0108 2224              clr R2
+ 010A 20920D00          sts _RxStatus,R2
+ 010E                   .dbline 74
+ 010E           ; //    return;                                                       // 结束接收，直接跳出
+ 010E           ;       }
+ 010E                   .dbline -2
+ 010E           L1:
+ 010E 2990              ld R2,y+
+ 0110 2FBE              out 0x3f,R2
+ 0112 F991              ld R31,y+
+ 0114 E991              ld R30,y+
+ 0116 9991              ld R25,y+
+ 0118 8991              ld R24,y+
+ 011A 0991              ld R16,y+
+ 011C 3990              ld R3,y+
+ 011E 2990              ld R2,y+
+ 0120                   .dbline 0 ; func end
+ 0120 1895              reti
+ 0122                   .dbsym r j 16 c
+ 0122                   .dbsym r i 16 c
+ 0122                   .dbend
+                        .area vector(rom, abs)
+                        .org 26
+ 001A 91C0              rjmp _uart0_tx_isr
+                        .area text(rom, con, rel)
+ 0122                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay\main.c
+ 0122                   .dbfunc e uart0_tx_isr _uart0_tx_isr fV
+                        .even
+ 0122           _uart0_tx_isr::
+ 0122 2A92              st -y,R2
+ 0124 8A93              st -y,R24
+ 0126 9A93              st -y,R25
+ 0128 EA93              st -y,R30
+ 012A FA93              st -y,R31
+ 012C 2FB6              in R2,0x3f
+ 012E 2A92              st -y,R2
+ 0130                   .dbline -1
+ 0130                   .dbline 80
+ 0130           ; }
+ 0130           ; 
+ 0130           ; ////////////////////////////////////////////////////////////////////////////////
+ 0130           ; #pragma interrupt_handler uart0_tx_isr:14
+ 0130           ; void uart0_tx_isr(void)
+ 0130           ; {
+ 0130                   .dbline 82
+ 0130           ;     
+ 0130           ;     if(!TxStatus)                                   // 本帧数据未发完，则继续发送  
+ 0130 20900E00          lds R2,_TxStatus
+ 0134 2220              tst R2
+ 0136 49F4              brne L20
+ 0138                   .dbline 83
+ 0138           ;       {
+ 0138                   .dbline 85
+ 0138           ;           //while ( !(UCSRA & (1<<UDRE)) );             // 等待UDR空
+ 0138           ;           UDR = TxBuf[TxIndex];               
+ 0138 80E0              ldi R24,<_TxBuf
+ 013A 90E0              ldi R25,>_TxBuf
+ 013C E0910000          lds R30,_TxIndex
+ 0140 FF27              clr R31
+ 0142 E80F              add R30,R24
+ 0144 F91F              adc R31,R25
+ 0146 2080              ldd R2,z+0
+ 0148 2CB8              out 0xc,R2
+ 014A                   .dbline 86
+ 014A           ;       }
+ 014A           L20:
+ 014A                   .dbline 87
+ 014A           ;       if((TxBuf[TxIndex] == 0x0D) || (TxBuf[TxIndex] == 0x1A))  // 本帧数据发送结束
+ 014A 80E0              ldi R24,<_TxBuf
+ 014C 90E0              ldi R25,>_TxBuf
+ 014E E0910000          lds R30,_TxIndex
+ 0152 FF27              clr R31
+ 0154 E80F              add R30,R24
+ 0156 F91F              adc R31,R25
+ 0158 8081              ldd R24,z+0
+ 015A 8D30              cpi R24,13
+ 015C 51F0              breq L24
+ 015E 80E0              ldi R24,<_TxBuf
+ 0160 90E0              ldi R25,>_TxBuf
+ 0162 E0910000          lds R30,_TxIndex
+ 0166 FF27              clr R31
+ 0168 E80F              add R30,R24
+ 016A F91F              adc R31,R25
+ 016C 8081              ldd R24,z+0
+ 016E 8A31              cpi R24,26
+ 0170 41F4              brne L22
+ 0172           L24:
+ 0172                   .dbline 88
+ 0172           ;       {
+ 0172                   .dbline 89
+ 0172           ;               TxStatus = 1;                          // 发送完成状态标志置位
+ 0172 81E0              ldi R24,1
+ 0174 80930E00          sts _TxStatus,R24
+ 0178                   .dbline 90
+ 0178           ;               TxIndex = 0;                           // 发送缓冲区指针归零
+ 0178 2224              clr R2
+ 017A 20920000          sts _TxIndex,R2
+ 017E                   .dbline 91
+ 017E           ;               UCSRB &= ~((1<<TXCIE));//|(1<<TXEN));  // 关发送中断
+ 017E 5698              cbi 0xa,6
+ 0180                   .dbline 92
+ 0180           ;               return;
+ 0180 05C0              rjmp L19
+ 0182           L22:
+ 0182                   .dbline 94
+ 0182           ;       }
+ 0182           ;       TxIndex++;                              
+ 0182 80910000          lds R24,_TxIndex
+ 0186 8F5F              subi R24,255    ; addi 1
+ 0188 80930000          sts _TxIndex,R24
+ 018C                   .dbline -2
+ 018C           L19:
+ 018C 2990              ld R2,y+
+ 018E 2FBE              out 0x3f,R2
+ 0190 F991              ld R31,y+
+ 0192 E991              ld R30,y+
+ 0194 9991              ld R25,y+
+ 0196 8991              ld R24,y+
+ 0198 2990              ld R2,y+
+ 019A                   .dbline 0 ; func end
+ 019A 1895              reti
+ 019C                   .dbend
+ 019C                   .dbfunc e CheckRx _CheckRx fc
+ 019C           ;              j -> R18
+ 019C           ;              i -> R16
+                        .even
+ 019C           _CheckRx::
+ 019C                   .dbline -1
+ 019C                   .dbline 97
+ 019C           ; }
+ 019C           ; unsigned char CheckRx(void)
+ 019C           ; {
+ 019C                   .dbline 99
+ 019C           ;     unsigned char i,j;
+ 019C           ;       i = RxIndex;
+ 019C 00912100          lds R16,_RxIndex
+ 01A0                   .dbline 100
+ 01A0           ;       j = RxIndex - 1;
+ 01A0 20912100          lds R18,_RxIndex
+ 01A4 2150              subi R18,1
+ 01A6                   .dbline 101
+ 01A6           ;     if(( RxBuf[j] == 0x30) && (RxBuf[i] == 0x0D))
+ 01A6 80E0              ldi R24,<_RxBuf
+ 01A8 90E0              ldi R25,>_RxBuf
+ 01AA E22F              mov R30,R18
+ 01AC FF27              clr R31
+ 01AE E80F              add R30,R24
+ 01B0 F91F              adc R31,R25
+ 01B2 8081              ldd R24,z+0
+ 01B4 8033              cpi R24,48
+ 01B6 71F4              brne L26
+ 01B8 80E0              ldi R24,<_RxBuf
+ 01BA 90E0              ldi R25,>_RxBuf
+ 01BC E02F              mov R30,R16
+ 01BE FF27              clr R31
+ 01C0 E80F              add R30,R24
+ 01C2 F91F              adc R31,R25
+ 01C4 8081              ldd R24,z+0
+ 01C6 8D30              cpi R24,13
+ 01C8 29F4              brne L26
+ 01CA                   .dbline 102
+ 01CA           ;       {
+ 01CA                   .dbline 103
+ 01CA           ;           RxIndex = 0;
+ 01CA 2224              clr R2
+ 01CC 20922100          sts _RxIndex,R2
+ 01D0                   .dbline 104
+ 01D0           ;               return (1);
+ 01D0 01E0              ldi R16,1
+ 01D2 01C0              rjmp L25
+ 01D4           L26:
+ 01D4                   .dbline 107
+ 01D4           ;       }
+ 01D4           ;       else
+ 01D4           ;       {
+ 01D4                   .dbline 108
+ 01D4           ;           return (0);
+ 01D4 0027              clr R16
+ 01D6                   .dbline -2
+ 01D6           L25:
+ 01D6                   .dbline 0 ; func end
+ 01D6 0895              ret
+ 01D8                   .dbsym r j 18 c
+ 01D8                   .dbsym r i 16 c
+ 01D8                   .dbend
+ 01D8                   .dbfunc e ClearRxBuf _ClearRxBuf fV
+ 01D8           ;              i -> R16
+                        .even
+ 01D8           _ClearRxBuf::
+ 01D8                   .dbline -1
+ 01D8                   .dbline 115
+ 01D8           ;       }
+ 01D8           ; }
+ 01D8           ; /*-----------------------------------------------------------------------*/
+ 01D8           ; ///////////////////////////  清除接收缓冲  ////////////////////////////////
+ 01D8           ; /*-----------------------------------------------------------------------*/
+ 01D8           ; void ClearRxBuf(void)
+ 01D8           ; {
+ 01D8                   .dbline 117
+ 01D8           ;     unsigned char i;
+ 01D8           ;       for(i=0;i<128;i++)
+ 01D8 0027              clr R16
+ 01DA 09C0              rjmp L32
+ 01DC           L29:
+ 01DC                   .dbline 118
+ 01DC                   .dbline 119
+ 01DC 80E0              ldi R24,<_RxBuf
+ 01DE 90E0              ldi R25,>_RxBuf
+ 01E0 E02F              mov R30,R16
+ 01E2 FF27              clr R31
+ 01E4 E80F              add R30,R24
+ 01E6 F91F              adc R31,R25
+ 01E8 2224              clr R2
+ 01EA 2082              std z+0,R2
+ 01EC                   .dbline 120
+ 01EC           L30:
+ 01EC                   .dbline 117
+ 01EC 0395              inc R16
+ 01EE           L32:
+ 01EE                   .dbline 117
+ 01EE 0038              cpi R16,128
+ 01F0 A8F3              brlo L29
+ 01F2                   .dbline -2
+ 01F2           L28:
+ 01F2                   .dbline 0 ; func end
+ 01F2 0895              ret
+ 01F4                   .dbsym r i 16 c
+ 01F4                   .dbend
+ 01F4                   .dbfunc e TxEnable _TxEnable fV
+                        .even
+ 01F4           _TxEnable::
+ 01F4                   .dbline -1
+ 01F4                   .dbline 126
+ 01F4           ;       {
+ 01F4           ;           RxBuf[i] = 0;
+ 01F4           ;       }
+ 01F4           ; }
+ 01F4           ; /*-----------------------------------------------------------------------*/
+ 01F4           ; ///////////////////////////  串口发送使能  ////////////////////////////////
+ 01F4           ; /*-----------------------------------------------------------------------*/
+ 01F4           ; void TxEnable(void)
+ 01F4           ; {
+ 01F4                   .dbline 128
+ 01F4           ;     //RxIndex = 0;
+ 01F4           ;     UDR = TxBuf[0];                            // 发送缓冲头送入串口发送寄存器，激活开始发送
+ 01F4 20900100          lds R2,_TxBuf
+ 01F8 2CB8              out 0xc,R2
+ 01FA                   .dbline 129
+ 01FA           ;       UCSRB |= ((1<<TXCIE));//|(1<<TXEN));
+ 01FA 569A              sbi 0xa,6
+ 01FC                   .dbline -2
+ 01FC           L33:
+ 01FC                   .dbline 0 ; func end
+ 01FC 0895              ret
+ 01FE                   .dbend
+ 01FE                   .dbfunc e Put_AT_command _Put_AT_command fV
+ 01FE           ;          count -> R20
+ 01FE           ;          atlen -> R22
+ 01FE           ;            atc -> R10,R11
+                        .even
+ 01FE           _Put_AT_command::
+ 01FE 00D0              rcall push_gset3
+ 0200 622F              mov R22,R18
+ 0202 5801              movw R10,R16
+ 0204                   .dbline -1
+ 0204                   .dbline 135
+ 0204           ; }
+ 0204           ; /*-----------------------------------------------------------------------*/
+ 0204           ; /////////////////////////////  发送AT命令 /////////////////////////////////
+ 0204           ; /*-----------------------------------------------------------------------*/
+ 0204           ; void Put_AT_command(const unsigned char *atc, unsigned char atlen)
+ 0204           ; {
+ 0204                   .dbline 138
+ 0204           ;     unsigned char count;
+ 0204           ;       
+ 0204           ;       for(count = 0;count < atlen;count++)      // AT命令窜移入发送缓冲
+ 0204 4427              clr R20
+ 0206 0DC0              rjmp L38
+ 0208           L35:
+ 0208                   .dbline 139
+ 0208                   .dbline 140
+ 0208 E42F              mov R30,R20
+ 020A FF27              clr R31
+ 020C EA0D              add R30,R10
+ 020E FB1D              adc R31,R11
+ 0210 E491              lpm R30,Z
+ 0212 80E0              ldi R24,<_TxBuf
+ 0214 90E0              ldi R25,>_TxBuf
+ 0216 A42F              mov R26,R20
+ 0218 BB27              clr R27
+ 021A A80F              add R26,R24
+ 021C B91F              adc R27,R25
+ 021E EC93              st x,R30
+ 0220                   .dbline 141
+ 0220           L36:
+ 0220                   .dbline 138
+ 0220 4395              inc R20
+ 0222           L38:
+ 0222                   .dbline 138
+ 0222 4617              cp R20,R22
+ 0224 88F3              brlo L35
+ 0226                   .dbline 143
+ 0226           ;       {
+ 0226           ;           TxBuf[count] = atc[count];
+ 0226           ;       }
+ 0226           ;       
+ 0226           ;       TxBuf[atlen] = 0x0D;                      // 发送缓冲窜结尾加“回车”
+ 0226 80E0              ldi R24,<_TxBuf
+ 0228 90E0              ldi R25,>_TxBuf
+ 022A E62F              mov R30,R22
+ 022C FF27              clr R31
+ 022E E80F              add R30,R24
+ 0230 F91F              adc R31,R25
+ 0232 8DE0              ldi R24,13
+ 0234 8083              std z+0,R24
+ 0236                   .dbline 144
+ 0236           ;       TxBuf[atlen + 1] = 0x00;                  // 发送缓冲窜结束符号
+ 0236 80E0              ldi R24,<_TxBuf+1
+ 0238 90E0              ldi R25,>_TxBuf+1
+ 023A E62F              mov R30,R22
+ 023C FF27              clr R31
+ 023E E80F              add R30,R24
+ 0240 F91F              adc R31,R25
+ 0242 2224              clr R2
+ 0244 2082              std z+0,R2
+ 0246                   .dbline 146
+ 0246           ; 
+ 0246           ;       OkFlag = 0;
+ 0246 20920F00          sts _OkFlag,R2
+ 024A                   .dbline 147
+ 024A           ;     TxStatus = 0;
+ 024A 20920E00          sts _TxStatus,R2
+ 024E                   .dbline 148
+ 024E           ;       TxIndex = 1;                              // 发送指针偏移1
+ 024E 81E0              ldi R24,1
+ 0250 80930000          sts _TxIndex,R24
+ 0254                   .dbline 149
+ 0254           ;       TxEnable();                               // 激活发送
+ 0254 CFDF              rcall _TxEnable
+ 0256           L40:
+ 0256                   .dbline 150
+ 0256           L41:
+ 0256                   .dbline 150
+ 0256           ;     while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+ 0256 20900E00          lds R2,_TxStatus
+ 025A 2220              tst R2
+ 025C E1F3              breq L40
+ 025E                   .dbline 151
+ 025E           ;       DelayMs(20);
+ 025E 04E1              ldi R16,20
+ 0260 10E0              ldi R17,0
+ 0262 00D0              rcall _DelayMs
+ 0264           L43:
+ 0264                   .dbline 152
+ 0264           L44:
+ 0264                   .dbline 152
+ 0264           ;       while(!OkFlag);                           // 收到模块返回OK,命令结束
+ 0264 20900F00          lds R2,_OkFlag
+ 0268 2220              tst R2
+ 026A E1F3              breq L43
+ 026C                   .dbline 153
+ 026C           ;       OkFlag = 0;
+ 026C 2224              clr R2
+ 026E 20920F00          sts _OkFlag,R2
+ 0272                   .dbline -2
+ 0272           L34:
+ 0272 00D0              rcall pop_gset3
+ 0274                   .dbline 0 ; func end
+ 0274 0895              ret
+ 0276                   .dbsym r count 20 c
+ 0276                   .dbsym r atlen 22 c
+ 0276                   .dbsym r atc 10 pkc
+ 0276                   .dbend
+ 0276                   .dbfunc e Put_AT_String _Put_AT_String fV
+ 0276           ;          count -> R20
+ 0276           ;          atlen -> R22
+ 0276           ;            atc -> R10,R11
+                        .even
+ 0276           _Put_AT_String::
+ 0276 00D0              rcall push_gset3
+ 0278 622F              mov R22,R18
+ 027A 5801              movw R10,R16
+ 027C                   .dbline -1
+ 027C                   .dbline 161
+ 027C           ; 
+ 027C           ; }
+ 027C           ; 
+ 027C           ; /*-----------------------------------------------------------------------*/
+ 027C           ; /////////////////////////  从内存发送AT命令串  ////////////////////////////
+ 027C           ; /*-----------------------------------------------------------------------*/
+ 027C           ; void Put_AT_String(unsigned char *atc, unsigned char atlen)
+ 027C           ; {
+ 027C                   .dbline 164
+ 027C           ;     unsigned char count;
+ 027C           ;               
+ 027C           ;       for(count = 0;count < atlen;count++)
+ 027C 4427              clr R20
+ 027E 0DC0              rjmp L50
+ 0280           L47:
+ 0280                   .dbline 165
+ 0280                   .dbline 166
+ 0280 E42F              mov R30,R20
+ 0282 FF27              clr R31
+ 0284 EA0D              add R30,R10
+ 0286 FB1D              adc R31,R11
+ 0288 2080              ldd R2,z+0
+ 028A 80E0              ldi R24,<_TxBuf
+ 028C 90E0              ldi R25,>_TxBuf
+ 028E E42F              mov R30,R20
+ 0290 FF27              clr R31
+ 0292 E80F              add R30,R24
+ 0294 F91F              adc R31,R25
+ 0296 2082              std z+0,R2
+ 0298                   .dbline 167
+ 0298           L48:
+ 0298                   .dbline 164
+ 0298 4395              inc R20
+ 029A           L50:
+ 029A                   .dbline 164
+ 029A 4617              cp R20,R22
+ 029C 88F3              brlo L47
+ 029E                   .dbline 169
+ 029E           ;       {
+ 029E           ;           TxBuf[count] = *(atc+count);
+ 029E           ;       }
+ 029E           ;       
+ 029E           ;       TxBuf[atlen] = 0x0D;                      // 发送缓冲窜结尾加“回车”
+ 029E 80E0              ldi R24,<_TxBuf
+ 02A0 90E0              ldi R25,>_TxBuf
+ 02A2 E62F              mov R30,R22
+ 02A4 FF27              clr R31
+ 02A6 E80F              add R30,R24
+ 02A8 F91F              adc R31,R25
+ 02AA 8DE0              ldi R24,13
+ 02AC 8083              std z+0,R24
+ 02AE                   .dbline 170
+ 02AE           ;       TxBuf[atlen + 1] = 0x00;                  // 发送缓冲窜结束符号
+ 02AE 80E0              ldi R24,<_TxBuf+1
+ 02B0 90E0              ldi R25,>_TxBuf+1
+ 02B2 E62F              mov R30,R22
+ 02B4 FF27              clr R31
+ 02B6 E80F              add R30,R24
+ 02B8 F91F              adc R31,R25
+ 02BA 2224              clr R2
+ 02BC 2082              std z+0,R2
+ 02BE                   .dbline 172
+ 02BE           ; 
+ 02BE           ;     OkFlag = 0;
+ 02BE 20920F00          sts _OkFlag,R2
+ 02C2                   .dbline 173
+ 02C2           ;     TxStatus = 0;
+ 02C2 20920E00          sts _TxStatus,R2
+ 02C6                   .dbline 174
+ 02C6           ;       TxIndex = 1;                              // 发送指针偏移1
+ 02C6 81E0              ldi R24,1
+ 02C8 80930000          sts _TxIndex,R24
+ 02CC                   .dbline 175
+ 02CC           ;       TxEnable();                               // 激活发送
+ 02CC 93DF              rcall _TxEnable
+ 02CE           L52:
+ 02CE                   .dbline 176
+ 02CE           L53:
+ 02CE                   .dbline 176
+ 02CE           ;     while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+ 02CE 20900E00          lds R2,_TxStatus
+ 02D2 2220              tst R2
+ 02D4 E1F3              breq L52
+ 02D6                   .dbline 177
+ 02D6           ;       DelayMs(20);
+ 02D6 04E1              ldi R16,20
+ 02D8 10E0              ldi R17,0
+ 02DA 00D0              rcall _DelayMs
+ 02DC           L55:
+ 02DC                   .dbline 178
+ 02DC           L56:
+ 02DC                   .dbline 178
+ 02DC           ;       while(!OkFlag);                           // 收到模块返回OK,命令结束
+ 02DC 20900F00          lds R2,_OkFlag
+ 02E0 2220              tst R2
+ 02E2 E1F3              breq L55
+ 02E4                   .dbline 179
+ 02E4           ;       OkFlag = 0;
+ 02E4 2224              clr R2
+ 02E6 20920F00          sts _OkFlag,R2
+ 02EA                   .dbline -2
+ 02EA           L46:
+ 02EA 00D0              rcall pop_gset3
+ 02EC                   .dbline 0 ; func end
+ 02EC 0895              ret
+ 02EE                   .dbsym r count 20 c
+ 02EE                   .dbsym r atlen 22 c
+ 02EE                   .dbsym r atc 10 pc
+ 02EE                   .dbend
+ 02EE                   .dbfunc e PutString _PutString fV
+ 02EE           ;          count -> R20
+ 02EE           ;        retflag -> R22
+ 02EE           ;         length -> R10
+ 02EE           ;            str -> R12,R13
+                        .even
+ 02EE           _PutString::
+ 02EE 00D0              rcall push_gset4
+ 02F0 A22E              mov R10,R18
+ 02F2 6801              movw R12,R16
+ 02F4 6885              ldd R22,y+8
+ 02F6                   .dbline -1
+ 02F6                   .dbline 185
+ 02F6           ; }
+ 02F6           ; /*-----------------------------------------------------------------------*/
+ 02F6           ; /////////////////////////  向串口发送一串数据  ////////////////////////////
+ 02F6           ; /*-----------------------------------------------------------------------*/
+ 02F6           ; void PutString(unsigned char *str, unsigned char length,unsigned char retflag)
+ 02F6           ; {
+ 02F6                   .dbline 188
+ 02F6           ;     unsigned char count;
+ 02F6           ; 
+ 02F6           ;       for(count = 0;count < length;count++)
+ 02F6 4427              clr R20
+ 02F8 0DC0              rjmp L62
+ 02FA           L59:
+ 02FA                   .dbline 189
+ 02FA                   .dbline 190
+ 02FA E42F              mov R30,R20
+ 02FC FF27              clr R31
+ 02FE EC0D              add R30,R12
+ 0300 FD1D              adc R31,R13
+ 0302 2080              ldd R2,z+0
+ 0304 80E0              ldi R24,<_TxBuf
+ 0306 90E0              ldi R25,>_TxBuf
+ 0308 E42F              mov R30,R20
+ 030A FF27              clr R31
+ 030C E80F              add R30,R24
+ 030E F91F              adc R31,R25
+ 0310 2082              std z+0,R2
+ 0312                   .dbline 191
+ 0312           L60:
+ 0312                   .dbline 188
+ 0312 4395              inc R20
+ 0314           L62:
+ 0314                   .dbline 188
+ 0314 4A15              cp R20,R10
+ 0316 88F3              brlo L59
+ 0318                   .dbline 193
+ 0318           ;       {
+ 0318           ;           TxBuf[count] = *(str+count);
+ 0318           ;       }
+ 0318           ;       
+ 0318           ;       TxBuf[length] = 0x0D;                     // 发送缓冲窜结尾加“回车”
+ 0318 80E0              ldi R24,<_TxBuf
+ 031A 90E0              ldi R25,>_TxBuf
+ 031C EA2D              mov R30,R10
+ 031E FF27              clr R31
+ 0320 E80F              add R30,R24
+ 0322 F91F              adc R31,R25
+ 0324 8DE0              ldi R24,13
+ 0326 8083              std z+0,R24
+ 0328                   .dbline 194
+ 0328           ;       TxBuf[length+ 1] = 0x00;                  // 发送缓冲窜结束符号
+ 0328 80E0              ldi R24,<_TxBuf+1
+ 032A 90E0              ldi R25,>_TxBuf+1
+ 032C EA2D              mov R30,R10
+ 032E FF27              clr R31
+ 0330 E80F              add R30,R24
+ 0332 F91F              adc R31,R25
+ 0334 2224              clr R2
+ 0336 2082              std z+0,R2
+ 0338                   .dbline 196
+ 0338           ;       
+ 0338           ;     TxStatus = 0;
+ 0338 20920E00          sts _TxStatus,R2
+ 033C                   .dbline 197
+ 033C           ;       TxIndex = 1;                              // 发送指针偏移1
+ 033C 81E0              ldi R24,1
+ 033E 80930000          sts _TxIndex,R24
+ 0342                   .dbline 198
+ 0342           ;       OkFlag = 0;
+ 0342 20920F00          sts _OkFlag,R2
+ 0346                   .dbline 199
+ 0346           ;       TxEnable();
+ 0346 56DF              rcall _TxEnable
+ 0348           L64:
+ 0348                   .dbline 201
+ 0348           L65:
+ 0348                   .dbline 201
+ 0348           ;                                                 // 激活发送
+ 0348           ;     while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+ 0348 20900E00          lds R2,_TxStatus
+ 034C 2220              tst R2
+ 034E E1F3              breq L64
+ 0350                   .dbline 202
+ 0350           ;       DelayMs(20);
+ 0350 04E1              ldi R16,20
+ 0352 10E0              ldi R17,0
+ 0354 00D0              rcall _DelayMs
+ 0356                   .dbline 203
+ 0356           ;     if(retflag)
+ 0356 6623              tst R22
+ 0358 41F0              breq L67
+ 035A                   .dbline 204
+ 035A           ;     { 
+ 035A           L69:
+ 035A                   .dbline 205
+ 035A           L70:
+ 035A                   .dbline 205
+ 035A           ;         while(!OkFlag);                       // 收到模块返回OK,命令结束
+ 035A 20900F00          lds R2,_OkFlag
+ 035E 2220              tst R2
+ 0360 E1F3              breq L69
+ 0362                   .dbline 206
+ 0362           ;               OkFlag = 0;
+ 0362 2224              clr R2
+ 0364 20920F00          sts _OkFlag,R2
+ 0368                   .dbline 207
+ 0368           ;       }
+ 0368 06C0              rjmp L68
+ 036A           L67:
+ 036A                   .dbline 209
+ 036A                   .dbline 210
+ 036A 08EC              ldi R16,200
+ 036C 10E0              ldi R17,0
+ 036E 00D0              rcall _DelayMs
+ 0370                   .dbline 211
+ 0370 2224              clr R2
+ 0372 20920F00          sts _OkFlag,R2
+ 0376                   .dbline 212
+ 0376           L68:
+ 0376                   .dbline -2
+ 0376           L58:
+ 0376 00D0              rcall pop_gset4
+ 0378                   .dbline 0 ; func end
+ 0378 0895              ret
+ 037A                   .dbsym r count 20 c
+ 037A                   .dbsym r retflag 22 c
+ 037A                   .dbsym r length 10 c
+ 037A                   .dbsym r str 12 pc
+ 037A                   .dbend
+ 037A                   .dbfunc e DialNum _DialNum fV
+ 037A           ;              i -> R10
+ 037A           ;         length -> R20
+ 037A           ;          count -> R22
+                        .even
+ 037A           _DialNum::
+ 037A 00D0              rcall push_gset3
+ 037C                   .dbline -1
+ 037C                   .dbline 220
+ 037C           ;       else
+ 037C           ;       {
+ 037C           ;         DelayMs(200);
+ 037C           ;               OkFlag = 0;
+ 037C           ;       }
+ 037C           ; }
+ 037C           ; ////////////////////////////////////////////////////////////////////////////////
+ 037C           ; 
+ 037C           ; /*-----------------------------------------------------------------------*/
+ 037C           ; //////////////////////////         拨号         ///////////////////////////
+ 037C           ; /*-----------------------------------------------------------------------*/
+ 037C           ; void DialNum(void)
+ 037C           ; {
+ 037C                   .dbline 221
+ 037C           ;     unsigned char i,count=0,length=0;
+ 037C 6627              clr R22
+ 037E                   .dbline 221
+ 037E 4427              clr R20
+ 0380 01C0              rjmp L74
+ 0382           L73:
+ 0382                   .dbline 224
+ 0382                   .dbline 225
+ 0382 4395              inc R20
+ 0384                   .dbline 226
+ 0384           L74:
+ 0384                   .dbline 223
+ 0384           ; 
+ 0384           ;       while ((PhoneNum[count++] != 0))                  // 计算电话号码长度
+ 0384 262E              mov R2,R22
+ 0386 3324              clr R3
+ 0388 6F5F              subi R22,255    ; addi 1
+ 038A 80E0              ldi R24,<_PhoneNum
+ 038C 90E0              ldi R25,>_PhoneNum
+ 038E E22D              mov R30,R2
+ 0390 FF27              clr R31
+ 0392 E80F              add R30,R24
+ 0394 F91F              adc R31,R25
+ 0396 2080              ldd R2,z+0
+ 0398 2220              tst R2
+ 039A 99F7              brne L73
+ 039C                   .dbline 228
+ 039C           ;       {
+ 039C           ;           length++;
+ 039C           ;       }
+ 039C           ;       
+ 039C           ;       TxBuf[0] = 'A';
+ 039C 81E4              ldi R24,65
+ 039E 80930100          sts _TxBuf,R24
+ 03A2                   .dbline 229
+ 03A2           ;       TxBuf[1] = 'T';
+ 03A2 84E5              ldi R24,84
+ 03A4 80930200          sts _TxBuf+1,R24
+ 03A8                   .dbline 230
+ 03A8           ;       TxBuf[2] = 'D';
+ 03A8 84E4              ldi R24,68
+ 03AA 80930300          sts _TxBuf+2,R24
+ 03AE                   .dbline 232
+ 03AE           ;       
+ 03AE           ;       i = 3;
+ 03AE 83E0              ldi R24,3
+ 03B0 A82E              mov R10,R24
+ 03B2                   .dbline 233
+ 03B2           ;     for(count=0;count<length;count++)
+ 03B2 6627              clr R22
+ 03B4 14C0              rjmp L81
+ 03B6           L78:
+ 03B6                   .dbline 234
+ 03B6                   .dbline 235
+ 03B6 2A2C              mov R2,R10
+ 03B8 3324              clr R3
+ 03BA 822D              mov R24,R2
+ 03BC 8F5F              subi R24,255    ; addi 1
+ 03BE A82E              mov R10,R24
+ 03C0 80E0              ldi R24,<_PhoneNum
+ 03C2 90E0              ldi R25,>_PhoneNum
+ 03C4 E62F              mov R30,R22
+ 03C6 FF27              clr R31
+ 03C8 E80F              add R30,R24
+ 03CA F91F              adc R31,R25
+ 03CC 4080              ldd R4,z+0
+ 03CE 80E0              ldi R24,<_TxBuf
+ 03D0 90E0              ldi R25,>_TxBuf
+ 03D2 E22D              mov R30,R2
+ 03D4 FF27              clr R31
+ 03D6 E80F              add R30,R24
+ 03D8 F91F              adc R31,R25
+ 03DA 4082              std z+0,R4
+ 03DC                   .dbline 236
+ 03DC           L79:
+ 03DC                   .dbline 233
+ 03DC 6395              inc R22
+ 03DE           L81:
+ 03DE                   .dbline 233
+ 03DE 6417              cp R22,R20
+ 03E0 50F3              brlo L78
+ 03E2                   .dbline 238
+ 03E2           ;       {
+ 03E2           ;           TxBuf[i++] = PhoneNum[count];
+ 03E2           ;       }
+ 03E2           ;     
+ 03E2           ;       TxBuf[length+3] = ';';
+ 03E2 80E0              ldi R24,<_TxBuf+3
+ 03E4 90E0              ldi R25,>_TxBuf+3
+ 03E6 E42F              mov R30,R20
+ 03E8 FF27              clr R31
+ 03EA E80F              add R30,R24
+ 03EC F91F              adc R31,R25
+ 03EE 8BE3              ldi R24,59
+ 03F0 8083              std z+0,R24
+ 03F2                   .dbline 239
+ 03F2           ;       TxBuf[length+4] = 0x0D;
+ 03F2 80E0              ldi R24,<_TxBuf+4
+ 03F4 90E0              ldi R25,>_TxBuf+4
+ 03F6 E42F              mov R30,R20
+ 03F8 FF27              clr R31
+ 03FA E80F              add R30,R24
+ 03FC F91F              adc R31,R25
+ 03FE 8DE0              ldi R24,13
+ 0400 8083              std z+0,R24
+ 0402                   .dbline 241
+ 0402           ;       
+ 0402           ;     OkFlag = 0;
+ 0402 2224              clr R2
+ 0404 20920F00          sts _OkFlag,R2
+ 0408                   .dbline 242
+ 0408           ;     TxStatus = 0;
+ 0408 20920E00          sts _TxStatus,R2
+ 040C                   .dbline 243
+ 040C           ;       TxIndex = 1;                              // 发送指针偏移1
+ 040C 81E0              ldi R24,1
+ 040E 80930000          sts _TxIndex,R24
+ 0412                   .dbline 244
+ 0412           ;       TxEnable();                               // 激活发送
+ 0412 F0DE              rcall _TxEnable
+ 0414           L84:
+ 0414                   .dbline 245
+ 0414           L85:
+ 0414                   .dbline 245
+ 0414           ;     while(!TxStatus);                         // 等代发送结束,发送缓冲指针为零则可以发送
+ 0414 20900E00          lds R2,_TxStatus
+ 0418 2220              tst R2
+ 041A E1F3              breq L84
+ 041C                   .dbline 246
+ 041C           ;       DelayMs(20);
+ 041C 04E1              ldi R16,20
+ 041E 10E0              ldi R17,0
+ 0420 00D0              rcall _DelayMs
+ 0422                   .dbline 248
+ 0422           ;       //while(!OkFlag);                           // 收到模块返回OK,命令结束  
+ 0422           ;     OkFlag = 0;
+ 0422 2224              clr R2
+ 0424 20920F00          sts _OkFlag,R2
+ 0428                   .dbline -2
+ 0428           L72:
+ 0428 00D0              rcall pop_gset3
+ 042A                   .dbline 0 ; func end
+ 042A 0895              ret
+ 042C                   .dbsym r i 10 c
+ 042C                   .dbsym r length 20 c
+ 042C                   .dbsym r count 22 c
+ 042C                   .dbend
+ 042C                   .dbfunc e StringCompare _StringCompare fc
+ 042C           ;         strlen -> R20
+ 042C           ;           str2 -> R18,R19
+ 042C           ;           str1 -> R16,R17
+                        .even
+ 042C           _StringCompare::
+ 042C 00D0              rcall push_gset1
+ 042E 4A81              ldd R20,y+2
+ 0430                   .dbline -1
+ 0430                   .dbline 255
+ 0430           ; } 
+ 0430           ; 
+ 0430           ; /*-----------------------------------------------------------------------*/
+ 0430           ; /////////////////////////////  比较两个串 /////////////////////////////////
+ 0430           ; /*-----------------------------------------------------------------------*/
+ 0430           ; unsigned char StringCompare(volatile unsigned char *str1,const unsigned char *str2,unsigned char strlen)
+ 0430           ; {
+ 0430 0CC0              rjmp L89
+ 0432           L88:
+ 0432                   .dbline 257
+ 0432           ;     while(strlen--)
+ 0432           ;       {
+ 0432                   .dbline 258
+ 0432           ;           if(*str1++ != *str2++) return(FALSE);    // 两个串不相等返回假
+ 0432 1901              movw R2,R18
+ 0434 2F5F              subi R18,255  ; offset = 1
+ 0436 3F4F              sbci R19,255
+ 0438 F101              movw R30,R2
+ 043A E491              lpm R30,Z
+ 043C D801              movw R26,R16
+ 043E 2D90              ld R2,X+
+ 0440 8D01              movw R16,R26
+ 0442 2E16              cp R2,R30
+ 0444 11F0              breq L91
+ 0446                   .dbline 258
+ 0446 0027              clr R16
+ 0448 06C0              rjmp L87
+ 044A           L91:
+ 044A                   .dbline 259
+ 044A           L89:
+ 044A                   .dbline 256
+ 044A 242E              mov R2,R20
+ 044C 3324              clr R3
+ 044E 4150              subi R20,1
+ 0450 2220              tst R2
+ 0452 79F7              brne L88
+ 0454                   .dbline 260
+ 0454           ;       }
+ 0454           ;       return(TRUE);
+ 0454 01E0              ldi R16,1
+ 0456                   .dbline -2
+ 0456           L87:
+ 0456 00D0              rcall pop_gset1
+ 0458                   .dbline 0 ; func end
+ 0458 0895              ret
+ 045A                   .dbsym r strlen 20 c
+ 045A                   .dbsym r str2 18 pkc
+ 045A                   .dbsym r str1 16 pc
+ 045A                   .dbend
+ 045A                   .dbfunc e Delete_SMS _Delete_SMS fV
+ 045A           ;          count -> R20
+ 045A           ;            num -> R22
+                        .even
+ 045A           _Delete_SMS::
+ 045A 00D0              rcall push_gset2
+ 045C 602F              mov R22,R16
+ 045E                   .dbline -1
+ 045E                   .dbline 267
+ 045E           ; }
+ 045E           ; 
+ 045E           ; /*-----------------------------------------------------------------------*/
+ 045E           ; /////////////////////////////    删除短信    //////////////////////////////
+ 045E           ; /*-----------------------------------------------------------------------*/
+ 045E           ; void Delete_SMS(unsigned char num)     // 删除SMS，=0删除所有SMS
+ 045E           ; {
+ 045E                   .dbline 270
+ 045E           ;     unsigned char count;
+ 045E           ; 
+ 045E           ;       for(count = 0;count < AtcmgdLen;count++)      // AT命令窜移入发送缓冲
+ 045E 4427              clr R20
+ 0460 0FC0              rjmp L97
+ 0462           L94:
+ 0462                   .dbline 271
+ 0462                   .dbline 272
+ 0462 80E0              ldi R24,<_Atcmgd
+ 0464 90E0              ldi R25,>_Atcmgd
+ 0466 E42F              mov R30,R20
+ 0468 FF27              clr R31
+ 046A E80F              add R30,R24
+ 046C F91F              adc R31,R25
+ 046E E491              lpm R30,Z
+ 0470 80E0              ldi R24,<_TmpBuf
+ 0472 90E0              ldi R25,>_TmpBuf
+ 0474 A42F              mov R26,R20
+ 0476 BB27              clr R27
+ 0478 A80F              add R26,R24
+ 047A B91F              adc R27,R25
+ 047C EC93              st x,R30
+ 047E                   .dbline 273
+ 047E           L95:
+ 047E                   .dbline 270
+ 047E 4395              inc R20
+ 0480           L97:
+ 0480                   .dbline 270
+ 0480 4830              cpi R20,8
+ 0482 78F3              brlo L94
+ 0484                   .dbline 275
+ 0484           ;       {
+ 0484           ;           TmpBuf[count] = Atcmgd[count];
+ 0484           ;       }
+ 0484           ;               
+ 0484           ;       if(num == ALL)
+ 0484 6F3F              cpi R22,255
+ 0486 F1F4              brne L98
+ 0488                   .dbline 276
+ 0488           ;       {
+ 0488                   .dbline 277
+ 0488           ;          for(count = 1; count < 10; count++)
+ 0488 41E0              ldi R20,1
+ 048A 09C0              rjmp L103
+ 048C           L100:
+ 048C                   .dbline 278
+ 048C                   .dbline 279
+ 048C 842F              mov R24,R20
+ 048E 805D              subi R24,208    ; addi 48
+ 0490 80932A01          sts _TmpBuf+8,R24
+ 0494                   .dbline 280
+ 0494 29E0              ldi R18,9
+ 0496 00E0              ldi R16,<_TmpBuf
+ 0498 10E0              ldi R17,>_TmpBuf
+ 049A EDDE              rcall _Put_AT_String
+ 049C                   .dbline 282
+ 049C           L101:
+ 049C                   .dbline 277
+ 049C 4395              inc R20
+ 049E           L103:
+ 049E                   .dbline 277
+ 049E 4A30              cpi R20,10
+ 04A0 A8F3              brlo L100
+ 04A2                   .dbline 283
+ 04A2           ;          {
+ 04A2           ;              TmpBuf[AtcmgdLen] = count + 0x30;
+ 04A2           ;              Put_AT_String((unsigned char*)TmpBuf,(AtcmgdLen+1));
+ 04A2           ; 
+ 04A2           ;               }
+ 04A2           ;          TmpBuf[AtcmgdLen] = 0x31;
+ 04A2 81E3              ldi R24,49
+ 04A4 80932A01          sts _TmpBuf+8,R24
+ 04A8                   .dbline 284
+ 04A8           ;        for(count = 0; count < 10; count++)
+ 04A8 4427              clr R20
+ 04AA 09C0              rjmp L109
+ 04AC           L106:
+ 04AC                   .dbline 285
+ 04AC                   .dbline 286
+ 04AC 842F              mov R24,R20
+ 04AE 805D              subi R24,208    ; addi 48
+ 04B0 80932B01          sts _TmpBuf+9,R24
+ 04B4                   .dbline 287
+ 04B4 2AE0              ldi R18,10
+ 04B6 00E0              ldi R16,<_TmpBuf
+ 04B8 10E0              ldi R17,>_TmpBuf
+ 04BA DDDE              rcall _Put_AT_String
+ 04BC                   .dbline 289
+ 04BC           L107:
+ 04BC                   .dbline 284
+ 04BC 4395              inc R20
+ 04BE           L109:
+ 04BE                   .dbline 284
+ 04BE 4A30              cpi R20,10
+ 04C0 A8F3              brlo L106
+ 04C2                   .dbline 291
+ 04C2           ;          {
+ 04C2           ;              TmpBuf[AtcmgdLen+1] = count + 0x30;
+ 04C2           ;              Put_AT_String((unsigned char*)TmpBuf,(AtcmgdLen+2));
+ 04C2           ; 
+ 04C2           ;           }
+ 04C2           ; 
+ 04C2           ;       }
+ 04C2 08C0              rjmp L99
+ 04C4           L98:
+ 04C4                   .dbline 293
+ 04C4                   .dbline 294
+ 04C4 862F              mov R24,R22
+ 04C6 805D              subi R24,208    ; addi 48
+ 04C8 80932A01          sts _TmpBuf+8,R24
+ 04CC                   .dbline 295
+ 04CC 29E0              ldi R18,9
+ 04CE 00E0              ldi R16,<_TmpBuf
+ 04D0 10E0              ldi R17,>_TmpBuf
+ 04D2 D1DE              rcall _Put_AT_String
+ 04D4                   .dbline 297
+ 04D4           L99:
+ 04D4                   .dbline -2
+ 04D4           L93:
+ 04D4 00D0              rcall pop_gset2
+ 04D6                   .dbline 0 ; func end
+ 04D6 0895              ret
+ 04D8                   .dbsym r count 20 c
+ 04D8                   .dbsym r num 22 c
+ 04D8                   .dbend
+ 04D8                   .dbfunc e CheckSMS_in _CheckSMS_in fc
+                        .even
+ 04D8           _CheckSMS_in::
+ 04D8 2197              sbiw R28,1
+ 04DA                   .dbline -1
+ 04DA                   .dbline 304
+ 04DA           ;       else
+ 04DA           ;       {
+ 04DA           ;           TmpBuf[AtcmgdLen] = num + 0x30;
+ 04DA           ;           Put_AT_String((unsigned char*)TmpBuf,(AtcmgdLen+1));
+ 04DA           ; 
+ 04DA           ;       }
+ 04DA           ; }
+ 04DA           ; 
+ 04DA           ; /*-----------------------------------------------------------------------*/
+ 04DA           ; ///////////////////////////  检查SMS返回  //////////////////////////////
+ 04DA           ; /*-----------------------------------------------------------------------*/
+ 04DA           ; unsigned char CheckSMS_in(void)
+ 04DA           ; {
+ 04DA           L113:
+ 04DA                   .dbline 305
+ 04DA           L114:
+ 04DA                   .dbline 305
+ 04DA           ;       while(!RxStatus);                            // 等待接收完成
+ 04DA 20900D00          lds R2,_RxStatus
+ 04DE 2220              tst R2
+ 04E0 E1F3              breq L113
+ 04E2                   .dbline 306
+ 04E2           ;       DelayMs(100);
+ 04E2 04E6              ldi R16,100
+ 04E4 10E0              ldi R17,0
+ 04E6 00D0              rcall _DelayMs
+ 04E8                   .dbline 308
+ 04E8           ; 
+ 04E8           ;       if(StringCompare(RxBuf,SMSin,SMSinLen))      // 如果收到OK完成    +CMTI: "SM", 1
+ 04E8 8EE0              ldi R24,14
+ 04EA 8883              std y+0,R24
+ 04EC 20E0              ldi R18,<_SMSin
+ 04EE 30E0              ldi R19,>_SMSin
+ 04F0 00E0              ldi R16,<_RxBuf
+ 04F2 10E0              ldi R17,>_RxBuf
+ 04F4 9BDF              rcall _StringCompare
+ 04F6 0023              tst R16
+ 04F8 11F0              breq L116
+ 04FA                   .dbline 309
+ 04FA           ;       {
+ 04FA                   .dbline 310
+ 04FA           ;               return (OK);
+ 04FA 01E0              ldi R16,1
+ 04FC 01C0              rjmp L112
+ 04FE           L116:
+ 04FE                   .dbline 313
+ 04FE           ;       }
+ 04FE           ;       else
+ 04FE           ;       {
+ 04FE                   .dbline 314
+ 04FE           ;           return (ERROR);
+ 04FE 0027              clr R16
+ 0500                   .dbline -2
+ 0500           L112:
+ 0500 2196              adiw R28,1
+ 0502                   .dbline 0 ; func end
+ 0502 0895              ret
+ 0504                   .dbend
+ 0504                   .dbfunc e CheckSMS _CheckSMS fV
+ 0504           ;         numlen -> R22
+ 0504           ;              j -> R22
+ 0504           ;          index -> R22
+ 0504           ;              i -> R20
+                        .even
+ 0504           _CheckSMS::
+ 0504 00D0              rcall push_gset2
+ 0506                   .dbline -1
+ 0506                   .dbline 322
+ 0506           ;       }
+ 0506           ; 
+ 0506           ; }
+ 0506           ; /*-----------------------------------------------------------------------*/
+ 0506           ; ///////////////              将设置号码存入内存           /////////////////
+ 0506           ; /*-----------------------------------------------------------------------*/
+ 0506           ; void CheckSMS(void)
+ 0506           ; {
+ 0506                   .dbline 323
+ 0506           ;     unsigned char i=0,j=0,index,numlen=0;
+ 0506 4427              clr R20
+ 0508                   .dbline 323
+ 0508 6627              clr R22
+ 050A                   .dbline 323
+ 050A                   .dbline 324
+ 050A           ;       for(;i<12;i++)
+ 050A 09C0              rjmp L122
+ 050C           L119:
+ 050C                   .dbline 325
+ 050C                   .dbline 326
+ 050C 80E0              ldi R24,<_PhoneNum
+ 050E 90E0              ldi R25,>_PhoneNum
+ 0510 E42F              mov R30,R20
+ 0512 FF27              clr R31
+ 0514 E80F              add R30,R24
+ 0516 F91F              adc R31,R25
+ 0518 2224              clr R2
+ 051A 2082              std z+0,R2
+ 051C                   .dbline 327
+ 051C           L120:
+ 051C                   .dbline 324
+ 051C 4395              inc R20
+ 051E           L122:
+ 051E                   .dbline 324
+ 051E 4C30              cpi R20,12
+ 0520 A8F3              brlo L119
+ 0522                   .dbline 341
+ 0522           ;       {
+ 0522           ;           PhoneNum[i] = 0;
+ 0522           ;       }
+ 0522           ; /*    do
+ 0522           ;       {
+ 0522           ;           i++;
+ 0522           ;               j=i+1;
+ 0522           ;       }
+ 0522           ;       //while((Pdu[i] == 'G') && (Pdu[j] == 'H'));
+ 0522           ;       
+ 0522           ;       index = j+1;
+ 0522           ;       i = index;
+ 0522           ;       while(Pdu[i++] == '+')numlen++;
+ 0522           ;       
+ 0522           ;       j = 79; */
+ 0522           ;       
+ 0522           ;       index = 79;
+ 0522 6FE4              ldi R22,79
+ 0524                   .dbline 342
+ 0524           ;       for(i=0;i<11;i++)
+ 0524 4427              clr R20
+ 0526 13C0              rjmp L126
+ 0528           L123:
+ 0528                   .dbline 343
+ 0528                   .dbline 344
+ 0528 262E              mov R2,R22
+ 052A 3324              clr R3
+ 052C 6F5F              subi R22,255    ; addi 1
+ 052E 80E0              ldi R24,<_Pdu
+ 0530 90E0              ldi R25,>_Pdu
+ 0532 E22D              mov R30,R2
+ 0534 FF27              clr R31
+ 0536 E80F              add R30,R24
+ 0538 F91F              adc R31,R25
+ 053A 2080              ldd R2,z+0
+ 053C 80E0              ldi R24,<_PhoneNum
+ 053E 90E0              ldi R25,>_PhoneNum
+ 0540 E42F              mov R30,R20
+ 0542 FF27              clr R31
+ 0544 E80F              add R30,R24
+ 0546 F91F              adc R31,R25
+ 0548 2082              std z+0,R2
+ 054A                   .dbline 345
+ 054A 00D0              rcall _PhoneNum_to_EEPROM
+ 054C                   .dbline 346
+ 054C           L124:
+ 054C                   .dbline 342
+ 054C 4395              inc R20
+ 054E           L126:
+ 054E                   .dbline 342
+ 054E 4B30              cpi R20,11
+ 0550 58F3              brlo L123
+ 0552                   .dbline -2
+ 0552           L118:
+ 0552 00D0              rcall pop_gset2
+ 0554                   .dbline 0 ; func end
+ 0554 0895              ret
+ 0556                   .dbsym r numlen 22 c
+ 0556                   .dbsym r j 22 c
+ 0556                   .dbsym r index 22 c
+ 0556                   .dbsym r i 20 c
+ 0556                   .dbend
+ 0556                   .dbfunc e CheckPhoneNum _CheckPhoneNum fc
+ 0556           ;              i -> R16
+                        .even
+ 0556           _CheckPhoneNum::
+ 0556                   .dbline -1
+ 0556                   .dbline 350
+ 0556           ;       {
+ 0556           ;           PhoneNum[i] = Pdu[index++];
+ 0556           ;               PhoneNum_to_EEPROM();
+ 0556           ;     }
+ 0556           ;       
+ 0556           ; }     
+ 0556           ; unsigned char CheckPhoneNum(void)
+ 0556           ; {
+ 0556                   .dbline 352
+ 0556           ;     unsigned char i;
+ 0556           ;       for(i=0;i<12;i++)
+ 0556 0027              clr R16
+ 0558 08C0              rjmp L131
+ 055A           L128:
+ 055A                   .dbline 353
+ 055A           ;       {
+ 055A                   .dbline 354
+ 055A           ;           if( PhoneNum != 0) return (FALSE);
+ 055A 80E0              ldi R24,<_PhoneNum
+ 055C 90E0              ldi R25,>_PhoneNum
+ 055E 8030              cpi R24,0
+ 0560 8907              cpc R24,R25
+ 0562 11F0              breq L132
+ 0564           X0:
+ 0564                   .dbline 354
+ 0564 0027              clr R16
+ 0566 04C0              rjmp L127
+ 0568           L132:
+ 0568                   .dbline 355
+ 0568           L129:
+ 0568                   .dbline 352
+ 0568 0395              inc R16
+ 056A           L131:
+ 056A                   .dbline 352
+ 056A 0C30              cpi R16,12
+ 056C B0F3              brlo L128
+ 056E                   .dbline 356
+ 056E           ;       }
+ 056E           ;       return (TRUE);
+ 056E 01E0              ldi R16,1
+ 0570                   .dbline -2
+ 0570           L127:
+ 0570                   .dbline 0 ; func end
+ 0570 0895              ret
+ 0572                   .dbsym r i 16 c
+ 0572                   .dbend
+ 0572                   .dbfunc e RecSMS _RecSMS fV
+ 0572           ;              j -> R20
+ 0572           ;              y -> R10
+ 0572           ;              x -> R12
+ 0572           ;              i -> R22
+ 0572           ;          count -> R14
+                        .even
+ 0572           _RecSMS::
+ 0572 00D0              rcall push_gset5
+ 0574                   .dbline -1
+ 0574                   .dbline 362
+ 0574           ; }
+ 0574           ; /*-----------------------------------------------------------------------*/
+ 0574           ; //////////////////////////    接收处理短信息    ///////////////////////////
+ 0574           ; /*-----------------------------------------------------------------------*/
+ 0574           ; void RecSMS(void)
+ 0574           ; {
+ 0574                   .dbline 363
+ 0574           ;     unsigned char count,i=0,j=0,x,y;
+ 0574 6627              clr R22
+ 0576                   .dbline 363
+ 0576 4427              clr R20
+ 0578                   .dbline 365
+ 0578           ;       
+ 0578           ;     Put_AT_String("AT+CMGR=1",9);
+ 0578 29E0              ldi R18,9
+ 057A 00E0              ldi R16,<L135
+ 057C 10E0              ldi R17,>L135
+ 057E 7BDE              rcall _Put_AT_String
+ 0580 01C0              rjmp L137
+ 0582           L136:
+ 0582                   .dbline 368
+ 0582                   .dbline 369
+ 0582 6395              inc R22
+ 0584                   .dbline 370
+ 0584           L137:
+ 0584                   .dbline 367
+ 0584           ;       
+ 0584           ;     while(RxBuf[i] != 0x0D)
+ 0584 80E0              ldi R24,<_RxBuf
+ 0586 90E0              ldi R25,>_RxBuf
+ 0588 E62F              mov R30,R22
+ 058A FF27              clr R31
+ 058C E80F              add R30,R24
+ 058E F91F              adc R31,R25
+ 0590 8081              ldd R24,z+0
+ 0592 8D30              cpi R24,13
+ 0594 B1F7              brne L136
+ 0596                   .dbline 371
+ 0596           ;       {
+ 0596           ;           i++;
+ 0596           ;       }
+ 0596           ;       i = 76;
+ 0596 6CE4              ldi R22,76
+ 0598                   .dbline 372
+ 0598           ;       j = i;
+ 0598 462F              mov R20,R22
+ 059A                   .dbline 373
+ 059A           ;       if((RxBuf[i] == 'G') && (RxBuf[j+1] == 'H'))
+ 059A 80E0              ldi R24,<_RxBuf
+ 059C 90E0              ldi R25,>_RxBuf
+ 059E E62F              mov R30,R22
+ 05A0 FF27              clr R31
+ 05A2 E80F              add R30,R24
+ 05A4 F91F              adc R31,R25
+ 05A6 8081              ldd R24,z+0
+ 05A8 8734              cpi R24,71
+ 05AA 09F0              breq X1
+ 05AC 35C0              rjmp L139
+ 05AE           X1:
+ 05AE 80E0              ldi R24,<_RxBuf+1
+ 05B0 90E0              ldi R25,>_RxBuf+1
+ 05B2 E42F              mov R30,R20
+ 05B4 FF27              clr R31
+ 05B6 E80F              add R30,R24
+ 05B8 F91F              adc R31,R25
+ 05BA 8081              ldd R24,z+0
+ 05BC 8834              cpi R24,72
+ 05BE 09F0              breq X2
+ 05C0 2BC0              rjmp L139
+ 05C2           X2:
+ 05C2                   .dbline 374
+ 05C2           ;     { 
+ 05C2                   .dbline 375
+ 05C2           ;         count = 0;
+ 05C2 EE24              clr R14
+ 05C4 24C0              rjmp L143
+ 05C6           L142:
+ 05C6                   .dbline 377
+ 05C6           ;           while(1)
+ 05C6           ;           {
+ 05C6                   .dbline 378
+ 05C6           ;               Pdu[count] = RxBuf[count];
+ 05C6 80E0              ldi R24,<_RxBuf
+ 05C8 90E0              ldi R25,>_RxBuf
+ 05CA EE2D              mov R30,R14
+ 05CC FF27              clr R31
+ 05CE E80F              add R30,R24
+ 05D0 F91F              adc R31,R25
+ 05D2 2080              ldd R2,z+0
+ 05D4 80E0              ldi R24,<_Pdu
+ 05D6 90E0              ldi R25,>_Pdu
+ 05D8 EE2D              mov R30,R14
+ 05DA FF27              clr R31
+ 05DC E80F              add R30,R24
+ 05DE F91F              adc R31,R25
+ 05E0 2082              std z+0,R2
+ 05E2                   .dbline 379
+ 05E2           ;                       x = count;
+ 05E2 CE2C              mov R12,R14
+ 05E4                   .dbline 380
+ 05E4           ;                       y = count;
+ 05E4 AE2C              mov R10,R14
+ 05E6                   .dbline 381
+ 05E6           ;                   if((RxBuf[x-2] == 0x30) && (RxBuf[y-1] == 0x0D)) 
+ 05E6 80E0              ldi R24,<_RxBuf-2
+ 05E8 90E0              ldi R25,>_RxBuf-2
+ 05EA EC2D              mov R30,R12
+ 05EC FF27              clr R31
+ 05EE E80F              add R30,R24
+ 05F0 F91F              adc R31,R25
+ 05F2 8081              ldd R24,z+0
+ 05F4 8033              cpi R24,48
+ 05F6 51F4              brne L145
+ 05F8 80E0              ldi R24,<_RxBuf-1
+ 05FA 90E0              ldi R25,>_RxBuf-1
+ 05FC EA2D              mov R30,R10
+ 05FE FF27              clr R31
+ 0600 E80F              add R30,R24
+ 0602 F91F              adc R31,R25
+ 0604 8081              ldd R24,z+0
+ 0606 8D30              cpi R24,13
+ 0608 09F4              brne L145
+ 060A                   .dbline 382
+ 060A           ;                   {
+ 060A                   .dbline 383
+ 060A           ;                   break;
+ 060A 02C0              rjmp L144
+ 060C           L145:
+ 060C                   .dbline 385
+ 060C E394              inc R14
+ 060E                   .dbline 386
+ 060E           L143:
+ 060E                   .dbline 376
+ 060E DBCF              rjmp L142
+ 0610           L144:
+ 0610                   .dbline 387
+ 0610           ;               }
+ 0610           ;                   count++;
+ 0610           ;           }
+ 0610           ;               CheckSMS();
+ 0610 79DF              rcall _CheckSMS
+ 0612                   .dbline 388
+ 0612           ;               Delete_SMS(1);
+ 0612 01E0              ldi R16,1
+ 0614 22DF              rcall _Delete_SMS
+ 0616                   .dbline 390
+ 0616           ;               
+ 0616           ;     }
+ 0616 02C0              rjmp L140
+ 0618           L139:
+ 0618                   .dbline 392
+ 0618                   .dbline 393
+ 0618 01E0              ldi R16,1
+ 061A 1FDF              rcall _Delete_SMS
+ 061C                   .dbline 394
+ 061C           L140:
+ 061C                   .dbline -2
+ 061C           L134:
+ 061C 00D0              rcall pop_gset5
+ 061E                   .dbline 0 ; func end
+ 061E 0895              ret
+ 0620                   .dbsym r j 20 c
+ 0620                   .dbsym r y 10 c
+ 0620                   .dbsym r x 12 c
+ 0620                   .dbsym r i 22 c
+ 0620                   .dbsym r count 14 c
+ 0620                   .dbend
+ 0620                   .dbfunc e DetQEITING _DetQEITING fc
+ 0620           ;            tmp -> y+0
+                        .even
+ 0620           _DetQEITING::
+ 0620 2197              sbiw R28,1
+ 0622                   .dbline -1
+ 0622                   .dbline 398
+ 0622           ;       else 
+ 0622           ;       {
+ 0622           ;           Delete_SMS(1);
+ 0622           ;       }
+ 0622           ; }
+ 0622           ; 
+ 0622           ; unsigned char DetQEITING(void)
+ 0622           ; {
+ 0622                   .dbline 401
+ 0622           ;     volatile unsigned char tmp;
+ 0622           ;       
+ 0622           ;     if(!(DetQT()))
+ 0622 8299              sbic 0x10,2
+ 0624 0CC0              rjmp L150
+ 0626                   .dbline 402
+ 0626           ;     {
+ 0626                   .dbline 403
+ 0626           ;           release = 0;
+ 0626 2224              clr R2
+ 0628 20921400          sts _release,R2
+ 062C                   .dbline 404
+ 062C           ;           DelayMs(10);
+ 062C 0AE0              ldi R16,10
+ 062E 10E0              ldi R17,0
+ 0630 00D0              rcall _DelayMs
+ 0632                   .dbline 406
+ 0632           ;               
+ 0632           ;               if(!(DetQT())) {DettqFlag = 1;}
+ 0632 8299              sbic 0x10,2
+ 0634 07C0              rjmp L151
+ 0636                   .dbline 406
+ 0636                   .dbline 406
+ 0636 81E0              ldi R24,1
+ 0638 80931300          sts _DettqFlag,R24
+ 063C                   .dbline 406
+ 063C                   .dbline 407
+ 063C           ;     }
+ 063C 03C0              rjmp L151
+ 063E           L150:
+ 063E                   .dbline 409
+ 063E           ;       else 
+ 063E           ;       {
+ 063E                   .dbline 410
+ 063E           ;           release = 1;
+ 063E 81E0              ldi R24,1
+ 0640 80931400          sts _release,R24
+ 0644                   .dbline 411
+ 0644           ;       }
+ 0644           L151:
+ 0644                   .dbline 413
+ 0644           ;                       
+ 0644           ;       if(release && DettqFlag)
+ 0644 20901400          lds R2,_release
+ 0648 2220              tst R2
+ 064A 69F0              breq L154
+ 064C 20901300          lds R2,_DettqFlag
+ 0650 2220              tst R2
+ 0652 49F0              breq L154
+ 0654                   .dbline 414
+ 0654           ;       {
+ 0654                   .dbline 415
+ 0654           ;           DettqFlag = 0;
+ 0654 2224              clr R2
+ 0656 20921300          sts _DettqFlag,R2
+ 065A                   .dbline 416
+ 065A           ;               CplLED();
+ 065A 81E0              ldi R24,1
+ 065C 28B2              in R2,0x18
+ 065E 2826              eor R2,R24
+ 0660 28BA              out 0x18,R2
+ 0662                   .dbline 418
+ 0662           ; 
+ 0662           ;               return (TRUE);
+ 0662 01E0              ldi R16,1
+ 0664 01C0              rjmp L149
+ 0666           L154:
+ 0666                   .dbline 421
+ 0666           ;               
+ 0666           ;       }
+ 0666           ;       return (FALSE);
+ 0666 0027              clr R16
+ 0668                   .dbline -2
+ 0668           L149:
+ 0668 2196              adiw R28,1
+ 066A                   .dbline 0 ; func end
+ 066A 0895              ret
+ 066C                   .dbsym l tmp 0 c
+ 066C                   .dbend
+ 066C                   .dbfunc e IGT _IGT fV
+ 066C           ;              n -> R16
+                        .even
+ 066C           _IGT::
+ 066C                   .dbline -1
+ 066C                   .dbline 425
+ 066C           ; }
+ 066C           ; 
+ 066C           ; void IGT(unsigned char n)
+ 066C           ; {
+ 066C                   .dbline 426
+ 066C           ;     if(n)
+ 066C 0023              tst R16
+ 066E 19F0              breq L157
+ 0670                   .dbline 427
+ 0670           ;       {
+ 0670                   .dbline 428
+ 0670           ;           PORTD &= ~(1<<PD6);
+ 0670 9698              cbi 0x12,6
+ 0672                   .dbline 429
+ 0672           ;               DDRD |= (1<<PD6);
+ 0672 8E9A              sbi 0x11,6
+ 0674                   .dbline 430
+ 0674           ;       }
+ 0674 01C0              rjmp L158
+ 0676           L157:
+ 0676                   .dbline 432
+ 0676                   .dbline 433
+ 0676 8E98              cbi 0x11,6
+ 0678                   .dbline 434
+ 0678           L158:
+ 0678                   .dbline -2
+ 0678           L156:
+ 0678                   .dbline 0 ; func end
+ 0678 0895              ret
+ 067A                   .dbsym r n 16 c
+ 067A                   .dbend
+ 067A                   .dbfunc e work _work fV
+                        .even
+ 067A           _work::
+ 067A                   .dbline -1
+ 067A                   .dbline 438
+ 067A           ;       else
+ 067A           ;       {
+ 067A           ;           DDRD &= ~(1<<PD6);
+ 067A           ;       }
+ 067A           ; }
+ 067A           ;                       
+ 067A           ; void work(void)
+ 067A           ; {
+ 067A 2DC0              rjmp L161
+ 067C           L160:
+ 067C                   .dbline 440
+ 067C           ;     while(1)
+ 067C           ;       {
+ 067C                   .dbline 441
+ 067C           ;           if(CheckSMS_in())
+ 067C 2DDF              rcall _CheckSMS_in
+ 067E 0023              tst R16
+ 0680 09F0              breq L163
+ 0682                   .dbline 442
+ 0682           ;               {
+ 0682                   .dbline 443
+ 0682           ;                   RecSMS();
+ 0682 77DF              rcall _RecSMS
+ 0684                   .dbline 444
+ 0684           ;           }
+ 0684           L163:
+ 0684                   .dbline 445
+ 0684           ;               if(CallInFlag) 
+ 0684 20901000          lds R2,_CallInFlag
+ 0688 2220              tst R2
+ 068A 39F0              breq L165
+ 068C                   .dbline 446
+ 068C           ;               {
+ 068C                   .dbline 447
+ 068C           ;                   Put_AT_command(Ata,AtaLen);
+ 068C 23E0              ldi R18,3
+ 068E 00E0              ldi R16,<_Ata
+ 0690 10E0              ldi R17,>_Ata
+ 0692 B5DD              rcall _Put_AT_command
+ 0694                   .dbline 448
+ 0694           ;                   CallInFlag = 0;
+ 0694 2224              clr R2
+ 0696 20921000          sts _CallInFlag,R2
+ 069A                   .dbline 449
+ 069A           ;               }
+ 069A           L165:
+ 069A                   .dbline 450
+ 069A           ;               if((BusyFlag) || (NoCarrierFlag))  
+ 069A 20901200          lds R2,_BusyFlag
+ 069E 2220              tst R2
+ 06A0 21F4              brne L169
+ 06A2 20901100          lds R2,_NoCarrierFlag
+ 06A6 2220              tst R2
+ 06A8 59F0              breq L167
+ 06AA           L169:
+ 06AA                   .dbline 451
+ 06AA           ;               {
+ 06AA                   .dbline 452
+ 06AA           ;                   Put_AT_command(Ath,AthLen);
+ 06AA 23E0              ldi R18,3
+ 06AC 00E0              ldi R16,<_Ath
+ 06AE 10E0              ldi R17,>_Ath
+ 06B0 A6DD              rcall _Put_AT_command
+ 06B2                   .dbline 453
+ 06B2           ;                       CallOut = 0;
+ 06B2 2224              clr R2
+ 06B4 20921500          sts _CallOut,R2
+ 06B8                   .dbline 454
+ 06B8           ;                       BusyFlag = 0;
+ 06B8 20921200          sts _BusyFlag,R2
+ 06BC                   .dbline 455
+ 06BC           ;                       NoCarrierFlag = 0;
+ 06BC 20921100          sts _NoCarrierFlag,R2
+ 06C0                   .dbline 456
+ 06C0           ;               }
+ 06C0           L167:
+ 06C0                   .dbline 457
+ 06C0           ;               if(DetQEITING() && (!CallOut))
+ 06C0 AFDF              rcall _DetQEITING
+ 06C2 0023              tst R16
+ 06C4 41F0              breq L170
+ 06C6 20901500          lds R2,_CallOut
+ 06CA 2220              tst R2
+ 06CC 21F4              brne L170
+ 06CE                   .dbline 458
+ 06CE           ;               {
+ 06CE                   .dbline 459
+ 06CE           ;                   CallOut = 1;
+ 06CE 81E0              ldi R24,1
+ 06D0 80931500          sts _CallOut,R24
+ 06D4                   .dbline 460
+ 06D4           ;                   DialNum();
+ 06D4 52DE              rcall _DialNum
+ 06D6                   .dbline 461
+ 06D6           ;               }
+ 06D6           L170:
+ 06D6                   .dbline 462
+ 06D6           L161:
+ 06D6                   .dbline 439
+ 06D6 D2CF              rjmp L160
+ 06D8           X3:
+ 06D8                   .dbline -2
+ 06D8           L159:
+ 06D8                   .dbline 0 ; func end
+ 06D8 0895              ret
+ 06DA                   .dbend
+ 06DA                   .dbfunc e InitMC55 _InitMC55 fV
+ 06DA           ;            tmp -> <dead>
+                        .even
+ 06DA           _InitMC55::
+ 06DA 2197              sbiw R28,1
+ 06DC                   .dbline -1
+ 06DC                   .dbline 468
+ 06DC           ;       }
+ 06DC           ; }
+ 06DC           ; /*-----------------------------------------------------------------------*/
+ 06DC           ; /////////////////////////////  初始化MC55    //////////////////////////////
+ 06DC           ; /*-----------------------------------------------------------------------*/
+ 06DC           ; void InitMC55(void)
+ 06DC           ; {
+ 06DC                   .dbline 470
+ 06DC           ;       unsigned char tmp;
+ 06DC           ;     IGT(OFF);                                   
+ 06DC 0027              clr R16
+ 06DE C6DF              rcall _IGT
+ 06E0                   .dbline 471
+ 06E0           ;     DelayMs(500);                                                       // 置低MC55 IGT口 200mS ，启动MC55模块
+ 06E0 04EF              ldi R16,500
+ 06E2 11E0              ldi R17,1
+ 06E4 00D0              rcall _DelayMs
+ 06E6                   .dbline 472
+ 06E6           ;       IGT(ON);
+ 06E6 01E0              ldi R16,1
+ 06E8 C1DF              rcall _IGT
+ 06EA                   .dbline 473
+ 06EA           ;     DelayMs(500);
+ 06EA 04EF              ldi R16,500
+ 06EC 11E0              ldi R17,1
+ 06EE 00D0              rcall _DelayMs
+ 06F0                   .dbline 474
+ 06F0           ;     IGT(OFF);                                   
+ 06F0 0027              clr R16
+ 06F2 BCDF              rcall _IGT
+ 06F4                   .dbline 480
+ 06F4           ; 
+ 06F4           ; 
+ 06F4           ; //    DelayMs(1000);                             // 等待模块启动
+ 06F4           ;       
+ 06F4           ; 
+ 06F4           ;       ClrRTS();
+ 06F4 9498              cbi 0x12,4
+ 06F6                   .dbline 481
+ 06F6           ;     DelayMs(50);                              // 激活MC55串口
+ 06F6 02E3              ldi R16,50
+ 06F8 10E0              ldi R17,0
+ 06FA 00D0              rcall _DelayMs
+ 06FC                   .dbline 482
+ 06FC           ;       SetRTS();
+ 06FC 949A              sbi 0x12,4
+ 06FE                   .dbline 483
+ 06FE           ;       DelayMs(50);
+ 06FE 02E3              ldi R16,50
+ 0700 10E0              ldi R17,0
+ 0702 00D0              rcall _DelayMs
+ 0704                   .dbline 484
+ 0704           ;       ClrRTS();
+ 0704 9498              cbi 0x12,4
+ 0706                   .dbline 485
+ 0706           ;     DelayMs(50);                              // 激活MC55串口
+ 0706 02E3              ldi R16,50
+ 0708 10E0              ldi R17,0
+ 070A 00D0              rcall _DelayMs
+ 070C                   .dbline 486
+ 070C           ;       SetRTS();
+ 070C 949A              sbi 0x12,4
+ 070E                   .dbline 490
+ 070E           ; 
+ 070E           ; //    DelayMs(1000);                              // 激活MC55串口
+ 070E           ;               
+ 070E           ;     TxIndex = 0;
+ 070E 2224              clr R2
+ 0710 20920000          sts _TxIndex,R2
+ 0714                   .dbline 491
+ 0714           ;     RxIndex = 0;
+ 0714 20922100          sts _RxIndex,R2
+ 0718           L173:
+ 0718                   .dbline 493
+ 0718           L174:
+ 0718                   .dbline 493
+ 0718           ;       
+ 0718           ;       while(!DetQEITING());
+ 0718 83DF              rcall _DetQEITING
+ 071A 0023              tst R16
+ 071C E9F3              breq L173
+ 071E                   .dbline 495
+ 071E           ;       
+ 071E           ;       PutString("AT",2,0);
+ 071E 2224              clr R2
+ 0720 2882              std y+0,R2
+ 0722 22E0              ldi R18,2
+ 0724 00E0              ldi R16,<L176
+ 0726 10E0              ldi R17,>L176
+ 0728 E2DD              rcall _PutString
+ 072A                   .dbline 497
+ 072A           ; 
+ 072A           ;       DelayMs(500);      
+ 072A 04EF              ldi R16,500
+ 072C 11E0              ldi R17,1
+ 072E 00D0              rcall _DelayMs
+ 0730                   .dbline 499
+ 0730           ;   
+ 0730           ;       PutString("AT",2,1);
+ 0730 81E0              ldi R24,1
+ 0732 8883              std y+0,R24
+ 0734 22E0              ldi R18,2
+ 0736 00E0              ldi R16,<L176
+ 0738 10E0              ldi R17,>L176
+ 073A D9DD              rcall _PutString
+ 073C                   .dbline 501
+ 073C           ;       
+ 073C           ;       PutString("ATV0",4,1);
+ 073C 81E0              ldi R24,1
+ 073E 8883              std y+0,R24
+ 0740 24E0              ldi R18,4
+ 0742 00E0              ldi R16,<L177
+ 0744 10E0              ldi R17,>L177
+ 0746 D3DD              rcall _PutString
+ 0748                   .dbline 503
+ 0748           ; 
+ 0748           ;       PutString("ATE0",4,1);
+ 0748 81E0              ldi R24,1
+ 074A 8883              std y+0,R24
+ 074C 24E0              ldi R18,4
+ 074E 00E0              ldi R16,<L178
+ 0750 10E0              ldi R17,>L178
+ 0752 CDDD              rcall _PutString
+ 0754                   .dbline 505
+ 0754           ; 
+ 0754           ;       PutString("AT+CNMI=2,1",11,1);
+ 0754 81E0              ldi R24,1
+ 0756 8883              std y+0,R24
+ 0758 2BE0              ldi R18,11
+ 075A 00E0              ldi R16,<L179
+ 075C 10E0              ldi R17,>L179
+ 075E C7DD              rcall _PutString
+ 0760                   .dbline 507
+ 0760           ; 
+ 0760           ;       PutString("AT+CMGF=1",9,1);
+ 0760 81E0              ldi R24,1
+ 0762 8883              std y+0,R24
+ 0764 29E0              ldi R18,9
+ 0766 00E0              ldi R16,<L180
+ 0768 10E0              ldi R17,>L180
+ 076A C1DD              rcall _PutString
+ 076C                   .dbline 509
+ 076C           ; 
+ 076C           ;       Delete_SMS(ALL);
+ 076C 0FEF              ldi R16,255
+ 076E 75DE              rcall _Delete_SMS
+ 0770                   .dbline 511
+ 0770           ;       
+ 0770           ;       PhoneNum_to_EEPROM();
+ 0770 00D0              rcall _PhoneNum_to_EEPROM
+ 0772                   .dbline 513
+ 0772           ;       
+ 0772           ;       EEPROM_to_PhoneNum();
+ 0772 00D0              rcall _EEPROM_to_PhoneNum
+ 0774                   .dbline -2
+ 0774           L172:
+ 0774 2196              adiw R28,1
+ 0776                   .dbline 0 ; func end
+ 0776 0895              ret
+ 0778                   .dbsym l tmp 2 c
+ 0778                   .dbend
+ 0778                   .dbfunc e port_init _port_init fV
+                        .even
+ 0778           _port_init::
+ 0778                   .dbline -1
+ 0778                   .dbline 540
+ 0778           ; 
+ 0778           ; }
+ 0778           ; 
+ 0778           ; /////////////////////////////////////////////////////////////////////////////////
+ 0778           ; /////////////////////////////////////////////////////////////////////////////////
+ 0778           ; /////////////////////////////////////////////////////////////////////////////////
+ 0778           ; /////////////////////////////////////////////////////////////////////////////////
+ 0778           ; 
+ 0778           ; /*
+ 0778           ; #pragma interrupt_handler int0_isr:2
+ 0778           ; void int0_isr(void)
+ 0778           ; {
+ 0778           ;  //external interupt on INT0
+ 0778           ;  DialNum();
+ 0778           ;  
+ 0778           ; }
+ 0778           ; 
+ 0778           ; #pragma interrupt_handler int1_isr:3
+ 0778           ; void int1_isr(void)
+ 0778           ; {
+ 0778           ;  //external interupt on INT1
+ 0778           ; }
+ 0778           ; */
+ 0778           ; ////////////////////////////////////////////////////////////////////////////////
+ 0778           ; 
+ 0778           ; void port_init(void)
+ 0778           ; {
+ 0778                   .dbline 541
+ 0778           ;  PORTB = 0x01;
+ 0778 81E0              ldi R24,1
+ 077A 88BB              out 0x18,R24
+ 077C                   .dbline 542
+ 077C           ;  DDRB  = 0x01;
+ 077C 87BB              out 0x17,R24
+ 077E                   .dbline 543
+ 077E           ;  PORTC = 0x00; //m103 output only
+ 077E 2224              clr R2
+ 0780 25BA              out 0x15,R2
+ 0782                   .dbline 544
+ 0782           ;  DDRC  = 0x02;
+ 0782 82E0              ldi R24,2
+ 0784 84BB              out 0x14,R24
+ 0786                   .dbline 545
+ 0786           ;  PORTD = 0x0C;
+ 0786 8CE0              ldi R24,12
+ 0788 82BB              out 0x12,R24
+ 078A                   .dbline 546
+ 078A           ;  DDRD  = 0x50;
+ 078A 80E5              ldi R24,80
+ 078C 81BB              out 0x11,R24
+ 078E                   .dbline -2
+ 078E           L181:
+ 078E                   .dbline 0 ; func end
+ 078E 0895              ret
+ 0790                   .dbend
+ 0790                   .dbfunc e uart0_init _uart0_init fV
+                        .even
+ 0790           _uart0_init::
+ 0790                   .dbline -1
+ 0790                   .dbline 557
+ 0790           ; }
+ 0790           ; 
+ 0790           ; //UART0 initialize
+ 0790           ; // desired baud rate: 19200
+ 0790           ; // actual: baud rate:19200 (0.0%)
+ 0790           ; // char size: 8 bit
+ 0790           ; // parity: Disabled
+ 0790           ; //#ifdef XTAL == 3.6864
+ 0790           ;  
+ 0790           ; void uart0_init(void)
+ 0790           ; {
+ 0790                   .dbline 558
+ 0790           ;  UCSRB = 0x00; //disable while setting baud rate
+ 0790 2224              clr R2
+ 0792 2AB8              out 0xa,R2
+ 0794                   .dbline 559
+ 0794           ;  UCSRA = 0x00;
+ 0794 2BB8              out 0xb,R2
+ 0796                   .dbline 560
+ 0796           ;  UCSRC = BIT(URSEL) | 0x06;
+ 0796 86E8              ldi R24,134
+ 0798 80BD              out 0x20,R24
+ 079A                   .dbline 561
+ 079A           ;  UBRRL = 0x0B; //set baud rate lo
+ 079A 8BE0              ldi R24,11
+ 079C 89B9              out 0x9,R24
+ 079E                   .dbline 562
+ 079E           ;  UBRRH = 0x00; //set baud rate hi
+ 079E 20BC              out 0x20,R2
+ 07A0                   .dbline 563
+ 07A0           ;  UCSRB = 0xD8;
+ 07A0 88ED              ldi R24,216
+ 07A2 8AB9              out 0xa,R24
+ 07A4                   .dbline -2
+ 07A4           L182:
+ 07A4                   .dbline 0 ; func end
+ 07A4 0895              ret
+ 07A6                   .dbend
+ 07A6                   .dbfunc e init_devices _init_devices fV
+                        .even
+ 07A6           _init_devices::
+ 07A6                   .dbline -1
+ 07A6                   .dbline 581
+ 07A6           ; }
+ 07A6           ; //#endif
+ 07A6           ; 
+ 07A6           ; //#ifdef XTAL == 7.3728
+ 07A6           ; /*void uart0_init(void)
+ 07A6           ; {
+ 07A6           ;  UCSRB = 0x00; //disable while setting baud rate
+ 07A6           ;  UCSRA = 0x00;
+ 07A6           ;  UCSRC = BIT(URSEL) | 0x06;
+ 07A6           ;  UBRRL = 0x17; //set baud rate lo
+ 07A6           ;  UBRRH = 0x00; //set baud rate hi
+ 07A6           ;  UCSRB = 0xD8;
+ 07A6           ; }*/
+ 07A6           ; //#endif
+ 07A6           ; 
+ 07A6           ; //call this routine to initialize all peripherals
+ 07A6           ; void init_devices(void)
+ 07A6           ; {
+ 07A6                   .dbline 583
+ 07A6           ;  //stop errant interrupts until set up
+ 07A6           ;  CLI(); //disable all interrupts
+ 07A6 F894              cli
+ 07A8                   .dbline 584
+ 07A8           ;  port_init();
+ 07A8 E7DF              rcall _port_init
+ 07AA                   .dbline 585
+ 07AA           ;  uart0_init();
+ 07AA F2DF              rcall _uart0_init
+ 07AC                   .dbline 587
+ 07AC           ; 
+ 07AC           ;  MCUCR = 0x00;
+ 07AC 2224              clr R2
+ 07AE 25BE              out 0x35,R2
+ 07B0                   .dbline 588
+ 07B0           ;  GICR  = 0x00; //0xC0;
+ 07B0 2BBE              out 0x3b,R2
+ 07B2                   .dbline 589
+ 07B2           ;  TIMSK = 0x00; //timer interrupt sources
+ 07B2 29BE              out 0x39,R2
+ 07B4                   .dbline 590
+ 07B4           ;  SEI(); //re-enable interrupts
+ 07B4 7894              sei
+ 07B6                   .dbline 592
+ 07B6           ;  
+ 07B6           ;  InitMC55();
+ 07B6 91DF              rcall _InitMC55
+ 07B8                   .dbline -2
+ 07B8           L183:
+ 07B8                   .dbline 0 ; func end
+ 07B8 0895              ret
+ 07BA                   .dbend
+ 07BA                   .dbfunc e main _main fV
+                        .even
+ 07BA           _main::
+ 07BA                   .dbline -1
+ 07BA                   .dbline 599
+ 07BA           ; }
+ 07BA           ; 
+ 07BA           ; 
+ 07BA           ; 
+ 07BA           ; //
+ 07BA           ; void main(void)
+ 07BA           ; {
+ 07BA                   .dbline 600
+ 07BA           ; DelayMs(1000); 
+ 07BA 08EE              ldi R16,1000
+ 07BC 13E0              ldi R17,3
+ 07BE 00D0              rcall _DelayMs
+ 07C0                   .dbline 601
+ 07C0           ;  init_devices();
+ 07C0 F2DF              rcall _init_devices
+ 07C2                   .dbline 602
+ 07C2           ;  work();
+ 07C2 5BDF              rcall _work
+ 07C4                   .dbline -2
+ 07C4           L184:
+ 07C4                   .dbline 0 ; func end
+ 07C4 0895              ret
+ 07C6                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay\main.c
+ 0000           _TxIndex::
+ 0000                   .blkb 1
+ 0001                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0001                   .dbsym e TxIndex _TxIndex c
+ 0001           _TxBuf::
+ 0001                   .blkb 32
+ 0021                   .dbsym e TxBuf _TxBuf A[32:32]c
+ 0021           _RxIndex::
+ 0021                   .blkb 1
+ 0022                   .dbsym e RxIndex _RxIndex c
+ 0022           _RxBuf::
+ 0022                   .blkb 128
+ 00A2                   .dbsym e RxBuf _RxBuf A[128:128]c
+ 00A2           _Pdu::
+ 00A2                   .blkb 128
+ 0122                   .dbsym e Pdu _Pdu A[128:128]c
+ 0122           _TmpBuf::
+ 0122                   .blkb 16
+ 0132                   .dbsym e TmpBuf _TmpBuf A[16:16]c
+                        .area data(ram, con, rel)
+ 0018                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0018           L180:
+ 0018                   .blkb 10
+                        .area idata
+ 0018 41542B434D47463D3100      .byte 'A,'T,43,'C,'M,'G,'F,61,49,0
+                        .area data(ram, con, rel)
+ 0022                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0022           L179:
+ 0022                   .blkb 12
+                        .area idata
+ 0022 41542B434E4D493D322C3100  .byte 'A,'T,43,'C,'N,'M,'I,61,50,44,49,0
+                        .area data(ram, con, rel)
+ 002E                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 002E           L178:
+ 002E                   .blkb 5
+                        .area idata
+ 002E 4154453000        .byte 'A,'T,'E,48,0
+                        .area data(ram, con, rel)
+ 0033                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0033           L177:
+ 0033                   .blkb 5
+                        .area idata
+ 0033 4154563000        .byte 'A,'T,'V,48,0
+                        .area data(ram, con, rel)
+ 0038                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 0038           L176:
+ 0038                   .blkb 3
+                        .area idata
+ 0038 415400            .byte 'A,'T,0
+                        .area data(ram, con, rel)
+ 003B                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h
+ 003B           L135:
+ 003B                   .blkb 10
+                        .area idata
+ 003B 41542B434D47523D3100      .byte 'A,'T,43,'C,'M,'G,'R,61,49,0
+                        .area data(ram, con, rel)
+ 0045                   .dbfile D:\MyProject\SMS-MC55\Code\窃听器delay/var.h

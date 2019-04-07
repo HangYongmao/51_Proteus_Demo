@@ -1,0 +1,4219 @@
+                        .module DISPLAY.C
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM/delay.h
+ 0000                   .dbfunc e delay_1us _delay_1us fV
+                        .even
+ 0000           _delay_1us::
+ 0000                   .dbline -1
+ 0000                   .dbline 14
+ 0000           ; /*
+ 0000           ; KS0108 128*64 LCD C语言驱动
+ 0000           ; LCD引脚定义
+ 0000           ; 1---GND 
+ 0000           ; 2---VCC
+ 0000           ; 3---VLCD
+ 0000           ; 4---D/I
+ 0000           ; 5---R/W
+ 0000           ; 6---E
+ 0000           ; 7到14 D0-D7
+ 0000           ; 15--CS1
+ 0000           ; 16--CS2
+ 0000           ; 17--RESET
+ 0000           ; 18--VEE
+ 0000                   .dbline 15
+ 0000           ; 19--SW
+ 0000 0000              nop
+ 0002                   .dbline -2
+ 0002                   .dbline 16
+ 0002           ; 20--NC 
+ 0002           L1:
+ 0002                   .dbline 0 ; func end
+ 0002 0895              ret
+ 0004                   .dbend
+ 0004                   .dbfunc e delay_nus _delay_nus fV
+ 0004           ;              i -> R20,R21
+ 0004           ;              n -> R22,R23
+                        .even
+ 0004           _delay_nus::
+ 0004 0E940000          xcall push_gset2
+ 0008 B801              movw R22,R16
+ 000A                   .dbline -1
+ 000A                   .dbline 19
+ 000A           ; */
+ 000A           ; #include <iom32v.h>
+ 000A           ; #include <macros.h>
+ 000A                   .dbline 20
+ 000A           ; #include "delay.h"
+ 000A 4427              clr R20
+ 000C 5527              clr R21
+ 000E                   .dbline 21
+ 000E           ; unsigned char CurOffset,CurRow,CurPage,CurCol;        
+ 000E 03C0              xjmp L6
+ 0010           L3:
+ 0010                   .dbline 22
+ 0010 F7DF              xcall _delay_1us
+ 0012           L4:
+ 0012                   .dbline 21
+ 0012 4F5F              subi R20,255  ; offset = 1
+ 0014 5F4F              sbci R21,255
+ 0016           L6:
+ 0016                   .dbline 21
+ 0016 4617              cp R20,R22
+ 0018 5707              cpc R21,R23
+ 001A D0F3              brlo L3
+ 001C                   .dbline -2
+ 001C                   .dbline 23
+ 001C           ; #define uchar unsigned char
+ 001C           ; /*  常量定义  */
+ 001C           L2:
+ 001C 0E940000          xcall pop_gset2
+ 0020                   .dbline 0 ; func end
+ 0020 0895              ret
+ 0022                   .dbsym r i 20 i
+ 0022                   .dbsym r n 22 i
+ 0022                   .dbend
+ 0022                   .dbfunc e delay_1ms _delay_1ms fV
+ 0022           ;              i -> R16,R17
+                        .even
+ 0022           _delay_1ms::
+ 0022                   .dbline -1
+ 0022                   .dbline 26
+ 0022           ; #define  LCD_STATUS_BUSY 0x80
+ 0022           ; #define  START_LINE0   0xc0
+ 0022           ; #define  DISPLAY_ON    0x3f
+ 0022                   .dbline 28
+ 0022 0027              clr R16
+ 0024 1127              clr R17
+ 0026 02C0              xjmp L11
+ 0028           L8:
+ 0028                   .dbline 28
+ 0028           L9:
+ 0028                   .dbline 28
+ 0028 0F5F              subi R16,255  ; offset = 1
+ 002A 1F4F              sbci R17,255
+ 002C           L11:
+ 002C                   .dbline 28
+ 002C           ; #define  DISPLAY_OFF   0x3e
+ 002C           ; #define  PARA1         0x40
+ 002C 0437              cpi R16,116
+ 002E E4E0              ldi R30,4
+ 0030 1E07              cpc R17,R30
+ 0032 D0F3              brlo L8
+ 0034                   .dbline -2
+ 0034                   .dbline 29
+ 0034           ; //#define  BIT(x)  (1<<x)
+ 0034           L7:
+ 0034                   .dbline 0 ; func end
+ 0034 0895              ret
+ 0036                   .dbsym r i 16 i
+ 0036                   .dbend
+ 0036                   .dbfunc e delay_nms _delay_nms fV
+ 0036           ;              i -> R20,R21
+ 0036           ;              n -> R22,R23
+                        .even
+ 0036           _delay_nms::
+ 0036 0E940000          xcall push_gset2
+ 003A B801              movw R22,R16
+ 003C                   .dbline -1
+ 003C                   .dbline 32
+ 003C           ; //PORTA---数据口  PORTB----控制口
+ 003C           ; volatile unsigned char *LCD_DIR_PORT = &DDRA;
+ 003C           ; volatile unsigned char *LCD_IP_PORT  = &PINA;
+ 003C                   .dbline 33
+ 003C           ; volatile unsigned char *LCD_OP_PORT  = &PORTA;
+ 003C 4427              clr R20
+ 003E 5527              clr R21
+ 0040                   .dbline 34
+ 0040           ; 
+ 0040 03C0              xjmp L16
+ 0042           L13:
+ 0042                   .dbline 35
+ 0042                   .dbline 36
+ 0042 EFDF              xcall _delay_1ms
+ 0044                   .dbline 37
+ 0044           L14:
+ 0044                   .dbline 34
+ 0044 4F5F              subi R20,255  ; offset = 1
+ 0046 5F4F              sbci R21,255
+ 0048           L16:
+ 0048                   .dbline 34
+ 0048 4617              cp R20,R22
+ 004A 5707              cpc R21,R23
+ 004C D0F3              brlo L13
+ 004E                   .dbline -2
+ 004E                   .dbline 38
+ 004E           ; volatile unsigned char *LCD_EN_PORT  = &PORTB;
+ 004E           ; volatile unsigned char *LCD_CS2_PORT = &PORTC;
+ 004E           ; volatile unsigned char *LCD_CS1_PORT = &PORTC;
+ 004E           ; volatile unsigned char *LCD_RW_PORT  = &PORTC;
+ 004E           L12:
+ 004E 0E940000          xcall pop_gset2
+ 0052                   .dbline 0 ; func end
+ 0052 0895              ret
+ 0054                   .dbsym r i 20 i
+ 0054                   .dbsym r n 22 i
+ 0054                   .dbend
+                        .area data(ram, con, rel)
+ 0000                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM/delay.h
+ 0000           _LCD_DIR_PORT::
+ 0000                   .blkb 2
+                        .area idata
+ 0000 3A00              .word 58
+                        .area data(ram, con, rel)
+ 0002                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM/delay.h
+ 0002                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0002                   .dbsym e LCD_DIR_PORT _LCD_DIR_PORT pc
+ 0002           _LCD_IP_PORT::
+ 0002                   .blkb 2
+                        .area idata
+ 0002 3900              .word 57
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0004                   .dbsym e LCD_IP_PORT _LCD_IP_PORT pc
+ 0004           _LCD_OP_PORT::
+ 0004                   .blkb 2
+                        .area idata
+ 0004 3B00              .word 59
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0006                   .dbsym e LCD_OP_PORT _LCD_OP_PORT pc
+ 0006           _LCD_EN_PORT::
+ 0006                   .blkb 2
+                        .area idata
+ 0006 3800              .word 56
+                        .area data(ram, con, rel)
+ 0008                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0008                   .dbsym e LCD_EN_PORT _LCD_EN_PORT pc
+ 0008           _LCD_CS2_PORT::
+ 0008                   .blkb 2
+                        .area idata
+ 0008 3500              .word 53
+                        .area data(ram, con, rel)
+ 000A                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 000A                   .dbsym e LCD_CS2_PORT _LCD_CS2_PORT pc
+ 000A           _LCD_CS1_PORT::
+ 000A                   .blkb 2
+                        .area idata
+ 000A 3500              .word 53
+                        .area data(ram, con, rel)
+ 000C                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 000C                   .dbsym e LCD_CS1_PORT _LCD_CS1_PORT pc
+ 000C           _LCD_RW_PORT::
+ 000C                   .blkb 2
+                        .area idata
+ 000C 3500              .word 53
+                        .area data(ram, con, rel)
+ 000E                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 000E                   .dbsym e LCD_RW_PORT _LCD_RW_PORT pc
+ 000E           _LCD_DI_PORT::
+ 000E                   .blkb 2
+                        .area idata
+ 000E 3500              .word 53
+                        .area data(ram, con, rel)
+ 0010                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0010                   .dbsym e LCD_DI_PORT _LCD_DI_PORT pc
+ 0010           _LCD_EN_BIT::
+ 0010                   .blkb 1
+                        .area idata
+ 0010 10                .byte 16
+                        .area data(ram, con, rel)
+ 0011                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0011                   .dbsym e LCD_EN_BIT _LCD_EN_BIT c
+ 0011           _LCD_CS2_BIT::
+ 0011                   .blkb 1
+                        .area idata
+ 0011 08                .byte 8
+                        .area data(ram, con, rel)
+ 0012                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0012                   .dbsym e LCD_CS2_BIT _LCD_CS2_BIT c
+ 0012           _LCD_CS1_BIT::
+ 0012                   .blkb 1
+                        .area idata
+ 0012 04                .byte 4
+                        .area data(ram, con, rel)
+ 0013                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0013                   .dbsym e LCD_CS1_BIT _LCD_CS1_BIT c
+ 0013           _LCD_RW_BIT::
+ 0013                   .blkb 1
+                        .area idata
+ 0013 20                .byte 32
+                        .area data(ram, con, rel)
+ 0014                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0014                   .dbsym e LCD_RW_BIT _LCD_RW_BIT c
+ 0014           _LCD_DI_BIT::
+ 0014                   .blkb 1
+                        .area idata
+ 0014 10                .byte 16
+                        .area data(ram, con, rel)
+ 0015                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0015                   .dbsym e LCD_DI_BIT _LCD_DI_BIT c
+                        .area text(rom, con, rel)
+ 0054                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0054                   .dbfunc e LCD_BUSY _LCD_BUSY fV
+ 0054           ;         status -> <dead>
+ 0054           ;             lr -> R16
+                        .even
+ 0054           _LCD_BUSY::
+ 0054                   .dbline -1
+ 0054                   .dbline 68
+ 0054           ; volatile unsigned char *LCD_DI_PORT  = &PORTC;
+ 0054           ; 
+ 0054           ; char LCD_EN_BIT  = BIT(4);
+ 0054           ; char LCD_CS2_BIT = BIT(3);
+ 0054           ; char LCD_CS1_BIT = BIT(2);
+ 0054           ; char LCD_RW_BIT  = BIT(5);
+ 0054           ; char LCD_DI_BIT  = BIT(4);
+ 0054           ; 
+ 0054           ; #define SET_LCD_E                     *LCD_EN_PORT |= LCD_EN_BIT    //LCD使能
+ 0054           ; #define CLEAR_LCD_E               *LCD_EN_PORT &= ~LCD_EN_BIT   //LCD禁止
+ 0054           ; 
+ 0054           ; #define SET_LCD_DATA              *LCD_DI_PORT |= LCD_DI_BIT    //选择指令端口
+ 0054           ; #define SET_LCD_CMD               *LCD_DI_PORT &= ~LCD_DI_BIT   //选择数据端口
+ 0054           ; 
+ 0054           ; #define SET_LCD_READ              *LCD_RW_PORT |= LCD_RW_BIT    //读模式
+ 0054           ; #define SET_LCD_WRITE             *LCD_RW_PORT &= ~LCD_RW_BIT   //写模式
+ 0054           ; 
+ 0054           ; #define SET_LCD_CS2               *LCD_CS2_PORT |= LCD_CS2_BIT  //左屏选择禁止
+ 0054           ; #define CLEAR_LCD_CS2             *LCD_CS2_PORT &= ~LCD_CS2_BIT //左屏选择使能
+ 0054           ; 
+ 0054           ; #define SET_LCD_CS1               *LCD_CS1_PORT |= LCD_CS1_BIT  //左屏选择禁止
+ 0054           ; #define CLEAR_LCD_CS1             *LCD_CS1_PORT &= ~LCD_CS1_BIT //左屏选择使能
+ 0054           ; 
+ 0054           ; #define LEFT 0
+ 0054           ; #define RIGHT 1
+ 0054           ; #define CMD 0
+ 0054           ; #define DATA 1
+ 0054           ; 
+ 0054           ; void LCD_BUSY(unsigned char lr) //判断忙标志
+ 0054           ; {
+ 0054                   .dbline 70
+ 0054           ;     unsigned char status;
+ 0054           ;     _CLI();
+ 0054 F894              cli
+ 0056                   .dbline 71
+ 0056           ;     if(lr==LEFT)
+ 0056 0023              tst R16
+ 0058 A1F4              brne L18
+ 005A                   .dbline 72
+ 005A           ;     {
+ 005A                   .dbline 73
+ 005A           ;         CLEAR_LCD_CS2; //cs2=0
+ 005A 20901100          lds R2,_LCD_CS2_BIT
+ 005E 2094              com R2
+ 0060 E0910800          lds R30,_LCD_CS2_PORT
+ 0064 F0910900          lds R31,_LCD_CS2_PORT+1
+ 0068 3080              ldd R3,z+0
+ 006A 3220              and R3,R2
+ 006C 3082              std z+0,R3
+ 006E                   .dbline 74
+ 006E           ;         SET_LCD_CS1;   //cs1=1
+ 006E 20901200          lds R2,_LCD_CS1_BIT
+ 0072 E0910A00          lds R30,_LCD_CS1_PORT
+ 0076 F0910B00          lds R31,_LCD_CS1_PORT+1
+ 007A 3080              ldd R3,z+0
+ 007C 3228              or R3,R2
+ 007E 3082              std z+0,R3
+ 0080                   .dbline 75
+ 0080           ;     }
+ 0080 13C0              xjmp L19
+ 0082           L18:
+ 0082                   .dbline 77
+ 0082           ;     else
+ 0082           ;     {
+ 0082                   .dbline 78
+ 0082           ;         SET_LCD_CS2;   //cs2=1
+ 0082 20901100          lds R2,_LCD_CS2_BIT
+ 0086 E0910800          lds R30,_LCD_CS2_PORT
+ 008A F0910900          lds R31,_LCD_CS2_PORT+1
+ 008E 3080              ldd R3,z+0
+ 0090 3228              or R3,R2
+ 0092 3082              std z+0,R3
+ 0094                   .dbline 79
+ 0094           ;         CLEAR_LCD_CS1; //cs1=0
+ 0094 20901200          lds R2,_LCD_CS1_BIT
+ 0098 2094              com R2
+ 009A E0910A00          lds R30,_LCD_CS1_PORT
+ 009E F0910B00          lds R31,_LCD_CS1_PORT+1
+ 00A2 3080              ldd R3,z+0
+ 00A4 3220              and R3,R2
+ 00A6 3082              std z+0,R3
+ 00A8                   .dbline 80
+ 00A8           ;     } 
+ 00A8           L19:
+ 00A8                   .dbline 81
+ 00A8           ;     SET_LCD_CMD;
+ 00A8 20901400          lds R2,_LCD_DI_BIT
+ 00AC 2094              com R2
+ 00AE E0910E00          lds R30,_LCD_DI_PORT
+ 00B2 F0910F00          lds R31,_LCD_DI_PORT+1
+ 00B6 3080              ldd R3,z+0
+ 00B8 3220              and R3,R2
+ 00BA 3082              std z+0,R3
+ 00BC                   .dbline 82
+ 00BC           ;     *LCD_DIR_PORT = 0x00;
+ 00BC 2224              clr R2
+ 00BE E0910000          lds R30,_LCD_DIR_PORT
+ 00C2 F0910100          lds R31,_LCD_DIR_PORT+1
+ 00C6 2082              std z+0,R2
+ 00C8                   .dbline 83
+ 00C8           ;     *LCD_OP_PORT = 0xff;              
+ 00C8 8FEF              ldi R24,255
+ 00CA E0910400          lds R30,_LCD_OP_PORT
+ 00CE F0910500          lds R31,_LCD_OP_PORT+1
+ 00D2 8083              std z+0,R24
+ 00D4                   .dbline 84
+ 00D4           ;     SET_LCD_READ;
+ 00D4 20901300          lds R2,_LCD_RW_BIT
+ 00D8 E0910C00          lds R30,_LCD_RW_PORT
+ 00DC F0910D00          lds R31,_LCD_RW_PORT+1
+ 00E0 3080              ldd R3,z+0
+ 00E2 3228              or R3,R2
+ 00E4 3082              std z+0,R3
+ 00E6                   .dbline 85
+ 00E6           ;     SET_LCD_E;                                        
+ 00E6 20901000          lds R2,_LCD_EN_BIT
+ 00EA E0910600          lds R30,_LCD_EN_PORT
+ 00EE F0910700          lds R31,_LCD_EN_PORT+1
+ 00F2 3080              ldd R3,z+0
+ 00F4 3228              or R3,R2
+ 00F6 3082              std z+0,R3
+ 00F8                   .dbline 86
+ 00F8           ;     _NOP();   
+ 00F8 0000              nop
+ 00FA                   .dbline 87
+ 00FA           ;     _NOP();
+ 00FA 0000              nop
+ 00FC                   .dbline 88
+ 00FC           ;     _NOP();
+ 00FC 0000              nop
+ 00FE                   .dbline 89
+ 00FE           ;     _NOP();
+ 00FE 0000              nop
+ 0100 16C0              xjmp L21
+ 0102           L20:
+ 0102                   .dbline 91
+ 0102                   .dbline 92
+ 0102 20901000          lds R2,_LCD_EN_BIT
+ 0106 2094              com R2
+ 0108 E0910600          lds R30,_LCD_EN_PORT
+ 010C F0910700          lds R31,_LCD_EN_PORT+1
+ 0110 3080              ldd R3,z+0
+ 0112 3220              and R3,R2
+ 0114 3082              std z+0,R3
+ 0116                   .dbline 93
+ 0116 0000              nop
+ 0118                   .dbline 94
+ 0118 0000              nop
+ 011A                   .dbline 95
+ 011A 0000              nop
+ 011C                   .dbline 96
+ 011C 0000              nop
+ 011E                   .dbline 97
+ 011E 20901000          lds R2,_LCD_EN_BIT
+ 0122 3228              or R3,R2
+ 0124 3082              std z+0,R3
+ 0126                   .dbline 98
+ 0126 0000              nop
+ 0128                   .dbline 99
+ 0128 0000              nop
+ 012A                   .dbline 100
+ 012A 0000              nop
+ 012C                   .dbline 101
+ 012C 0000              nop
+ 012E                   .dbline 102
+ 012E           L21:
+ 012E                   .dbline 90
+ 012E           ;     while((*LCD_IP_PORT) & LCD_STATUS_BUSY)
+ 012E E0910200          lds R30,_LCD_IP_PORT
+ 0132 F0910300          lds R31,_LCD_IP_PORT+1
+ 0136 2080              ldd R2,z+0
+ 0138 27FC              sbrc R2,7
+ 013A E3CF              rjmp L20
+ 013C                   .dbline 103
+ 013C           ;     {
+ 013C           ;         CLEAR_LCD_E;                  
+ 013C           ;         _NOP();
+ 013C           ;         _NOP();
+ 013C           ;         _NOP();
+ 013C           ;         _NOP();
+ 013C           ;         SET_LCD_E;
+ 013C           ;         _NOP();
+ 013C           ;         _NOP();
+ 013C           ;         _NOP();
+ 013C           ;         _NOP();
+ 013C           ;     }
+ 013C           ;     CLEAR_LCD_E;
+ 013C 20901000          lds R2,_LCD_EN_BIT
+ 0140 2094              com R2
+ 0142 E0910600          lds R30,_LCD_EN_PORT
+ 0146 F0910700          lds R31,_LCD_EN_PORT+1
+ 014A 3080              ldd R3,z+0
+ 014C 3220              and R3,R2
+ 014E 3082              std z+0,R3
+ 0150                   .dbline 104
+ 0150           ;     SET_LCD_WRITE;
+ 0150 20901300          lds R2,_LCD_RW_BIT
+ 0154 2094              com R2
+ 0156 E0910C00          lds R30,_LCD_RW_PORT
+ 015A F0910D00          lds R31,_LCD_RW_PORT+1
+ 015E 3080              ldd R3,z+0
+ 0160 3220              and R3,R2
+ 0162 3082              std z+0,R3
+ 0164                   .dbline 105
+ 0164           ;     *LCD_OP_PORT = 0xff;
+ 0164 8FEF              ldi R24,255
+ 0166 E0910400          lds R30,_LCD_OP_PORT
+ 016A F0910500          lds R31,_LCD_OP_PORT+1
+ 016E 8083              std z+0,R24
+ 0170                   .dbline 106
+ 0170           ;     asm("sei");//)asm("sei");
+ 0170 7894              sei
+ 0172                   .dbline -2
+ 0172                   .dbline 107
+ 0172           ; }
+ 0172           L17:
+ 0172                   .dbline 0 ; func end
+ 0172 0895              ret
+ 0174                   .dbsym l status 1 c
+ 0174                   .dbsym r lr 16 c
+ 0174                   .dbend
+ 0174                   .dbfunc e write_LCD _write_LCD fV
+ 0174           ;           data -> y+4
+ 0174           ;             cd -> R20
+ 0174           ;             lr -> R22
+                        .even
+ 0174           _write_LCD::
+ 0174 0E940000          xcall push_gset2
+ 0178 422F              mov R20,R18
+ 017A 602F              mov R22,R16
+ 017C                   .dbline -1
+ 017C                   .dbline 110
+ 017C           ; 
+ 017C           ; void write_LCD(unsigned char lr,unsigned char cd,unsigned char data) /*写入指令或数据*/
+ 017C           ; {     
+ 017C                   .dbline 111
+ 017C           ;     _CLI();//_CLI();
+ 017C F894              cli
+ 017E                   .dbline 112
+ 017E           ;     LCD_BUSY(lr);
+ 017E 062F              mov R16,R22
+ 0180 69DF              xcall _LCD_BUSY
+ 0182                   .dbline 113
+ 0182           ;     if(cd==CMD)
+ 0182 4423              tst R20
+ 0184 59F4              brne L24
+ 0186                   .dbline 114
+ 0186           ;     {
+ 0186                   .dbline 115
+ 0186           ;         SET_LCD_CMD;
+ 0186 20901400          lds R2,_LCD_DI_BIT
+ 018A 2094              com R2
+ 018C E0910E00          lds R30,_LCD_DI_PORT
+ 0190 F0910F00          lds R31,_LCD_DI_PORT+1
+ 0194 3080              ldd R3,z+0
+ 0196 3220              and R3,R2
+ 0198 3082              std z+0,R3
+ 019A                   .dbline 116
+ 019A           ;     }
+ 019A 09C0              xjmp L25
+ 019C           L24:
+ 019C                   .dbline 118
+ 019C           ;     else
+ 019C           ;     {
+ 019C                   .dbline 119
+ 019C           ;         SET_LCD_DATA;
+ 019C 20901400          lds R2,_LCD_DI_BIT
+ 01A0 E0910E00          lds R30,_LCD_DI_PORT
+ 01A4 F0910F00          lds R31,_LCD_DI_PORT+1
+ 01A8 3080              ldd R3,z+0
+ 01AA 3228              or R3,R2
+ 01AC 3082              std z+0,R3
+ 01AE                   .dbline 120
+ 01AE           ;     }
+ 01AE           L25:
+ 01AE                   .dbline 121
+ 01AE           ;     SET_LCD_WRITE; 
+ 01AE 20901300          lds R2,_LCD_RW_BIT
+ 01B2 2094              com R2
+ 01B4 E0910C00          lds R30,_LCD_RW_PORT
+ 01B8 F0910D00          lds R31,_LCD_RW_PORT+1
+ 01BC 3080              ldd R3,z+0
+ 01BE 3220              and R3,R2
+ 01C0 3082              std z+0,R3
+ 01C2                   .dbline 122
+ 01C2           ;     SET_LCD_E;
+ 01C2 20901000          lds R2,_LCD_EN_BIT
+ 01C6 E0910600          lds R30,_LCD_EN_PORT
+ 01CA F0910700          lds R31,_LCD_EN_PORT+1
+ 01CE 3080              ldd R3,z+0
+ 01D0 3228              or R3,R2
+ 01D2 3082              std z+0,R3
+ 01D4                   .dbline 123
+ 01D4           ;     *LCD_DIR_PORT = 0xff;
+ 01D4 8FEF              ldi R24,255
+ 01D6 E0910000          lds R30,_LCD_DIR_PORT
+ 01DA F0910100          lds R31,_LCD_DIR_PORT+1
+ 01DE 8083              std z+0,R24
+ 01E0                   .dbline 124
+ 01E0           ;     *LCD_OP_PORT = data;
+ 01E0 E0910400          lds R30,_LCD_OP_PORT
+ 01E4 F0910500          lds R31,_LCD_OP_PORT+1
+ 01E8 0C80              ldd R0,y+4
+ 01EA 0082              std z+0,R0
+ 01EC                   .dbline 125
+ 01EC           ;     _NOP();
+ 01EC 0000              nop
+ 01EE                   .dbline 126
+ 01EE           ;     _NOP();
+ 01EE 0000              nop
+ 01F0                   .dbline 127
+ 01F0           ;     _NOP();
+ 01F0 0000              nop
+ 01F2                   .dbline 128
+ 01F2           ;     _NOP();
+ 01F2 0000              nop
+ 01F4                   .dbline 129
+ 01F4           ;     CLEAR_LCD_E;
+ 01F4 2094              com R2
+ 01F6 E0910600          lds R30,_LCD_EN_PORT
+ 01FA F0910700          lds R31,_LCD_EN_PORT+1
+ 01FE 3080              ldd R3,z+0
+ 0200 3220              and R3,R2
+ 0202 3082              std z+0,R3
+ 0204                   .dbline 130
+ 0204           ;     *LCD_OP_PORT = 0xff;
+ 0204 E0910400          lds R30,_LCD_OP_PORT
+ 0208 F0910500          lds R31,_LCD_OP_PORT+1
+ 020C 8083              std z+0,R24
+ 020E                   .dbline 131
+ 020E           ;     _SEI();
+ 020E 7894              sei
+ 0210                   .dbline -2
+ 0210                   .dbline 132
+ 0210           ; }
+ 0210           L23:
+ 0210 0E940000          xcall pop_gset2
+ 0214                   .dbline 0 ; func end
+ 0214 0895              ret
+ 0216                   .dbsym l data 4 c
+ 0216                   .dbsym r cd 20 c
+ 0216                   .dbsym r lr 22 c
+ 0216                   .dbend
+ 0216                   .dbfunc e read_LCD _read_LCD fc
+ 0216           ;           data -> R20
+ 0216           ;             lr -> R22
+                        .even
+ 0216           _read_LCD::
+ 0216 0E940000          xcall push_gset2
+ 021A 602F              mov R22,R16
+ 021C                   .dbline -1
+ 021C                   .dbline 134
+ 021C           ; unsigned char read_LCD(unsigned char lr)        /*  读显示数据 */
+ 021C           ; {
+ 021C                   .dbline 136
+ 021C           ;     unsigned char data;
+ 021C           ;     _CLI();
+ 021C F894              cli
+ 021E                   .dbline 137
+ 021E           ;     LCD_BUSY(lr);
+ 021E 062F              mov R16,R22
+ 0220 19DF              xcall _LCD_BUSY
+ 0222                   .dbline 138
+ 0222           ;     SET_LCD_DATA;
+ 0222 20901400          lds R2,_LCD_DI_BIT
+ 0226 E0910E00          lds R30,_LCD_DI_PORT
+ 022A F0910F00          lds R31,_LCD_DI_PORT+1
+ 022E 3080              ldd R3,z+0
+ 0230 3228              or R3,R2
+ 0232 3082              std z+0,R3
+ 0234                   .dbline 139
+ 0234           ;     *LCD_DIR_PORT = 0x00;
+ 0234 2224              clr R2
+ 0236 E0910000          lds R30,_LCD_DIR_PORT
+ 023A F0910100          lds R31,_LCD_DIR_PORT+1
+ 023E 2082              std z+0,R2
+ 0240                   .dbline 140
+ 0240           ;     *LCD_OP_PORT = 0xff;
+ 0240 8FEF              ldi R24,255
+ 0242 E0910400          lds R30,_LCD_OP_PORT
+ 0246 F0910500          lds R31,_LCD_OP_PORT+1
+ 024A 8083              std z+0,R24
+ 024C                   .dbline 141
+ 024C           ;     SET_LCD_READ;
+ 024C 20901300          lds R2,_LCD_RW_BIT
+ 0250 E0910C00          lds R30,_LCD_RW_PORT
+ 0254 F0910D00          lds R31,_LCD_RW_PORT+1
+ 0258 3080              ldd R3,z+0
+ 025A 3228              or R3,R2
+ 025C 3082              std z+0,R3
+ 025E                   .dbline 142
+ 025E           ;     SET_LCD_E;
+ 025E 20901000          lds R2,_LCD_EN_BIT
+ 0262 E0910600          lds R30,_LCD_EN_PORT
+ 0266 F0910700          lds R31,_LCD_EN_PORT+1
+ 026A 3080              ldd R3,z+0
+ 026C 3228              or R3,R2
+ 026E 3082              std z+0,R3
+ 0270                   .dbline 143
+ 0270           ;     _NOP();
+ 0270 0000              nop
+ 0272                   .dbline 144
+ 0272           ;     _NOP();
+ 0272 0000              nop
+ 0274                   .dbline 145
+ 0274           ;     _NOP();
+ 0274 0000              nop
+ 0276                   .dbline 146
+ 0276           ;     _NOP();
+ 0276 0000              nop
+ 0278                   .dbline 147
+ 0278           ;     data=*LCD_IP_PORT;
+ 0278 E0910200          lds R30,_LCD_IP_PORT
+ 027C F0910300          lds R31,_LCD_IP_PORT+1
+ 0280 4081              ldd R20,z+0
+ 0282                   .dbline 148
+ 0282           ;     CLEAR_LCD_E;
+ 0282 2094              com R2
+ 0284 E0910600          lds R30,_LCD_EN_PORT
+ 0288 F0910700          lds R31,_LCD_EN_PORT+1
+ 028C 3080              ldd R3,z+0
+ 028E 3220              and R3,R2
+ 0290 3082              std z+0,R3
+ 0292                   .dbline 149
+ 0292           ;     SET_LCD_WRITE;
+ 0292 20901300          lds R2,_LCD_RW_BIT
+ 0296 2094              com R2
+ 0298 E0910C00          lds R30,_LCD_RW_PORT
+ 029C F0910D00          lds R31,_LCD_RW_PORT+1
+ 02A0 3080              ldd R3,z+0
+ 02A2 3220              and R3,R2
+ 02A4 3082              std z+0,R3
+ 02A6                   .dbline 150
+ 02A6           ;     LCD_BUSY(lr);
+ 02A6 062F              mov R16,R22
+ 02A8 D5DE              xcall _LCD_BUSY
+ 02AA                   .dbline 151
+ 02AA           ;     SET_LCD_DATA; 
+ 02AA 20901400          lds R2,_LCD_DI_BIT
+ 02AE E0910E00          lds R30,_LCD_DI_PORT
+ 02B2 F0910F00          lds R31,_LCD_DI_PORT+1
+ 02B6 3080              ldd R3,z+0
+ 02B8 3228              or R3,R2
+ 02BA 3082              std z+0,R3
+ 02BC                   .dbline 152
+ 02BC           ;     *LCD_DIR_PORT = 0x00;
+ 02BC 2224              clr R2
+ 02BE E0910000          lds R30,_LCD_DIR_PORT
+ 02C2 F0910100          lds R31,_LCD_DIR_PORT+1
+ 02C6 2082              std z+0,R2
+ 02C8                   .dbline 153
+ 02C8           ;     *LCD_OP_PORT = 0xff;
+ 02C8 8FEF              ldi R24,255
+ 02CA E0910400          lds R30,_LCD_OP_PORT
+ 02CE F0910500          lds R31,_LCD_OP_PORT+1
+ 02D2 8083              std z+0,R24
+ 02D4                   .dbline 154
+ 02D4           ;     SET_LCD_READ; 
+ 02D4 20901300          lds R2,_LCD_RW_BIT
+ 02D8 E0910C00          lds R30,_LCD_RW_PORT
+ 02DC F0910D00          lds R31,_LCD_RW_PORT+1
+ 02E0 3080              ldd R3,z+0
+ 02E2 3228              or R3,R2
+ 02E4 3082              std z+0,R3
+ 02E6                   .dbline 155
+ 02E6           ;     SET_LCD_E;
+ 02E6 20901000          lds R2,_LCD_EN_BIT
+ 02EA E0910600          lds R30,_LCD_EN_PORT
+ 02EE F0910700          lds R31,_LCD_EN_PORT+1
+ 02F2 3080              ldd R3,z+0
+ 02F4 3228              or R3,R2
+ 02F6 3082              std z+0,R3
+ 02F8                   .dbline 156
+ 02F8           ;     _NOP();   
+ 02F8 0000              nop
+ 02FA                   .dbline 157
+ 02FA           ;     _NOP();
+ 02FA 0000              nop
+ 02FC                   .dbline 158
+ 02FC           ;     _NOP();
+ 02FC 0000              nop
+ 02FE                   .dbline 159
+ 02FE           ;     _NOP();
+ 02FE 0000              nop
+ 0300                   .dbline 160
+ 0300           ;     data=*LCD_IP_PORT;
+ 0300 E0910200          lds R30,_LCD_IP_PORT
+ 0304 F0910300          lds R31,_LCD_IP_PORT+1
+ 0308 4081              ldd R20,z+0
+ 030A                   .dbline 161
+ 030A           ;     CLEAR_LCD_E;
+ 030A 2094              com R2
+ 030C E0910600          lds R30,_LCD_EN_PORT
+ 0310 F0910700          lds R31,_LCD_EN_PORT+1
+ 0314 3080              ldd R3,z+0
+ 0316 3220              and R3,R2
+ 0318 3082              std z+0,R3
+ 031A                   .dbline 162
+ 031A           ;     SET_LCD_WRITE;
+ 031A 20901300          lds R2,_LCD_RW_BIT
+ 031E 2094              com R2
+ 0320 E0910C00          lds R30,_LCD_RW_PORT
+ 0324 F0910D00          lds R31,_LCD_RW_PORT+1
+ 0328 3080              ldd R3,z+0
+ 032A 3220              and R3,R2
+ 032C 3082              std z+0,R3
+ 032E                   .dbline 164
+ 032E           ; 
+ 032E           ;     _SEI();
+ 032E 7894              sei
+ 0330                   .dbline 165
+ 0330           ;     return data;
+ 0330 042F              mov R16,R20
+ 0332                   .dbline -2
+ 0332           L26:
+ 0332 0E940000          xcall pop_gset2
+ 0336                   .dbline 0 ; func end
+ 0336 0895              ret
+ 0338                   .dbsym r data 20 c
+ 0338                   .dbsym r lr 22 c
+ 0338                   .dbend
+ 0338                   .dbfunc e set_start_line_L _set_start_line_L fV
+ 0338           ;           line -> R20
+                        .even
+ 0338           _set_start_line_L::
+ 0338 0E940000          xcall push_gset1
+ 033C 402F              mov R20,R16
+ 033E 2197              sbiw R28,1
+ 0340                   .dbline -1
+ 0340                   .dbline 169
+ 0340           ; }
+ 0340           ; 
+ 0340           ; void set_start_line_L(unsigned char line) /*设置显示起始行*/ //0-63
+ 0340           ; {
+ 0340                   .dbline 170
+ 0340           ;     write_LCD(LEFT,CMD,0xc0|line); 
+ 0340 842F              mov R24,R20
+ 0342 806C              ori R24,192
+ 0344 8883              std y+0,R24
+ 0346 2227              clr R18
+ 0348 0027              clr R16
+ 034A 14DF              xcall _write_LCD
+ 034C                   .dbline -2
+ 034C                   .dbline 171
+ 034C           ; }
+ 034C           L27:
+ 034C 2196              adiw R28,1
+ 034E 0E940000          xcall pop_gset1
+ 0352                   .dbline 0 ; func end
+ 0352 0895              ret
+ 0354                   .dbsym r line 20 c
+ 0354                   .dbend
+ 0354                   .dbfunc e set_start_line_R _set_start_line_R fV
+ 0354           ;           line -> R20
+                        .even
+ 0354           _set_start_line_R::
+ 0354 0E940000          xcall push_gset1
+ 0358 402F              mov R20,R16
+ 035A 2197              sbiw R28,1
+ 035C                   .dbline -1
+ 035C                   .dbline 174
+ 035C           ; 
+ 035C           ; void set_start_line_R(unsigned char line) /*设置显示起始行*/ //0-63
+ 035C           ; {
+ 035C                   .dbline 175
+ 035C           ;     write_LCD(RIGHT,CMD,0xc0|line); 
+ 035C 842F              mov R24,R20
+ 035E 806C              ori R24,192
+ 0360 8883              std y+0,R24
+ 0362 2227              clr R18
+ 0364 01E0              ldi R16,1
+ 0366 06DF              xcall _write_LCD
+ 0368                   .dbline -2
+ 0368                   .dbline 176
+ 0368           ; }
+ 0368           L28:
+ 0368 2196              adiw R28,1
+ 036A 0E940000          xcall pop_gset1
+ 036E                   .dbline 0 ; func end
+ 036E 0895              ret
+ 0370                   .dbsym r line 20 c
+ 0370                   .dbend
+ 0370                   .dbfunc e set_page_L _set_page_L fV
+ 0370           ;           page -> R20
+                        .even
+ 0370           _set_page_L::
+ 0370 0E940000          xcall push_gset1
+ 0374 402F              mov R20,R16
+ 0376 2197              sbiw R28,1
+ 0378                   .dbline -1
+ 0378                   .dbline 179
+ 0378           ; 
+ 0378           ; void set_page_L(unsigned char page)   /*设置X地址 设置页*/  //0-7
+ 0378           ; {
+ 0378                   .dbline 180
+ 0378           ;     write_LCD(LEFT,CMD,0xb8|page);                     
+ 0378 842F              mov R24,R20
+ 037A 886B              ori R24,184
+ 037C 8883              std y+0,R24
+ 037E 2227              clr R18
+ 0380 0027              clr R16
+ 0382 F8DE              xcall _write_LCD
+ 0384                   .dbline -2
+ 0384                   .dbline 181
+ 0384           ; }
+ 0384           L29:
+ 0384 2196              adiw R28,1
+ 0386 0E940000          xcall pop_gset1
+ 038A                   .dbline 0 ; func end
+ 038A 0895              ret
+ 038C                   .dbsym r page 20 c
+ 038C                   .dbend
+ 038C                   .dbfunc e set_page_R _set_page_R fV
+ 038C           ;           page -> R20
+                        .even
+ 038C           _set_page_R::
+ 038C 0E940000          xcall push_gset1
+ 0390 402F              mov R20,R16
+ 0392 2197              sbiw R28,1
+ 0394                   .dbline -1
+ 0394                   .dbline 183
+ 0394           ; void set_page_R(unsigned char page)   /*设置X地址 设置页*/ //0-7
+ 0394           ; {
+ 0394                   .dbline 184
+ 0394           ;     write_LCD(RIGHT,CMD,0xb8|page);                     
+ 0394 842F              mov R24,R20
+ 0396 886B              ori R24,184
+ 0398 8883              std y+0,R24
+ 039A 2227              clr R18
+ 039C 01E0              ldi R16,1
+ 039E EADE              xcall _write_LCD
+ 03A0                   .dbline -2
+ 03A0                   .dbline 185
+ 03A0           ; }
+ 03A0           L30:
+ 03A0 2196              adiw R28,1
+ 03A2 0E940000          xcall pop_gset1
+ 03A6                   .dbline 0 ; func end
+ 03A6 0895              ret
+ 03A8                   .dbsym r page 20 c
+ 03A8                   .dbend
+ 03A8                   .dbfunc e set_col_addr_L _set_col_addr_L fV
+ 03A8           ;            col -> R20
+                        .even
+ 03A8           _set_col_addr_L::
+ 03A8 0E940000          xcall push_gset1
+ 03AC 402F              mov R20,R16
+ 03AE 2197              sbiw R28,1
+ 03B0                   .dbline -1
+ 03B0                   .dbline 188
+ 03B0           ; 
+ 03B0           ; void set_col_addr_L(unsigned char col) /*设置Y地址*/ //0-63
+ 03B0           ; {
+ 03B0                   .dbline 189
+ 03B0           ;     write_LCD(LEFT,CMD,0x40|col);                     
+ 03B0 842F              mov R24,R20
+ 03B2 8064              ori R24,64
+ 03B4 8883              std y+0,R24
+ 03B6 2227              clr R18
+ 03B8 0027              clr R16
+ 03BA DCDE              xcall _write_LCD
+ 03BC                   .dbline -2
+ 03BC                   .dbline 190
+ 03BC           ; }
+ 03BC           L31:
+ 03BC 2196              adiw R28,1
+ 03BE 0E940000          xcall pop_gset1
+ 03C2                   .dbline 0 ; func end
+ 03C2 0895              ret
+ 03C4                   .dbsym r col 20 c
+ 03C4                   .dbend
+ 03C4                   .dbfunc e set_col_addr_R _set_col_addr_R fV
+ 03C4           ;            col -> R20
+                        .even
+ 03C4           _set_col_addr_R::
+ 03C4 0E940000          xcall push_gset1
+ 03C8 402F              mov R20,R16
+ 03CA 2197              sbiw R28,1
+ 03CC                   .dbline -1
+ 03CC                   .dbline 193
+ 03CC           ; 
+ 03CC           ; void set_col_addr_R(unsigned char col) /*设置Y地址*/ //0-63
+ 03CC           ; {
+ 03CC                   .dbline 194
+ 03CC           ;     write_LCD(RIGHT,CMD,0x40|col);                     
+ 03CC 842F              mov R24,R20
+ 03CE 8064              ori R24,64
+ 03D0 8883              std y+0,R24
+ 03D2 2227              clr R18
+ 03D4 01E0              ldi R16,1
+ 03D6 CEDE              xcall _write_LCD
+ 03D8                   .dbline -2
+ 03D8                   .dbline 195
+ 03D8           ; }
+ 03D8           L32:
+ 03D8 2196              adiw R28,1
+ 03DA 0E940000          xcall pop_gset1
+ 03DE                   .dbline 0 ; func end
+ 03DE 0895              ret
+ 03E0                   .dbsym r col 20 c
+ 03E0                   .dbend
+ 03E0                   .dbfunc e init_lcd _init_lcd fV
+                        .even
+ 03E0           _init_lcd::
+ 03E0 2197              sbiw R28,1
+ 03E2                   .dbline -1
+ 03E2                   .dbline 198
+ 03E2           ; 
+ 03E2           ; void init_lcd(void) /*初始化函数*/
+ 03E2           ; {
+ 03E2                   .dbline 199
+ 03E2           ;     set_start_line_L(0); /*显示起始行为0*/
+ 03E2 0027              clr R16
+ 03E4 A9DF              xcall _set_start_line_L
+ 03E6                   .dbline 200
+ 03E6           ;     set_start_line_R(0); /*显示起始行为0*/
+ 03E6 0027              clr R16
+ 03E8 B5DF              xcall _set_start_line_R
+ 03EA                   .dbline 201
+ 03EA           ;     write_LCD(LEFT,CMD,DISPLAY_ON); /*  开显示  */
+ 03EA 8FE3              ldi R24,63
+ 03EC 8883              std y+0,R24
+ 03EE 2227              clr R18
+ 03F0 0027              clr R16
+ 03F2 C0DE              xcall _write_LCD
+ 03F4                   .dbline 202
+ 03F4           ;     write_LCD(RIGHT,CMD,DISPLAY_ON); /*  开显示  */
+ 03F4 8FE3              ldi R24,63
+ 03F6 8883              std y+0,R24
+ 03F8 2227              clr R18
+ 03FA 01E0              ldi R16,1
+ 03FC BBDE              xcall _write_LCD
+ 03FE                   .dbline -2
+ 03FE                   .dbline 203
+ 03FE           ; }
+ 03FE           L33:
+ 03FE 2196              adiw R28,1
+ 0400                   .dbline 0 ; func end
+ 0400 0895              ret
+ 0402                   .dbend
+ 0402                   .dbfunc e clr_lcd _clr_lcd fV
+ 0402           ;          pages -> R20
+ 0402           ;              i -> R22
+                        .even
+ 0402           _clr_lcd::
+ 0402 0E940000          xcall push_gset2
+ 0406 2197              sbiw R28,1
+ 0408                   .dbline -1
+ 0408                   .dbline 206
+ 0408           ; 
+ 0408           ; void clr_lcd(void) /*清屏函数*/
+ 0408           ; {
+ 0408                   .dbline 208
+ 0408           ;     unsigned char pages,i;
+ 0408           ;     for(pages=0;pages<8;pages++)
+ 0408 4427              clr R20
+ 040A 18C0              xjmp L38
+ 040C           L35:
+ 040C                   .dbline 209
+ 040C           ;     {
+ 040C                   .dbline 210
+ 040C           ;         set_page_L(pages);  /* X 页地址 */
+ 040C 042F              mov R16,R20
+ 040E B0DF              xcall _set_page_L
+ 0410                   .dbline 211
+ 0410           ;         set_page_R(pages);  /* X 页地址 */
+ 0410 042F              mov R16,R20
+ 0412 BCDF              xcall _set_page_R
+ 0414                   .dbline 212
+ 0414           ;         for(i=0;i<64;i++)   
+ 0414 6627              clr R22
+ 0416 0FC0              xjmp L42
+ 0418           L39:
+ 0418                   .dbline 213
+ 0418                   .dbline 214
+ 0418 062F              mov R16,R22
+ 041A C6DF              xcall _set_col_addr_L
+ 041C                   .dbline 215
+ 041C 062F              mov R16,R22
+ 041E D2DF              xcall _set_col_addr_R
+ 0420                   .dbline 216
+ 0420 2224              clr R2
+ 0422 2882              std y+0,R2
+ 0424 21E0              ldi R18,1
+ 0426 0027              clr R16
+ 0428 A5DE              xcall _write_LCD
+ 042A                   .dbline 217
+ 042A 2224              clr R2
+ 042C 2882              std y+0,R2
+ 042E 21E0              ldi R18,1
+ 0430 01E0              ldi R16,1
+ 0432 A0DE              xcall _write_LCD
+ 0434                   .dbline 218
+ 0434           L40:
+ 0434                   .dbline 212
+ 0434 6395              inc R22
+ 0436           L42:
+ 0436                   .dbline 212
+ 0436 6034              cpi R22,64
+ 0438 78F3              brlo L39
+ 043A                   .dbline 219
+ 043A           L36:
+ 043A                   .dbline 208
+ 043A 4395              inc R20
+ 043C           L38:
+ 043C                   .dbline 208
+ 043C 4830              cpi R20,8
+ 043E 30F3              brlo L35
+ 0440                   .dbline -2
+ 0440                   .dbline 220
+ 0440           ;         {
+ 0440           ;             set_col_addr_L(i);//Y
+ 0440           ;             set_col_addr_R(i);//Y
+ 0440           ;             write_LCD(LEFT,DATA,0x0);
+ 0440           ;             write_LCD(RIGHT,DATA,0x0);
+ 0440           ;         }
+ 0440           ;     }
+ 0440           ; }
+ 0440           L34:
+ 0440 2196              adiw R28,1
+ 0442 0E940000          xcall pop_gset2
+ 0446                   .dbline 0 ; func end
+ 0446 0895              ret
+ 0448                   .dbsym r pages 20 c
+ 0448                   .dbsym r i 22 c
+ 0448                   .dbend
+                        .area lit(rom, con, rel)
+ 0000           _ASC_16::
+ 0000 31                .byte 49
+ 0001 0000              .byte 0,0
+ 0003 0808              .byte 8,8
+ 0005 FC00              .byte 252,0
+ 0007 0000              .byte 0,0
+ 0009 0000              .byte 0,0
+ 000B 0404              .byte 4,4
+ 000D 0704              .byte 7,4
+ 000F 0400              .byte 4,0
+ 0011 32                .byte 50
+ 0012 0000              .byte 0,0
+ 0014 0804              .byte 8,4
+ 0016 8444              .byte 132,'D
+ 0018 3800              .byte 56,0
+ 001A 0000              .byte 0,0
+ 001C 0605              .byte 6,5
+ 001E 0404              .byte 4,4
+ 0020 0400              .byte 4,0
+ 0022 33                .byte 51
+ 0023 0000              .byte 0,0
+ 0025 0804              .byte 8,4
+ 0027 4444              .byte 'D,'D
+ 0029 B800              .byte 184,0
+ 002B 0000              .byte 0,0
+ 002D 0204              .byte 2,4
+ 002F 0404              .byte 4,4
+ 0031 0300              .byte 3,0
+ 0033 34                .byte 52
+ 0034 0000              .byte 0,0
+ 0036 8060              .byte 128,96
+ 0038 18FC              .byte 24,252
+ 003A 0000              .byte 0,0
+ 003C 0000              .byte 0,0
+ 003E 0101              .byte 1,1
+ 0040 0507              .byte 5,7
+ 0042 0500              .byte 5,0
+ 0044 35                .byte 53
+ 0045 0000              .byte 0,0
+ 0047 7C44              .byte 124,'D
+ 0049 4444              .byte 'D,'D
+ 004B 8400              .byte 132,0
+ 004D 0000              .byte 0,0
+ 004F 0204              .byte 2,4
+ 0051 0404              .byte 4,4
+ 0053 0300              .byte 3,0
+ 0055 36                .byte 54
+ 0056 0000              .byte 0,0
+ 0058 F048              .byte 240,'H
+ 005A 4444              .byte 'D,'D
+ 005C 8000              .byte 128,0
+ 005E 0000              .byte 0,0
+ 0060 0304              .byte 3,4
+ 0062 0404              .byte 4,4
+ 0064 0300              .byte 3,0
+ 0066 37                .byte 55
+ 0067 0000              .byte 0,0
+ 0069 0C04              .byte 12,4
+ 006B 8464              .byte 132,'d
+ 006D 1C00              .byte 28,0
+ 006F 0000              .byte 0,0
+ 0071 0006              .byte 0,6
+ 0073 0100              .byte 1,0
+ 0075 0000              .byte 0,0
+ 0077 38                .byte 56
+ 0078 0000              .byte 0,0
+ 007A B844              .byte 184,'D
+ 007C 4444              .byte 'D,'D
+ 007E B800              .byte 184,0
+ 0080 0000              .byte 0,0
+ 0082 0304              .byte 3,4
+ 0084 0404              .byte 4,4
+ 0086 0300              .byte 3,0
+ 0088 39                .byte 57
+ 0089 0000              .byte 0,0
+ 008B 3844              .byte 56,'D
+ 008D 4444              .byte 'D,'D
+ 008F F800              .byte 248,0
+ 0091 0000              .byte 0,0
+ 0093 0004              .byte 0,4
+ 0095 0402              .byte 4,2
+ 0097 0100              .byte 1,0
+ 0099 30                .byte 48
+ 009A 0000              .byte 0,0
+ 009C F804              .byte 248,4
+ 009E 0404              .byte 4,4
+ 00A0 F800              .byte 248,0
+ 00A2 0000              .byte 0,0
+ 00A4 0304              .byte 3,4
+ 00A6 0404              .byte 4,4
+ 00A8 0300              .byte 3,0
+ 00AA 2E                .byte 46
+ 00AB 0000              .byte 0,0
+ 00AD 0000              .byte 0,0
+ 00AF 0000              .byte 0,0
+ 00B1 0000              .byte 0,0
+ 00B3 0000              .byte 0,0
+ 00B5 0000              .byte 0,0
+ 00B7 0400              .byte 4,0
+ 00B9 0000              .byte 0,0
+ 00BB 2C                .byte 44
+ 00BC 0000              .byte 0,0
+ 00BE 0000              .byte 0,0
+ 00C0 0000              .byte 0,0
+ 00C2 0000              .byte 0,0
+ 00C4 0000              .byte 0,0
+ 00C6 0008              .byte 0,8
+ 00C8 0400              .byte 4,0
+ 00CA 0000              .byte 0,0
+ 00CC 3A                .byte 58
+ 00CD 0000              .byte 0,0
+ 00CF 0000              .byte 0,0
+ 00D1 2000              .byte 32,0
+ 00D3 0000              .byte 0,0
+ 00D5 0000              .byte 0,0
+ 00D7 0000              .byte 0,0
+ 00D9 0400              .byte 4,0
+ 00DB 0000              .byte 0,0
+ 00DD 3B                .byte 59
+ 00DE 0000              .byte 0,0
+ 00E0 0000              .byte 0,0
+ 00E2 2000              .byte 32,0
+ 00E4 0000              .byte 0,0
+ 00E6 0000              .byte 0,0
+ 00E8 0008              .byte 0,8
+ 00EA 0400              .byte 4,0
+ 00EC 0000              .byte 0,0
+ 00EE 2D                .byte 45
+ 00EF 0080              .byte 0,128
+ 00F1 8080              .byte 128,128
+ 00F3 8080              .byte 128,128
+ 00F5 8080              .byte 128,128
+ 00F7 0000              .byte 0,0
+ 00F9 0000              .byte 0,0
+ 00FB 0000              .byte 0,0
+ 00FD 0000              .byte 0,0
+ 00FF 5F                .byte 95
+ 0100 0000              .byte 0,0
+ 0102 0000              .byte 0,0
+ 0104 0000              .byte 0,0
+ 0106 0000              .byte 0,0
+ 0108 1010              .byte 16,16
+ 010A 1010              .byte 16,16
+ 010C 1010              .byte 16,16
+ 010E 1010              .byte 16,16
+ 0110 41                .byte 'A
+ 0111 0000              .byte 0,0
+ 0113 8064              .byte 128,'d
+ 0115 1C60              .byte 28,96
+ 0117 8000              .byte 128,0
+ 0119 0004              .byte 0,4
+ 011B 0705              .byte 7,5
+ 011D 0105              .byte 1,5
+ 011F 0704              .byte 7,4
+ 0121 42                .byte 'B
+ 0122 0004              .byte 0,4
+ 0124 FC44              .byte 252,'D
+ 0126 4444              .byte 'D,'D
+ 0128 44B8              .byte 'D,184
+ 012A 0004              .byte 0,4
+ 012C 0704              .byte 7,4
+ 012E 0404              .byte 4,4
+ 0130 0403              .byte 4,3
+ 0132 43                .byte 'C
+ 0133 00F0              .byte 0,240
+ 0135 0804              .byte 8,4
+ 0137 0404              .byte 4,4
+ 0139 0408              .byte 4,8
+ 013B 0001              .byte 0,1
+ 013D 0204              .byte 2,4
+ 013F 0404              .byte 4,4
+ 0141 0402              .byte 4,2
+ 0143 44                .byte 'D
+ 0144 0004              .byte 0,4
+ 0146 FC04              .byte 252,4
+ 0148 0404              .byte 4,4
+ 014A 08F0              .byte 8,240
+ 014C 0004              .byte 0,4
+ 014E 0704              .byte 7,4
+ 0150 0404              .byte 4,4
+ 0152 0201              .byte 2,1
+ 0154 45                .byte 'E
+ 0155 0004              .byte 0,4
+ 0157 FC44              .byte 252,'D
+ 0159 44E4              .byte 'D,228
+ 015B 040C              .byte 4,12
+ 015D 0004              .byte 0,4
+ 015F 0704              .byte 7,4
+ 0161 0404              .byte 4,4
+ 0163 0406              .byte 4,6
+ 0165 46                .byte 'F
+ 0166 0004              .byte 0,4
+ 0168 FC44              .byte 252,'D
+ 016A 44E4              .byte 'D,228
+ 016C 040C              .byte 4,12
+ 016E 0004              .byte 0,4
+ 0170 0704              .byte 7,4
+ 0172 0400              .byte 4,0
+ 0174 0000              .byte 0,0
+ 0176 20                .byte 32
+ 0177 0000              .byte 0,0
+ 0179 0000              .byte 0,0
+ 017B 0000              .byte 0,0
+ 017D 0000              .byte 0,0
+ 017F 0000              .byte 0,0
+ 0181 0000              .byte 0,0
+ 0183 0000              .byte 0,0
+ 0185 0000              .byte 0,0
+ 0187 3D                .byte 61
+ 0188 0000              .byte 0,0
+ 018A A0A0              .byte 160,160
+ 018C A0A0              .byte 160,160
+ 018E A000              .byte 160,0
+ 0190 0000              .byte 0,0
+ 0192 0000              .byte 0,0
+ 0194 0000              .byte 0,0
+ 0196 0000              .byte 0,0
+ 0198 28                .byte 40
+ 0199 0000              .byte 0,0
+ 019B 00E0              .byte 0,224
+ 019D 1804              .byte 24,4
+ 019F 0000              .byte 0,0
+ 01A1 0000              .byte 0,0
+ 01A3 0003              .byte 0,3
+ 01A5 0C10              .byte 12,16
+ 01A7 0000              .byte 0,0
+ 01A9 29                .byte 41
+ 01AA 0000              .byte 0,0
+ 01AC 0004              .byte 0,4
+ 01AE 18E0              .byte 24,224
+ 01B0 0000              .byte 0,0
+ 01B2 0000              .byte 0,0
+ 01B4 0010              .byte 0,16
+ 01B6 0C03              .byte 12,3
+ 01B8 0000              .byte 0,0
+ 01BA 56                .byte 'V
+ 01BB 0004              .byte 0,4
+ 01BD 3CC4              .byte 60,196
+ 01BF 00C4              .byte 0,196
+ 01C1 3C04              .byte 60,4
+ 01C3 0000              .byte 0,0
+ 01C5 0001              .byte 0,1
+ 01C7 0601              .byte 6,1
+ 01C9 0000              .byte 0,0
+ 01CB 6D                .byte 'm
+ 01CC 0020              .byte 0,32
+ 01CE E020              .byte 224,32
+ 01D0 C020              .byte 192,32
+ 01D2 C000              .byte 192,0
+ 01D4 0004              .byte 0,4
+ 01D6 0700              .byte 7,0
+ 01D8 0700              .byte 7,0
+ 01DA 0704              .byte 7,4
+ 01DC 48                .byte 'H
+ 01DD 0004              .byte 0,4
+ 01DF FC44              .byte 252,'D
+ 01E1 4044              .byte 64,'D
+ 01E3 FC04              .byte 252,4
+ 01E5 0004              .byte 0,4
+ 01E7 0704              .byte 7,4
+ 01E9 0004              .byte 0,4
+ 01EB 0704              .byte 7,4
+ 01ED 2A                .byte 42
+ 01EE 9090              .byte 144,144
+ 01F0 60FC              .byte 96,252
+ 01F2 6090              .byte 96,144
+ 01F4 9000              .byte 144,0
+ 01F6 0000              .byte 0,0
+ 01F8 0003              .byte 0,3
+ 01FA 0000              .byte 0,0
+ 01FC 0000              .byte 0,0
+ 01FE                   .dbstruct 0 17 typFNT_ASC16
+ 01FE                   .dbfield 0 Index A[1:1]c
+ 01FE                   .dbfield 1 Msk A[16:16]c
+ 01FE                   .dbend
+ 01FE                   .dbsym e ASC_16 _ASC_16 A[510:30]kS[typFNT_ASC16]
+ 01FE           _GB_16::
+ 01FE BFC6              .byte 191,198
+ 0200 8A6A              .byte 138,'j
+ 0202 FE29              .byte 254,41
+ 0204 4980              .byte 'I,128
+ 0206 92A4              .byte 146,164
+ 0208 80FF              .byte 128,255
+ 020A 4000              .byte 64,0
+ 020C 0100              .byte 1,0
+ 020E 0700              .byte 7,0
+ 0210 0000              .byte 0,0
+ 0212 0000              .byte 0,0
+ 0214 0007              .byte 0,7
+ 0216 0000              .byte 0,0
+ 0218 BCBC              .byte 188,188
+ 021A 4444              .byte 'D,'D
+ 021C FF24              .byte 255,36
+ 021E 0064              .byte 0,'d
+ 0220 A43F              .byte 164,63
+ 0222 A464              .byte 164,'d
+ 0224 0400              .byte 4,0
+ 0226 0404              .byte 4,4
+ 0228 0700              .byte 7,0
+ 022A 0404              .byte 4,4
+ 022C 0201              .byte 2,1
+ 022E 0204              .byte 2,4
+ 0230 0400              .byte 4,0
+ 0232 D3D0              .byte 211,208
+ 0234 4222              .byte 'B,34
+ 0236 12FA              .byte 18,250
+ 0238 4E4B              .byte 'N,'K
+ 023A 4A4A              .byte 'J,'J
+ 023C FA02              .byte 250,2
+ 023E 0200              .byte 2,0
+ 0240 0000              .byte 0,0
+ 0242 0007              .byte 0,7
+ 0244 0101              .byte 1,1
+ 0246 0105              .byte 1,5
+ 0248 0700              .byte 7,0
+ 024A 0000              .byte 0,0
+ 024C CFDE              .byte 207,222
+ 024E FF81              .byte 255,129
+ 0250 99E7              .byte 153,231
+ 0252 00FF              .byte 0,255
+ 0254 25E5              .byte 37,229
+ 0256 25BF              .byte 37,191
+ 0258 4000              .byte 64,0
+ 025A 0700              .byte 7,0
+ 025C 0000              .byte 0,0
+ 025E 0007              .byte 0,7
+ 0260 0402              .byte 4,2
+ 0262 0102              .byte 1,2
+ 0264 0400              .byte 4,0
+ 0266 B9AB              .byte 185,171
+ 0268 2010              .byte 32,16
+ 026A 0807              .byte 8,7
+ 026C C030              .byte 192,48
+ 026E 830C              .byte 131,12
+ 0270 1020              .byte 16,32
+ 0272 2000              .byte 32,0
+ 0274 0004              .byte 0,4
+ 0276 0605              .byte 6,5
+ 0278 0404              .byte 4,4
+ 027A 0203              .byte 2,3
+ 027C 0600              .byte 6,0
+ 027E 0000              .byte 0,0
+ 0280 CBBE              .byte 203,190
+ 0282 0809              .byte 8,9
+ 0284 E929              .byte 233,41
+ 0286 2929              .byte 41,41
+ 0288 ED09              .byte 237,9
+ 028A 01FF              .byte 1,255
+ 028C 0000              .byte 0,0
+ 028E 0000              .byte 0,0
+ 0290 0101              .byte 1,1
+ 0292 0101              .byte 1,1
+ 0294 0104              .byte 1,4
+ 0296 0407              .byte 4,7
+ 0298 0000              .byte 0,0
+ 029A D2BA              .byte 210,186
+ 029C 19E2              .byte 25,226
+ 029E 1442              .byte 20,'B
+ 02A0 F22E              .byte 242,46
+ 02A2 728F              .byte 'r,143
+ 02A4 AA7A              .byte 170,'z
+ 02A6 0200              .byte 2,0
+ 02A8 0107              .byte 1,7
+ 02AA 0000              .byte 0,0
+ 02AC 0704              .byte 7,4
+ 02AE 0402              .byte 4,2
+ 02B0 0102              .byte 1,2
+ 02B2 0400              .byte 4,0
+ 02B4 BEA7              .byte 190,167
+ 02B6 00C0              .byte 0,192
+ 02B8 405F              .byte 64,95
+ 02BA D515              .byte 213,21
+ 02BC D555              .byte 213,'U
+ 02BE 5F40              .byte 95,64
+ 02C0 C000              .byte 192,0
+ 02C2 0007              .byte 0,7
+ 02C4 0505              .byte 5,5
+ 02C6 0700              .byte 7,0
+ 02C8 0705              .byte 7,5
+ 02CA 0505              .byte 5,5
+ 02CC 0700              .byte 7,0
+ 02CE CFD4              .byte 207,212
+ 02D0 0040              .byte 0,64
+ 02D2 9F15              .byte 159,21
+ 02D4 D515              .byte 213,21
+ 02D6 D515              .byte 213,21
+ 02D8 1FC0              .byte 31,192
+ 02DA 0000              .byte 0,0
+ 02DC 0404              .byte 4,4
+ 02DE 0504              .byte 5,4
+ 02E0 0704              .byte 7,4
+ 02E2 0706              .byte 7,6
+ 02E4 0504              .byte 5,4
+ 02E6 0400              .byte 4,0
+ 02E8 CABE              .byte 202,190
+ 02EA 1012              .byte 16,18
+ 02EC 9252              .byte 146,'R
+ 02EE 12F2              .byte 18,242
+ 02F0 1212              .byte 18,18
+ 02F2 5392              .byte 'S,146
+ 02F4 1000              .byte 16,0
+ 02F6 0201              .byte 2,1
+ 02F8 0004              .byte 0,4
+ 02FA 0407              .byte 4,7
+ 02FC 0000              .byte 0,0
+ 02FE 0000              .byte 0,0
+ 0300 0300              .byte 3,0
+ 0302 B5C4              .byte 181,196
+ 0304 FC44              .byte 252,'D
+ 0306 4645              .byte 'F,'E
+ 0308 FC10              .byte 252,16
+ 030A 2CC7              .byte 44,199
+ 030C 0404              .byte 4,4
+ 030E FC00              .byte 252,0
+ 0310 0702              .byte 7,2
+ 0312 0202              .byte 2,2
+ 0314 0700              .byte 7,0
+ 0316 0004              .byte 0,4
+ 0318 0404              .byte 4,4
+ 031A 0300              .byte 3,0
+ 031C B5DA              .byte 181,218
+ 031E 04EA              .byte 4,234
+ 0320 ABAE              .byte 171,174
+ 0322 AAFC              .byte 170,252
+ 0324 AAAB              .byte 170,171
+ 0326 AEBA              .byte 174,186
+ 0328 8200              .byte 130,0
+ 032A 0404              .byte 4,4
+ 032C 0201              .byte 2,1
+ 032E 0007              .byte 0,7
+ 0330 0002              .byte 0,2
+ 0332 0202              .byte 2,2
+ 0334 0100              .byte 1,0
+ 0336 D2BB              .byte 210,187
+ 0338 2020              .byte 32,32
+ 033A 2020              .byte 32,32
+ 033C 2020              .byte 32,32
+ 033E 2020              .byte 32,32
+ 0340 2030              .byte 32,48
+ 0342 2000              .byte 32,0
+ 0344 0000              .byte 0,0
+ 0346 0000              .byte 0,0
+ 0348 0000              .byte 0,0
+ 034A 0000              .byte 0,0
+ 034C 0000              .byte 0,0
+ 034E 0000              .byte 0,0
+ 0350 D0D0              .byte 208,208
+ 0352 4824              .byte 'H,36
+ 0354 F308              .byte 243,8
+ 0356 0909              .byte 9,9
+ 0358 0909              .byte 9,9
+ 035A F909              .byte 249,9
+ 035C 0800              .byte 8,0
+ 035E 0000              .byte 0,0
+ 0360 0700              .byte 7,0
+ 0362 0004              .byte 0,4
+ 0364 0404              .byte 4,4
+ 0366 0700              .byte 7,0
+ 0368 0000              .byte 0,0
+ 036A B6FE              .byte 182,254
+ 036C 0004              .byte 0,4
+ 036E 0404              .byte 4,4
+ 0370 0404              .byte 4,4
+ 0372 0404              .byte 4,4
+ 0374 0604              .byte 6,4
+ 0376 0000              .byte 0,0
+ 0378 0202              .byte 2,2
+ 037A 0202              .byte 2,2
+ 037C 0202              .byte 2,2
+ 037E 0202              .byte 2,2
+ 0380 0202              .byte 2,2
+ 0382 0200              .byte 2,0
+ 0384 C8FD              .byte 200,253
+ 0386 0002              .byte 0,2
+ 0388 2222              .byte 34,34
+ 038A 2222              .byte 34,34
+ 038C 2222              .byte 34,34
+ 038E 2302              .byte 35,2
+ 0390 0000              .byte 0,0
+ 0392 0404              .byte 4,4
+ 0394 0404              .byte 4,4
+ 0396 0404              .byte 4,4
+ 0398 0404              .byte 4,4
+ 039A 0406              .byte 4,6
+ 039C 0400              .byte 4,0
+ 039E CBC4              .byte 203,196
+ 03A0 00FF              .byte 0,255
+ 03A2 8141              .byte 129,'A
+ 03A4 3F01              .byte 63,1
+ 03A6 01FF              .byte 1,255
+ 03A8 8181              .byte 129,129
+ 03AA FF00              .byte 255,0
+ 03AC 0007              .byte 0,7
+ 03AE 0202              .byte 2,2
+ 03B0 0202              .byte 2,2
+ 03B2 0202              .byte 2,2
+ 03B4 0202              .byte 2,2
+ 03B6 0700              .byte 7,0
+ 03B8 CEE5              .byte 206,229
+ 03BA 0011              .byte 0,17
+ 03BC 1191              .byte 17,145
+ 03BE 7F11              .byte 127,17
+ 03C0 1111              .byte 17,17
+ 03C2 F101              .byte 241,1
+ 03C4 0000              .byte 0,0
+ 03C6 0404              .byte 4,4
+ 03C8 0407              .byte 4,7
+ 03CA 0404              .byte 4,4
+ 03CC 0404              .byte 4,4
+ 03CE 0704              .byte 7,4
+ 03D0 0400              .byte 4,0
+ 03D2                   .dbstruct 0 26 typFNT_GB16
+ 03D2                   .dbfield 0 Index A[2:2]c
+ 03D2                   .dbfield 2 Msk A[24:24]c
+ 03D2                   .dbend
+ 03D2                   .dbsym e GB_16 _GB_16 A[468:18]kS[typFNT_GB16]
+                        .area text(rom, con, rel)
+ 0448                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0448                   .dbfunc e GetPage _GetPage fc
+                        .even
+ 0448           _GetPage::
+ 0448                   .dbline -1
+ 0448                   .dbline 295
+ 0448           ; 
+ 0448           ; //ASCII 字模宽度及高度
+ 0448           ; #define ASC_CHR_WIDTH 8
+ 0448           ; #define ASC_CHR_HEIGHT        12
+ 0448           ; 
+ 0448           ; typedef struct typFNT_ASC16   /* 汉字字模显示数据结构 */
+ 0448           ; {
+ 0448           ;     char Index[1];
+ 0448           ;     char Msk[16];
+ 0448           ; };
+ 0448           ; const struct typFNT_ASC16  ASC_16[] = 
+ 0448           ; {     /* 显示为8*16  Curier 10 常规*/
+ 0448           ; "1",0x00,0x00,0x08,0x08,0xFC,0x00,0x00,0x00,0x00,0x00,0x04,0x04,0x07,0x04,0x04,0x00,
+ 0448           ; "2",0x00,0x00,0x08,0x04,0x84,0x44,0x38,0x00,0x00,0x00,0x06,0x05,0x04,0x04,0x04,0x00,
+ 0448           ; "3",0x00,0x00,0x08,0x04,0x44,0x44,0xB8,0x00,0x00,0x00,0x02,0x04,0x04,0x04,0x03,0x00,
+ 0448           ; "4",0x00,0x00,0x80,0x60,0x18,0xFC,0x00,0x00,0x00,0x00,0x01,0x01,0x05,0x07,0x05,0x00,
+ 0448           ; "5",0x00,0x00,0x7C,0x44,0x44,0x44,0x84,0x00,0x00,0x00,0x02,0x04,0x04,0x04,0x03,0x00,
+ 0448           ; "6",0x00,0x00,0xF0,0x48,0x44,0x44,0x80,0x00,0x00,0x00,0x03,0x04,0x04,0x04,0x03,0x00,
+ 0448           ; "7",0x00,0x00,0x0C,0x04,0x84,0x64,0x1C,0x00,0x00,0x00,0x00,0x06,0x01,0x00,0x00,0x00,
+ 0448           ; "8",0x00,0x00,0xB8,0x44,0x44,0x44,0xB8,0x00,0x00,0x00,0x03,0x04,0x04,0x04,0x03,0x00,
+ 0448           ; "9",0x00,0x00,0x38,0x44,0x44,0x44,0xF8,0x00,0x00,0x00,0x00,0x04,0x04,0x02,0x01,0x00,
+ 0448           ; "0",0x00,0x00,0xF8,0x04,0x04,0x04,0xF8,0x00,0x00,0x00,0x03,0x04,0x04,0x04,0x03,0x00,
+ 0448           ; ".",0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,
+ 0448           ; ",",0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x08,0x04,0x00,0x00,0x00,
+ 0448           ; ":",0x00,0x00,0x00,0x00,0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x04,0x00,0x00,0x00,
+ 0448           ; ";",0x00,0x00,0x00,0x00,0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x08,0x04,0x00,0x00,0x00,
+ 0448           ; "-",0x00,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+ 0448           ; "_",0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,
+ 0448           ; "A",0x00,0x00,0x80,0x64,0x1C,0x60,0x80,0x00,0x00,0x04,0x07,0x05,0x01,0x05,0x07,0x04,
+ 0448           ; "B",0x00,0x04,0xFC,0x44,0x44,0x44,0x44,0xB8,0x00,0x04,0x07,0x04,0x04,0x04,0x04,0x03,
+ 0448           ; "C",0x00,0xF0,0x08,0x04,0x04,0x04,0x04,0x08,0x00,0x01,0x02,0x04,0x04,0x04,0x04,0x02,
+ 0448           ; "D",0x00,0x04,0xFC,0x04,0x04,0x04,0x08,0xF0,0x00,0x04,0x07,0x04,0x04,0x04,0x02,0x01,
+ 0448           ; "E",0x00,0x04,0xFC,0x44,0x44,0xE4,0x04,0x0C,0x00,0x04,0x07,0x04,0x04,0x04,0x04,0x06,
+ 0448           ; "F",0x00,0x04,0xFC,0x44,0x44,0xE4,0x04,0x0C,0x00,0x04,0x07,0x04,0x04,0x00,0x00,0x00,
+ 0448           ; " ",0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+ 0448           ; "=",0x00,0x00,0xA0,0xA0,0xA0,0xA0,0xA0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+ 0448           ; "(",0x00,0x00,0x00,0xE0,0x18,0x04,0x00,0x00,0x00,0x00,0x00,0x03,0x0C,0x10,0x00,0x00,
+ 0448           ; ")",0x00,0x00,0x00,0x04,0x18,0xE0,0x00,0x00,0x00,0x00,0x00,0x10,0x0C,0x03,0x00,0x00,
+ 0448           ; "V",0x00,0x04,0x3C,0xC4,0x00,0xC4,0x3C,0x04,0x00,0x00,0x00,0x01,0x06,0x01,0x00,0x00,
+ 0448           ; "m",0x00,0x20,0xE0,0x20,0xC0,0x20,0xC0,0x00,0x00,0x04,0x07,0x00,0x07,0x00,0x07,0x04,
+ 0448           ; "H",0x00,0x04,0xFC,0x44,0x40,0x44,0xFC,0x04,0x00,0x04,0x07,0x04,0x00,0x04,0x07,0x04,
+ 0448           ; "*",0x90,0x90,0x60,0xFC,0x60,0x90,0x90,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x00,
+ 0448           ; };
+ 0448           ; 
+ 0448           ; #define ASC_HZ_WIDTH  12
+ 0448           ; //#define ASC_HZ_HEIGHT       12
+ 0448           ; 
+ 0448           ; typedef struct typFNT_GB16    /*12*16 汉字字模显示数据结构 */
+ 0448           ; {
+ 0448           ;       char Index[2];
+ 0448           ;       char Msk[24];
+ 0448           ; };
+ 0448           ; const struct typFNT_GB16  GB_16[] = { /* 宋体 9 显示为12*16 */
+ 0448           ; "科",0x8A,0x6A,0xFE,0x29,0x49,0x80,0x92,0xA4,0x80,0xFF,0x40,0x00,0x01,0x00,0x07,0x00,0x00,0x00,0x00,0x00,0x00,0x07,0x00,0x00,
+ 0448           ; "技",0x44,0x44,0xFF,0x24,0x00,0x64,0xA4,0x3F,0xA4,0x64,0x04,0x00,0x04,0x04,0x07,0x00,0x04,0x04,0x02,0x01,0x02,0x04,0x04,0x00,
+ 0448           ; "有",0x42,0x22,0x12,0xFA,0x4E,0x4B,0x4A,0x4A,0xFA,0x02,0x02,0x00,0x00,0x00,0x00,0x07,0x01,0x01,0x01,0x05,0x07,0x00,0x00,0x00,
+ 0448           ; "限",0xFF,0x81,0x99,0xE7,0x00,0xFF,0x25,0xE5,0x25,0xBF,0x40,0x00,0x07,0x00,0x00,0x00,0x00,0x07,0x04,0x02,0x01,0x02,0x04,0x00,
+ 0448           ; "公",0x20,0x10,0x08,0x07,0xC0,0x30,0x83,0x0C,0x10,0x20,0x20,0x00,0x00,0x04,0x06,0x05,0x04,0x04,0x02,0x03,0x06,0x00,0x00,0x00,
+ 0448           ; "司",0x08,0x09,0xE9,0x29,0x29,0x29,0xED,0x09,0x01,0xFF,0x00,0x00,0x00,0x00,0x01,0x01,0x01,0x01,0x01,0x04,0x04,0x07,0x00,0x00,
+ 0448           ; "液",0x19,0xE2,0x14,0x42,0xF2,0x2E,0x72,0x8F,0xAA,0x7A,0x02,0x00,0x01,0x07,0x00,0x00,0x07,0x04,0x04,0x02,0x01,0x02,0x04,0x00,
+ 0448           ; "晶",0x00,0xC0,0x40,0x5F,0xD5,0x15,0xD5,0x55,0x5F,0x40,0xC0,0x00,0x00,0x07,0x05,0x05,0x07,0x00,0x07,0x05,0x05,0x05,0x07,0x00,
+ 0448           ; "显",0x00,0x40,0x9F,0x15,0xD5,0x15,0xD5,0x15,0x1F,0xC0,0x00,0x00,0x04,0x04,0x05,0x04,0x07,0x04,0x07,0x06,0x05,0x04,0x04,0x00,
+ 0448           ; "示",0x10,0x12,0x92,0x52,0x12,0xF2,0x12,0x12,0x53,0x92,0x10,0x00,0x02,0x01,0x00,0x04,0x04,0x07,0x00,0x00,0x00,0x00,0x03,0x00,
+ 0448           ; "的",0xFC,0x44,0x46,0x45,0xFC,0x10,0x2C,0xC7,0x04,0x04,0xFC,0x00,0x07,0x02,0x02,0x02,0x07,0x00,0x00,0x04,0x04,0x04,0x03,0x00,
+ 0448           ; "第",0x04,0xEA,0xAB,0xAE,0xAA,0xFC,0xAA,0xAB,0xAE,0xBA,0x82,0x00,0x04,0x04,0x02,0x01,0x00,0x07,0x00,0x02,0x02,0x02,0x01,0x00,
+ 0448           ; "一",0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x30,0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+ 0448           ; "行",0x48,0x24,0xF3,0x08,0x09,0x09,0x09,0x09,0xF9,0x09,0x08,0x00,0x00,0x00,0x07,0x00,0x00,0x04,0x04,0x04,0x07,0x00,0x00,0x00,
+ 0448           ; "二",0x00,0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x06,0x04,0x00,0x00,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x00,
+ 0448           ; "三",0x00,0x02,0x22,0x22,0x22,0x22,0x22,0x22,0x23,0x02,0x00,0x00,0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x06,0x04,0x00,
+ 0448           ; "四",0x00,0xFF,0x81,0x41,0x3F,0x01,0x01,0xFF,0x81,0x81,0xFF,0x00,0x00,0x07,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x07,0x00,
+ 0448           ; "五",0x00,0x11,0x11,0x91,0x7F,0x11,0x11,0x11,0xF1,0x01,0x00,0x00,0x04,0x04,0x04,0x07,0x04,0x04,0x04,0x04,0x07,0x04,0x04,0x00,
+ 0448           ; };
+ 0448           ; 
+ 0448           ; unsigned char GetPage(void) /*得到当前页*/
+ 0448           ; {
+ 0448                   .dbline 296
+ 0448           ;       return CurPage;
+ 0448 00910100          lds R16,_CurPage
+ 044C                   .dbline -2
+ 044C           L43:
+ 044C                   .dbline 0 ; func end
+ 044C 0895              ret
+ 044E                   .dbend
+ 044E                   .dbfunc e GetCol _GetCol fc
+                        .even
+ 044E           _GetCol::
+ 044E                   .dbline -1
+ 044E                   .dbline 300
+ 044E           ; }
+ 044E           ; 
+ 044E           ; unsigned char GetCol(void) /*得到当前列*/
+ 044E           ; {
+ 044E                   .dbline 301
+ 044E           ;       return CurCol;
+ 044E 00910000          lds R16,_CurCol
+ 0452                   .dbline -2
+ 0452           L44:
+ 0452                   .dbline 0 ; func end
+ 0452 0895              ret
+ 0454                   .dbend
+ 0454                   .dbfunc e SetPageCol _SetPageCol fV
+ 0454           ;           ucol -> R20
+ 0454           ;          upage -> R22
+                        .even
+ 0454           _SetPageCol::
+ 0454 0E940000          xcall push_gset2
+ 0458 422F              mov R20,R18
+ 045A 602F              mov R22,R16
+ 045C                   .dbline -1
+ 045C                   .dbline 305
+ 045C           ; }
+ 045C           ; 
+ 045C           ; void SetPageCol(unsigned char upage, unsigned char ucol) /* 设置液晶的页和列 */
+ 045C           ; {
+ 045C                   .dbline 306
+ 045C           ;       CurPage = upage;
+ 045C 60930100          sts _CurPage,R22
+ 0460                   .dbline 307
+ 0460           ;       CurCol = ucol;
+ 0460 40930000          sts _CurCol,R20
+ 0464                   .dbline 308
+ 0464           ;       if(ucol<64)
+ 0464 4034              cpi R20,64
+ 0466 28F4              brsh L46
+ 0468                   .dbline 309
+ 0468           ;       {
+ 0468                   .dbline 310
+ 0468           ;               set_page_L(upage);
+ 0468 062F              mov R16,R22
+ 046A 82DF              xcall _set_page_L
+ 046C                   .dbline 311
+ 046C           ;               set_col_addr_L(ucol);
+ 046C 042F              mov R16,R20
+ 046E 9CDF              xcall _set_col_addr_L
+ 0470                   .dbline 312
+ 0470           ;       }
+ 0470 05C0              xjmp L47
+ 0472           L46:
+ 0472                   .dbline 314
+ 0472                   .dbline 315
+ 0472 062F              mov R16,R22
+ 0474 8BDF              xcall _set_page_R
+ 0476                   .dbline 316
+ 0476 042F              mov R16,R20
+ 0478 0054              subi R16,64
+ 047A A4DF              xcall _set_col_addr_R
+ 047C                   .dbline 317
+ 047C           L47:
+ 047C                   .dbline -2
+ 047C                   .dbline 318
+ 047C           ;       else
+ 047C           ;       {
+ 047C           ;               set_page_R(upage);
+ 047C           ;               set_col_addr_R(ucol-64);
+ 047C           ;       }
+ 047C           ; }
+ 047C           L45:
+ 047C 0E940000          xcall pop_gset2
+ 0480                   .dbline 0 ; func end
+ 0480 0895              ret
+ 0482                   .dbsym r ucol 20 c
+ 0482                   .dbsym r upage 22 c
+ 0482                   .dbend
+ 0482                   .dbfunc e SetRowCol _SetRowCol fV
+ 0482           ;           page -> R20
+ 0482           ;           ucol -> R22
+ 0482           ;           urow -> R20
+                        .even
+ 0482           _SetRowCol::
+ 0482 0E940000          xcall push_gset2
+ 0486 622F              mov R22,R18
+ 0488 402F              mov R20,R16
+ 048A                   .dbline -1
+ 048A                   .dbline 322
+ 048A           ; 
+ 048A           ; /* 设置当前显示的页和列 */
+ 048A           ; void SetRowCol(unsigned char urow, unsigned char ucol) 
+ 048A           ; {
+ 048A                   .dbline 324
+ 048A           ;       unsigned char page;
+ 048A           ;       CurRow = urow;
+ 048A 40930200          sts _CurRow,R20
+ 048E                   .dbline 325
+ 048E           ;       CurCol = ucol;
+ 048E 60930000          sts _CurCol,R22
+ 0492                   .dbline 327
+ 0492           ;       
+ 0492           ;       switch(urow)
+ 0492 5527              clr R21
+ 0494 4130              cpi R20,1
+ 0496 E0E0              ldi R30,0
+ 0498 5E07              cpc R21,R30
+ 049A 89F0              breq L52
+ 049C 4230              cpi R20,2
+ 049E E0E0              ldi R30,0
+ 04A0 5E07              cpc R21,R30
+ 04A2 91F0              breq L53
+ 04A4 4330              cpi R20,3
+ 04A6 E0E0              ldi R30,0
+ 04A8 5E07              cpc R21,R30
+ 04AA 99F0              breq L54
+ 04AC 4430              cpi R20,4
+ 04AE E0E0              ldi R30,0
+ 04B0 5E07              cpc R21,R30
+ 04B2 A1F0              breq L55
+ 04B4 4530              cpi R20,5
+ 04B6 E0E0              ldi R30,0
+ 04B8 5E07              cpc R21,R30
+ 04BA A9F0              breq L56
+ 04BC 18C0              xjmp L49
+ 04BE           X0:
+ 04BE                   .dbline 328
+ 04BE           ;       {
+ 04BE           L52:
+ 04BE                   .dbline 330
+ 04BE           ;               case 1:
+ 04BE           ;                       page=0;
+ 04BE 4427              clr R20
+ 04C0                   .dbline 331
+ 04C0           ;                       CurOffset=1;
+ 04C0 81E0              ldi R24,1
+ 04C2 80930300          sts _CurOffset,R24
+ 04C6                   .dbline 332
+ 04C6           ;                       break;
+ 04C6 13C0              xjmp L50
+ 04C8           L53:
+ 04C8                   .dbline 334
+ 04C8           ;               case 2:
+ 04C8           ;                       page=1;
+ 04C8 41E0              ldi R20,1
+ 04CA                   .dbline 335
+ 04CA           ;                       CurOffset=2;
+ 04CA 82E0              ldi R24,2
+ 04CC 80930300          sts _CurOffset,R24
+ 04D0                   .dbline 336
+ 04D0           ;                       break;
+ 04D0 0EC0              xjmp L50
+ 04D2           L54:
+ 04D2                   .dbline 338
+ 04D2           ;               case 3:
+ 04D2           ;                       page=3;
+ 04D2 43E0              ldi R20,3
+ 04D4                   .dbline 339
+ 04D4           ;                       CurOffset=1;
+ 04D4 81E0              ldi R24,1
+ 04D6 80930300          sts _CurOffset,R24
+ 04DA                   .dbline 340
+ 04DA           ;                       break;
+ 04DA 09C0              xjmp L50
+ 04DC           L55:
+ 04DC                   .dbline 342
+ 04DC           ;               case 4:
+ 04DC           ;                       page=4;
+ 04DC 44E0              ldi R20,4
+ 04DE                   .dbline 343
+ 04DE           ;                       CurOffset=2;
+ 04DE 82E0              ldi R24,2
+ 04E0 80930300          sts _CurOffset,R24
+ 04E4                   .dbline 344
+ 04E4           ;                       break;
+ 04E4 04C0              xjmp L50
+ 04E6           L56:
+ 04E6                   .dbline 346
+ 04E6           ;               case 5:
+ 04E6           ;                       page=6;
+ 04E6 46E0              ldi R20,6
+ 04E8                   .dbline 347
+ 04E8           ;                       CurOffset=1;
+ 04E8 81E0              ldi R24,1
+ 04EA 80930300          sts _CurOffset,R24
+ 04EE                   .dbline 348
+ 04EE           ;                       break;
+ 04EE           L49:
+ 04EE           L50:
+ 04EE                   .dbline 350
+ 04EE           ;       }
+ 04EE           ;       SetPageCol(page,ucol);
+ 04EE 262F              mov R18,R22
+ 04F0 042F              mov R16,R20
+ 04F2 B0DF              xcall _SetPageCol
+ 04F4                   .dbline -2
+ 04F4                   .dbline 351
+ 04F4           ; }
+ 04F4           L48:
+ 04F4 0E940000          xcall pop_gset2
+ 04F8                   .dbline 0 ; func end
+ 04F8 0895              ret
+ 04FA                   .dbsym r page 20 c
+ 04FA                   .dbsym r ucol 22 c
+ 04FA                   .dbsym r urow 20 c
+ 04FA                   .dbend
+ 04FA                   .dbfunc e disp_ch _disp_ch fV
+ 04FA           ;          width -> R22
+ 04FA           ;            len -> R22
+ 04FA           ;          uPage -> y+2
+ 04FA           ;           ch_r -> R10
+ 04FA           ;           uCol -> y+1
+ 04FA           ;           ch_w -> R14
+ 04FA           ;              k -> R20
+ 04FA           ;              j -> R12
+ 04FA           ;              c -> R10
+                        .even
+ 04FA           _disp_ch::
+ 04FA 0E940000          xcall push_gset5
+ 04FE A02E              mov R10,R16
+ 0500 2397              sbiw R28,3
+ 0502                   .dbline -1
+ 0502                   .dbline 354
+ 0502           ; 
+ 0502           ; void disp_ch(unsigned char c)
+ 0502           ; {
+ 0502                   .dbline 358
+ 0502           ;       unsigned char k,j,uPage,uCol,ch_r,ch_w;
+ 0502           ;       unsigned char width;
+ 0502           ;       unsigned char len;
+ 0502           ;       uPage = GetPage();
+ 0502 A2DF              xcall _GetPage
+ 0504 0A83              std y+2,R16
+ 0506                   .dbline 359
+ 0506           ;       uCol = GetCol();
+ 0506 A3DF              xcall _GetCol
+ 0508 0983              std y+1,R16
+ 050A                   .dbline 360
+ 050A           ;       len=sizeof(ASC_16)/sizeof(ASC_16[0]);
+ 050A 6EE1              ldi R22,30
+ 050C                   .dbline 361
+ 050C           ;       for(k=0;k<len;k++)
+ 050C 4427              clr R20
+ 050E 0CC0              xjmp L61
+ 0510           L58:
+ 0510                   .dbline 362
+ 0510           ;       {
+ 0510                   .dbline 363
+ 0510           ;               if(c == ASC_16[k].Index[0] ) break;
+ 0510 81E1              ldi R24,17
+ 0512 849F              mul R24,R20
+ 0514 F001              movw R30,R0
+ 0516 80E0              ldi R24,<_ASC_16
+ 0518 90E0              ldi R25,>_ASC_16
+ 051A E80F              add R30,R24
+ 051C F91F              adc R31,R25
+ 051E E491              lpm R30,Z
+ 0520 AE16              cp R10,R30
+ 0522 09F4              brne L62
+ 0524                   .dbline 363
+ 0524 03C0              xjmp L60
+ 0526           L62:
+ 0526                   .dbline 364
+ 0526           L59:
+ 0526                   .dbline 361
+ 0526 4395              inc R20
+ 0528           L61:
+ 0528                   .dbline 361
+ 0528 4617              cp R20,R22
+ 052A 90F3              brlo L58
+ 052C           L60:
+ 052C                   .dbline 365
+ 052C           ;       }
+ 052C           ;       if(k<len)
+ 052C 4617              cp R20,R22
+ 052E 08F0              brlo X1
+ 0530 F1C0              xjmp L64
+ 0532           X1:
+ 0532                   .dbline 366
+ 0532           ;       {
+ 0532                   .dbline 368
+ 0532           ;               
+ 0532           ;               if(c=='-'||c==':') 
+ 0532 8A2D              mov R24,R10
+ 0534 8D32              cpi R24,45
+ 0536 11F0              breq L68
+ 0538 8A33              cpi R24,58
+ 053A 11F4              brne L66
+ 053C           L68:
+ 053C                   .dbline 369
+ 053C           ;                       width=ASC_CHR_WIDTH-2;
+ 053C 66E0              ldi R22,6
+ 053E 06C0              xjmp L67
+ 0540           L66:
+ 0540                   .dbline 370
+ 0540           ;               else if(c=='|')
+ 0540 8A2D              mov R24,R10
+ 0542 8C37              cpi R24,124
+ 0544 11F4              brne L69
+ 0546                   .dbline 371
+ 0546           ;                       width=ASC_HZ_WIDTH-ASC_CHR_WIDTH;
+ 0546 64E0              ldi R22,4
+ 0548 01C0              xjmp L70
+ 054A           L69:
+ 054A                   .dbline 373
+ 054A           ;               else 
+ 054A           ;                       width=ASC_CHR_WIDTH;
+ 054A 68E0              ldi R22,8
+ 054C           L70:
+ 054C           L67:
+ 054C                   .dbline 375
+ 054C           ;               
+ 054C           ;               if(CurOffset==1) //下半部是写半个字节
+ 054C 80910300          lds R24,_CurOffset
+ 0550 8130              cpi R24,1
+ 0552 09F0              breq X2
+ 0554 62C0              xjmp L71
+ 0556           X2:
+ 0556                   .dbline 376
+ 0556           ;               {
+ 0556                   .dbline 377
+ 0556           ;                       for(j=0;j<width;j++)
+ 0556 CC24              clr R12
+ 0558 1EC0              xjmp L76
+ 055A           L73:
+ 055A                   .dbline 378
+ 055A           ;                       {
+ 055A                   .dbline 379
+ 055A           ;                               SetPageCol(uPage,uCol+j);
+ 055A 2981              ldd R18,y+1
+ 055C 2C0D              add R18,R12
+ 055E 0A81              ldd R16,y+2
+ 0560 79DF              xcall _SetPageCol
+ 0562                   .dbline 380
+ 0562           ;                               ch_w=ASC_16[k].Msk[j];
+ 0562 81E1              ldi R24,17
+ 0564 849F              mul R24,R20
+ 0566 1001              movw R2,R0
+ 0568 80E0              ldi R24,<_ASC_16+1
+ 056A 90E0              ldi R25,>_ASC_16+1
+ 056C 280E              add R2,R24
+ 056E 391E              adc R3,R25
+ 0570 EC2D              mov R30,R12
+ 0572 FF27              clr R31
+ 0574 E20D              add R30,R2
+ 0576 F31D              adc R31,R3
+ 0578 E490              lpm R14,Z
+ 057A                   .dbline 381
+ 057A           ;                               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 057A 8981              ldd R24,y+1
+ 057C 8C0D              add R24,R12
+ 057E 8034              cpi R24,64
+ 0580 28F4              brsh L78
+ 0582                   .dbline 381
+ 0582 E882              std y+0,R14
+ 0584 21E0              ldi R18,1
+ 0586 0027              clr R16
+ 0588 F5DD              xcall _write_LCD
+ 058A 04C0              xjmp L79
+ 058C           L78:
+ 058C                   .dbline 382
+ 058C           ;                               else write_LCD(RIGHT,DATA,ch_w);
+ 058C E882              std y+0,R14
+ 058E 21E0              ldi R18,1
+ 0590 01E0              ldi R16,1
+ 0592 F0DD              xcall _write_LCD
+ 0594           L79:
+ 0594                   .dbline 383
+ 0594           L74:
+ 0594                   .dbline 377
+ 0594 C394              inc R12
+ 0596           L76:
+ 0596                   .dbline 377
+ 0596 C616              cp R12,R22
+ 0598 00F3              brlo L73
+ 059A                   .dbline 384
+ 059A           ;                       }
+ 059A           ;                       SetPageCol(uPage+1,uCol);
+ 059A 2981              ldd R18,y+1
+ 059C 0A81              ldd R16,y+2
+ 059E 0F5F              subi R16,255    ; addi 1
+ 05A0 59DF              xcall _SetPageCol
+ 05A2                   .dbline 386
+ 05A2           ;                       
+ 05A2           ;                       for(j=0;j<width;j++)
+ 05A2 CC24              clr R12
+ 05A4 36C0              xjmp L83
+ 05A6           L80:
+ 05A6                   .dbline 387
+ 05A6           ;                       {
+ 05A6                   .dbline 388
+ 05A6           ;                               SetPageCol(uPage+1,uCol+j);
+ 05A6 2981              ldd R18,y+1
+ 05A8 2C0D              add R18,R12
+ 05AA 0A81              ldd R16,y+2
+ 05AC 0F5F              subi R16,255    ; addi 1
+ 05AE 52DF              xcall _SetPageCol
+ 05B0                   .dbline 389
+ 05B0           ;                               if(uCol+j<64) ch_r=read_LCD(LEFT);
+ 05B0 8981              ldd R24,y+1
+ 05B2 8C0D              add R24,R12
+ 05B4 8034              cpi R24,64
+ 05B6 20F4              brsh L84
+ 05B8                   .dbline 389
+ 05B8 0027              clr R16
+ 05BA 2DDE              xcall _read_LCD
+ 05BC A02E              mov R10,R16
+ 05BE 03C0              xjmp L85
+ 05C0           L84:
+ 05C0                   .dbline 390
+ 05C0           ;                               else ch_r=read_LCD(RIGHT);
+ 05C0 01E0              ldi R16,1
+ 05C2 29DE              xcall _read_LCD
+ 05C4 A02E              mov R10,R16
+ 05C6           L85:
+ 05C6                   .dbline 391
+ 05C6           ;                               ch_r&=0xf0;
+ 05C6 8A2D              mov R24,R10
+ 05C8 807F              andi R24,240
+ 05CA A82E              mov R10,R24
+ 05CC                   .dbline 392
+ 05CC           ;                               ch_w=ASC_16[k].Msk[ASC_CHR_WIDTH+j]&0x0f; 
+ 05CC 81E1              ldi R24,17
+ 05CE 849F              mul R24,R20
+ 05D0 1001              movw R2,R0
+ 05D2 80E0              ldi R24,<_ASC_16+1
+ 05D4 90E0              ldi R25,>_ASC_16+1
+ 05D6 280E              add R2,R24
+ 05D8 391E              adc R3,R25
+ 05DA EC2D              mov R30,R12
+ 05DC FF27              clr R31
+ 05DE 3896              adiw R30,8
+ 05E0 E20D              add R30,R2
+ 05E2 F31D              adc R31,R3
+ 05E4 E491              lpm R30,Z
+ 05E6 EF70              andi R30,15
+ 05E8 EE2E              mov R14,R30
+ 05EA                   .dbline 393
+ 05EA           ;                               ch_w|=ch_r;
+ 05EA EA28              or R14,R10
+ 05EC                   .dbline 394
+ 05EC           ;                               SetPageCol(uPage+1,uCol+j);
+ 05EC 2981              ldd R18,y+1
+ 05EE 2C0D              add R18,R12
+ 05F0 0A81              ldd R16,y+2
+ 05F2 0F5F              subi R16,255    ; addi 1
+ 05F4 2FDF              xcall _SetPageCol
+ 05F6                   .dbline 395
+ 05F6           ;                               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 05F6 8981              ldd R24,y+1
+ 05F8 8C0D              add R24,R12
+ 05FA 8034              cpi R24,64
+ 05FC 28F4              brsh L87
+ 05FE                   .dbline 395
+ 05FE E882              std y+0,R14
+ 0600 21E0              ldi R18,1
+ 0602 0027              clr R16
+ 0604 B7DD              xcall _write_LCD
+ 0606 04C0              xjmp L88
+ 0608           L87:
+ 0608                   .dbline 396
+ 0608           ;                               else write_LCD(RIGHT,DATA,ch_w); 
+ 0608 E882              std y+0,R14
+ 060A 21E0              ldi R18,1
+ 060C 01E0              ldi R16,1
+ 060E B2DD              xcall _write_LCD
+ 0610           L88:
+ 0610                   .dbline 397
+ 0610           L81:
+ 0610                   .dbline 386
+ 0610 C394              inc R12
+ 0612           L83:
+ 0612                   .dbline 386
+ 0612 C616              cp R12,R22
+ 0614 08F4              brsh X3
+ 0616 C7CF              xjmp L80
+ 0618           X3:
+ 0618                   .dbline 398
+ 0618           ;                       }
+ 0618           ;               }
+ 0618 7DC0              xjmp L72
+ 061A           L71:
+ 061A                   .dbline 400
+ 061A           ;               else //上半部是写半个字节
+ 061A           ;               {
+ 061A                   .dbline 401
+ 061A           ;                       for(j=0;j<width;j++)
+ 061A CC24              clr R12
+ 061C 35C0              xjmp L92
+ 061E           L89:
+ 061E                   .dbline 402
+ 061E           ;                       {
+ 061E                   .dbline 403
+ 061E           ;                               SetPageCol(uPage,uCol+j);
+ 061E 2981              ldd R18,y+1
+ 0620 2C0D              add R18,R12
+ 0622 0A81              ldd R16,y+2
+ 0624 17DF              xcall _SetPageCol
+ 0626                   .dbline 404
+ 0626           ;                               if(uCol+j<64) ch_r=read_LCD(LEFT);
+ 0626 8981              ldd R24,y+1
+ 0628 8C0D              add R24,R12
+ 062A 8034              cpi R24,64
+ 062C 20F4              brsh L93
+ 062E                   .dbline 404
+ 062E 0027              clr R16
+ 0630 F2DD              xcall _read_LCD
+ 0632 A02E              mov R10,R16
+ 0634 03C0              xjmp L94
+ 0636           L93:
+ 0636                   .dbline 405
+ 0636           ;                               else ch_r=read_LCD(RIGHT);
+ 0636 01E0              ldi R16,1
+ 0638 EEDD              xcall _read_LCD
+ 063A A02E              mov R10,R16
+ 063C           L94:
+ 063C                   .dbline 406
+ 063C           ;                               ch_r&=0x0f;
+ 063C 8A2D              mov R24,R10
+ 063E 8F70              andi R24,15
+ 0640 A82E              mov R10,R24
+ 0642                   .dbline 407
+ 0642           ;                               ch_w=ASC_16[k].Msk[j];
+ 0642 81E1              ldi R24,17
+ 0644 849F              mul R24,R20
+ 0646 1001              movw R2,R0
+ 0648 80E0              ldi R24,<_ASC_16+1
+ 064A 90E0              ldi R25,>_ASC_16+1
+ 064C 280E              add R2,R24
+ 064E 391E              adc R3,R25
+ 0650 EC2D              mov R30,R12
+ 0652 FF27              clr R31
+ 0654 E20D              add R30,R2
+ 0656 F31D              adc R31,R3
+ 0658 E490              lpm R14,Z
+ 065A                   .dbline 408
+ 065A           ;                               ch_w=ch_w<<4;
+ 065A 8E2D              mov R24,R14
+ 065C 8F70              andi R24,#0x0F
+ 065E 8295              swap R24
+ 0660 E82E              mov R14,R24
+ 0662                   .dbline 409
+ 0662           ;                               ch_w|=ch_r;
+ 0662 EA28              or R14,R10
+ 0664                   .dbline 410
+ 0664           ;                               SetPageCol(uPage,uCol+j);
+ 0664 2981              ldd R18,y+1
+ 0666 2C0D              add R18,R12
+ 0668 0A81              ldd R16,y+2
+ 066A F4DE              xcall _SetPageCol
+ 066C                   .dbline 411
+ 066C           ;                               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 066C 8981              ldd R24,y+1
+ 066E 8C0D              add R24,R12
+ 0670 8034              cpi R24,64
+ 0672 28F4              brsh L96
+ 0674                   .dbline 411
+ 0674 E882              std y+0,R14
+ 0676 21E0              ldi R18,1
+ 0678 0027              clr R16
+ 067A 7CDD              xcall _write_LCD
+ 067C 04C0              xjmp L97
+ 067E           L96:
+ 067E                   .dbline 412
+ 067E           ;                               else write_LCD(RIGHT,DATA,ch_w); 
+ 067E E882              std y+0,R14
+ 0680 21E0              ldi R18,1
+ 0682 01E0              ldi R16,1
+ 0684 77DD              xcall _write_LCD
+ 0686           L97:
+ 0686                   .dbline 413
+ 0686           L90:
+ 0686                   .dbline 401
+ 0686 C394              inc R12
+ 0688           L92:
+ 0688                   .dbline 401
+ 0688 C616              cp R12,R22
+ 068A 08F4              brsh X4
+ 068C C8CF              xjmp L89
+ 068E           X4:
+ 068E                   .dbline 414
+ 068E           ;                       }
+ 068E           ;                       SetPageCol(uPage+1,uCol);
+ 068E 2981              ldd R18,y+1
+ 0690 0A81              ldd R16,y+2
+ 0692 0F5F              subi R16,255    ; addi 1
+ 0694 DFDE              xcall _SetPageCol
+ 0696                   .dbline 415
+ 0696           ;                       for(j=0;j<width;j++)
+ 0696 CC24              clr R12
+ 0698 3AC0              xjmp L101
+ 069A           L98:
+ 069A                   .dbline 416
+ 069A           ;                       {
+ 069A                   .dbline 417
+ 069A           ;                               SetPageCol(uPage+1,uCol+j);
+ 069A 2981              ldd R18,y+1
+ 069C 2C0D              add R18,R12
+ 069E 0A81              ldd R16,y+2
+ 06A0 0F5F              subi R16,255    ; addi 1
+ 06A2 D8DE              xcall _SetPageCol
+ 06A4                   .dbline 419
+ 06A4           ;                               
+ 06A4           ;                               ch_r=ASC_16[k].Msk[j];
+ 06A4 81E1              ldi R24,17
+ 06A6 849F              mul R24,R20
+ 06A8 1001              movw R2,R0
+ 06AA 80E0              ldi R24,<_ASC_16+1
+ 06AC 90E0              ldi R25,>_ASC_16+1
+ 06AE 280E              add R2,R24
+ 06B0 391E              adc R3,R25
+ 06B2 EC2D              mov R30,R12
+ 06B4 FF27              clr R31
+ 06B6 E20D              add R30,R2
+ 06B8 F31D              adc R31,R3
+ 06BA A490              lpm R10,Z
+ 06BC                   .dbline 420
+ 06BC           ;                               ch_w=ASC_16[k].Msk[ASC_CHR_WIDTH+j];
+ 06BC 81E1              ldi R24,17
+ 06BE 849F              mul R24,R20
+ 06C0 1001              movw R2,R0
+ 06C2 80E0              ldi R24,<_ASC_16+1
+ 06C4 90E0              ldi R25,>_ASC_16+1
+ 06C6 280E              add R2,R24
+ 06C8 391E              adc R3,R25
+ 06CA EC2D              mov R30,R12
+ 06CC FF27              clr R31
+ 06CE 3896              adiw R30,8
+ 06D0 E20D              add R30,R2
+ 06D2 F31D              adc R31,R3
+ 06D4 E490              lpm R14,Z
+ 06D6                   .dbline 421
+ 06D6           ;                               ch_r=ch_r>>4;
+ 06D6 8A2D              mov R24,R10
+ 06D8 8295              swap R24
+ 06DA 8F70              andi R24,#0x0F
+ 06DC A82E              mov R10,R24
+ 06DE                   .dbline 422
+ 06DE           ;                               ch_w=ch_w<<4; 
+ 06DE 8E2D              mov R24,R14
+ 06E0 8F70              andi R24,#0x0F
+ 06E2 8295              swap R24
+ 06E4 E82E              mov R14,R24
+ 06E6                   .dbline 423
+ 06E6           ;                               ch_w|=ch_r;
+ 06E6 EA28              or R14,R10
+ 06E8                   .dbline 424
+ 06E8           ;                               SetPageCol(uPage+1,uCol+j);
+ 06E8 2981              ldd R18,y+1
+ 06EA 2C0D              add R18,R12
+ 06EC 0A81              ldd R16,y+2
+ 06EE 0F5F              subi R16,255    ; addi 1
+ 06F0 B1DE              xcall _SetPageCol
+ 06F2                   .dbline 425
+ 06F2           ;                               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 06F2 8981              ldd R24,y+1
+ 06F4 8C0D              add R24,R12
+ 06F6 8034              cpi R24,64
+ 06F8 28F4              brsh L104
+ 06FA                   .dbline 425
+ 06FA E882              std y+0,R14
+ 06FC 21E0              ldi R18,1
+ 06FE 0027              clr R16
+ 0700 39DD              xcall _write_LCD
+ 0702 04C0              xjmp L105
+ 0704           L104:
+ 0704                   .dbline 426
+ 0704           ;                               else write_LCD(RIGHT,DATA,ch_w); 
+ 0704 E882              std y+0,R14
+ 0706 21E0              ldi R18,1
+ 0708 01E0              ldi R16,1
+ 070A 34DD              xcall _write_LCD
+ 070C           L105:
+ 070C                   .dbline 427
+ 070C           L99:
+ 070C                   .dbline 415
+ 070C C394              inc R12
+ 070E           L101:
+ 070E                   .dbline 415
+ 070E C616              cp R12,R22
+ 0710 08F4              brsh X5
+ 0712 C3CF              xjmp L98
+ 0714           X5:
+ 0714                   .dbline 428
+ 0714           ;                       }
+ 0714           ;               }
+ 0714           L72:
+ 0714                   .dbline 429
+ 0714           ;       }
+ 0714           L64:
+ 0714                   .dbline 430
+ 0714           ;       SetPageCol(uPage,uCol+width);
+ 0714 2981              ldd R18,y+1
+ 0716 260F              add R18,R22
+ 0718 0A81              ldd R16,y+2
+ 071A 9CDE              xcall _SetPageCol
+ 071C                   .dbline -2
+ 071C                   .dbline 431
+ 071C           ; }
+ 071C           L57:
+ 071C 2396              adiw R28,3
+ 071E 0E940000          xcall pop_gset5
+ 0722                   .dbline 0 ; func end
+ 0722 0895              ret
+ 0724                   .dbsym r width 22 c
+ 0724                   .dbsym r len 22 c
+ 0724                   .dbsym l uPage 2 c
+ 0724                   .dbsym r ch_r 10 c
+ 0724                   .dbsym l uCol 1 c
+ 0724                   .dbsym r ch_w 14 c
+ 0724                   .dbsym r k 20 c
+ 0724                   .dbsym r j 12 c
+ 0724                   .dbsym r c 10 c
+ 0724                   .dbend
+ 0724                   .dbfunc e disp_hz _disp_hz fV
+ 0724           ;          uPage -> y+1
+ 0724           ;           ch_r -> R22
+ 0724           ;              k -> R10
+ 0724           ;           uCol -> R12
+ 0724           ;           ch_w -> R14
+ 0724           ;              j -> R20
+ 0724           ;             hz -> R20,R21
+                        .even
+ 0724           _disp_hz::
+ 0724 0E940000          xcall push_gset5
+ 0728 A801              movw R20,R16
+ 072A 2297              sbiw R28,2
+ 072C                   .dbline -1
+ 072C                   .dbline 435
+ 072C           ; 
+ 072C           ; 
+ 072C           ; void disp_hz(unsigned char *hz)
+ 072C           ; {
+ 072C                   .dbline 437
+ 072C           ;       unsigned char k,j,uPage,uCol,ch_r,ch_w;
+ 072C           ;       uPage = GetPage();
+ 072C 8DDE              xcall _GetPage
+ 072E 0983              std y+1,R16
+ 0730                   .dbline 438
+ 0730           ;       uCol = GetCol();
+ 0730 8EDE              xcall _GetCol
+ 0732 C02E              mov R12,R16
+ 0734                   .dbline 439
+ 0734           ;       for(k=0;k<sizeof(GB_16)/sizeof(GB_16[0]);k++)
+ 0734 AA24              clr R10
+ 0736 19C0              xjmp L110
+ 0738           L107:
+ 0738                   .dbline 440
+ 0738           ;       {
+ 0738                   .dbline 441
+ 0738           ;               if(hz[0] == GB_16[k].Index[0] && hz[1] == GB_16[k].Index[1])
+ 0738 8AE1              ldi R24,26
+ 073A 8A9D              mul R24,R10
+ 073C 1001              movw R2,R0
+ 073E 80E0              ldi R24,<_GB_16
+ 0740 90E0              ldi R25,>_GB_16
+ 0742 F101              movw R30,R2
+ 0744 E80F              add R30,R24
+ 0746 F91F              adc R31,R25
+ 0748 E491              lpm R30,Z
+ 074A DA01              movw R26,R20
+ 074C 4C90              ld R4,x
+ 074E 4E16              cp R4,R30
+ 0750 59F4              brne L111
+ 0752 80E0              ldi R24,<_GB_16+1
+ 0754 90E0              ldi R25,>_GB_16+1
+ 0756 F101              movw R30,R2
+ 0758 E80F              add R30,R24
+ 075A F91F              adc R31,R25
+ 075C E491              lpm R30,Z
+ 075E 1196              adiw R26,1
+ 0760 2C90              ld R2,x
+ 0762 2E16              cp R2,R30
+ 0764 09F4              brne L111
+ 0766                   .dbline 442
+ 0766           ;                       break;
+ 0766 04C0              xjmp L109
+ 0768           L111:
+ 0768                   .dbline 443
+ 0768           L108:
+ 0768                   .dbline 439
+ 0768 A394              inc R10
+ 076A           L110:
+ 076A                   .dbline 439
+ 076A 8A2D              mov R24,R10
+ 076C 8231              cpi R24,18
+ 076E 20F3              brlo L107
+ 0770           L109:
+ 0770                   .dbline 445
+ 0770           ;       }
+ 0770           ; 
+ 0770           ;       if(CurOffset==1) 
+ 0770 80910300          lds R24,_CurOffset
+ 0774 8130              cpi R24,1
+ 0776 09F0              breq X6
+ 0778 64C0              xjmp L114
+ 077A           X6:
+ 077A                   .dbline 446
+ 077A           ;       {
+ 077A                   .dbline 447
+ 077A           ;       for(j=0;j<ASC_HZ_WIDTH;j++)
+ 077A 4427              clr R20
+ 077C 1EC0              xjmp L119
+ 077E           L116:
+ 077E                   .dbline 448
+ 077E           ;       {
+ 077E                   .dbline 449
+ 077E           ;               SetPageCol(uPage,uCol+j);
+ 077E 2C2D              mov R18,R12
+ 0780 240F              add R18,R20
+ 0782 0981              ldd R16,y+1
+ 0784 67DE              xcall _SetPageCol
+ 0786                   .dbline 450
+ 0786           ;               ch_w=GB_16[k].Msk[j];
+ 0786 8AE1              ldi R24,26
+ 0788 8A9D              mul R24,R10
+ 078A 1001              movw R2,R0
+ 078C 80E0              ldi R24,<_GB_16+2
+ 078E 90E0              ldi R25,>_GB_16+2
+ 0790 280E              add R2,R24
+ 0792 391E              adc R3,R25
+ 0794 E42F              mov R30,R20
+ 0796 FF27              clr R31
+ 0798 E20D              add R30,R2
+ 079A F31D              adc R31,R3
+ 079C E490              lpm R14,Z
+ 079E                   .dbline 451
+ 079E           ;               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w);
+ 079E 8C2D              mov R24,R12
+ 07A0 840F              add R24,R20
+ 07A2 8034              cpi R24,64
+ 07A4 28F4              brsh L121
+ 07A6                   .dbline 451
+ 07A6 E882              std y+0,R14
+ 07A8 21E0              ldi R18,1
+ 07AA 0027              clr R16
+ 07AC E3DC              xcall _write_LCD
+ 07AE 04C0              xjmp L122
+ 07B0           L121:
+ 07B0                   .dbline 452
+ 07B0           ;               else write_LCD(RIGHT,DATA,ch_w);
+ 07B0 E882              std y+0,R14
+ 07B2 21E0              ldi R18,1
+ 07B4 01E0              ldi R16,1
+ 07B6 DEDC              xcall _write_LCD
+ 07B8           L122:
+ 07B8                   .dbline 453
+ 07B8           L117:
+ 07B8                   .dbline 447
+ 07B8 4395              inc R20
+ 07BA           L119:
+ 07BA                   .dbline 447
+ 07BA 4C30              cpi R20,12
+ 07BC 00F3              brlo L116
+ 07BE                   .dbline 454
+ 07BE           ;       }
+ 07BE           ;       SetPageCol(uPage+1,uCol);
+ 07BE 2C2D              mov R18,R12
+ 07C0 0981              ldd R16,y+1
+ 07C2 0F5F              subi R16,255    ; addi 1
+ 07C4 47DE              xcall _SetPageCol
+ 07C6                   .dbline 456
+ 07C6           ; 
+ 07C6           ;       for(j=0;j<ASC_HZ_WIDTH;j++)
+ 07C6 4427              clr R20
+ 07C8 34C0              xjmp L126
+ 07CA           L123:
+ 07CA                   .dbline 457
+ 07CA           ;       {
+ 07CA                   .dbline 458
+ 07CA           ;               SetPageCol(uPage+1,uCol+j);
+ 07CA 2C2D              mov R18,R12
+ 07CC 240F              add R18,R20
+ 07CE 0981              ldd R16,y+1
+ 07D0 0F5F              subi R16,255    ; addi 1
+ 07D2 40DE              xcall _SetPageCol
+ 07D4                   .dbline 459
+ 07D4           ;               if(uCol+j<64) ch_r=read_LCD(LEFT);
+ 07D4 8C2D              mov R24,R12
+ 07D6 840F              add R24,R20
+ 07D8 8034              cpi R24,64
+ 07DA 20F4              brsh L127
+ 07DC                   .dbline 459
+ 07DC 0027              clr R16
+ 07DE 1BDD              xcall _read_LCD
+ 07E0 602F              mov R22,R16
+ 07E2 03C0              xjmp L128
+ 07E4           L127:
+ 07E4                   .dbline 460
+ 07E4           ;               else ch_r=read_LCD(RIGHT);
+ 07E4 01E0              ldi R16,1
+ 07E6 17DD              xcall _read_LCD
+ 07E8 602F              mov R22,R16
+ 07EA           L128:
+ 07EA                   .dbline 461
+ 07EA           ;               ch_r&=0xf0;
+ 07EA 607F              andi R22,240
+ 07EC                   .dbline 462
+ 07EC           ;               ch_w=GB_16[k].Msk[ASC_HZ_WIDTH+j]&0x0f; 
+ 07EC 8AE1              ldi R24,26
+ 07EE 8A9D              mul R24,R10
+ 07F0 1001              movw R2,R0
+ 07F2 80E0              ldi R24,<_GB_16+2
+ 07F4 90E0              ldi R25,>_GB_16+2
+ 07F6 280E              add R2,R24
+ 07F8 391E              adc R3,R25
+ 07FA E42F              mov R30,R20
+ 07FC FF27              clr R31
+ 07FE 3C96              adiw R30,12
+ 0800 E20D              add R30,R2
+ 0802 F31D              adc R31,R3
+ 0804 E491              lpm R30,Z
+ 0806 EF70              andi R30,15
+ 0808 EE2E              mov R14,R30
+ 080A                   .dbline 463
+ 080A           ;               ch_w|=ch_r;
+ 080A E62A              or R14,R22
+ 080C                   .dbline 464
+ 080C           ;               SetPageCol(uPage+1,uCol+j);
+ 080C 2C2D              mov R18,R12
+ 080E 240F              add R18,R20
+ 0810 0981              ldd R16,y+1
+ 0812 0F5F              subi R16,255    ; addi 1
+ 0814 1FDE              xcall _SetPageCol
+ 0816                   .dbline 465
+ 0816           ;               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 0816 8C2D              mov R24,R12
+ 0818 840F              add R24,R20
+ 081A 8034              cpi R24,64
+ 081C 28F4              brsh L130
+ 081E                   .dbline 465
+ 081E E882              std y+0,R14
+ 0820 21E0              ldi R18,1
+ 0822 0027              clr R16
+ 0824 A7DC              xcall _write_LCD
+ 0826 04C0              xjmp L131
+ 0828           L130:
+ 0828                   .dbline 466
+ 0828           ;               else write_LCD(RIGHT,DATA,ch_w);
+ 0828 E882              std y+0,R14
+ 082A 21E0              ldi R18,1
+ 082C 01E0              ldi R16,1
+ 082E A2DC              xcall _write_LCD
+ 0830           L131:
+ 0830                   .dbline 467
+ 0830           L124:
+ 0830                   .dbline 456
+ 0830 4395              inc R20
+ 0832           L126:
+ 0832                   .dbline 456
+ 0832 4C30              cpi R20,12
+ 0834 08F4              brsh X7
+ 0836 C9CF              xjmp L123
+ 0838           X7:
+ 0838                   .dbline 468
+ 0838           ;       }
+ 0838           ;       SetPageCol(uPage,uCol+ASC_HZ_WIDTH);
+ 0838 2C2D              mov R18,R12
+ 083A 245F              subi R18,244    ; addi 12
+ 083C 0981              ldd R16,y+1
+ 083E 0ADE              xcall _SetPageCol
+ 0840                   .dbline 469
+ 0840           ;       }
+ 0840 7FC0              xjmp L115
+ 0842           L114:
+ 0842                   .dbline 472
+ 0842           ; 
+ 0842           ;       else //汉字上半部是写半个字节
+ 0842           ;       {
+ 0842                   .dbline 473
+ 0842           ;       for(j=0;j<ASC_HZ_WIDTH;j++)
+ 0842 4427              clr R20
+ 0844 33C0              xjmp L135
+ 0846           L132:
+ 0846                   .dbline 474
+ 0846           ;       {
+ 0846                   .dbline 475
+ 0846           ;               SetPageCol(uPage,uCol+j);
+ 0846 2C2D              mov R18,R12
+ 0848 240F              add R18,R20
+ 084A 0981              ldd R16,y+1
+ 084C 03DE              xcall _SetPageCol
+ 084E                   .dbline 476
+ 084E           ;               if(uCol+j<64) ch_r=read_LCD(LEFT);
+ 084E 8C2D              mov R24,R12
+ 0850 840F              add R24,R20
+ 0852 8034              cpi R24,64
+ 0854 20F4              brsh L136
+ 0856                   .dbline 476
+ 0856 0027              clr R16
+ 0858 DEDC              xcall _read_LCD
+ 085A 602F              mov R22,R16
+ 085C 03C0              xjmp L137
+ 085E           L136:
+ 085E                   .dbline 477
+ 085E           ;               else ch_r=read_LCD(RIGHT);
+ 085E 01E0              ldi R16,1
+ 0860 DADC              xcall _read_LCD
+ 0862 602F              mov R22,R16
+ 0864           L137:
+ 0864                   .dbline 478
+ 0864           ;               ch_r&=0x0f;
+ 0864 6F70              andi R22,15
+ 0866                   .dbline 479
+ 0866           ;               ch_w=GB_16[k].Msk[j];
+ 0866 8AE1              ldi R24,26
+ 0868 8A9D              mul R24,R10
+ 086A 1001              movw R2,R0
+ 086C 80E0              ldi R24,<_GB_16+2
+ 086E 90E0              ldi R25,>_GB_16+2
+ 0870 280E              add R2,R24
+ 0872 391E              adc R3,R25
+ 0874 E42F              mov R30,R20
+ 0876 FF27              clr R31
+ 0878 E20D              add R30,R2
+ 087A F31D              adc R31,R3
+ 087C E490              lpm R14,Z
+ 087E                   .dbline 480
+ 087E           ;               ch_w=ch_w<<4;
+ 087E 8E2D              mov R24,R14
+ 0880 8F70              andi R24,#0x0F
+ 0882 8295              swap R24
+ 0884 E82E              mov R14,R24
+ 0886                   .dbline 481
+ 0886           ;               ch_w|=ch_r;
+ 0886 E62A              or R14,R22
+ 0888                   .dbline 482
+ 0888           ;               SetPageCol(uPage,uCol+j);
+ 0888 2C2D              mov R18,R12
+ 088A 240F              add R18,R20
+ 088C 0981              ldd R16,y+1
+ 088E E2DD              xcall _SetPageCol
+ 0890                   .dbline 483
+ 0890           ;               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 0890 8C2D              mov R24,R12
+ 0892 840F              add R24,R20
+ 0894 8034              cpi R24,64
+ 0896 28F4              brsh L139
+ 0898                   .dbline 483
+ 0898 E882              std y+0,R14
+ 089A 21E0              ldi R18,1
+ 089C 0027              clr R16
+ 089E 6ADC              xcall _write_LCD
+ 08A0 04C0              xjmp L140
+ 08A2           L139:
+ 08A2                   .dbline 484
+ 08A2           ;               else write_LCD(RIGHT,DATA,ch_w); 
+ 08A2 E882              std y+0,R14
+ 08A4 21E0              ldi R18,1
+ 08A6 01E0              ldi R16,1
+ 08A8 65DC              xcall _write_LCD
+ 08AA           L140:
+ 08AA                   .dbline 485
+ 08AA           L133:
+ 08AA                   .dbline 473
+ 08AA 4395              inc R20
+ 08AC           L135:
+ 08AC                   .dbline 473
+ 08AC 4C30              cpi R20,12
+ 08AE 08F4              brsh X8
+ 08B0 CACF              xjmp L132
+ 08B2           X8:
+ 08B2                   .dbline 486
+ 08B2           ;       }
+ 08B2           ;       SetPageCol(uPage+1,uCol);
+ 08B2 2C2D              mov R18,R12
+ 08B4 0981              ldd R16,y+1
+ 08B6 0F5F              subi R16,255    ; addi 1
+ 08B8 CDDD              xcall _SetPageCol
+ 08BA                   .dbline 487
+ 08BA           ;       for(j=0;j<ASC_HZ_WIDTH;j++)
+ 08BA 4427              clr R20
+ 08BC 3AC0              xjmp L144
+ 08BE           L141:
+ 08BE                   .dbline 488
+ 08BE           ;       {
+ 08BE                   .dbline 489
+ 08BE           ;               SetPageCol(uPage+1,uCol+j);
+ 08BE 2C2D              mov R18,R12
+ 08C0 240F              add R18,R20
+ 08C2 0981              ldd R16,y+1
+ 08C4 0F5F              subi R16,255    ; addi 1
+ 08C6 C6DD              xcall _SetPageCol
+ 08C8                   .dbline 491
+ 08C8           ; 
+ 08C8           ;               ch_r=GB_16[k].Msk[j];
+ 08C8 8AE1              ldi R24,26
+ 08CA 8A9D              mul R24,R10
+ 08CC 1001              movw R2,R0
+ 08CE 80E0              ldi R24,<_GB_16+2
+ 08D0 90E0              ldi R25,>_GB_16+2
+ 08D2 280E              add R2,R24
+ 08D4 391E              adc R3,R25
+ 08D6 E42F              mov R30,R20
+ 08D8 FF27              clr R31
+ 08DA E20D              add R30,R2
+ 08DC F31D              adc R31,R3
+ 08DE 6491              lpm R22,Z
+ 08E0                   .dbline 492
+ 08E0           ;               ch_w=GB_16[k].Msk[ASC_HZ_WIDTH+j];
+ 08E0 8AE1              ldi R24,26
+ 08E2 8A9D              mul R24,R10
+ 08E4 1001              movw R2,R0
+ 08E6 80E0              ldi R24,<_GB_16+2
+ 08E8 90E0              ldi R25,>_GB_16+2
+ 08EA 280E              add R2,R24
+ 08EC 391E              adc R3,R25
+ 08EE E42F              mov R30,R20
+ 08F0 FF27              clr R31
+ 08F2 3C96              adiw R30,12
+ 08F4 E20D              add R30,R2
+ 08F6 F31D              adc R31,R3
+ 08F8 E490              lpm R14,Z
+ 08FA                   .dbline 493
+ 08FA           ;               ch_r=ch_r>>4;
+ 08FA 862F              mov R24,R22
+ 08FC 8295              swap R24
+ 08FE 8F70              andi R24,#0x0F
+ 0900 682F              mov R22,R24
+ 0902                   .dbline 494
+ 0902           ;               ch_w=ch_w<<4; 
+ 0902 8E2D              mov R24,R14
+ 0904 8F70              andi R24,#0x0F
+ 0906 8295              swap R24
+ 0908 E82E              mov R14,R24
+ 090A                   .dbline 495
+ 090A           ;               ch_w|=ch_r;
+ 090A E62A              or R14,R22
+ 090C                   .dbline 496
+ 090C           ;               SetPageCol(uPage+1,uCol+j);
+ 090C 2C2D              mov R18,R12
+ 090E 240F              add R18,R20
+ 0910 0981              ldd R16,y+1
+ 0912 0F5F              subi R16,255    ; addi 1
+ 0914 9FDD              xcall _SetPageCol
+ 0916                   .dbline 497
+ 0916           ;               if(uCol+j<64)   write_LCD(LEFT,DATA,ch_w); 
+ 0916 8C2D              mov R24,R12
+ 0918 840F              add R24,R20
+ 091A 8034              cpi R24,64
+ 091C 28F4              brsh L147
+ 091E                   .dbline 497
+ 091E E882              std y+0,R14
+ 0920 21E0              ldi R18,1
+ 0922 0027              clr R16
+ 0924 27DC              xcall _write_LCD
+ 0926 04C0              xjmp L148
+ 0928           L147:
+ 0928                   .dbline 498
+ 0928           ;               else write_LCD(RIGHT,DATA,ch_w); 
+ 0928 E882              std y+0,R14
+ 092A 21E0              ldi R18,1
+ 092C 01E0              ldi R16,1
+ 092E 22DC              xcall _write_LCD
+ 0930           L148:
+ 0930                   .dbline 499
+ 0930           L142:
+ 0930                   .dbline 487
+ 0930 4395              inc R20
+ 0932           L144:
+ 0932                   .dbline 487
+ 0932 4C30              cpi R20,12
+ 0934 08F4              brsh X9
+ 0936 C3CF              xjmp L141
+ 0938           X9:
+ 0938                   .dbline 500
+ 0938 2C2D              mov R18,R12
+ 093A 245F              subi R18,244    ; addi 12
+ 093C 0981              ldd R16,y+1
+ 093E 8ADD              xcall _SetPageCol
+ 0940                   .dbline 501
+ 0940           L115:
+ 0940                   .dbline -2
+ 0940                   .dbline 502
+ 0940           ;       }
+ 0940           ;       SetPageCol(uPage,uCol+ASC_HZ_WIDTH);
+ 0940           ;       }
+ 0940           ; }
+ 0940           L106:
+ 0940 2296              adiw R28,2
+ 0942 0E940000          xcall pop_gset5
+ 0946                   .dbline 0 ; func end
+ 0946 0895              ret
+ 0948                   .dbsym l uPage 1 c
+ 0948                   .dbsym r ch_r 22 c
+ 0948                   .dbsym r k 10 c
+ 0948                   .dbsym r uCol 12 c
+ 0948                   .dbsym r ch_w 14 c
+ 0948                   .dbsym r j 20 c
+ 0948                   .dbsym r hz 20 pc
+ 0948                   .dbend
+ 0948                   .dbfunc e disp_str _disp_str fV
+ 0948           ;              i -> R20
+ 0948           ;              p -> R22,R23
+                        .even
+ 0948           _disp_str::
+ 0948 0E940000          xcall push_gset2
+ 094C B801              movw R22,R16
+ 094E                   .dbline -1
+ 094E                   .dbline 505
+ 094E           ; 
+ 094E           ; void disp_str(unsigned char *p)
+ 094E           ; {
+ 094E                   .dbline 506
+ 094E           ;       unsigned char i=0;
+ 094E 4427              clr R20
+ 0950 15C0              xjmp L151
+ 0952           L150:
+ 0952                   .dbline 508
+ 0952           ;       while(p[i]>0)
+ 0952           ;       {
+ 0952                   .dbline 509
+ 0952           ;               if(p[i] < 128)
+ 0952 E42F              mov R30,R20
+ 0954 FF27              clr R31
+ 0956 E60F              add R30,R22
+ 0958 F71F              adc R31,R23
+ 095A 8081              ldd R24,z+0
+ 095C 8038              cpi R24,128
+ 095E 38F4              brsh L153
+ 0960                   .dbline 510
+ 0960           ;               {       /* ASCII */
+ 0960                   .dbline 511
+ 0960           ;                       disp_ch(p[i]);
+ 0960 E42F              mov R30,R20
+ 0962 FF27              clr R31
+ 0964 E60F              add R30,R22
+ 0966 F71F              adc R31,R23
+ 0968 0081              ldd R16,z+0
+ 096A C7DD              xcall _disp_ch
+ 096C                   .dbline 512
+ 096C           ;               }
+ 096C 06C0              xjmp L154
+ 096E           L153:
+ 096E                   .dbline 514
+ 096E           ;               else
+ 096E           ;               {       /* 中文 */
+ 096E                   .dbline 515
+ 096E           ;                       disp_hz(&p[i]);
+ 096E 042F              mov R16,R20
+ 0970 1127              clr R17
+ 0972 060F              add R16,R22
+ 0974 171F              adc R17,R23
+ 0976 D6DE              xcall _disp_hz
+ 0978                   .dbline 516
+ 0978           ;                       i++;
+ 0978 4395              inc R20
+ 097A                   .dbline 517
+ 097A           ;               }
+ 097A           L154:
+ 097A                   .dbline 518
+ 097A 4395              inc R20
+ 097C                   .dbline 519
+ 097C           L151:
+ 097C                   .dbline 507
+ 097C E42F              mov R30,R20
+ 097E FF27              clr R31
+ 0980 E60F              add R30,R22
+ 0982 F71F              adc R31,R23
+ 0984 2080              ldd R2,z+0
+ 0986 3324              clr R3
+ 0988 3214              cp R3,R2
+ 098A 18F3              brlo L150
+ 098C                   .dbline -2
+ 098C                   .dbline 520
+ 098C           ;               i++;
+ 098C           ;       }
+ 098C           ; }
+ 098C           L149:
+ 098C 0E940000          xcall pop_gset2
+ 0990                   .dbline 0 ; func end
+ 0990 0895              ret
+ 0992                   .dbsym r i 20 c
+ 0992                   .dbsym r p 22 pc
+ 0992                   .dbend
+ 0992                   .dbfunc e pixel _pixel fV
+ 0992           ;             ch -> R22,R23
+ 0992           ;              y -> R20,R21
+ 0992           ;           flag -> R10
+ 0992           ;             yy -> R14
+ 0992           ;             xx -> R12
+                        .even
+ 0992           _pixel::
+ 0992 0E940000          xcall push_gset5
+ 0996 E22E              mov R14,R18
+ 0998 C02E              mov R12,R16
+ 099A 2197              sbiw R28,1
+ 099C AB84              ldd R10,y+11
+ 099E                   .dbline -1
+ 099E                   .dbline 527
+ 099E           ; 
+ 099E           ; /*************************************/
+ 099E           ; /*             绘点函数              */
+ 099E           ; /*************************************/
+ 099E           ; /* XX--(0-128) YY--(0-63) FLAG=1绘点   FLAG=0 清点 */
+ 099E           ; void pixel(unsigned char xx,unsigned char yy,unsigned char flag)
+ 099E           ; {
+ 099E                   .dbline 529
+ 099E           ;       unsigned int y,ch;
+ 099E           ;       ch=yy%8;  //余数
+ 099E 28E0              ldi R18,8
+ 09A0 30E0              ldi R19,0
+ 09A2 0E2D              mov R16,R14
+ 09A4 1127              clr R17
+ 09A6 0E940000          xcall mod16s
+ 09AA B801              movw R22,R16
+ 09AC                   .dbline 531
+ 09AC           ; 
+ 09AC           ;       y=1;
+ 09AC 41E0              ldi R20,1
+ 09AE 50E0              ldi R21,0
+ 09B0                   .dbline 532
+ 09B0           ;       for(;ch!=0;)
+ 09B0 08C0              xjmp L159
+ 09B2           L156:
+ 09B2                   .dbline 533
+ 09B2                   .dbline 534
+ 09B2 02E0              ldi R16,2
+ 09B4 10E0              ldi R17,0
+ 09B6 9A01              movw R18,R20
+ 09B8 0E940000          xcall empy16s
+ 09BC A801              movw R20,R16
+ 09BE                   .dbline 535
+ 09BE 6150              subi R22,1
+ 09C0 7040              sbci R23,0
+ 09C2                   .dbline 536
+ 09C2           L157:
+ 09C2                   .dbline 532
+ 09C2           L159:
+ 09C2                   .dbline 532
+ 09C2 6030              cpi R22,0
+ 09C4 6707              cpc R22,R23
+ 09C6 A9F7              brne L156
+ 09C8           X10:
+ 09C8                   .dbline 537
+ 09C8           ;               {
+ 09C8           ;                       y=y*2;
+ 09C8           ;                       ch--;
+ 09C8           ;               }
+ 09C8           ;       if(xx<64)
+ 09C8 8C2D              mov R24,R12
+ 09CA 8034              cpi R24,64
+ 09CC 18F5              brsh L160
+ 09CE                   .dbline 538
+ 09CE           ;               {
+ 09CE                   .dbline 539
+ 09CE           ;                       set_page_L(yy/8);
+ 09CE 0E2D              mov R16,R14
+ 09D0 0695              lsr R16
+ 09D2 0695              lsr R16
+ 09D4 0695              lsr R16
+ 09D6 CCDC              xcall _set_page_L
+ 09D8                   .dbline 540
+ 09D8           ;                       set_col_addr_L(xx);     
+ 09D8 0C2D              mov R16,R12
+ 09DA E6DC              xcall _set_col_addr_L
+ 09DC                   .dbline 541
+ 09DC           ;                       ch=read_LCD(LEFT);
+ 09DC 0027              clr R16
+ 09DE 1BDC              xcall _read_LCD
+ 09E0 602F              mov R22,R16
+ 09E2 7727              clr R23
+ 09E4                   .dbline 542
+ 09E4           ;                       set_col_addr_L(xx);
+ 09E4 0C2D              mov R16,R12
+ 09E6 E0DC              xcall _set_col_addr_L
+ 09E8                   .dbline 543
+ 09E8           ;                       if(flag)
+ 09E8 AA20              tst R10
+ 09EA 41F0              breq L162
+ 09EC                   .dbline 544
+ 09EC           ;                               write_LCD(LEFT,DATA,ch|y);
+ 09EC 1B01              movw R2,R22
+ 09EE 242A              or R2,R20
+ 09F0 352A              or R3,R21
+ 09F2 2882              std y+0,R2
+ 09F4 21E0              ldi R18,1
+ 09F6 0027              clr R16
+ 09F8 BDDB              xcall _write_LCD
+ 09FA 30C0              xjmp L161
+ 09FC           L162:
+ 09FC                   .dbline 546
+ 09FC           ;                       else
+ 09FC           ;                       {
+ 09FC                   .dbline 547
+ 09FC           ;                               y=~y;
+ 09FC 4095              com R20
+ 09FE 5095              com R21
+ 0A00                   .dbline 548
+ 0A00           ;                               ch&=y;
+ 0A00 6423              and R22,R20
+ 0A02 7523              and R23,R21
+ 0A04                   .dbline 549
+ 0A04           ;                               write_LCD(LEFT,DATA,ch|y);
+ 0A04 1B01              movw R2,R22
+ 0A06 242A              or R2,R20
+ 0A08 352A              or R3,R21
+ 0A0A 2882              std y+0,R2
+ 0A0C 21E0              ldi R18,1
+ 0A0E 0027              clr R16
+ 0A10 B1DB              xcall _write_LCD
+ 0A12                   .dbline 550
+ 0A12           ;                       }
+ 0A12                   .dbline 551
+ 0A12           ;               }
+ 0A12 24C0              xjmp L161
+ 0A14           L160:
+ 0A14                   .dbline 553
+ 0A14           ;       else
+ 0A14           ;               {
+ 0A14                   .dbline 554
+ 0A14           ;                       set_page_R(yy/8);
+ 0A14 0E2D              mov R16,R14
+ 0A16 0695              lsr R16
+ 0A18 0695              lsr R16
+ 0A1A 0695              lsr R16
+ 0A1C B7DC              xcall _set_page_R
+ 0A1E                   .dbline 555
+ 0A1E           ;                       set_col_addr_R(xx-64);  
+ 0A1E 0C2D              mov R16,R12
+ 0A20 0054              subi R16,64
+ 0A22 D0DC              xcall _set_col_addr_R
+ 0A24                   .dbline 556
+ 0A24           ;                       ch=read_LCD(RIGHT);
+ 0A24 01E0              ldi R16,1
+ 0A26 F7DB              xcall _read_LCD
+ 0A28 602F              mov R22,R16
+ 0A2A 7727              clr R23
+ 0A2C                   .dbline 557
+ 0A2C           ;                       set_col_addr_R(xx-64);  
+ 0A2C 0C2D              mov R16,R12
+ 0A2E 0054              subi R16,64
+ 0A30 C9DC              xcall _set_col_addr_R
+ 0A32                   .dbline 558
+ 0A32           ;                       if(flag)
+ 0A32 AA20              tst R10
+ 0A34 41F0              breq L164
+ 0A36                   .dbline 559
+ 0A36           ;                               write_LCD(RIGHT,DATA,ch|y);
+ 0A36 1B01              movw R2,R22
+ 0A38 242A              or R2,R20
+ 0A3A 352A              or R3,R21
+ 0A3C 2882              std y+0,R2
+ 0A3E 21E0              ldi R18,1
+ 0A40 01E0              ldi R16,1
+ 0A42 98DB              xcall _write_LCD
+ 0A44 0BC0              xjmp L165
+ 0A46           L164:
+ 0A46                   .dbline 561
+ 0A46           ;                       else
+ 0A46           ;                       {
+ 0A46                   .dbline 562
+ 0A46           ;                               y=~y;
+ 0A46 4095              com R20
+ 0A48 5095              com R21
+ 0A4A                   .dbline 563
+ 0A4A           ;                               ch&=y;
+ 0A4A 6423              and R22,R20
+ 0A4C 7523              and R23,R21
+ 0A4E                   .dbline 564
+ 0A4E           ;                               write_LCD(RIGHT,DATA,ch|y);
+ 0A4E 1B01              movw R2,R22
+ 0A50 242A              or R2,R20
+ 0A52 352A              or R3,R21
+ 0A54 2882              std y+0,R2
+ 0A56 21E0              ldi R18,1
+ 0A58 01E0              ldi R16,1
+ 0A5A 8CDB              xcall _write_LCD
+ 0A5C                   .dbline 565
+ 0A5C           ;                       }
+ 0A5C           L165:
+ 0A5C                   .dbline 566
+ 0A5C           L161:
+ 0A5C                   .dbline -2
+ 0A5C                   .dbline 567
+ 0A5C           ;               }
+ 0A5C           ; }
+ 0A5C           L155:
+ 0A5C 2196              adiw R28,1
+ 0A5E 0E940000          xcall pop_gset5
+ 0A62                   .dbline 0 ; func end
+ 0A62 0895              ret
+ 0A64                   .dbsym r ch 22 i
+ 0A64                   .dbsym r y 20 i
+ 0A64                   .dbsym r flag 10 c
+ 0A64                   .dbsym r yy 14 c
+ 0A64                   .dbsym r xx 12 c
+ 0A64                   .dbend
+ 0A64                   .dbfunc e Linexy _Linexy fV
+ 0A64           ;           incy -> y+9
+ 0A64           ;           incx -> y+7
+ 0A64           ;        delta_y -> y+5
+ 0A64           ;        delta_x -> y+3
+ 0A64           ;           uCol -> y+1
+ 0A64           ;           uRow -> R20,R21
+ 0A64           ;           yerr -> R22,R23
+ 0A64           ;           xerr -> R10,R11
+ 0A64           ;       distance -> R12,R13
+ 0A64           ;              t -> R14
+ 0A64           ;              s -> y+25
+ 0A64           ;             yt -> y+23
+ 0A64           ;             xt -> y+21
+ 0A64           ;             y0 -> R12
+ 0A64           ;             x0 -> R20
+                        .even
+ 0A64           _Linexy::
+ 0A64 0E940000          xcall push_gset5
+ 0A68 C22E              mov R12,R18
+ 0A6A 402F              mov R20,R16
+ 0A6C 2B97              sbiw R28,11
+ 0A6E                   .dbline -1
+ 0A6E                   .dbline 693
+ 0A6E           ; /*void point(void) 
+ 0A6E           ; { 
+ 0A6E           ;    uchar   x1, y1, y; 
+ 0A6E           ; 
+ 0A6E           ;    x1 = CurCol; 
+ 0A6E           ;    y1 = CurRow; 
+ 0A6E           ;    CurRow = y1 >> 3;      //取Y方向分页地址   
+ 0A6E           ;    Rddata();               // get cbyte on screen 
+ 0A6E           ;    y = y1 & 0x07;     //字节内位置计算  
+ 0A6E           ;    Wrdata(cbyte | (1 << y));   //画上屏幕    /
+ 0A6E           ;    CurCol = x1;         ///恢复xy坐标     /
+ 0A6E           ;    CurRow = y1; 
+ 0A6E           ; } */
+ 0A6E           ; 
+ 0A6E           ; /************************************************/ 
+ 0A6E           ; /*画圆。数学方程(X-Ox)^2+(Y-Oy)^2=Rx^2      */ 
+ 0A6E           ; /************************************************/ 
+ 0A6E           ; 
+ 0A6E           ; /*void circle(uchar Ox, uchar Oy, uchar Rx) 
+ 0A6E           ; { 
+ 0A6E           ;    unsigned int xx, rr, xt, yt, rs; 
+ 0A6E           ;     
+ 0A6E           ;     yt = Rx; 
+ 0A6E           ;    rr = Rx * Rx + 1;         //补偿 1 修正方形 
+ 0A6E           ;    rs = (yt + (yt >> 1)) >> 1;      //(*0.75)分开1/8圆弧来画 
+ 0A6E           ;    for (xt = 0; xt <= rs; xt++) 
+ 0A6E           ;    { 
+ 0A6E           ;       xx = xt * xt; 
+ 0A6E           ;       while ((yt * yt) > (rr - xx)) 
+ 0A6E           ;             yt--; 
+ 0A6E           ;       col = Ox + xt;      //第一象限 
+ 0A6E           ;       row=Oy-yt; 
+ 0A6E           ;       point(); 
+ 0A6E           ;       col = Ox - xt;      //第二象限 
+ 0A6E           ;       point(); 
+ 0A6E           ;       row = Oy + yt;      //第三象限 
+ 0A6E           ;       point(); 
+ 0A6E           ;       col = Ox + xt;      //第四象限 
+ 0A6E           ;       point(); 
+ 0A6E           ; 
+ 0A6E           ; // ***************45度镜象画另一半*************** 
+ 0A6E           ; 
+ 0A6E           ;       col = Ox + yt;      //第一象限 
+ 0A6E           ;       row = Oy - xt; 
+ 0A6E           ;       point(); 
+ 0A6E           ;       col = Ox - yt;      //第二象限 
+ 0A6E           ;       point(); 
+ 0A6E           ;       row = Oy + xt;      //第三象限 
+ 0A6E           ;       point(); 
+ 0A6E           ;       col = Ox + yt;      //第四象限 
+ 0A6E           ;       point(); 
+ 0A6E           ;    } 
+ 0A6E           ; } 
+ 0A6E           ; */
+ 0A6E           ;              
+ 0A6E           ; /************************************************/ 
+ 0A6E           ; /*画线。任意方向的斜线,直线数学方程 aX+bY=1   */ 
+ 0A6E           ; /************************************************/ 
+ 0A6E           ; 
+ 0A6E           ; /*void Linexy(uchar x0,uchar y0,uchar xt,uchar yt) 
+ 0A6E           ; { 
+ 0A6E           ;    uchar t; 
+ 0A6E           ;    int xerr = 0, yerr = 0, delta_x, delta_y, distance; 
+ 0A6E           ;    int incx, incy; 
+ 0A6E           ; 
+ 0A6E           ;    delta_x = xt - x0;            // 计算坐标增量 
+ 0A6E           ;    delta_y = yt - y0; 
+ 0A6E           ;    col = x0; 
+ 0A6E           ;    row = y0; 
+ 0A6E           ;     
+ 0A6E           ;     if (delta_x > 0)  
+ 0A6E           ;     { 
+ 0A6E           ;         incx = 1;         // 水平+方向 
+ 0A6E           ;     } 
+ 0A6E           ;    else if (delta_x == 0 )  
+ 0A6E           ;         { 
+ 0A6E           ;             incx = 0;      // 垂直线 
+ 0A6E           ;         } 
+ 0A6E           ;       else  
+ 0A6E           ;         { 
+ 0A6E           ;             incx =- 1;  //水平负方向 
+ 0A6E           ;             delta_x =- delta_x; 
+ 0A6E           ;         } 
+ 0A6E           ;      
+ 0A6E           ;    if (delta_y > 0)  
+ 0A6E           ;     { 
+ 0A6E           ;         incy = 1;       // 垂直+方向 
+ 0A6E           ;     } 
+ 0A6E           ;    else  
+ 0A6E           ;         if (delta_y == 0)  
+ 0A6E           ;         { 
+ 0A6E           ;             incy = 0;      // 水平线 
+ 0A6E           ;         } 
+ 0A6E           ;       else  
+ 0A6E           ;         { 
+ 0A6E           ;             incy =- 1;      //垂直-方向 
+ 0A6E           ;             delta_y =- delta_y; 
+ 0A6E           ;         } 
+ 0A6E           ;   
+ 0A6E           ; 
+ 0A6E           ;    if (delta_x > delta_y)    
+ 0A6E           ;         distance = delta_x; //选取基本增量坐标轴 
+ 0A6E           ;    else  
+ 0A6E           ;         distance = delta_y; 
+ 0A6E           ; 
+ 0A6E           ;    for (t = 0; t <= distance + 1; t++)    
+ 0A6E           ;     {   // 画线输出 
+ 0A6E           ;       point();         // 画点 
+ 0A6E           ;       xerr +=   delta_x; 
+ 0A6E           ;       yerr +=   delta_y; 
+ 0A6E           ;        
+ 0A6E           ;       if (xerr > distance)  
+ 0A6E           ;         { 
+ 0A6E           ;          xerr -= distance; 
+ 0A6E           ;          col += incx; 
+ 0A6E           ;       } 
+ 0A6E           ;       if (yerr > distance)  
+ 0A6E           ;         { 
+ 0A6E           ;          yerr -= distance; 
+ 0A6E           ;          row += incy; 
+ 0A6E           ;       } 
+ 0A6E           ;    } 
+ 0A6E           ; } 
+ 0A6E           ; */
+ 0A6E           ; void Linexy(uchar x0,uchar y0,uchar xt,uchar yt,uchar s)
+ 0A6E           ; {
+ 0A6E                   .dbline 695
+ 0A6E           ;       register uchar t;
+ 0A6E           ;       int xerr=0,yerr=0,delta_x,delta_y,distance;
+ 0A6E AA24              clr R10
+ 0A70 BB24              clr R11
+ 0A72                   .dbline 695
+ 0A72 6627              clr R22
+ 0A74 7727              clr R23
+ 0A76                   .dbline 698
+ 0A76           ;       int incx,incy,uRow,uCol;
+ 0A76           ; 
+ 0A76           ;       delta_x = xt-x0;                                //计算坐标增量
+ 0A76 242E              mov R2,R20
+ 0A78 3324              clr R3
+ 0A7A 4D88              ldd R4,y+21
+ 0A7C 5524              clr R5
+ 0A7E 4218              sub R4,R2
+ 0A80 5308              sbc R5,R3
+ 0A82 5C82              std y+4,R5
+ 0A84 4B82              std y+3,R4
+ 0A86                   .dbline 699
+ 0A86           ;       delta_y = yt-y0;
+ 0A86 2C2C              mov R2,R12
+ 0A88 3324              clr R3
+ 0A8A 4F88              ldd R4,y+23
+ 0A8C 5524              clr R5
+ 0A8E 4218              sub R4,R2
+ 0A90 5308              sbc R5,R3
+ 0A92 5E82              std y+6,R5
+ 0A94 4D82              std y+5,R4
+ 0A96                   .dbline 700
+ 0A96           ;       uRow = x0;
+ 0A96 5527              clr R21
+ 0A98                   .dbline 701
+ 0A98           ;       uCol = y0;
+ 0A98 3324              clr R3
+ 0A9A 3A82              std y+2,R3
+ 0A9C 2982              std y+1,R2
+ 0A9E                   .dbline 702
+ 0A9E           ;       if(delta_x>0) incx=1;                           //设置单步方向
+ 0A9E 2224              clr R2
+ 0AA0 4B80              ldd R4,y+3
+ 0AA2 5C80              ldd R5,y+4
+ 0AA4 2414              cp R2,R4
+ 0AA6 3504              cpc R3,R5
+ 0AA8 2CF4              brge L167
+ 0AAA                   .dbline 702
+ 0AAA 81E0              ldi R24,1
+ 0AAC 90E0              ldi R25,0
+ 0AAE 9887              std y+8,R25
+ 0AB0 8F83              std y+7,R24
+ 0AB2 17C0              xjmp L168
+ 0AB4           L167:
+ 0AB4                   .dbline 703
+ 0AB4           ;       else if( delta_x==0 ) incx=0;                   //垂直线
+ 0AB4 2B80              ldd R2,y+3
+ 0AB6 3C80              ldd R3,y+4
+ 0AB8 2220              tst R2
+ 0ABA 39F4              brne L169
+ 0ABC 3320              tst R3
+ 0ABE 29F4              brne L169
+ 0AC0           X11:
+ 0AC0                   .dbline 703
+ 0AC0 2224              clr R2
+ 0AC2 3324              clr R3
+ 0AC4 3886              std y+8,R3
+ 0AC6 2F82              std y+7,R2
+ 0AC8 0CC0              xjmp L170
+ 0ACA           L169:
+ 0ACA                   .dbline 704
+ 0ACA           ;               else {incx=-1;delta_x=-delta_x;}
+ 0ACA                   .dbline 704
+ 0ACA 8FEF              ldi R24,-1
+ 0ACC 9FEF              ldi R25,-1
+ 0ACE 9887              std y+8,R25
+ 0AD0 8F83              std y+7,R24
+ 0AD2                   .dbline 704
+ 0AD2 8B81              ldd R24,y+3
+ 0AD4 9C81              ldd R25,y+4
+ 0AD6 8095              com R24
+ 0AD8 9095              com R25
+ 0ADA 8F5F              subi R24,0xFF
+ 0ADC 9F4F              sbci R25,0xFF
+ 0ADE 9C83              std y+4,R25
+ 0AE0 8B83              std y+3,R24
+ 0AE2                   .dbline 704
+ 0AE2           L170:
+ 0AE2           L168:
+ 0AE2                   .dbline 706
+ 0AE2           ; 
+ 0AE2           ;       if(delta_y>0) incy=1;
+ 0AE2 2224              clr R2
+ 0AE4 3324              clr R3
+ 0AE6 4D80              ldd R4,y+5
+ 0AE8 5E80              ldd R5,y+6
+ 0AEA 2414              cp R2,R4
+ 0AEC 3504              cpc R3,R5
+ 0AEE 2CF4              brge L171
+ 0AF0                   .dbline 706
+ 0AF0 81E0              ldi R24,1
+ 0AF2 90E0              ldi R25,0
+ 0AF4 9A87              std y+10,R25
+ 0AF6 8987              std y+9,R24
+ 0AF8 17C0              xjmp L172
+ 0AFA           L171:
+ 0AFA                   .dbline 707
+ 0AFA           ;       else if( delta_y==0 ) incy=0;                   //水平线
+ 0AFA 2D80              ldd R2,y+5
+ 0AFC 3E80              ldd R3,y+6
+ 0AFE 2220              tst R2
+ 0B00 39F4              brne L173
+ 0B02 3320              tst R3
+ 0B04 29F4              brne L173
+ 0B06           X12:
+ 0B06                   .dbline 707
+ 0B06 2224              clr R2
+ 0B08 3324              clr R3
+ 0B0A 3A86              std y+10,R3
+ 0B0C 2986              std y+9,R2
+ 0B0E 0CC0              xjmp L174
+ 0B10           L173:
+ 0B10                   .dbline 708
+ 0B10           ;               else {incy=-1;delta_y=-delta_y;}
+ 0B10                   .dbline 708
+ 0B10 8FEF              ldi R24,-1
+ 0B12 9FEF              ldi R25,-1
+ 0B14 9A87              std y+10,R25
+ 0B16 8987              std y+9,R24
+ 0B18                   .dbline 708
+ 0B18 8D81              ldd R24,y+5
+ 0B1A 9E81              ldd R25,y+6
+ 0B1C 8095              com R24
+ 0B1E 9095              com R25
+ 0B20 8F5F              subi R24,0xFF
+ 0B22 9F4F              sbci R25,0xFF
+ 0B24 9E83              std y+6,R25
+ 0B26 8D83              std y+5,R24
+ 0B28                   .dbline 708
+ 0B28           L174:
+ 0B28           L172:
+ 0B28                   .dbline 710
+ 0B28           ; 
+ 0B28           ;       if( delta_x > delta_y ) distance=delta_x;       //选取基本增量坐标轴
+ 0B28 2D80              ldd R2,y+5
+ 0B2A 3E80              ldd R3,y+6
+ 0B2C 4B80              ldd R4,y+3
+ 0B2E 5C80              ldd R5,y+4
+ 0B30 2414              cp R2,R4
+ 0B32 3504              cpc R3,R5
+ 0B34 14F4              brge L175
+ 0B36                   .dbline 710
+ 0B36 6201              movw R12,R4
+ 0B38 02C0              xjmp L176
+ 0B3A           L175:
+ 0B3A                   .dbline 711
+ 0B3A           ;       else distance=delta_y;
+ 0B3A CD80              ldd R12,y+5
+ 0B3C DE80              ldd R13,y+6
+ 0B3E           L176:
+ 0B3E                   .dbline 713
+ 0B3E           ; 
+ 0B3E           ;       for( t=0;t <= distance+1; t++ )
+ 0B3E EE24              clr R14
+ 0B40 24C0              xjmp L180
+ 0B42           L177:
+ 0B42                   .dbline 714
+ 0B42           ;               {                                       //画线输出
+ 0B42                   .dbline 715
+ 0B42           ;               pixel(uRow,uCol,s);                     //画点
+ 0B42 098C              ldd R0,y+25
+ 0B44 0882              std y+0,R0
+ 0B46 2981              ldd R18,y+1
+ 0B48 042F              mov R16,R20
+ 0B4A 23DF              xcall _pixel
+ 0B4C                   .dbline 716
+ 0B4C           ;               xerr += delta_x ;
+ 0B4C 2B80              ldd R2,y+3
+ 0B4E 3C80              ldd R3,y+4
+ 0B50 A20C              add R10,R2
+ 0B52 B31C              adc R11,R3
+ 0B54                   .dbline 717
+ 0B54           ;               yerr += delta_y ;
+ 0B54 2D80              ldd R2,y+5
+ 0B56 3E80              ldd R3,y+6
+ 0B58 620D              add R22,R2
+ 0B5A 731D              adc R23,R3
+ 0B5C                   .dbline 719
+ 0B5C           ;               
+ 0B5C           ;               if( xerr > distance )
+ 0B5C CA14              cp R12,R10
+ 0B5E DB04              cpc R13,R11
+ 0B60 34F4              brge L181
+ 0B62                   .dbline 720
+ 0B62           ;                       {
+ 0B62                   .dbline 721
+ 0B62           ;                       xerr-=distance;
+ 0B62 AC18              sub R10,R12
+ 0B64 BD08              sbc R11,R13
+ 0B66                   .dbline 722
+ 0B66           ;                       uRow+=incx;
+ 0B66 2F80              ldd R2,y+7
+ 0B68 3884              ldd R3,y+8
+ 0B6A 420D              add R20,R2
+ 0B6C 531D              adc R21,R3
+ 0B6E                   .dbline 723
+ 0B6E           ;                       }
+ 0B6E           L181:
+ 0B6E                   .dbline 724
+ 0B6E           ;               if( yerr > distance )
+ 0B6E C616              cp R12,R22
+ 0B70 D706              cpc R13,R23
+ 0B72 54F4              brge L183
+ 0B74                   .dbline 725
+ 0B74           ;                       {
+ 0B74                   .dbline 726
+ 0B74           ;                       yerr-=distance;
+ 0B74 6C19              sub R22,R12
+ 0B76 7D09              sbc R23,R13
+ 0B78                   .dbline 727
+ 0B78           ;                       uCol+=incy;
+ 0B78 2984              ldd R2,y+9
+ 0B7A 3A84              ldd R3,y+10
+ 0B7C 4980              ldd R4,y+1
+ 0B7E 5A80              ldd R5,y+2
+ 0B80 420C              add R4,R2
+ 0B82 531C              adc R5,R3
+ 0B84 5A82              std y+2,R5
+ 0B86 4982              std y+1,R4
+ 0B88                   .dbline 728
+ 0B88           ;                       }
+ 0B88           L183:
+ 0B88                   .dbline 729
+ 0B88           L178:
+ 0B88                   .dbline 713
+ 0B88 E394              inc R14
+ 0B8A           L180:
+ 0B8A                   .dbline 713
+ 0B8A C601              movw R24,R12
+ 0B8C 0196              adiw R24,1
+ 0B8E 2E2C              mov R2,R14
+ 0B90 3324              clr R3
+ 0B92 8215              cp R24,R2
+ 0B94 9305              cpc R25,R3
+ 0B96 ACF6              brge L177
+ 0B98                   .dbline -2
+ 0B98                   .dbline 730
+ 0B98           ;               }
+ 0B98           ; }
+ 0B98           L166:
+ 0B98 2B96              adiw R28,11
+ 0B9A 0E940000          xcall pop_gset5
+ 0B9E                   .dbline 0 ; func end
+ 0B9E 0895              ret
+ 0BA0                   .dbsym l incy 9 I
+ 0BA0                   .dbsym l incx 7 I
+ 0BA0                   .dbsym l delta_y 5 I
+ 0BA0                   .dbsym l delta_x 3 I
+ 0BA0                   .dbsym l uCol 1 I
+ 0BA0                   .dbsym r uRow 20 I
+ 0BA0                   .dbsym r yerr 22 I
+ 0BA0                   .dbsym r xerr 10 I
+ 0BA0                   .dbsym r distance 12 I
+ 0BA0                   .dbsym r t 14 c
+ 0BA0                   .dbsym l s 25 c
+ 0BA0                   .dbsym l yt 23 c
+ 0BA0                   .dbsym l xt 21 c
+ 0BA0                   .dbsym r y0 12 c
+ 0BA0                   .dbsym r x0 20 c
+ 0BA0                   .dbend
+ 0BA0                   .dbfunc e circle _circle fV
+ 0BA0           ;             rs -> y+1
+ 0BA0           ;             xt -> R20,R21
+ 0BA0           ;             rr -> R22,R23
+ 0BA0           ;             xx -> R14,R15
+ 0BA0           ;            col -> R12,R13
+ 0BA0           ;            row -> R10,R11
+ 0BA0           ;             yt -> y+3
+ 0BA0           ;              s -> y+21
+ 0BA0           ;             Rx -> y+19
+ 0BA0           ;             Oy -> y+17
+ 0BA0           ;             Ox -> y+15
+                        .even
+ 0BA0           _circle::
+ 0BA0 0E940000          xcall push_arg4
+ 0BA4 0E940000          xcall push_gset5
+ 0BA8 2597              sbiw R28,5
+ 0BAA                   .dbline -1
+ 0BAA                   .dbline 736
+ 0BAA           ; 
+ 0BAA           ; /************************************************/
+ 0BAA           ; /*画圆。数学方程(X-Ox)^2+(Y-Oy)^2=Rx^2                        */
+ 0BAA           ; /************************************************/
+ 0BAA           ; void circle(uchar Ox,uchar Oy,uchar Rx,uchar s)
+ 0BAA           ; {
+ 0BAA                   .dbline 738
+ 0BAA           ;       unsigned int xx,rr,xt,yt,rs,row,col;
+ 0BAA           ;       yt=Rx;
+ 0BAA 2B88              ldd R2,y+19
+ 0BAC 3324              clr R3
+ 0BAE 3C82              std y+4,R3
+ 0BB0 2B82              std y+3,R2
+ 0BB2                   .dbline 739
+ 0BB2           ;       rr=Rx*Rx+1;                     //补偿 1 修正方形
+ 0BB2 0B88              ldd R0,y+19
+ 0BB4 002D              mov R16,R0
+ 0BB6 009E              mul R0,R16
+ 0BB8 B001              movw R22,R0
+ 0BBA 6F5F              subi R22,255  ; offset = 1
+ 0BBC 7F4F              sbci R23,255
+ 0BBE                   .dbline 740
+ 0BBE           ;       rs=(yt+(yt>>1))>>1;             //(*0.75)分开1/8圆弧来画
+ 0BBE 3694              lsr R3
+ 0BC0 2794              ror R2
+ 0BC2 4B80              ldd R4,y+3
+ 0BC4 5C80              ldd R5,y+4
+ 0BC6 420C              add R4,R2
+ 0BC8 531C              adc R5,R3
+ 0BCA 5694              lsr R5
+ 0BCC 4794              ror R4
+ 0BCE 5A82              std y+2,R5
+ 0BD0 4982              std y+1,R4
+ 0BD2                   .dbline 741
+ 0BD2           ;       for (xt=0;xt<=rs;xt++)
+ 0BD2 4427              clr R20
+ 0BD4 5527              clr R21
+ 0BD6 72C0              xjmp L189
+ 0BD8           L186:
+ 0BD8                   .dbline 742
+ 0BD8           ;       {
+ 0BD8                   .dbline 743
+ 0BD8           ;               xx=xt*xt;
+ 0BD8 9A01              movw R18,R20
+ 0BDA 8A01              movw R16,R20
+ 0BDC 0E940000          xcall empy16s
+ 0BE0 7801              movw R14,R16
+ 0BE2 05C0              xjmp L191
+ 0BE4           L190:
+ 0BE4                   .dbline 744
+ 0BE4 8B81              ldd R24,y+3
+ 0BE6 9C81              ldd R25,y+4
+ 0BE8 0197              sbiw R24,1
+ 0BEA 9C83              std y+4,R25
+ 0BEC 8B83              std y+3,R24
+ 0BEE           L191:
+ 0BEE                   .dbline 744
+ 0BEE 1B01              movw R2,R22
+ 0BF0 2E18              sub R2,R14
+ 0BF2 3F08              sbc R3,R15
+ 0BF4 2B81              ldd R18,y+3
+ 0BF6 3C81              ldd R19,y+4
+ 0BF8 8901              movw R16,R18
+ 0BFA 0E940000          xcall empy16s
+ 0BFE 2016              cp R2,R16
+ 0C00 3106              cpc R3,R17
+ 0C02 80F3              brlo L190
+ 0C04                   .dbline 745
+ 0C04 AF84              ldd R10,y+15
+ 0C06 BB24              clr R11
+ 0C08 A40E              add R10,R20
+ 0C0A B51E              adc R11,R21
+ 0C0C                   .dbline 746
+ 0C0C C988              ldd R12,y+17
+ 0C0E DD24              clr R13
+ 0C10 0B80              ldd R0,y+3
+ 0C12 1C80              ldd R1,y+4
+ 0C14 C018              sub R12,R0
+ 0C16 D108              sbc R13,R1
+ 0C18                   .dbline 747
+ 0C18 0D88              ldd R0,y+21
+ 0C1A 0882              std y+0,R0
+ 0C1C 2C2D              mov R18,R12
+ 0C1E 0A2D              mov R16,R10
+ 0C20 B8DE              xcall _pixel
+ 0C22                   .dbline 748
+ 0C22 AF84              ldd R10,y+15
+ 0C24 BB24              clr R11
+ 0C26 A41A              sub R10,R20
+ 0C28 B50A              sbc R11,R21
+ 0C2A                   .dbline 749
+ 0C2A 0D88              ldd R0,y+21
+ 0C2C 0882              std y+0,R0
+ 0C2E 2C2D              mov R18,R12
+ 0C30 0A2D              mov R16,R10
+ 0C32 AFDE              xcall _pixel
+ 0C34                   .dbline 750
+ 0C34 C988              ldd R12,y+17
+ 0C36 DD24              clr R13
+ 0C38 0B80              ldd R0,y+3
+ 0C3A 1C80              ldd R1,y+4
+ 0C3C C00C              add R12,R0
+ 0C3E D11C              adc R13,R1
+ 0C40                   .dbline 751
+ 0C40 0D88              ldd R0,y+21
+ 0C42 0882              std y+0,R0
+ 0C44 2C2D              mov R18,R12
+ 0C46 0A2D              mov R16,R10
+ 0C48 A4DE              xcall _pixel
+ 0C4A                   .dbline 752
+ 0C4A AF84              ldd R10,y+15
+ 0C4C BB24              clr R11
+ 0C4E A40E              add R10,R20
+ 0C50 B51E              adc R11,R21
+ 0C52                   .dbline 753
+ 0C52 0D88              ldd R0,y+21
+ 0C54 0882              std y+0,R0
+ 0C56 2C2D              mov R18,R12
+ 0C58 0A2D              mov R16,R10
+ 0C5A 9BDE              xcall _pixel
+ 0C5C                   .dbline 757
+ 0C5C AF84              ldd R10,y+15
+ 0C5E BB24              clr R11
+ 0C60 0B80              ldd R0,y+3
+ 0C62 1C80              ldd R1,y+4
+ 0C64 A00C              add R10,R0
+ 0C66 B11C              adc R11,R1
+ 0C68                   .dbline 758
+ 0C68 C988              ldd R12,y+17
+ 0C6A DD24              clr R13
+ 0C6C C41A              sub R12,R20
+ 0C6E D50A              sbc R13,R21
+ 0C70                   .dbline 759
+ 0C70 0D88              ldd R0,y+21
+ 0C72 0882              std y+0,R0
+ 0C74 2C2D              mov R18,R12
+ 0C76 0A2D              mov R16,R10
+ 0C78 8CDE              xcall _pixel
+ 0C7A                   .dbline 760
+ 0C7A AF84              ldd R10,y+15
+ 0C7C BB24              clr R11
+ 0C7E 0B80              ldd R0,y+3
+ 0C80 1C80              ldd R1,y+4
+ 0C82 A018              sub R10,R0
+ 0C84 B108              sbc R11,R1
+ 0C86                   .dbline 761
+ 0C86 0D88              ldd R0,y+21
+ 0C88 0882              std y+0,R0
+ 0C8A 2C2D              mov R18,R12
+ 0C8C 0A2D              mov R16,R10
+ 0C8E 81DE              xcall _pixel
+ 0C90                   .dbline 762
+ 0C90 C988              ldd R12,y+17
+ 0C92 DD24              clr R13
+ 0C94 C40E              add R12,R20
+ 0C96 D51E              adc R13,R21
+ 0C98                   .dbline 763
+ 0C98 0D88              ldd R0,y+21
+ 0C9A 0882              std y+0,R0
+ 0C9C 2C2D              mov R18,R12
+ 0C9E 0A2D              mov R16,R10
+ 0CA0 78DE              xcall _pixel
+ 0CA2                   .dbline 764
+ 0CA2 AF84              ldd R10,y+15
+ 0CA4 BB24              clr R11
+ 0CA6 0B80              ldd R0,y+3
+ 0CA8 1C80              ldd R1,y+4
+ 0CAA A00C              add R10,R0
+ 0CAC B11C              adc R11,R1
+ 0CAE                   .dbline 765
+ 0CAE 0D88              ldd R0,y+21
+ 0CB0 0882              std y+0,R0
+ 0CB2 2C2D              mov R18,R12
+ 0CB4 0A2D              mov R16,R10
+ 0CB6 6DDE              xcall _pixel
+ 0CB8                   .dbline 766
+ 0CB8           L187:
+ 0CB8                   .dbline 741
+ 0CB8 4F5F              subi R20,255  ; offset = 1
+ 0CBA 5F4F              sbci R21,255
+ 0CBC           L189:
+ 0CBC                   .dbline 741
+ 0CBC 2980              ldd R2,y+1
+ 0CBE 3A80              ldd R3,y+2
+ 0CC0 2416              cp R2,R20
+ 0CC2 3506              cpc R3,R21
+ 0CC4 08F0              brlo X13
+ 0CC6 88CF              xjmp L186
+ 0CC8           X13:
+ 0CC8                   .dbline -2
+ 0CC8                   .dbline 767
+ 0CC8           ;               while ((yt*yt)>(rr-xx))yt--;
+ 0CC8           ;               row=Ox+xt;              //第一象限
+ 0CC8           ;               col=Oy-yt;
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;               row=Ox-xt;              //第二象限
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;               col=Oy+yt;              //第三象限
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;               row=Ox+xt;              //第四象限
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ; 
+ 0CC8           ; /***************45度镜象画另一半***************/
+ 0CC8           ; 
+ 0CC8           ;               row=Ox+yt;              //第一象限
+ 0CC8           ;               col=Oy-xt;
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;               row=Ox-yt;              //第二象限
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;               col=Oy+xt;              //第三象限
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;               row=Ox+yt;              //第四象限
+ 0CC8           ;               pixel(row,col,s);
+ 0CC8           ;       }
+ 0CC8           ; }
+ 0CC8           L185:
+ 0CC8 2596              adiw R28,5
+ 0CCA 0E940000          xcall pop_gset5
+ 0CCE 2496              adiw R28,4
+ 0CD0                   .dbline 0 ; func end
+ 0CD0 0895              ret
+ 0CD2                   .dbsym l rs 1 i
+ 0CD2                   .dbsym r xt 20 i
+ 0CD2                   .dbsym r rr 22 i
+ 0CD2                   .dbsym r xx 14 i
+ 0CD2                   .dbsym r col 12 i
+ 0CD2                   .dbsym r row 10 i
+ 0CD2                   .dbsym l yt 3 i
+ 0CD2                   .dbsym l s 21 c
+ 0CD2                   .dbsym l Rx 19 c
+ 0CD2                   .dbsym l Oy 17 c
+ 0CD2                   .dbsym l Ox 15 c
+ 0CD2                   .dbend
+ 0CD2                   .dbfunc e delay _delay fV
+ 0CD2           ;              j -> R10,R11
+ 0CD2           ;              i -> R12,R13
+ 0CD2           ;             tt -> R16,R17
+                        .even
+ 0CD2           _delay::
+ 0CD2 0E940000          xcall push_gset4
+ 0CD6                   .dbline -1
+ 0CD6                   .dbline 769
+ 0CD6           ; void delay(int tt)
+ 0CD6           ; {
+ 0CD6 0AC0              xjmp L195
+ 0CD8           L194:
+ 0CD8                   .dbline 773
+ 0CD8           ;        int i;
+ 0CD8           ;        int j;
+ 0CD8           ;        while((j++)>1000000)   
+ 0CD8           ;        {
+ 0CD8                   .dbline 774
+ 0CD8           ;            for(i=0;i<tt;i++)
+ 0CD8 CC24              clr R12
+ 0CDA DD24              clr R13
+ 0CDC 04C0              xjmp L200
+ 0CDE           L197:
+ 0CDE                   .dbline 775
+ 0CDE                   .dbline 776
+ 0CDE 0000              nop
+ 0CE0                   .dbline 777
+ 0CE0           L198:
+ 0CE0                   .dbline 774
+ 0CE0 C601              movw R24,R12
+ 0CE2 0196              adiw R24,1
+ 0CE4 6C01              movw R12,R24
+ 0CE6           L200:
+ 0CE6                   .dbline 774
+ 0CE6 C016              cp R12,R16
+ 0CE8 D106              cpc R13,R17
+ 0CEA CCF3              brlt L197
+ 0CEC                   .dbline 778
+ 0CEC           L195:
+ 0CEC                   .dbline 772
+ 0CEC 1501              movw R2,R10
+ 0CEE C101              movw R24,R2
+ 0CF0 0196              adiw R24,1
+ 0CF2 5C01              movw R10,R24
+ 0CF4 40E4              ldi R20,64
+ 0CF6 52E4              ldi R21,66
+ 0CF8 6FE0              ldi R22,15
+ 0CFA 70E0              ldi R23,0
+ 0CFC 4424              clr R4
+ 0CFE 37FC              sbrc R3,7
+ 0D00 4094              com R4
+ 0D02 5524              clr R5
+ 0D04 47FC              sbrc R4,7
+ 0D06 5094              com R5
+ 0D08 4215              cp R20,R2
+ 0D0A 5305              cpc R21,R3
+ 0D0C 6405              cpc R22,R4
+ 0D0E 7505              cpc R23,R5
+ 0D10 1CF3              brlt L194
+ 0D12                   .dbline -2
+ 0D12                   .dbline 779
+ 0D12           ;            {
+ 0D12           ;                _NOP();
+ 0D12           ;            }   
+ 0D12           ;       }
+ 0D12           ; }
+ 0D12           L193:
+ 0D12 0E940000          xcall pop_gset4
+ 0D16                   .dbline 0 ; func end
+ 0D16 0895              ret
+ 0D18                   .dbsym r j 10 I
+ 0D18                   .dbsym r i 12 I
+ 0D18                   .dbsym r tt 16 I
+ 0D18                   .dbend
+ 0D18                   .dbfunc e init_port _init_port fV
+                        .even
+ 0D18           _init_port::
+ 0D18                   .dbline -1
+ 0D18                   .dbline 782
+ 0D18           ; 
+ 0D18           ; void init_port(void)
+ 0D18           ; {
+ 0D18                   .dbline 785
+ 0D18           ; // DDRA   = 0xFF;
+ 0D18           ; // PORTA  = 0x00;
+ 0D18           ;  DDRB     = 0xF0;
+ 0D18 80EF              ldi R24,240
+ 0D1A 87BB              out 0x17,R24
+ 0D1C                   .dbline 786
+ 0D1C           ;  PORTB    = 0xFF;
+ 0D1C 8FEF              ldi R24,255
+ 0D1E 88BB              out 0x18,R24
+ 0D20                   .dbline 787
+ 0D20           ;  DDRC     = 0xFD;
+ 0D20 8DEF              ldi R24,253
+ 0D22 84BB              out 0x14,R24
+ 0D24                   .dbline 788
+ 0D24           ;  PORTC    = 0x00;
+ 0D24 2224              clr R2
+ 0D26 25BA              out 0x15,R2
+ 0D28                   .dbline 789
+ 0D28           ;  DDRD     = 0xFE;
+ 0D28 8EEF              ldi R24,254
+ 0D2A 81BB              out 0x11,R24
+ 0D2C                   .dbline 790
+ 0D2C           ;  PORTD    = 0xFF;
+ 0D2C 8FEF              ldi R24,255
+ 0D2E 82BB              out 0x12,R24
+ 0D30                   .dbline -2
+ 0D30                   .dbline 791
+ 0D30           ; }
+ 0D30           L201:
+ 0D30                   .dbline 0 ; func end
+ 0D30 0895              ret
+ 0D32                   .dbend
+ 0D32                   .dbfunc e main _main fV
+ 0D32           ;              i -> R20,R21
+                        .even
+ 0D32           _main::
+ 0D32 2397              sbiw R28,3
+ 0D34                   .dbline -1
+ 0D34                   .dbline 794
+ 0D34           ;  
+ 0D34           ; void main() 
+ 0D34           ; { 
+ 0D34                   .dbline 796
+ 0D34           ; unsigned int i;
+ 0D34           ; init_port();//自己加,主要是控制线所在端口为输出
+ 0D34 F1DF              xcall _init_port
+ 0D36                   .dbline 797
+ 0D36           ; init_lcd(); 
+ 0D36 54DB              xcall _init_lcd
+ 0D38                   .dbline 799
+ 0D38           ; 
+ 0D38           ; SetRowCol(1,0);
+ 0D38 2227              clr R18
+ 0D3A 01E0              ldi R16,1
+ 0D3C A2DB              xcall _SetRowCol
+ 0D3E                   .dbline 800
+ 0D3E           ; disp_str("液晶显示的第1行");
+ 0D3E 00E0              ldi R16,<L203
+ 0D40 10E0              ldi R17,>L203
+ 0D42 02DE              xcall _disp_str
+ 0D44                   .dbline 801
+ 0D44           ; SetRowCol(2,0);
+ 0D44 2227              clr R18
+ 0D46 02E0              ldi R16,2
+ 0D48 9CDB              xcall _SetRowCol
+ 0D4A                   .dbline 802
+ 0D4A           ; disp_str("液晶显示的第2行");
+ 0D4A 00E0              ldi R16,<L204
+ 0D4C 10E0              ldi R17,>L204
+ 0D4E FCDD              xcall _disp_str
+ 0D50                   .dbline 803
+ 0D50           ; SetRowCol(3,0);
+ 0D50 2227              clr R18
+ 0D52 03E0              ldi R16,3
+ 0D54 96DB              xcall _SetRowCol
+ 0D56                   .dbline 804
+ 0D56           ; disp_str("液晶显示的第3行");
+ 0D56 00E0              ldi R16,<L205
+ 0D58 10E0              ldi R17,>L205
+ 0D5A F6DD              xcall _disp_str
+ 0D5C                   .dbline 805
+ 0D5C           ; SetRowCol(4,0);
+ 0D5C 2227              clr R18
+ 0D5E 04E0              ldi R16,4
+ 0D60 90DB              xcall _SetRowCol
+ 0D62                   .dbline 806
+ 0D62           ; disp_str("液晶显示的第4行");
+ 0D62 00E0              ldi R16,<L206
+ 0D64 10E0              ldi R17,>L206
+ 0D66 F0DD              xcall _disp_str
+ 0D68                   .dbline 807
+ 0D68           ; SetRowCol(5,0);
+ 0D68 2227              clr R18
+ 0D6A 05E0              ldi R16,5
+ 0D6C 8ADB              xcall _SetRowCol
+ 0D6E                   .dbline 808
+ 0D6E           ; disp_str("液晶显示的第5行");
+ 0D6E 00E0              ldi R16,<L207
+ 0D70 10E0              ldi R17,>L207
+ 0D72 EADD              xcall _disp_str
+ 0D74                   .dbline 809
+ 0D74           ; clr_lcd();
+ 0D74 46DB              xcall _clr_lcd
+ 0D76                   .dbline 810
+ 0D76 4427              clr R20
+ 0D78 5527              clr R21
+ 0D7A 07C0              xjmp L211
+ 0D7C           L208:
+ 0D7C                   .dbline 810
+ 0D7C 81E0              ldi R24,1
+ 0D7E 8883              std y+0,R24
+ 0D80 242F              mov R18,R20
+ 0D82 0FE7              ldi R16,127
+ 0D84 06DE              xcall _pixel
+ 0D86           L209:
+ 0D86                   .dbline 810
+ 0D86 4F5F              subi R20,255  ; offset = 1
+ 0D88 5F4F              sbci R21,255
+ 0D8A           L211:
+ 0D8A                   .dbline 810
+ 0D8A           ; for(i=0;i<64;i++) pixel(127,i,1);
+ 0D8A 4034              cpi R20,64
+ 0D8C E0E0              ldi R30,0
+ 0D8E 5E07              cpc R21,R30
+ 0D90 A8F3              brlo L208
+ 0D92                   .dbline 811
+ 0D92 4427              clr R20
+ 0D94 5527              clr R21
+ 0D96 07C0              xjmp L215
+ 0D98           L212:
+ 0D98                   .dbline 811
+ 0D98 81E0              ldi R24,1
+ 0D9A 8883              std y+0,R24
+ 0D9C 242F              mov R18,R20
+ 0D9E 0027              clr R16
+ 0DA0 F8DD              xcall _pixel
+ 0DA2           L213:
+ 0DA2                   .dbline 811
+ 0DA2 4F5F              subi R20,255  ; offset = 1
+ 0DA4 5F4F              sbci R21,255
+ 0DA6           L215:
+ 0DA6                   .dbline 811
+ 0DA6           ; for(i=0;i<64;i++) pixel(0,i,1);
+ 0DA6 4034              cpi R20,64
+ 0DA8 E0E0              ldi R30,0
+ 0DAA 5E07              cpc R21,R30
+ 0DAC A8F3              brlo L212
+ 0DAE                   .dbline 812
+ 0DAE 4427              clr R20
+ 0DB0 5527              clr R21
+ 0DB2 07C0              xjmp L219
+ 0DB4           L216:
+ 0DB4                   .dbline 812
+ 0DB4 81E0              ldi R24,1
+ 0DB6 8883              std y+0,R24
+ 0DB8 2227              clr R18
+ 0DBA 042F              mov R16,R20
+ 0DBC EADD              xcall _pixel
+ 0DBE           L217:
+ 0DBE                   .dbline 812
+ 0DBE 4F5F              subi R20,255  ; offset = 1
+ 0DC0 5F4F              sbci R21,255
+ 0DC2           L219:
+ 0DC2                   .dbline 812
+ 0DC2           ; for(i=0;i<128;i++) pixel(i,0,1);
+ 0DC2 4038              cpi R20,128
+ 0DC4 E0E0              ldi R30,0
+ 0DC6 5E07              cpc R21,R30
+ 0DC8 A8F3              brlo L216
+ 0DCA                   .dbline 813
+ 0DCA 4427              clr R20
+ 0DCC 5527              clr R21
+ 0DCE 07C0              xjmp L223
+ 0DD0           L220:
+ 0DD0                   .dbline 813
+ 0DD0 81E0              ldi R24,1
+ 0DD2 8883              std y+0,R24
+ 0DD4 2FE3              ldi R18,63
+ 0DD6 042F              mov R16,R20
+ 0DD8 DCDD              xcall _pixel
+ 0DDA           L221:
+ 0DDA                   .dbline 813
+ 0DDA 4F5F              subi R20,255  ; offset = 1
+ 0DDC 5F4F              sbci R21,255
+ 0DDE           L223:
+ 0DDE                   .dbline 813
+ 0DDE           ; for(i=0;i<128;i++) pixel(i,63,1);
+ 0DDE 4038              cpi R20,128
+ 0DE0 E0E0              ldi R30,0
+ 0DE2 5E07              cpc R21,R30
+ 0DE4 A8F3              brlo L220
+ 0DE6                   .dbline 814
+ 0DE6           ; for(i=0;i<40;i++)
+ 0DE6 4427              clr R20
+ 0DE8 5527              clr R21
+ 0DEA 08C0              xjmp L227
+ 0DEC           L224:
+ 0DEC                   .dbline 815
+ 0DEC                   .dbline 816
+ 0DEC 81E0              ldi R24,1
+ 0DEE 8A83              std y+2,R24
+ 0DF0 4883              std y+0,R20
+ 0DF2 2DE2              ldi R18,45
+ 0DF4 04E1              ldi R16,20
+ 0DF6 D4DE              xcall _circle
+ 0DF8                   .dbline 817
+ 0DF8           L225:
+ 0DF8                   .dbline 814
+ 0DF8 4F5F              subi R20,255  ; offset = 1
+ 0DFA 5F4F              sbci R21,255
+ 0DFC           L227:
+ 0DFC                   .dbline 814
+ 0DFC 4832              cpi R20,40
+ 0DFE E0E0              ldi R30,0
+ 0E00 5E07              cpc R21,R30
+ 0E02 A0F3              brlo L224
+ 0E04           L228:
+ 0E04                   .dbline 818
+ 0E04           L229:
+ 0E04                   .dbline 818
+ 0E04 FFCF              xjmp L228
+ 0E06           X14:
+ 0E06                   .dbline -2
+ 0E06                   .dbline 821
+ 0E06           ; {
+ 0E06           ; circle(20,45,i,1);                            // 画圆
+ 0E06           ; }
+ 0E06           ; while(1);
+ 0E06           ; 
+ 0E06           ; 
+ 0E06           ; } 
+ 0E06           L202:
+ 0E06 2396              adiw R28,3
+ 0E08                   .dbline 0 ; func end
+ 0E08 0895              ret
+ 0E0A                   .dbsym r i 20 i
+ 0E0A                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0000           _CurCol::
+ 0000                   .blkb 1
+ 0001                   .dbsym e CurCol _CurCol c
+ 0001           _CurPage::
+ 0001                   .blkb 1
+ 0002                   .dbsym e CurPage _CurPage c
+ 0002           _CurRow::
+ 0002                   .blkb 1
+ 0003                   .dbsym e CurRow _CurRow c
+ 0003           _CurOffset::
+ 0003                   .blkb 1
+ 0004                   .dbsym e CurOffset _CurOffset c
+                        .area data(ram, con, rel)
+ 0015                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0015           L207:
+ 0015                   .blkb 16
+                        .area idata
+ 0015 D2BABEA7CFD4CABEB5C4B5DA35D0D000  .byte 210,186,190,167,207,212,202,190,181,196,181,218,53,208,208,0
+                        .area data(ram, con, rel)
+ 0025                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0025           L206:
+ 0025                   .blkb 16
+                        .area idata
+ 0025 D2BABEA7CFD4CABEB5C4B5DA34D0D000  .byte 210,186,190,167,207,212,202,190,181,196,181,218,52,208,208,0
+                        .area data(ram, con, rel)
+ 0035                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0035           L205:
+ 0035                   .blkb 16
+                        .area idata
+ 0035 D2BABEA7CFD4CABEB5C4B5DA33D0D000  .byte 210,186,190,167,207,212,202,190,181,196,181,218,51,208,208,0
+                        .area data(ram, con, rel)
+ 0045                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0045           L204:
+ 0045                   .blkb 16
+                        .area idata
+ 0045 D2BABEA7CFD4CABEB5C4B5DA32D0D000  .byte 210,186,190,167,207,212,202,190,181,196,181,218,50,208,208,0
+                        .area data(ram, con, rel)
+ 0055                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
+ 0055           L203:
+ 0055                   .blkb 16
+                        .area idata
+ 0055 D2BABEA7CFD4CABEB5C4B5DA31D0D000  .byte 210,186,190,167,207,212,202,190,181,196,181,218,49,208,208,0
+                        .area data(ram, con, rel)
+ 0065                   .dbfile E:\PROTEU~1.7\User\MEGA32-LCM\MEGA32-LCM\DISPLAY.C
